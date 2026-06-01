@@ -1,24 +1,19 @@
 workflows:
   build-android:
     name: Build Android
-    working_directory: .  # Explicitly start at the root
+    working_directory: mobile
     environment:
       node: 20
       groups:
         - android_credentials
     scripts:
-      - name: Verify Path and Install
-        script: |
-          ls -F mobile/ # Confirm package.json is there
-          cd mobile
-          npm install
+      - name: Install dependencies
+        script: npm install
       - name: Prebuild Android
-        script: |
-          cd mobile
-          npx expo prebuild --clean
+        script: npm run prebuild -- --clean
       - name: Build Android
         script: |
-          cd mobile/android
+          cd android
           chmod +x gradlew
           ./gradlew bundleRelease assembleRelease
     artifacts:
@@ -27,16 +22,15 @@ workflows:
 
   build-ios:
     name: Build iOS
+    working_directory: mobile
     environment:
       node: 20
       groups:
         - ios_credentials
     scripts:
       - name: Install dependencies
-        script: |
-          cd mobile && npm install
+        script: npm install
       - name: Build iOS IPA
-        script: |
-          cd mobile && npx expo export:ios --platform ios --type archive
+        script: npx expo export:ios --platform ios --type archive
     artifacts:
       - mobile/ios/build/*.ipa
