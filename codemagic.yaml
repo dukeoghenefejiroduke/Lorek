@@ -1,7 +1,8 @@
 workflows:
   build-android:
     name: Build Android
-    working_directory: .
+    # Set the working directory to the folder containing your project files
+    working_directory: mobile
     environment:
       node: 20
       groups:
@@ -9,22 +10,19 @@ workflows:
     scripts:
       - name: Install dependencies
         script: |
-          # Only run install if there is a package.json in mobile
-          if [ -f "mobile/package.json" ]; then
-            cd mobile && npm install
-          else
-            echo "ERROR: mobile/package.json not found!"
-            exit 1
-          fi
+          npm install
       - name: Prebuild Android
         script: |
-          cd mobile && npx expo prebuild --clean
+          npx expo prebuild --clean
       - name: Build Android
         script: |
-          cd mobile/android && chmod +x gradlew && ./gradlew bundleRelease assembleRelease
+          # Since we are already in 'mobile', we just go to 'android'
+          cd android
+          chmod +x gradlew
+          ./gradlew bundleRelease assembleRelease
     artifacts:
-      - mobile/android/app/build/outputs/bundle/release/*.aab
-      - mobile/android/app/build/outputs/apk/release/*.apk
+      - android/app/build/outputs/bundle/release/*.aab
+      - android/app/build/outputs/apk/release/*.apk
 
   build-ios:
     name: Build iOS
