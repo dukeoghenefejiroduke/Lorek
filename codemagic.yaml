@@ -1,33 +1,27 @@
-workflows:   
-  build-android:
+workflows:     
+ build-android:
     name: Build Android
-    # Change working_directory to the root
     working_directory: .
     environment:
       node: 20
       groups:
         - android_credentials
     scripts:
+      - name: Locate package.json
+        script: |
+          find . -name "package.json"
       - name: Install dependencies
         script: |
-          # Now running from the root, so navigate to mobile first
-          cd mobile
-          npm install
+          # Use the path discovered by the first script
+          # If it's in /mobile, use: cd mobile && npm install
+          cd mobile && npm install
       - name: Prebuild Android
         script: |
-          # Navigate into mobile to run prebuild
-          cd mobile
-          npx expo prebuild --clean
-      - name: Build Android AAB and APK
+          cd mobile && npx expo prebuild --clean
+      - name: Build Android
         script: |
-          # Navigate into the generated android folder
-          cd mobile/android
-          chmod +x gradlew
-          ./gradlew bundleRelease assembleRelease
-    artifacts:
-      - mobile/android/app/build/outputs/bundle/release/*.aab
-      - mobile/android/app/build/outputs/apk/release/*.apk
-      
+          cd mobile/android && chmod +x gradlew && ./gradlew bundleRelease assembleRelease
+
   build-ios:
     name: Build iOS
     environment:
