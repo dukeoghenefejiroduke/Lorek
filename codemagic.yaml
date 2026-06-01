@@ -1,27 +1,23 @@
 workflows:
   build-android:
     name: Build Android
+    working_directory: mobile
     environment:
       node: 20
       groups:
         - android_credentials
     scripts:
-      - name: Debug working directory
-        script: |
-          pwd
-          ls -F
       - name: Install dependencies
         script: |
-          cd mobile
           npm install
       - name: Build Android AAB and APK
         script: |
-          cd mobile
           npx expo prebuild --clean
           cd android
           ./gradlew bundleRelease assembleRelease
     artifacts:
       - mobile/android/app/build/outputs/bundle/release/*.aab
+      - mobile/android/app/build/outputs/apk/release/*.apk
 
   build-ios:
     name: Build iOS
