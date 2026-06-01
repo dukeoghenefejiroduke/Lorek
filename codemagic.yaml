@@ -6,6 +6,10 @@ workflows:
       groups:
         - android_credentials
     scripts:
+      - name: Debug working directory
+        script: |
+          pwd
+          ls -F
       - name: Install dependencies
         script: |
           cd mobile
