@@ -6,12 +6,13 @@ workflows:
       groups:
         - android_credentials
     scripts:
-      - name: Install and Prebuild
+      - name: Install dependencies
         script: |
           cd mobile
-          echo "Current directory: $(pwd)"
-          ls -la
           npm install
+      - name: Prebuild Android
+        script: |
+          cd mobile
           npm run prebuild -- --clean --platform android
       - name: Build Android
         script: |
@@ -29,12 +30,10 @@ workflows:
       groups:
         - ios_credentials
     scripts:
-      - name: Install and Prebuild
+      - name: Install dependencies
         script: |
           cd mobile
           npm install
-          # We don't prebuild iOS here usually, but if needed:
-          # npm run prebuild -- --clean --platform ios
       - name: Build iOS IPA
         script: |
           cd mobile
