@@ -13,7 +13,7 @@ workflows:
       - name: Build Android AAB and APK
         script: |
           cd mobile
-          npx expo prebuild
+          npx expo prebuild --clean
           cd android
           ./gradlew bundleRelease assembleRelease
     artifacts:
