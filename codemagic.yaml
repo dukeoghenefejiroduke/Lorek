@@ -1,0 +1,33 @@
+workflows:
+  build-android:
+    name: Build Android
+    environment:
+      flutter: false
+      node: 20
+      groups:
+        - android_credentials
+    scripts:
+      - name: Install dependencies
+        cwd: mobile
+        script: npm install
+      - name: Build Android AAB
+        cwd: mobile
+        script: npx expo export:android --platform android --type bundle
+    artifacts:
+      - mobile/android/app/build/outputs/bundle/release/*.aab
+
+  build-ios:
+    name: Build iOS
+    environment:
+      node: 20
+      groups:
+        - ios_credentials
+    scripts:
+      - name: Install dependencies
+        cwd: mobile
+        script: npm install
+      - name: Build iOS IPA
+        cwd: mobile
+        script: npx expo export:ios --platform ios --type archive
+    artifacts:
+      - mobile/ios/build/*.ipa
