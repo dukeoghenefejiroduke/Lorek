@@ -7,12 +7,17 @@ workflows:
       groups:
         - android_credentials
     scripts:
+      - name: Debug Environment
+        script: |
+          pwd
+          ls -F
       - name: Install dependencies
         script: |
           npm install
       - name: Build Android AAB and APK
         script: |
           npx expo prebuild --clean
+          ls -F
           cd android
           ./gradlew bundleRelease assembleRelease
     artifacts:
