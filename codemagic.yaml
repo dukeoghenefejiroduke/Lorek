@@ -7,17 +7,15 @@ workflows:
       groups:
         - android_credentials
     scripts:
-      - name: Debug File System
-        script: |
-          echo "Listing all files to find package.json:"
-          find . -name "package.json"
-          echo "Current directory contents:"
-          ls -F
       - name: Install dependencies
         script: |
-          # If 'find' shows ./mobile/package.json, this works.
-          # If 'find' shows ./package.json, change this to 'npm install'
-          cd mobile && npm install
+          # Only run install if there is a package.json in mobile
+          if [ -f "mobile/package.json" ]; then
+            cd mobile && npm install
+          else
+            echo "ERROR: mobile/package.json not found!"
+            exit 1
+          fi
       - name: Prebuild Android
         script: |
           cd mobile && npx expo prebuild --clean
