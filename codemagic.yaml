@@ -10,10 +10,12 @@ workflows:
         script: |
           cd mobile
           npm install
-      - name: Build Android AAB
+      - name: Build Android AAB and APK
         script: |
           cd mobile
-          npx expo export:android --platform android --type bundle
+          npx expo prebuild
+          cd android
+          ./gradlew bundleRelease assembleRelease
     artifacts:
       - mobile/android/app/build/outputs/bundle/release/*.aab
 
