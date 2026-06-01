@@ -1,33 +1,33 @@
-workflows:  
+workflows:   
   build-android:
     name: Build Android
-    # If package.json is in the root of your repo, change this to:
-    # working_directory: . 
-    working_directory: mobile
+    # Change working_directory to the root
+    working_directory: .
     environment:
       node: 20
       groups:
         - android_credentials
     scripts:
-      - name: Debug Directory
-        script: |
-          echo "Current directory is: $(pwd)"
-          ls -F
       - name: Install dependencies
         script: |
+          # Now running from the root, so navigate to mobile first
+          cd mobile
           npm install
       - name: Prebuild Android
         script: |
+          # Navigate into mobile to run prebuild
+          cd mobile
           npx expo prebuild --clean
       - name: Build Android AAB and APK
         script: |
-          cd android
+          # Navigate into the generated android folder
+          cd mobile/android
           chmod +x gradlew
           ./gradlew bundleRelease assembleRelease
     artifacts:
-      - android/app/build/outputs/bundle/release/*.aab
-      - android/app/build/outputs/apk/release/*.apk
-
+      - mobile/android/app/build/outputs/bundle/release/*.aab
+      - mobile/android/app/build/outputs/apk/release/*.apk
+      
   build-ios:
     name: Build iOS
     environment:
