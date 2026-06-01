@@ -1119,3 +1119,15 @@
 {"duration":"2302ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-06-01 09:31:30","url":"/api/admin/content/stats"}
 {"duration":"1307ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-06-01 09:33:49","url":"/api/user/profile"}
 {"duration":"1635ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-06-01 09:33:49","url":"/api/progress"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-06-01T13:05:13.973Z\n    ================================\n    ","timestamp":"2026-06-01 14:05:13"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-06-01 14:05:14"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-06-01 14:05:14"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-06-01 14:05:14"}
+{"duration":"1010ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-06-01 14:06:22","url":"/api/vocabulary/stats?lang=IZON"}
+{"duration":"2060ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-06-01 14:06:23","url":"/api/progress/badges?lang=IZON"}
+{"duration":"2472ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-06-01 14:06:24","url":"/api/community/feed?limit=3"}
+{"duration":"2842ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-06-01 14:06:25","url":"/api/notifications?limit=50"}
+{"duration":"5089ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-06-01 14:06:26","url":"/api/progress"}
+{"duration":"2335ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-06-01 14:06:26","url":"/api/auth/profile"}
+{"cpuSystem":112000,"cpuUser":1604000,"level":"warn","memoryDiff":{"external":221679,"heapTotal":524288,"heapUsed":13645856,"rss":2269184},"message":"High memory usage detected:","timestamp":"2026-06-01 14:06:26","url":"/api/auth/profile"}
+{"duration":"5593ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-06-01 14:06:26","url":"/api/progress"}
