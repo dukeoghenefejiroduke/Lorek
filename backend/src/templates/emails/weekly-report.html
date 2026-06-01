@@ -1,0 +1,19 @@
+<div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px;">
+  <h2 style="color: #388e3c;">Your Weekly Izon Report 📊</h2>
+  <p>Great job this week, {{username}}! Here is a summary of your progress:</p>
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr style="background-color: #f1f8e9;">
+      <td style="padding: 10px; border: 1px solid #ddd;">Lessons Completed</td>
+      <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">{{stats.lessonsCompleted}}</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #ddd;">New Words Learned</td>
+      <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">{{stats.wordsLearned}}</td>
+    </tr>
+    <tr style="background-color: #f1f8e9;">
+      <td style="padding: 10px; border: 1px solid #ddd;">Points Earned</td>
+      <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">{{stats.pointsEarned}}</td>
+    </tr>
+  </table>
+  <p style="text-align: center; margin-top: 20px;"><a href="{{dashboardUrl}}" style="color: #388e3c;">View full dashboard</a></p>
+</div>
