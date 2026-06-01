@@ -7,22 +7,24 @@ workflows:
       groups:
         - android_credentials
     scripts:
-      - name: Debug Environment
-        script: |
-          pwd
-          ls -F
       - name: Install dependencies
         script: |
           npm install
+      - name: Prebuild Android
+        script: |
+          # Cleans and generates the native android directory
+          npx expo prebuild --clean
       - name: Build Android AAB and APK
         script: |
-          npx expo prebuild --clean
-          ls -F
+          # Navigate into the generated android folder
           cd android
+          # Ensure gradlew has execution permissions
+          chmod +x gradlew
+          # Run the build
           ./gradlew bundleRelease assembleRelease
     artifacts:
-      - mobile/android/app/build/outputs/bundle/release/*.aab
-      - mobile/android/app/build/outputs/apk/release/*.apk
+      - android/app/build/outputs/bundle/release/*.aab
+      - android/app/build/outputs/apk/release/*.apk
 
   build-ios:
     name: Build iOS
