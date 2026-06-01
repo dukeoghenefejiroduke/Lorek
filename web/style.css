@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background: #4CAF50;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.hero {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: #fff;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.primary {
+    background: #4CAF50;
+    color: #fff;
+}
+
+.features {
+    padding: 2rem 1rem;
+    max-width: 800px;
+    margin: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.downloads {
+    padding: 3rem 1rem;
+    background: #fff;
+    text-align: center;
+}
+
+.security {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    max-width: 90%;
+}
+
+code {
+    display: block;
+    padding: 0.5rem;
+    background: #eee;
+    word-break: break-all;
+    font-family: monospace;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #333;
+    color: #fff;
+}
