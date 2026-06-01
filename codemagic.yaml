@@ -1,5 +1,5 @@
-workflows:     
- build-android:
+workflows:
+  build-android:
     name: Build Android
     working_directory: .
     environment:
@@ -7,13 +7,16 @@ workflows:
       groups:
         - android_credentials
     scripts:
-      - name: Locate package.json
+      - name: Debug File System
         script: |
+          echo "Listing all files to find package.json:"
           find . -name "package.json"
+          echo "Current directory contents:"
+          ls -F
       - name: Install dependencies
         script: |
-          # Use the path discovered by the first script
-          # If it's in /mobile, use: cd mobile && npm install
+          # If 'find' shows ./mobile/package.json, this works.
+          # If 'find' shows ./package.json, change this to 'npm install'
           cd mobile && npm install
       - name: Prebuild Android
         script: |
@@ -21,6 +24,9 @@ workflows:
       - name: Build Android
         script: |
           cd mobile/android && chmod +x gradlew && ./gradlew bundleRelease assembleRelease
+    artifacts:
+      - mobile/android/app/build/outputs/bundle/release/*.aab
+      - mobile/android/app/build/outputs/apk/release/*.apk
 
   build-ios:
     name: Build iOS
@@ -31,11 +37,9 @@ workflows:
     scripts:
       - name: Install dependencies
         script: |
-          cd mobile
-          npm install
+          cd mobile && npm install
       - name: Build iOS IPA
         script: |
-          cd mobile
-          npx expo export:ios --platform ios --type archive
+          cd mobile && npx expo export:ios --platform ios --type archive
     artifacts:
       - mobile/ios/build/*.ipa
