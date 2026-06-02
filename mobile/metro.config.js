@@ -4,6 +4,6 @@ const { getDefaultConfig } = require('expo/metro-config');
 const config = getDefaultConfig(__dirname);
 
 // Add support for solving the "exports" issue if necessary
-config.resolver.unstable_enablePackageExports = true;
+// config.resolver.unstable_enablePackageExports = true;
 
 module.exports = config;
