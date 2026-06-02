@@ -16,10 +16,10 @@ import {
   Dimensions,
   StatusBar,
   Share,
-  Clipboard,
   Vibration,
   RefreshControl,
 } from 'react-native';
+import * as Clipboard from 'expo-clipboard';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
