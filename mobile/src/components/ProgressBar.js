@@ -1,6 +1,6 @@
 // components/ProgressBar.js
 import React, { useEffect, useRef } from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
+import { View, StyleSheet, Animated, Text } from 'react-native';
 
 export default function ProgressBar({ 
   progress, 
