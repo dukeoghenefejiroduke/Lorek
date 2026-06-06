@@ -33,6 +33,7 @@ import { notificationAPI } from '../services/api';
 
 import { streakService } from '../services/streakService';
 
+import PronunciationScreen from '../screens/PronunciationScreen';
 import PremiumScreen from '../screens/PremiumScreen';
 // ── Existing screens ────────────────────────────────────────────────
 import HomeScreen          from '../screens/HomeScreen';
@@ -1014,6 +1015,7 @@ export default function AppNavigator() {
         <Stack.Screen name="Lessons" component={LessonsScreen} />
         <Stack.Screen name="Vocabulary" component={VocabularyScreen} />
         <Stack.Screen name="Practice" component={PracticeScreen} />
+        <Stack.Screen name="Pronunciation" component={PronunciationScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Progress" component={ProgressScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
@@ -1039,8 +1041,7 @@ export default function AppNavigator() {
       <Stack.Screen name="MyContributions" component={MyContributionsScreen} options={{ headerShown: false }}/>
       <Stack.Screen name="Achievements" component={AchievementScreen} options={{ headerShown: false }}/>
 
-       <Stack.Screen name="achievements" component={AchievementScreen} options={{ headerShown: false }}/>
-       <Stack.Screen name="Premium" component={PremiumScreen} options={{ headerShown: false }}/>
+      <Stack.Screen name="Premium" component={PremiumScreen} options={{ headerShown: false }}/>
 
       </Stack.Group>
 

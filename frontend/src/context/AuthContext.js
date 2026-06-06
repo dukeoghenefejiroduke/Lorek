@@ -191,15 +191,20 @@ const refreshUser = async () => {
         
         // Check if session is still valid
         if (Date.now() < parsedExpiry) {
-          setUser(JSON.parse(userData));
-          setIsAuthenticated(true);
-          setSessionExpiry(parsedExpiry);
-          
-          // Schedule token refresh
-          scheduleTokenRefresh(parsedExpiry);
-          
-          // Validate token with server (optional, can be done in background)
-          validateTokenWithServer();
+          try {
+            setUser(JSON.parse(userData));
+            setIsAuthenticated(true);
+            setSessionExpiry(parsedExpiry);
+            
+            // Schedule token refresh
+            scheduleTokenRefresh(parsedExpiry);
+            
+            // Validate token with server (optional, can be done in background)
+            validateTokenWithServer();
+          } catch (e) {
+            console.error('Failed to parse user data from storage:', e);
+            await clearAuthData();
+          }
         } else {
           // Session expired, try to refresh
           if (refreshToken) {
