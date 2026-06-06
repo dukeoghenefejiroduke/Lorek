@@ -8,20 +8,20 @@ workflows:
     scripts:
       - name: Install dependencies
         script: |
-          cd mobile
+          cd frontend
           npm install
       - name: Prebuild Android
         script: |
-          cd mobile
+          cd frontend
           npm run prebuild -- --clean --platform android
       - name: Build Android
         script: |
-          cd mobile/android
+          cd frontend/android
           chmod +x gradlew
           ./gradlew bundleRelease assembleRelease
     artifacts:
-      - mobile/android/app/build/outputs/bundle/release/*.aab
-      - mobile/android/app/build/outputs/apk/release/*.apk
+      - frontend/android/app/build/outputs/bundle/release/*.aab
+      - frontend/android/app/build/outputs/apk/release/*.apk
 
   build-ios:
     name: Build iOS
@@ -32,11 +32,11 @@ workflows:
     scripts:
       - name: Install dependencies
         script: |
-          cd mobile
+          cd frontend
           npm install
       - name: Build iOS IPA
         script: |
-          cd mobile
+          cd frontend
           npx expo export:ios --platform ios --type archive
     artifacts:
-      - mobile/ios/build/*.ipa
+      - frontend/ios/build/*.ipa
