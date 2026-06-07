@@ -9,8 +9,8 @@ import { Platform, Alert } from 'react-native'; // Standard import
 const ENV = {
   development: {
     API_URL: 'https://lorek.onrender.com/api', // Android Emulator
-    API_URL_IOS: 'http://localhost:5000/api', // iOS Simulator
-    API_URL_PHYSICAL: 'http://127.0.0.1:5000/api', // Physical device
+    API_URL_IOS: 'https://lorek.onrender.com/api', // iOS Simulator
+    API_URL_PHYSICAL: 'https://lorek.onrender.com/api', // Physical device
     TIMEOUT: 30000,
     RETRY_ATTEMPTS: 3,
     CACHE_TTL: 3600000, // 1 hour

@@ -2,7 +2,7 @@
   "expo": {
     "name": "lorek",
     "slug": "lorek",
-    "jsEngine": "jsc",
+    "jsEngine": "hermes",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
