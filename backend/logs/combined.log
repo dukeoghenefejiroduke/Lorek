@@ -1131,3 +1131,7 @@
 {"duration":"2335ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-06-01 14:06:26","url":"/api/auth/profile"}
 {"cpuSystem":112000,"cpuUser":1604000,"level":"warn","memoryDiff":{"external":221679,"heapTotal":524288,"heapUsed":13645856,"rss":2269184},"message":"High memory usage detected:","timestamp":"2026-06-01 14:06:26","url":"/api/auth/profile"}
 {"duration":"5593ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-06-01 14:06:26","url":"/api/progress"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-06-07T22:53:02.946Z\n    ================================\n    ","timestamp":"2026-06-07 23:53:02"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-06-07 23:53:03"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-06-07 23:53:03"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-06-07 23:53:03"}
