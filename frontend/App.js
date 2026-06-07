@@ -1,14 +1,8 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as Sentry from '@sentry/react-native';
-
-import { AuthProvider } from './src/context/AuthContext';
-import { ThemeProvider } from './src/context/ThemeContext';
-import { LanguageProvider } from './src/context/LanguageContext';
-import AppNavigator from './src/navigation/AppNavigator';
 
 Sentry.init({
   dsn: 'https://42bed7edc2db8f533c938a38e74c5fd9@o4511521656078336.ingest.de.sentry.io/4511521660731472',
@@ -19,28 +13,26 @@ Sentry.init({
   integrations: [Sentry.mobileReplayIntegration(), Sentry.feedbackIntegration()],
 });
 
-function App() {
+export default Sentry.wrap(function App() {
   return (
     <SafeAreaProvider>
-      <AuthProvider>
-        <ThemeProvider>
-          <LanguageProvider>
-            <GestureHandlerRootView style={styles.container}>
-              <NavigationContainer>
-                <AppNavigator />
-              </NavigationContainer>
-            </GestureHandlerRootView>
-          </LanguageProvider>
-        </ThemeProvider>
-      </AuthProvider>
+      <GestureHandlerRootView style={styles.container}>
+        <View style={styles.innerContainer}>
+           {/* Placeholder for future content */}
+        </View>
+      </GestureHandlerRootView>
     </SafeAreaProvider>
   );
-}
-
-export default Sentry.wrap(App);
+});
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  innerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  }
 });
