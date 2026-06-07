@@ -5,6 +5,9 @@ workflows:
       node: 20
       groups:
         - android_credentials
+      vars:
+        SENTRY_AUTH_TOKEN: "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"
+        EXPO_PUBLIC_API_URL: "https://lorek.onrender.com/api"
     scripts:
       - name: Install dependencies
         script: |
