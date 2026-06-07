@@ -15,7 +15,7 @@ workflows:
       - name: Prebuild Android
         script: |
           cd frontend
-          npm run prebuild -- --clean --platform android
+          npx expo prebuild --clean --platform android
       - name: Build Android
         script: |
           cd frontend/android
