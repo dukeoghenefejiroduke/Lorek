@@ -14,7 +14,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 
 import { gamificationAPI } from '../services/api';
@@ -24,7 +24,9 @@ const { width } = Dimensions.get('window');
 
 const AchievementScreen = () => {
   const navigation = useNavigation();
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in AchievementScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
   
   const [loading, setLoading] = useState(true);

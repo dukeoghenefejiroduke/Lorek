@@ -24,7 +24,7 @@ import { BlurView } from 'expo-blur';
 import haptics from '../utils/haptics';
 import { AuthContext } from '../context/AuthContext';
 import { communityAPI } from '../services/api';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 
 const { width } = Dimensions.get('window');
@@ -32,7 +32,9 @@ export default function CommunityScreen({ navigation }) {
   const { user } = useContext(AuthContext); 
   const { activeLanguage } = useContext(LanguageContext);
   
-   const { isDarkMode, theme } = useContext(ThemeContext);
+   const contextValue = useContext(ThemeContext) || {};
+   console.log('DEBUG: Accessing ThemeContext in CommunityScreen.js:', contextValue);
+   const { isDarkMode, theme } = contextValue;
   
   const isModerator = user?.role === 'admin' || user?.role === 'moderator';
 

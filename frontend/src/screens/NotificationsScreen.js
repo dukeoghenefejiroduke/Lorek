@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -127,7 +127,9 @@ export default function NotificationsScreen({ navigation }) {
   });
   const [savingSettings, setSavingSettings] = useState(false);
 
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in NotificationsScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
 
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;

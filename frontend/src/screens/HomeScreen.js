@@ -18,7 +18,7 @@ import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../context/AuthContext';
 import haptics from '../utils/haptics';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { handleGlobalError } from '../utils/errorHandler';
 
 // Import the new API modules
@@ -31,7 +31,9 @@ const { width } = Dimensions.get('window');
 const HomeScreen = () => {
   const navigation = useNavigation();
   const { user } = useContext(AuthContext);
-  const { theme, isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in HomeScreen.js:', contextValue);
+  const { theme, isDarkMode, toggleTheme } = contextValue;
   
   if (!theme) {
     console.warn('DEBUG: ThemeContext value is missing or incomplete in HomeScreen:', { theme, isDarkMode });

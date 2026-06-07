@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -27,7 +27,9 @@ const DailyGoalScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [dailyProverb, setDailyProverb] = useState('');
   
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in DailyGoalScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
   
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;

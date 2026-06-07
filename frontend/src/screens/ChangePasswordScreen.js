@@ -18,11 +18,13 @@ import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import haptics from '../utils/haptics';
 import { userAPI } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 
 export default function ChangePasswordScreen({ navigation }) {
   const { logout } = useContext(AuthContext);
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in ChangePasswordScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
   
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');

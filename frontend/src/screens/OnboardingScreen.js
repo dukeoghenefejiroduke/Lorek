@@ -1,5 +1,5 @@
 import React, { useState, useRef, useContext, useCallback } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Animated, FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -33,7 +33,9 @@ const onboardingData = [
 ];
 
 export default function OnboardingScreen({ navigation }) {
-  const { theme, isDarkMode } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in OnboardingScreen.js:', contextValue);
+  const { theme, isDarkMode } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;

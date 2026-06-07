@@ -18,14 +18,16 @@ import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { AuthContext } from '../context/AuthContext';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import { authAPI } from '../services/api';
 import GoogleLoginButton from '../components/GoogleLoginButton';
 
 export default function RegisterScreen({ navigation }) {
   const { activeLanguage } = useContext(LanguageContext);
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in RegisterScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

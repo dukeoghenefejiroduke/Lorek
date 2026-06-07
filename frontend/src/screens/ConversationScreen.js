@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -74,7 +74,9 @@ const SCENARIO_DATA = {
 
 const ConversationScreen = ({ route }) => {
   const { activeLanguage } = useContext(LanguageContext);
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in ConversationScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
   const scenarioId = route?.params?.scenarioId || 'market';
   const scenario = SCENARIO_DATA[scenarioId];
   

@@ -23,14 +23,16 @@ import * as ImagePicker from 'expo-image-picker';
 import { BlurView } from 'expo-blur';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 
 import { progressAPI, gamificationAPI, userAPI, notificationAPI } from '../services/api';
 
 const { width } = Dimensions.get('window');
 
 export default function ProfileScreen() {
-  const { isDarkMode, toggleTheme, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in ProfileScreen.js:', contextValue);
+  const { isDarkMode, toggleTheme, theme } = contextValue;
   const { user, logout } = useContext(AuthContext);
   const navigation = useNavigation();
 

@@ -21,7 +21,7 @@ import haptics from '../utils/haptics';
 import { BlurView } from 'expo-blur';
 import { lessonAPI } from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import ScreenHeader from '../components/ScreenHeader';
 import LanguageSwitcher from '../components/LanguageSwitcher';
@@ -41,7 +41,9 @@ const LessonsScreen = ({ navigation }) => {
   const [stats, setStats] = useState({ total: 0, completed: 0, inProgress: 0, totalPoints: 0 });
   const [languageSwitcherVisible, setLanguageSwitcherVisible] = useState(false);
 
-   const { isDarkMode, theme } = useContext(ThemeContext);
+   const contextValue = useContext(ThemeContext) || {};
+   console.log('DEBUG: Accessing ThemeContext in LessonsScreen.js:', contextValue);
+   const { isDarkMode, theme } = contextValue;
 
   // Use useMemo for filtering logic to avoid unnecessary re-renders and simplify code
   const filteredLessons = useMemo(() => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import {
   View,
@@ -43,7 +43,9 @@ const DEFAULT_SETTINGS = {
 
 export default function RemindersScreen({ navigation }) {
   const { activeLanguage } = useContext(LanguageContext);
-  const { theme, isDarkMode } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in RemindersScreen.js:', contextValue);
+  const { theme, isDarkMode } = contextValue;
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
   const [saving, setSaving] = useState(false);
 

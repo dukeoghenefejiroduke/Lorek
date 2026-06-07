@@ -21,7 +21,7 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { AuthContext } from '../context/AuthContext';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import GoogleLoginButton from '../components/GoogleLoginButton';
 import LoadingOverlay from '../components/LoadingOverlay';
@@ -45,7 +45,9 @@ export default function LoginScreen({ navigation }) {
   const passwordRef = useRef(null);
   const { login, authenticateWithBiometric } = useContext(AuthContext);
 
-   const { isDarkMode, theme } = useContext(ThemeContext);
+   const contextValue = useContext(ThemeContext) || {};
+   console.log('DEBUG: Accessing ThemeContext in LoginScreen.js:', contextValue);
+   const { isDarkMode, theme } = contextValue;
 
   // Check for saved email and biometric availability
   useEffect(() => {

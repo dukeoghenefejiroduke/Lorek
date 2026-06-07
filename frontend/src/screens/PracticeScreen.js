@@ -25,7 +25,7 @@ import haptics from '../utils/haptics';
 import * as Speech from 'expo-speech';
 import { BlurView } from 'expo-blur';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import ScreenHeader from '../components/ScreenHeader';
 import LanguageSwitcher from '../components/LanguageSwitcher';
@@ -76,7 +76,9 @@ export default function PracticeScreen() {
   
  const { activeLanguage } = useContext(LanguageContext);
     
-   const { isDarkMode, theme } = useContext(ThemeContext);
+   const contextValue = useContext(ThemeContext) || {};
+   console.log('DEBUG: Accessing ThemeContext in PracticeScreen.js:', contextValue);
+   const { isDarkMode, theme } = contextValue;
     
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;

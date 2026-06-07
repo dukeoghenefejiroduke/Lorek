@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useContext } from 'react';
 
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -151,7 +151,9 @@ export default function DiscussionDetailScreen({ navigation, route }) {
   const [reportReason, setReportReason] = useState('');
   const [reporting, setReporting] = useState(false);
 
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in DiscussionDetailScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
 
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;

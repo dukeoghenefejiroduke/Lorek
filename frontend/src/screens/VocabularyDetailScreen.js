@@ -15,12 +15,14 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
 import haptics from "../utils/haptics";
 import { vocabularyAPI } from '../services/api';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 
 export default function VocabularyDetailScreen({ navigation, route }) {
   const { wordId, word: initialWord } = route.params || {};
-  const { theme, isDarkMode } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in VocabularyDetailScreen.js:', contextValue);
+  const { theme, isDarkMode } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
   const [word, setWord] = useState(initialWord || null);
   const [loading, setLoading] = useState(!initialWord);

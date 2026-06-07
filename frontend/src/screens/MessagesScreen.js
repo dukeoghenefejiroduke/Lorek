@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -81,7 +81,9 @@ const ConversationItem = ({ item, onPress, currentUser, theme, isDarkMode }) => 
 
 export default function MessagesScreen({ navigation }) {
   const { user } = useContext(AuthContext);
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in MessagesScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
   const [conversations, setConversations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);

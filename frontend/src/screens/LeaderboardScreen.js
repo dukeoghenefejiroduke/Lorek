@@ -20,7 +20,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import haptics from '../utils/haptics';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 
 import { leaderboardAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -38,7 +38,9 @@ const LeaderboardScreen = ({ navigation }) => {
   const [categoryFilter, setCategoryFilter] = useState('points');
   const [userRank, setUserRank] = useState(null);
   
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in LeaderboardScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
   
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;
