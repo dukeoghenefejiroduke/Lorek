@@ -9,12 +9,14 @@ workflows:
       - name: Install dependencies
         script: |
           cd frontend
-          rm -rf node_modules
+          rm -rf node_modules package-lock.json
           npm install
+          ls -F node_modules/expo
           cat package.json
       - name: Prebuild Android
         script: |
           cd frontend
+          npx expo --version
           npx expo prebuild --clean --platform android
       - name: Build Android
         script: |
