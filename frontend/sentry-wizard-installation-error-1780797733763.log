@@ -1,0 +1,39 @@
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: react-native-reanimated@4.1.7
+npm error Found: react-native-worklets@0.9.0
+npm error node_modules/react-native-worklets
+npm error   react-native-worklets@"0.9.0" from the root project
+npm error
+npm error Could not resolve dependency:
+npm error peer react-native-worklets@"0.5 - 0.8" from react-native-reanimated@4.1.7
+npm error node_modules/react-native-reanimated
+npm error   peerOptional react-native-reanimated@"*" from expo-router@6.0.24
+npm error   node_modules/expo-router
+npm error     peerOptional expo-router@"*" from @expo/cli@54.0.25
+npm error     node_modules/expo/node_modules/@expo/cli
+npm error       @expo/cli@"54.0.25" from expo@54.0.35
+npm error       node_modules/expo
+npm error     1 more (the root project)
+npm error   react-native-reanimated@"4.1.7" from the root project
+npm error
+npm error Conflicting peer dependency: react-native-worklets@0.8.3
+npm error node_modules/react-native-worklets
+npm error   peer react-native-worklets@"0.5 - 0.8" from react-native-reanimated@4.1.7
+npm error   node_modules/react-native-reanimated
+npm error     peerOptional react-native-reanimated@"*" from expo-router@6.0.24
+npm error     node_modules/expo-router
+npm error       peerOptional expo-router@"*" from @expo/cli@54.0.25
+npm error       node_modules/expo/node_modules/@expo/cli
+npm error         @expo/cli@"54.0.25" from expo@54.0.35
+npm error         node_modules/expo
+npm error       1 more (the root project)
+npm error     react-native-reanimated@"4.1.7" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry this command with --force or --legacy-peer-deps to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /data/data/com.termux/files/home/.npm/_logs/2026-06-07T02_01_16_080Z-eresolve-report.txt
+npm error A complete log of this run can be found in: /data/data/com.termux/files/home/.npm/_logs/2026-06-07T02_01_16_080Z-debug-0.log
