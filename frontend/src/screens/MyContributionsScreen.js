@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator, Alert, SafeAreaView } from 'react-native';
 import { communityAPI } from '../services/api';
 
 const MyContributionsScreen = () => {
-  const { theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in MyContributionsScreen.js:', contextValue);
+  const { theme } = contextValue;
   const [contributions, setContributions] = useState([]);
   const [loading, setLoading] = useState(true);
 

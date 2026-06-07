@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -19,7 +19,9 @@ import haptics from '../utils/haptics';
 import { communityAPI, messagesAPI } from '../services/api';
 
 const UserItem = ({ user, onSelect, loading }) => {
-  const { theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in NewMessageScreen.js:', contextValue);
+  const { theme } = contextValue;
   return (
     <TouchableOpacity 
       style={[styles.userItem, { backgroundColor: theme.card }]} 
@@ -50,7 +52,9 @@ export default function NewMessageScreen({ navigation }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectingUser, setSelectingUser] = useState(null); // Track which user is being clicked
   
-  const { theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in NewMessageScreen.js:', contextValue);
+  const { theme } = contextValue;
 
   useEffect(() => {
     loadFriends();

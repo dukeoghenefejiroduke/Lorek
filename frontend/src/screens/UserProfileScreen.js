@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -67,7 +67,9 @@ const formatDate = (dateString) => {
 // ============================================================================
 
 export default function UserProfileScreen({ navigation, route }) {
-  const { theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in UserProfileScreen.js:', contextValue);
+  const { theme } = contextValue;
   const { user: currentUser } = useContext(AuthContext);
   const { userId } = route.params;
   

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -62,7 +62,9 @@ const MessageBubble = ({ message, isOwn, showAvatar, theme, isDarkMode }) => {
 
 export default function ChatDetailScreen({ navigation, route }) {
   const { user } = useContext(AuthContext);
-  const { theme, isDarkMode } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in ChatDetailScreen.js:', contextValue);
+  const { theme, isDarkMode } = contextValue;
   const { conversationId, otherUser: initialOtherUser } = route.params;
   
   const [messages, setMessages] = useState([]);

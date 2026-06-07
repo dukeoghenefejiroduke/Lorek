@@ -25,7 +25,7 @@ import { BlurView } from 'expo-blur';
 import { vocabularyAPI, pronunciationAPI } from '../services/api';
 import WordCard from '../components/WordCard';
 import FamilyTreeModule from '../components/FamilyTreeModule';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import ScreenHeader from '../components/ScreenHeader';
 import LanguageSwitcher from '../components/LanguageSwitcher';
@@ -40,7 +40,9 @@ const VocabularyScreen = ({ navigation }) => {
   
 const [vocabulary, setVocabulary] = useState([]);
 
-   const { isDarkMode, theme } = useContext(ThemeContext);
+   const contextValue = useContext(ThemeContext) || {};
+   console.log('DEBUG: Accessing ThemeContext in VocabularyScreen.js:', contextValue);
+   const { isDarkMode, theme } = contextValue;
 
 const filteredVocabulary = useMemo(() => {
   let filtered = [...vocabulary];

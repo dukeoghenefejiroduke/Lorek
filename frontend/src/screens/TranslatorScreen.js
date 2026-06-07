@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef, useCallback } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -307,7 +307,9 @@ const HistoryItem = ({ item, onPress, theme }) => (
 export default function TranslatorScreen({ navigation }) {
   const { user } = useContext(AuthContext);
   const { activeLanguage } = useContext(LanguageContext);
-  const { theme, isDarkMode } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in TranslatorScreen.js:', contextValue);
+  const { theme, isDarkMode } = contextValue;
 
   // State
   const [inputText, setInputText] = useState('');

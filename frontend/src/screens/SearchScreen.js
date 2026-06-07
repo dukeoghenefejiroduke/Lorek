@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -183,7 +183,9 @@ const UserResultItem = ({ item, onPress, theme }) => (
 // MAIN SCREEN
 // ============================================================================
 export default function SearchScreen({ navigation }) {
-  const { theme, isDarkMode } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in SearchScreen.js:', contextValue);
+  const { theme, isDarkMode } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
   const [searchQuery, setSearchQuery] = useState('');
   // ...

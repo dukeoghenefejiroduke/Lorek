@@ -14,7 +14,7 @@ import { Audio } from 'expo-av';
 import haptics from '../utils/haptics';
 import { MaterialIcons as Icon } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 
 const { width } = Dimensions.get('window');
 
@@ -26,7 +26,9 @@ export default function AudioPlayer({
   compact = false,
   autoPlay = false 
 }) {
-  const { theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in AudioPlayer.js:', contextValue);
+  const { theme = lightTheme } = contextValue;
   const [playbackSpeed, setPlaybackSpeed] = useState(1.0);
   const [userAudioUri, setUserAudioUri] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);

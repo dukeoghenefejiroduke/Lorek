@@ -18,7 +18,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { AuthContext } from '../context/AuthContext';
 import { authAPI } from '../services/api';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 
 export default function ApiKeyScreen({ navigation }) {
   const { user, token } = useContext(AuthContext);
@@ -31,7 +31,9 @@ export default function ApiKeyScreen({ navigation }) {
   const [showNewKey, setShowNewKey] = useState(false);
   const [newlyGeneratedKey, setNewlyGeneratedKey] = useState('');
 
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in ApiKeyScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
 
   useEffect(() => {
     fetchApiKeys();

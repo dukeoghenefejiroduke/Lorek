@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -121,7 +121,9 @@ const RewardCard = ({ reward, totalReferrals, theme }) => {
 
 export default function ReferralScreen({ navigation }) {
   const { user } = useContext(AuthContext);
-  const { theme, isDarkMode } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in ReferralScreen.js:', contextValue);
+  const { theme, isDarkMode } = contextValue;
   
   // State
   const [referralCode, setReferralCode] = useState('');

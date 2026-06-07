@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { MaterialIcons as Icon } from '@expo/vector-icons';
 import AudioPlayer from './AudioPlayer';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 
 export default function WordCard({ 
@@ -21,7 +21,9 @@ export default function WordCard({
   showAudioControls = true,
   compact = false 
 }) {
-  const { theme, isDarkMode } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in WordCard.js:', contextValue);
+  const { theme = lightTheme, isDarkMode = false } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
   const [flipped, setFlipped] = useState(false);
   const [showPronunciationGuide, setShowPronunciationGuide] = useState(false);

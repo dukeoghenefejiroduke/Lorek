@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -40,7 +40,9 @@ const LANGUAGES = [
 const AdminScreen = ({ navigation }) => {
   const { user } = useContext(AuthContext);
   const { activeLanguage } = useContext(LanguageContext);
-  const { theme, isDarkMode } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in AdminScreen.js:', contextValue);
+  const { theme, isDarkMode } = contextValue;
   const [selectedLanguage, setSelectedLanguage] = useState('IZON');
 
   useEffect(() => {

@@ -27,7 +27,7 @@ import { BlurView } from 'expo-blur';
 import { AuthContext } from '../context/AuthContext';
 import { progressAPI } from '../services/api';
 import { format } from 'date-fns';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 
 const { width } = Dimensions.get('window');
 
@@ -192,7 +192,9 @@ export default function ProgressScreen({ navigation }) {
   const [chartModalVisible, setChartModalVisible] = useState(false);
   const [categoryProgress, setCategoryProgress] = useState(null);
   
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in ProgressScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
   
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;

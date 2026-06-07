@@ -24,7 +24,7 @@ import haptics from '../utils/haptics';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { AuthContext } from '../context/AuthContext';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 
@@ -143,12 +143,8 @@ function MainApp({ navigation }) {
     }
   ], [user]);
 
-   const { isDarkMode, theme } = useContext(ThemeContext);
-   
-   if (!theme) {
-     console.warn('DEBUG: ThemeContext value is missing in MainApp (AppNavigator):', { theme, isDarkMode });
-     return null;
-   }
+   const context = useContext(ThemeContext) || {};
+   const { isDarkMode = false, theme = lightTheme } = context;
   
   const [unreadCount, setUnreadCount] = useState(0); 
   
@@ -331,7 +327,8 @@ function MainApp({ navigation }) {
   // ── When not logged in → show auth flow only ───────────────────────
   if (!user) {
     return (
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Debug">
+        <Stack.Screen name="Debug" component={require('../screens/DebugScreen').default} />
         <Stack.Screen name="Login"    component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
       </Stack.Navigator>

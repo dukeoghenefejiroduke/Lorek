@@ -3,12 +3,14 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, Platform } from 'react
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 
 const ScreenHeader = ({ title, showLanguageSelector = false, onLanguagePress, onBackPress, children }) => {
   const insets = useSafeAreaInsets();
-  const { theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log("DEBUG: Accessing ThemeContext in ScreenHeader.js:", contextValue);
+  const { theme = lightTheme } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
 
   return (

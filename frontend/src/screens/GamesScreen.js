@@ -19,7 +19,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import haptics from '../utils/haptics';
 import { BlurView } from 'expo-blur';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 
 import { gamesAPI } from '../services/api';
@@ -602,7 +602,9 @@ export default function GamesScreen({ navigation }) {
   const [gameResult, setGameResult] = useState(null);
 
   const { activeLanguage } = useContext(LanguageContext); // e.g., { code: 'izon', name: 'Izon' }
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in GamesScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(0.95)).current;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
   Text,
@@ -153,7 +153,9 @@ const PricingCard = ({ plan, price, yearlyPrice, features, isPopular, onSelect, 
 
 export default function PremiumScreen({ navigation }) {
   const { user } = useContext(AuthContext);
-  const { isDarkMode, theme } = useContext(ThemeContext);
+  const contextValue = useContext(ThemeContext) || {};
+  console.log('DEBUG: Accessing ThemeContext in PremiumScreen.js:', contextValue);
+  const { isDarkMode, theme } = contextValue;
   const [currentPlan, setCurrentPlan] = useState(null);
   const [loading, setLoading] = useState(true);
   const [pricing, setPricing] = useState(null);

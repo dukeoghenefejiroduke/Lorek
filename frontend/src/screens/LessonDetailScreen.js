@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator,
   Animated, Dimensions, Platform, StatusBar, Alert, TextInput,
@@ -30,7 +30,9 @@ const LessonDetailScreen = ({ route, navigation }) => {
   const [isLearningMode, setIsLearningMode] = useState(true);
   const { activeLanguage } = useContext(LanguageContext);
 
-   const { isDarkMode, theme } = useContext(ThemeContext);
+   const contextValue = useContext(ThemeContext) || {};
+   console.log('DEBUG: Accessing ThemeContext in LessonDetailScreen.js:', contextValue);
+   const { isDarkMode, theme } = contextValue;
    
   // Animations
   const fadeAnim = useRef(new Animated.Value(0)).current;

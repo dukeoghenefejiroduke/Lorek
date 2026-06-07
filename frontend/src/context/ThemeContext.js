@@ -62,11 +62,10 @@ export const ThemeProvider = ({ children }) => {
   const theme = useMemo(() => (isDarkMode ? darkTheme : lightTheme), [isDarkMode]);
 
   const value = useMemo(() => {
-    console.log('DEBUG: ThemeContext value:', { isDarkMode, theme });
     return {
       isDarkMode,
       toggleTheme,
-      theme
+      theme: theme || lightTheme,
     };
   }, [isDarkMode, toggleTheme, theme]);
 
