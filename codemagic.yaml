@@ -20,6 +20,7 @@ workflows:
           npx expo prebuild --clean --platform android
       - name: Build Android
         script: |
+          sed -i '/enableBundleCompression/d' frontend/android/app/build.gradle
           cd frontend/android
           chmod +x gradlew
           ./gradlew bundleRelease assembleRelease
