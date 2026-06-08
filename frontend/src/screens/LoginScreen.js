@@ -53,6 +53,12 @@ export default function LoginScreen({ navigation }) {
   useEffect(() => {
     loadSavedEmail();
     checkBiometricSupport();
+    
+    // Connectivity test
+    fetch('https://jsonplaceholder.typicode.com/posts/1')
+      .then(response => response.json())
+      .then(json => console.log('✅ HTTPS Test Success:', json))
+      .catch(error => console.error('❌ HTTPS Test Failed:', error));
   }, []);
 
   const loadSavedEmail = async () => {

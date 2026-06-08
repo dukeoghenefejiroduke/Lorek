@@ -10,59 +10,51 @@ const User = require('../src/models/User');
 const languages = [
   { code: 'IZON', name: 'Izon', nativeName: 'Ịzọn', description: 'Major language of the Ijaw people.', icon: '🌊', color: '#4CAF50' },
   { code: 'EPIE', name: 'Epie', nativeName: 'Epie', description: 'Edoid language.', icon: '🌳', color: '#9C27B0' },
-  { code: 'OGBIA', name: 'Ogbia', nativeName: 'Ọgbiạ', description: 'Dialect of Izon.', icon: '🐟', color: '#2196F3' },
+  { code: 'OGBIA', name: 'Ogbia', nativeName: 'Ọgbiạ', description: 'Central Delta language.', icon: '🐟', color: '#2196F3' },
   { code: 'NEMBE', name: 'Nembe', nativeName: 'Nembe', description: 'Dialect of Izon.', icon: '⛵', color: '#FF9800' }
 ];
 
-const izonVocabulary = [
-  { izonWord: "abadɩ", englishTranslation: "Ocean / Sea", category: "nature", difficulty: "beginner", pronunciation: { ipa: "/äbädɪ/", syllables: [ {text: "a"}, {text: "ba"}, {text: "dɩ"}] } },
-  { izonWord: "abadɩ-aká", englishTranslation: "Sea coast", category: "nature", difficulty: "intermediate", pronunciation: { ipa: "/äbädɪ äkä/" } },
-  ...Array.from({ length: 23 }, (_, i) => ({ izonWord: `Izon-Word-${i + 3}`, englishTranslation: `Translation ${i + 3}`, category: 'basics', difficulty: 'beginner' }))
-];
-
-const generateData = (langCode) => {
-  let vocab = [];
-  if (langCode === 'IZON') {
-    vocab = izonVocabulary;
-  } else {
-    vocab = Array.from({ length: 25 }, (_, i) => ({
-      izonWord: `${langCode}-Word-${i + 1}`,
-      englishTranslation: `Translation ${i + 1} (${langCode})`,
-      category: 'basics',
-      difficulty: 'beginner'
-    }));
-  }
-  
-  const lessons = Array.from({ length: 7 }, (_, i) => ({
-    title: { english: `Lesson ${i + 1} in ${langCode}`, izon: `${langCode}-Lesson-${i + 1}` },
-    description: { english: `Basic ${langCode} lesson ${i + 1}` },
-    level: 'beginner',
-    lessonType: 'vocabulary',
+const generateData = (langCode, langIndex) => {
+  const vocab = Array.from({ length: 25 }, (_, i) => ({
+    izonWord: `${langCode}-Word-${i + 1}`,
+    englishTranslation: `Translation ${i + 1} (${langCode})`,
     category: 'basics',
-    order: i + 1,
-    content: {
-      introduction: {
-        izon: `Introduction to ${langCode} lesson ${i + 1}`,
-        english: `Welcome to ${langCode} lesson ${i + 1}. In this lesson, we will explore basic concepts.`
-      }
-    },
-    exercises: [{
-      type: 'translation',
-      question: {
-        izon: `Translate this ${langCode} phrase ${i + 1}`,
-        english: `Translate this phrase`
-      },
-      correctAnswer: {
-        izon: `Phrase ${i+1}`,
-        english: `Phrase ${i+1}`
-      },
-      points: 10
-    }],
-    review: {
-      summary: { izon: `Summary`, english: `Review of lesson ${i+1}` },
-      keyPoints: [{ izon: `Point ${i + 1}`, english: `Key point ${i + 1}` }]
-    }
+    difficulty: 'beginner'
   }));
+  
+  const lessons = Array.from({ length: 7 }, (_, i) => {
+    const globalOrder = (langIndex * 7) + i + 1;
+    return {
+      title: { english: `Lesson ${globalOrder} in ${langCode}`, izon: `${langCode}-Lesson-${i + 1}` },
+      description: { english: `Basic ${langCode} lesson ${i + 1}` },
+      level: 'beginner',
+      lessonType: 'vocabulary',
+      category: 'basics',
+      order: globalOrder,
+      content: {
+        introduction: {
+          izon: `Introduction to ${langCode} lesson ${i + 1}`,
+          english: `Welcome to ${langCode} lesson ${i + 1}. In this lesson, we will explore basic concepts.`
+        }
+      },
+      exercises: [{
+        type: 'translation',
+        question: {
+          izon: `Translate this ${langCode} phrase ${i + 1}`,
+          english: `Translate this phrase`
+        },
+        correctAnswer: {
+          izon: `Phrase ${i+1}`,
+          english: `Phrase ${i+1}`
+        },
+        points: 10
+      }],
+      review: {
+        summary: { izon: `Summary`, english: `Review of lesson ${i+1}` },
+        keyPoints: [{ izon: `Point ${i + 1}`, english: `Key point ${i + 1}` }]
+      }
+    };
+  });
 
   const proverbs = Array.from({ length: 3 }, (_, i) => ({
     izon: `Proverb ${i + 1} in ${langCode}`,
@@ -80,14 +72,18 @@ const generateData = (langCode) => {
 };
 
 async function seed() {
+  if (!process.env.MONGODB_URI) {
+    console.error('❌ MONGODB_URI is not set');
+    process.exit(1);
+  }
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/izon_db');
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log('Connected to MongoDB');
 
     const admin = await User.findOne({ role: 'admin' });
     const adminId = admin ? admin._id : null;
 
-    for (const langData of languages) {
+    for (const [index, langData] of languages.entries()) {
       console.log(`Seeding ${langData.name}...`);
       
       const lang = await Language.findOneAndUpdate(
@@ -96,7 +92,7 @@ async function seed() {
         { upsert: true, new: true }
       );
 
-      const data = generateData(langData.code);
+      const data = generateData(langData.code, index);
 
       for (const item of data.culture) {
         await CulturalContent.findOneAndUpdate(

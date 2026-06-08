@@ -125,7 +125,7 @@ const refreshUser = async () => {
   // Setup network connectivity listener
   const setupNetworkListener = () => {
     const unsubscribe = NetInfo.addEventListener(state => {
-      const isConnected = state.isConnected && state.isInternetReachable;
+      const isConnected = state.isConnected;
       setNetworkStatus(isConnected);
       
       if (isConnected && !isAuthenticated) {
@@ -368,9 +368,12 @@ const refreshAuthToken = async (manualToken) => {
 
   // Enhanced login with security features
   const login = async (email, password, rememberMe = true) => {
+    console.log('🔑 AuthContext.login called for:', email);
+    
     // Check if account is locked
     const lockStatus = isAccountLocked();
     if (lockStatus.locked) {
+      console.log('🔒 Account locked');
       return { 
         success: false, 
         error: `Too many failed attempts. Please try again in ${lockStatus.remaining} minutes.`,
@@ -379,7 +382,9 @@ const refreshAuthToken = async (manualToken) => {
     }
 
     // Check network status
+    console.log('🌐 Network status:', networkStatus);
     if (!networkStatus) {
+      console.log('🚫 Offline');
       return { 
         success: false, 
         error: 'No internet connection. Please check your network.',
@@ -388,7 +393,9 @@ const refreshAuthToken = async (manualToken) => {
     }
 
     try {
+      console.log('📡 Attempting authAPI.login...');
       const response = await authAPI.login({ email, password });
+      console.log('✅ authAPI.login success');
       const { token, refreshToken, user, expiresIn } = response.data;
       
       const sessionExpiry = Date.now() + (expiresIn * 1000);
@@ -422,6 +429,7 @@ const refreshAuthToken = async (manualToken) => {
       
       return { success: true, user };
     } catch (error) {
+      console.error('❌ AuthContext.login error:', error);
       // Handle failed login attempt
       await handleLoginAttempt(false);
       
