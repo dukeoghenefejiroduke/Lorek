@@ -311,11 +311,7 @@ app.use('/api/languages', languageRoutes);
 app.use('/api/premium', premiumRoutes);
 app.use('/api/rag', auth, ragRoutes);
 
-// WebSocket for real-time features (optional)
-if (IS_PRODUCTION) {
-  const webSocketServer = require('./websocket');
-  webSocketServer.initialize(app);
-}
+
 
 // ============================================================================
 // AUTOMATION & SCHEDULED TASKS (Option A)
