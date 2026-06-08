@@ -17,7 +17,6 @@ const languages = [
 const izonVocabulary = [
   { izonWord: "abadɩ", englishTranslation: "Ocean / Sea", category: "nature", difficulty: "beginner", pronunciation: { ipa: "/äbädɪ/", syllables: [ {text: "a"}, {text: "ba"}, {text: "dɩ"}] } },
   { izonWord: "abadɩ-aká", englishTranslation: "Sea coast", category: "nature", difficulty: "intermediate", pronunciation: { ipa: "/äbädɪ äkä/" } },
-  // ... Adding placeholder fillers to reach 25
   ...Array.from({ length: 23 }, (_, i) => ({ izonWord: `Izon-Word-${i + 3}`, englishTranslation: `Translation ${i + 3}`, category: 'basics', difficulty: 'beginner' }))
 ];
 
@@ -37,9 +36,34 @@ const generateData = (langCode) => {
   const lessons = Array.from({ length: 7 }, (_, i) => ({
     title: { english: `Lesson ${i + 1} in ${langCode}`, izon: `${langCode}-Lesson-${i + 1}` },
     description: { english: `Basic ${langCode} lesson ${i + 1}` },
-    level: i + 1,
-    category: 'basics'
+    level: 'beginner',
+    lessonType: 'vocabulary',
+    category: 'basics',
+    order: i + 1,
+    content: {
+      introduction: {
+        izon: `Introduction to ${langCode} lesson ${i + 1}`,
+        english: `Welcome to ${langCode} lesson ${i + 1}. In this lesson, we will explore basic concepts.`
+      }
+    },
+    exercises: [{
+      type: 'translation',
+      question: {
+        izon: `Translate this ${langCode} phrase ${i + 1}`,
+        english: `Translate this phrase`
+      },
+      correctAnswer: {
+        izon: `Phrase ${i+1}`,
+        english: `Phrase ${i+1}`
+      },
+      points: 10
+    }],
+    review: {
+      summary: { izon: `Summary`, english: `Review of lesson ${i+1}` },
+      keyPoints: [{ izon: `Point ${i + 1}`, english: `Key point ${i + 1}` }]
+    }
   }));
+
   const proverbs = Array.from({ length: 3 }, (_, i) => ({
     izon: `Proverb ${i + 1} in ${langCode}`,
     english: `Translation of proverb ${i + 1}`,
@@ -74,7 +98,6 @@ async function seed() {
 
       const data = generateData(langData.code);
 
-      // Seed CulturalContent
       for (const item of data.culture) {
         await CulturalContent.findOneAndUpdate(
           { title: item.title, language_id: lang._id },
@@ -83,7 +106,6 @@ async function seed() {
         );
       }
 
-      // Seed Lessons
       for (const item of data.lessons) {
         await Lesson.findOneAndUpdate(
           { 'title.english': item.title.english, language_id: lang._id },
@@ -92,7 +114,6 @@ async function seed() {
         );
       }
 
-      // Seed Proverbs
       for (const item of data.proverbs) {
         await Proverb.findOneAndUpdate(
           { izon: item.izon, language_id: lang._id },
@@ -101,7 +122,6 @@ async function seed() {
         );
       }
 
-      // Seed Vocabulary
       for (const item of data.vocab) {
         await Vocabulary.findOneAndUpdate(
           { izonWord: item.izonWord, language_id: lang._id },

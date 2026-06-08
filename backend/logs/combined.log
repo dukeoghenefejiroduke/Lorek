@@ -1135,3 +1135,9 @@
 {"level":"info","message":"Redis client connected","timestamp":"2026-06-07 23:53:03"}
 {"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-06-07 23:53:03"}
 {"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-06-07 23:53:03"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-06-07T23:56:58.567Z\n    ================================\n    ","timestamp":"2026-06-08 00:56:58"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-06-08 00:56:58"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-06-08 00:56:58"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-06-08T00:00:28.179Z\n    ================================\n    ","timestamp":"2026-06-08 01:00:28"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-06-08 01:00:28"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-06-08 01:00:28"}

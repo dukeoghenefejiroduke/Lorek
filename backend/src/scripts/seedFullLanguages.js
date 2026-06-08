@@ -4,96 +4,66 @@ const Language = require('../models/Language');
 const Vocabulary = require('../models/Vocabulary');
 const Lesson = require('../models/Lesson');
 const Proverb = require('../models/Proverb');
+const CulturalContent = require('../models/CulturalContent');
 const User = require('../models/User');
 
-const seedData = [
-  {
-    language: { code: 'IZON', name: 'Izon', nativeName: 'Ịzọn', description: 'Major language of the Ijaw people.', icon: '🌊', color: '#4CAF50' },
-    vocabulary: [
-      { izonWord: 'Bara', englishTranslation: 'Hand', category: 'body', difficulty: 'beginner' },
-      { izonWord: 'Kiri', englishTranslation: 'Land', category: 'nature', difficulty: 'beginner' }
-    ],
-    lessons: [
-      { title: { english: 'Greetings', izon: 'Gban-gban' }, description: { english: 'Learn basic greetings' }, level: 1, category: 'basics' }
-    ],
-    proverbs: [
-      { izon: 'Bara bo keme fa', english: 'A person with no hands is not a person', meaning: 'Everyone needs help', category: 'wisdom', difficulty: 'intermediate' }
-    ]
-  },
-  {
-    language: { code: 'EPIE', name: 'Epie', nativeName: 'Epie', description: 'Edoid language.', icon: '🌳', color: '#9C27B0' },
-    vocabulary: [
-      { izonWord: 'Oma', englishTranslation: 'Sun', category: 'nature', difficulty: 'beginner' }
-    ],
-    lessons: [
-      { title: { english: 'Nature Basics', izon: 'Oma-ma' }, description: { english: 'Learn about nature' }, level: 1, category: 'nature' }
-    ],
-    proverbs: [
-      { izon: 'Oma fa', english: 'The sun is out', meaning: 'It is a new day', category: 'nature', difficulty: 'beginner' }
-    ]
-  },
-  {
-    language: { code: 'OGBIA', name: 'Ogbia', nativeName: 'Ọgbiạ', description: 'Dialect of Izon.', icon: '🐟', color: '#2196F3' },
-    vocabulary: [
-      { izonWord: 'Ami', englishTranslation: 'Water', category: 'nature', difficulty: 'beginner' }
-    ],
-    lessons: [
-      { title: { english: 'Water World', izon: 'Ami-mi' }, description: { english: 'Water vocabulary' }, level: 1, category: 'nature' }
-    ],
-    proverbs: [
-      { izon: 'Ami fa', english: 'Water is life', meaning: 'Water is essential', category: 'nature', difficulty: 'beginner' }
-    ]
-  }
+const languages = [
+  { code: 'IZON', name: 'Izon', nativeName: 'Ịzọn', description: 'Major language of the Ijaw people.', icon: '🌊', color: '#4CAF50' },
+  { code: 'EPIE', name: 'Epie', nativeName: 'Epie', description: 'Edoid language.', icon: '🌳', color: '#9C27B0' },
+  { code: 'OGBIA', name: 'Ogbia', nativeName: 'Ọgbiạ', description: 'Central Delta language.', icon: '🐟', color: '#2196F3' },
+  { code: 'NEMBE', name: 'Nembe', nativeName: 'Nembe', description: 'Dialect of Izon.', icon: '⛵', color: '#FF9800' }
 ];
 
+// Real-world reference data (Mocked for seeding)
+const getRealData = (langCode) => {
+  const vocab = Array.from({ length: 25 }, (_, i) => ({
+    izonWord: `${langCode.toLowerCase()}_word_${i + 1}`,
+    englishTranslation: `Translation for ${langCode} ${i + 1}`,
+    category: ["nature", "body", "places", "food", "family"][i % 5]
+  }));
+
+  const lessons = Array.from({ length: 7 }, (_, i) => ({
+    title: { english: `Module ${i + 1}`, izon: `Lesson ${i + 1}` },
+    description: { english: `Core ${langCode} concepts - Part ${i + 1}` },
+    level: 'beginner',
+    order: i + 1,
+    content: { introduction: { english: `Welcome to lesson ${i + 1}.`, izon: `Welcome.` } },
+    exercises: [{ type: 'translation', question: { english: "Translate this", izon: "Translation" }, correctAnswer: { english: "Example", izon: "Example" }, points: 10 }]
+  }));
+
+  const proverbs = Array.from({ length: 3 }, (_, i) => ({
+    izon: `${langCode} proverb ${i + 1}`,
+    english: `English meaning of proverb ${i + 1}`,
+    meaning: `The deep meaning of proverb ${i + 1}.`,
+    category: "wisdom"
+  }));
+
+  const culture = Array.from({ length: 3 }, (_, i) => ({
+    title: `${langCode} Cultural Item ${i + 1}`,
+    description: `Description of ${langCode} cultural practice ${i + 1}.`,
+    details: `Historical details about ${i + 1}.`,
+    significance: "Identity"
+  }));
+
+  return { vocab, lessons, proverbs, culture };
+};
+
 async function seed() {
-  try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/izon_db');
+  const conn = await mongoose.connect('mongodb+srv://Izon:learnizon@izon.xsueirm.mongodb.net/?appName=Izon');
+  const admin = await User.findOne({ role: 'admin' });
+  const adminId = admin?._id;
 
-    const admin = await User.findOne({ role: 'admin' });
-    const adminId = admin ? admin._id : new mongoose.Types.ObjectId();
+  for (const langData of languages) {
+    const lang = await Language.findOneAndUpdate({ code: langData.code }, langData, { upsert: true, new: true });
+    const data = getRealData(langData.code);
 
-    for (const data of seedData) {
-      // 1. Create/Update Language
-      let lang = await Language.findOneAndUpdate(
-        { code: data.language.code },
-        data.language,
-        { upsert: true, new: true }
-      );
-
-      // 2. Seed Vocabulary
-      for (const vocab of data.vocabulary) {
-        await Vocabulary.findOneAndUpdate(
-          { izonWord: vocab.izonWord, language_id: lang._id },
-          { ...vocab, language_id: lang._id, createdBy: adminId, isPublished: true },
-          { upsert: true }
-        );
-      }
-
-      // 3. Seed Lessons
-      for (const lesson of data.lessons) {
-        await Lesson.findOneAndUpdate(
-          { 'title.english': lesson.title.english, language_id: lang._id },
-          { ...lesson, language_id: lang._id, createdBy: adminId, status: 'published' },
-          { upsert: true }
-        );
-      }
-
-      // 4. Seed Proverbs
-      for (const proverb of data.proverbs) {
-        await Proverb.findOneAndUpdate(
-          { izon: proverb.izon, language_id: lang._id },
-          { ...proverb, language_id: lang._id, createdBy: adminId, isPublished: true },
-          { upsert: true }
-        );
-      }
-    }
-
-    process.exit(0);
-  } catch (error) {
-    console.error('Seeding error:', error);
-    process.exit(1);
+    // Seed operations (using Promise.all for performance)
+    await Promise.all([
+      ...data.vocab.map(item => Vocabulary.findOneAndUpdate({ izonWord: item.izonWord, language_id: lang._id }, { ...item, language_id: lang._id, createdBy: adminId }, { upsert: true })),
+      ...data.lessons.map(item => Lesson.findOneAndUpdate({ 'title.english': item.title.english, language_id: lang._id }, { ...item, language_id: lang._id, createdBy: adminId }, { upsert: true })),
+      ...data.proverbs.map(item => Proverb.findOneAndUpdate({ izon: item.izon, language_id: lang._id }, { ...item, language_id: lang._id, createdBy: adminId }, { upsert: true })),
+      ...data.culture.map(item => CulturalContent.findOneAndUpdate({ title: item.title, language_id: lang._id }, { ...item, language_id: lang._id, createdBy: adminId }, { upsert: true }))
+    ]);
   }
+  process.exit(0);
 }
-
-seed();
