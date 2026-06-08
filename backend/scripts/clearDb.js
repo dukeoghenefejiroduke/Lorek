@@ -8,8 +8,14 @@ const Proverb = require('../src/models/Proverb');
 const CulturalContent = require('../src/models/CulturalContent');
 
 async function clearDb() {
+  if (!process.env.MONGODB_URI) {
+    console.error('❌ MONGODB_URI is not set');
+    process.exit(1);
+  }
+
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/izon_db');
+    console.log('⚠️ WARNING: This will permanently delete ALL content data.');
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log('Connected to MongoDB');
 
     await Language.deleteMany({});

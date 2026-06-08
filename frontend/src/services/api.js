@@ -46,6 +46,7 @@ const getApiUrl = () => {
 };
 
 const API_URL = getApiUrl();
+console.log('📡 API Service Initialized with URL:', API_URL);
 const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
 
 const DEFAULT_LANGUAGE_CODE = 'IZON'; // Neutral/placeholder default
@@ -76,6 +77,7 @@ const api = axios.create({
     'X-Client-Version': '1.0.4',
     'X-Client-Platform': Platform.OS,
     'X-Client-Environment': ENVIRONMENT,
+    'Host': 'lorek.onrender.com', // Explicitly set host header
   },
   maxRedirects: 5,
   validateStatus: (status) => status >= 200 && status < 300,
@@ -90,8 +92,9 @@ let failedQueue = [];
 
 // Monitor network status
 NetInfo.addEventListener(state => {
+  console.log('📡 NetInfo state changed:', state.isConnected);
   const wasOnline = isOnline;
-  isOnline = state.isConnected && state.isInternetReachable;
+  isOnline = state.isConnected;
   
   if (!wasOnline && isOnline) {
     // Device came online, process queue
@@ -131,6 +134,7 @@ const processRequestQueue = async () => {
 // Enhanced request interceptor
 api.interceptors.request.use(
   async (config) => {
+    console.log(`🚀 API Request: ${config.method.toUpperCase()} ${config.baseURL}${config.url}`);
     // Generate request ID for tracking
     config.metadata = { 
       startTime: Date.now(),
@@ -201,11 +205,6 @@ api.interceptors.request.use(
       });
     }
 
-    // Log request in development
-    if (__DEV__) {
-      // Request logging disabled for production security
-    }
-
     return config;
   },
   (error) => {
@@ -217,13 +216,9 @@ api.interceptors.request.use(
 // Enhanced response interceptor with retry logic
 api.interceptors.response.use(
   (response) => {
+    console.log(`✅ API Response: ${response.config.method.toUpperCase()} ${response.config.url} ${response.status}`);
     const duration = Date.now() - (response.config.metadata?.startTime || 0);
     
-    // Log response in development
-    if (__DEV__) {
-      // Response logging disabled for production security
-    }
-
     // Add cache control headers
     if (response.config.method === 'get') {
       response.headers['cache-control'] = `max-age=${config.CACHE_TTL / 1000}`;
@@ -232,6 +227,7 @@ api.interceptors.response.use(
     return response;
   },
   async (error) => {
+    console.error(`❌ API Response Error: ${error.config?.url} ${error.message}`, error.response?.status);
     const originalConfig = error.config;
     
     // Don't retry if we've already retried or if it's not a GET request
