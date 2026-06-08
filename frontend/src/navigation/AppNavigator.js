@@ -327,8 +327,7 @@ function MainApp({ navigation }) {
   // ── When not logged in → show auth flow only ───────────────────────
   if (!user) {
     return (
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Debug">
-        <Stack.Screen name="Debug" component={require('../screens/DebugScreen').default} />
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Login">
         <Stack.Screen name="Login"    component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
       </Stack.Navigator>
