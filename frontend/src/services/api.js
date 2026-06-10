@@ -77,7 +77,6 @@ const api = axios.create({
     'X-Client-Version': '1.0.4',
     'X-Client-Platform': Platform.OS,
     'X-Client-Environment': ENVIRONMENT,
-    'Host': 'lorek.onrender.com', // Explicitly set host header
   },
   maxRedirects: 5,
   validateStatus: (status) => status >= 200 && status < 300,
@@ -369,7 +368,7 @@ const handleUnauthorized = async (error) => {
         return Promise.reject({ ...error, message: "Session expired", silent: true });
     }
 
-    const response = await axios.post(`${API_URL}/auth/refresh-token`, { refreshToken });
+    const response = await api.post('/auth/refresh-token', { refreshToken });
     const { token: newToken, refreshToken: newRefreshToken } = response.data;
 
     await AsyncStorage.multiSet([
