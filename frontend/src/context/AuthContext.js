@@ -513,9 +513,17 @@ const refreshAuthToken = async (manualToken) => {
       // Provide haptic feedback for error
       haptics.notificationError();
       
+      let errorMessage = 'Registration failed. Please try again.';
+      if (error.response && error.response.data && error.response.data.errors) {
+        // Handle validation errors from backend
+        errorMessage = error.response.data.errors.map(e => e.message).join(', ');
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
       return { 
         success: false, 
-        error: error.message || 'Registration failed. Please try again.'
+        error: errorMessage
       };
     }
   };
