@@ -182,10 +182,15 @@ const handleMultipleChoice = (optionId) => {
     }
   };
 
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+// ... other imports
+
+// ...
+
   const renderLearningContent = () => {
     const { content } = lesson;
     return (
-      <ScrollView style={styles.content}>
+      <KeyboardAvoidingWrapper style={styles.content}>
         <Animated.View style={[styles.exerciseWrapper, { opacity: fadeAnim, transform: [{ translateY: slideAnim }] }]}>
           {content?.grammar?.map((item, i) => (
             <View key={i} style={[styles.contentCard, { backgroundColor: theme.card }]}>
@@ -210,7 +215,7 @@ const handleMultipleChoice = (optionId) => {
             <MaterialIcons name="arrow-forward" size={20} color="#fff" />
           </TouchableOpacity>
         </Animated.View>
-      </ScrollView>
+      </KeyboardAvoidingWrapper>
     );
   };
 

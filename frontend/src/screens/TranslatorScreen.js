@@ -542,18 +542,21 @@ export default function TranslatorScreen({ navigation }) {
         </Text>
       </LinearGradient>
 
-      <KeyboardAvoidingView
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+// ... other imports
+
+// ...
+
+      <KeyboardAvoidingWrapper
         style={styles.keyboardView}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
-      >
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-          refreshControl={
+        scrollProps={{
+          contentContainerStyle: styles.scrollContent,
+          refreshControl: (
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#4CAF50']} />
-          }
-        >
+          )
+        }}
+      >
           <Animated.View style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }] }}>
             <LanguageSwitcher
               direction={direction}
@@ -586,8 +589,7 @@ export default function TranslatorScreen({ navigation }) {
               theme={theme}
             />
           </Animated.View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingWrapper>
 
       {/* History Modal */}
       <Modal

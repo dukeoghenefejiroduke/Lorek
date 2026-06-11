@@ -1,6 +1,7 @@
 import SafeAreaContainer from '../components/SafeAreaContainer';
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 import {
   View,
   Text,
@@ -152,15 +153,11 @@ export default function CreateDiscussionScreen({ navigation }) {
         </Text>
       </LinearGradient>
 
-      <KeyboardAvoidingView
+      <KeyboardAvoidingWrapper
         style={styles.keyboardView}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
       >
-        <ScrollView
+        <View
           style={styles.content}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollContent}
         >
           <Animated.View style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }] }}>
             {/* Category Selection */}
@@ -278,8 +275,8 @@ export default function CreateDiscussionScreen({ navigation }) {
             </TouchableOpacity>
             <LoadingOverlay visible={loading} message="Creating discussion..." />
           </Animated.View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+        </View>
+      </KeyboardAvoidingWrapper>
     </View>
   );
 }

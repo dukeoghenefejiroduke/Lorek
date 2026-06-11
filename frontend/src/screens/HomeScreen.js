@@ -199,7 +199,7 @@ const HomeScreen = () => {
   });
 
   return (
-    <SafeAreaContainer backgroundColor={theme.background}>
+    <SafeAreaContainer backgroundColor={theme.background} edges={['top', 'left', 'right']}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={isDarkMode ? '#000' : '#1a4c2e'} />
 
       <Animated.View style={[styles.backgroundPattern, { transform: [{ rotate }] }]}>

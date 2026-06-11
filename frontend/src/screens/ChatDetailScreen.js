@@ -1,6 +1,8 @@
 import SafeAreaContainer from '../components/SafeAreaContainer';
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+// ... (imports) ...
 import {
   View,
   Text,
@@ -10,7 +12,6 @@ import {
   Image,
   TextInput,
   ActivityIndicator,
-  KeyboardAvoidingView,
   Platform,
   StatusBar,
   Alert,
@@ -218,10 +219,9 @@ export default function ChatDetailScreen({ navigation, route }) {
       </LinearGradient>
 
     {/* WRAP THE LIST AND INPUT TOGETHER */}
-    <KeyboardAvoidingView
+    <KeyboardAvoidingWrapper
       style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
+      scroll={false}
     >
 
       <FlatList
@@ -256,7 +256,7 @@ export default function ChatDetailScreen({ navigation, route }) {
             {sending ? <ActivityIndicator size="small" color="#fff" /> : <MaterialIcons name="send" size={20} color="#fff" />}
           </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingWrapper>
     </View>
   );
 }

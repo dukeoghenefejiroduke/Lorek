@@ -202,6 +202,46 @@ Output ONLY the translation — no explanations, no quotes, no additional text.$
 }
 
 // ============================================================================
+// VERSION ENDPOINTS
+// ============================================================================
+
+/**
+ * Get latest app version (public)
+ * GET /api/version
+ */
+router.get('/version', (req, res) => {
+  // In a production system, fetch this from a persistent setting (e.g., in Redis or DB)
+  // For now, this is a placeholder response that you should update via the POST endpoint.
+  res.json({
+    latestVersion: '1.0.0', // Update this as needed
+    updateUrl: 'https://play.google.com/store/apps/details?id=com.izonlearner.app'
+  });
+});
+
+/**
+ * Update latest app version (admin only)
+ * POST /api/admin/version
+ */
+router.post('/admin/version', async (req, res, next) => {
+  try {
+    const { latestVersion, updateUrl } = req.body;
+
+    if (!latestVersion) {
+      return res.status(400).json({ success: false, error: 'latestVersion is required' });
+    }
+
+    // Logic to update the version in your DB or persistent store
+    // e.g., await Setting.findOneAndUpdate({ key: 'latestVersion' }, { value: latestVersion }, { upsert: true });
+
+    logger.info(`Backend version updated to ${latestVersion}`);
+    
+    res.json({ success: true, message: 'Version updated successfully' });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ============================================================================
 // HEALTH CHECK ENDPOINT
 // ============================================================================
 

@@ -26,6 +26,7 @@ import haptics from '../utils/haptics';
 import DateTimePicker from '@react-native-community/datetimepicker'; 
 
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 import { useAuth } from '../context/AuthContext';
 import { authAPI, userAPI } from '../services/api';
 
@@ -283,11 +284,7 @@ export default function EditProfileScreen({ navigation }) {
         </Animated.View>
       </LinearGradient>
 
-      <KeyboardAvoidingView
-        style={styles.contentContainer}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
-      >
+      <KeyboardAvoidingWrapper style={styles.contentContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollContent}
@@ -423,7 +420,7 @@ export default function EditProfileScreen({ navigation }) {
             </TouchableOpacity>
           </Animated.View>
         </ScrollView>
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingWrapper>
 
       {/* Image Picker Modal */}
       <Modal animationType="slide" transparent visible={modalVisible} onRequestClose={() => setModalVisible(false)}>

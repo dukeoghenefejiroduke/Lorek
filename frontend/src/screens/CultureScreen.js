@@ -342,10 +342,17 @@ export default function CultureScreen({ navigation }) {
         </Text>
       </LinearGradient>
 
-      <ScrollView
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+// ... other imports
+
+// ...
+
+      <KeyboardAvoidingWrapper
         style={[styles.content, { backgroundColor: theme.background }]}
-        showsVerticalScrollIndicator={false}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[theme.primary]} />}
+        scrollProps={{
+            showsVerticalScrollIndicator: false,
+            refreshControl: <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[theme.primary]} />
+        }}
       >
         {/* Proverb of the Day */}
         {renderProverbOfDay()}
@@ -370,7 +377,7 @@ export default function CultureScreen({ navigation }) {
           )}
         </View>
         <View style={{ height: 40 }} />
-      </ScrollView>
+      </KeyboardAvoidingWrapper>
 
       {/* Detail Modal */}
       <Modal

@@ -2,18 +2,17 @@ import SafeAreaContainer from '../components/SafeAreaContainer';
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import {
   View,
-  ScrollView,
   Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   Alert,
   ActivityIndicator,
-  KeyboardAvoidingView,
   Platform,
   StatusBar,
   Animated,
 } from 'react-native';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import haptics from '../utils/haptics';
@@ -207,17 +206,10 @@ export default function ChangePasswordScreen({ navigation }) {
         </Text>
       </LinearGradient>
 
-      <KeyboardAvoidingView
+      <KeyboardAvoidingWrapper
         style={styles.keyboardView}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
       >
-       <ScrollView 
-          style={styles.scrollView}
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-        >
         <Animated.View style={[styles.content, { opacity: fadeAnim, transform: [{ translateY: slideAnim }] }]}>
           {/* Current Password */}
           <View style={styles.inputGroup}>
@@ -398,8 +390,7 @@ export default function ChangePasswordScreen({ navigation }) {
             </LinearGradient>
           </TouchableOpacity>
         </Animated.View>
-       </ScrollView>
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingWrapper>
     </View>
   );
 }

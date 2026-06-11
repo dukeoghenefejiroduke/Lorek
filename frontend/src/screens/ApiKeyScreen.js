@@ -241,7 +241,11 @@ export default function ApiKeyScreen({ navigation }) {
         </Text>
       </LinearGradient>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+// ... other imports
+
+// ...
+      <KeyboardAvoidingWrapper style={styles.content}>
         <View style={[styles.infoCard, { backgroundColor: theme.card }]}>
           <MaterialIcons name="info" size={24} color={theme.primary} />
           <View style={styles.infoContent}>
@@ -276,7 +280,7 @@ export default function ApiKeyScreen({ navigation }) {
         ) : (
           apiKeys.map(renderApiKeyCard)
         )}
-      </ScrollView>
+      </KeyboardAvoidingWrapper>
 
       {/* Generate Key Modal */}
       <Modal
