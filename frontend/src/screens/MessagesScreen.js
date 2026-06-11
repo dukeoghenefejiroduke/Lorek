@@ -20,7 +20,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import haptics from '../utils/haptics';
 import { AuthContext } from '../context/AuthContext';
-
+import SafeAreaContainer from '../components/SafeAreaContainer';
 import { messagesAPI } from '../services/api';
 
 const formatTime = (dateString) => {
@@ -160,7 +160,7 @@ export default function MessagesScreen({ navigation }) {
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <SafeAreaContainer backgroundColor={theme.background}>
       <StatusBar barStyle="light-content" backgroundColor="#1a4c2e" />
       
       <LinearGradient colors={['#1a4c2e', '#2e7d32', '#43a047']} style={styles.header}>
@@ -205,7 +205,7 @@ export default function MessagesScreen({ navigation }) {
           ListFooterComponent={loadingMore && <ActivityIndicator style={styles.loadMoreIndicator} color="#4CAF50" />}
         />
       )}
-    </View>
+    </SafeAreaContainer>
   );
 }
 

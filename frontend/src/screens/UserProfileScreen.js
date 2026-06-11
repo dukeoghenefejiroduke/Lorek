@@ -1,3 +1,4 @@
+import SafeAreaContainer from '../components/SafeAreaContainer';
 import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {

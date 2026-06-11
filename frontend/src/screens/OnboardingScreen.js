@@ -1,3 +1,4 @@
+import SafeAreaContainer from '../components/SafeAreaContainer';
 import React, { useState, useRef, useContext, useCallback } from 'react';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Animated, FlatList } from 'react-native';

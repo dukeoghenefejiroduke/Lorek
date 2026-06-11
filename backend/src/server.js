@@ -154,13 +154,13 @@ app.use((req, res, next) => {
 
 // Request logging
 if (IS_PRODUCTION) {
-  // Rotating log files in production
+  // Rotating log files in production - using 'short' format to reduce I/O
   const accessLogStream = createStream('access.log', {
     interval: '1d',
     path: path.join(__dirname, 'logs'),
-    maxFiles: 30,
+    maxFiles: 7, // Reduced retention to save disk I/O and space
   });
-  app.use(morgan('combined', { stream: accessLogStream }));
+  app.use(morgan('short', { stream: accessLogStream }));
 } else {
   // Console logging in development
   app.use(morgan('dev'));

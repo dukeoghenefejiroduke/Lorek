@@ -1,3 +1,4 @@
+import SafeAreaContainer from '../components/SafeAreaContainer';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
