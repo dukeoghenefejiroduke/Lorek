@@ -24,6 +24,7 @@ import { BlurView } from 'expo-blur';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import SafeAreaContainer from '../components/SafeAreaContainer';
 
 import { progressAPI, gamificationAPI, userAPI, notificationAPI } from '../services/api';
 
@@ -200,7 +201,7 @@ const takePhoto = async () => {
   );
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <SafeAreaContainer backgroundColor={theme.background}>
       <StatusBar barStyle="light-content" backgroundColor={isDarkMode ? '#000' : theme.headerGradient[1]} />
 
       <Animated.View style={[styles.backgroundPattern, { transform: [{ rotate }] }]}>
@@ -282,7 +283,7 @@ const takePhoto = async () => {
           <MenuItem icon="⏰" label="Reminders" onPress={() => navigation.navigate('Reminders')} value="9:00 AM" color="#9C27B0" />
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaContainer>
   );
 }
 

@@ -113,42 +113,45 @@ exports.updateMastery = async (req, res, next) => {
       mistakes,
     });
 
-    // Update mastery record
+    // Atomic update for mastery record
     if (masteryIndex > -1) {
       // Update existing record
-      user.vocabularyMastery[masteryIndex] = {
-        ...user.vocabularyMastery[masteryIndex],
-        ...result.mastery,
-        lastReviewed: new Date(),
-        reviewHistory: [
-          ...(user.vocabularyMastery[masteryIndex].reviewHistory || []),
-          result.review,
-        ],
-      };
+      await User.updateOne(
+        { _id: userId, 'vocabularyMastery.wordId': wordId },
+        {
+          $set: {
+            'vocabularyMastery.$.interval': result.mastery.interval,
+            'vocabularyMastery.$.easeFactor': result.mastery.easeFactor,
+            'vocabularyMastery.$.stage': result.mastery.stage,
+            'vocabularyMastery.$.nextReview': result.mastery.nextReview,
+            'vocabularyMastery.$.reviewCount': result.mastery.reviewCount,
+            'vocabularyMastery.$.lastReviewed': new Date(),
+          },
+          $push: { 'vocabularyMastery.$.reviewHistory': result.review }
+        }
+      );
     } else {
       // Create new record
-      user.vocabularyMastery.push({
-        wordId,
-        language_id: word.language_id,
-        ...result.mastery,
-        firstSeen: new Date(),
-        lastReviewed: new Date(),
-        reviewHistory: [result.review],
-      });
+      await User.updateOne(
+        { _id: userId },
+        {
+          $push: {
+            vocabularyMastery: {
+              wordId,
+              language_id: word.language_id,
+              ...result.mastery,
+              firstSeen: new Date(),
+              lastReviewed: new Date(),
+              reviewHistory: [result.review],
+            }
+          }
+        }
+      );
     }
 
-    user.markModified('vocabularyMastery'); 
+    // Update user's learning stats asynchronously (non-blocking)
+    updateUserLearningStats(user, result, word).catch(err => logger.error('Error updating stats:', err));
 
-    // Update user's learning stats
-    await updateUserLearningStats(user, result, word);
-
-   // Check if you need to update Learning Stats separately
-   if (user.learningStats) {
-     user.markModified('learningStats');
-   }
-
-    // Save user
-    await user.save();
 
     // Update practice session if provided
     if (sessionId) {
@@ -164,16 +167,20 @@ exports.updateMastery = async (req, res, next) => {
     }
   }
 
-    // Check for achievements
-    const achievements = await checkMasteryAchievements(user, word, result);
+    // Check for achievements and send notifications asynchronously (non-blocking)
+    checkMasteryAchievements(user, word, result)
+      .then(achievements => {
+        // Log if needed or handle
+      })
+      .catch(err => logger.error('Error checking achievements:', err));
 
-    // Send notifications for significant milestones
     if (result.milestones.length > 0) {
-      await sendMasteryNotifications(userId, result.milestones);
+      sendMasteryNotifications(userId, result.milestones)
+        .catch(err => logger.error('Error sending notifications:', err));
     }
 
-    // Cache the result
-    await cacheMasteryResult(userId, wordId, result);
+    // Cache the result asynchronously
+    cacheMasteryResult(userId, wordId, result).catch(err => logger.error('Cache error:', err));
 
     // Prepare response
     const response = {
@@ -193,7 +200,7 @@ exports.updateMastery = async (req, res, next) => {
         },
         metrics: result.metrics,
         milestones: result.milestones,
-        achievements: achievements.earned,
+        achievements: [], // Assuming empty as async check
         nextReviewIn: calculateTimeUntil(result.mastery.nextReview),
         recommendations: result.recommendations,
       },

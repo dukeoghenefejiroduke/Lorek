@@ -1,3 +1,4 @@
+import SafeAreaContainer from '../components/SafeAreaContainer';
 import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
 import {
   View,

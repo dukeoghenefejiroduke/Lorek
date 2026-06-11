@@ -20,6 +20,8 @@ import { AuthContext } from '../context/AuthContext';
 import haptics from '../utils/haptics';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { handleGlobalError } from '../utils/errorHandler';
+import SafeAreaContainer from '../components/SafeAreaContainer';
+
 
 // Import the new API modules
 import { gamificationAPI, vocabularyAPI, communityAPI, progressAPI } from '../services/api'; 
@@ -197,7 +199,7 @@ const HomeScreen = () => {
   });
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <SafeAreaContainer backgroundColor={theme.background}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={isDarkMode ? '#000' : '#1a4c2e'} />
 
       <Animated.View style={[styles.backgroundPattern, { transform: [{ rotate }] }]}>
@@ -386,16 +388,16 @@ const HomeScreen = () => {
       </TouchableOpacity>
       
      <LanguageSwitcher
-        visible={showLanguageSwitcher}
-        onClose={() => setShowLanguageSwitcher(false)}
-        onLanguageChange={(language) => {
-          fetchDashboardData(); // Refresh data to reflect potential language-specific content
-        }}
-      />
-      
-    </View>
-  );
-};
+       visible={showLanguageSwitcher}
+       onClose={() => setShowLanguageSwitcher(false)}
+       onLanguageChange={(language) => {
+         fetchDashboardData(); // Refresh data to reflect potential language-specific content
+       }}
+     />
+
+     </SafeAreaContainer>
+     );
+     };
 
 const styles = StyleSheet.create({
   container: {
