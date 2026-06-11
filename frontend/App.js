@@ -7,6 +7,7 @@ import { ThemeProvider, ThemeContext } from './src/context/ThemeContext';
 import { AuthProvider } from './src/context/AuthContext';
 import { LanguageProvider } from './src/context/LanguageContext';
 import AppNavigator from './src/navigation/AppNavigator';
+import UpdateNotification from './src/components/UpdateNotification';
 
 function NavigationWrapper() {
   // This wrapper ensures we only render NavigationContainer 
@@ -15,6 +16,7 @@ function NavigationWrapper() {
   return (
     <NavigationContainer>
       <AppNavigator />
+      <UpdateNotification />
     </NavigationContainer>
   );
 }

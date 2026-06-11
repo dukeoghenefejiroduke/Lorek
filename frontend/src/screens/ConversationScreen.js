@@ -1,6 +1,7 @@
 import SafeAreaContainer from '../components/SafeAreaContainer';
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 import {
   View,
   Text,
@@ -449,10 +450,9 @@ const ConversationScreen = ({ route }) => {
       )}
 
       {/* Chat Area */}
-      <KeyboardAvoidingView 
+      <KeyboardAvoidingWrapper
         style={styles.chatContainer}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
+        scroll={false}
       >
         <FlatList
           ref={flatListRef}
@@ -517,7 +517,7 @@ const ConversationScreen = ({ route }) => {
             <MaterialIcons name="keyboard" size={24} color="#666" />
           </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingWrapper>
 
       {/* Message Detail Modal */}
       <Modal

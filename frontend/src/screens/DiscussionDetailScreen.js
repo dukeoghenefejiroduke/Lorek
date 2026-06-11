@@ -2,6 +2,7 @@ import SafeAreaContainer from '../components/SafeAreaContainer';
 import React, { useState, useEffect, useRef, useCallback, useContext } from 'react';
 
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 import {
   View,
   Text,
@@ -338,10 +339,9 @@ export default function DiscussionDetailScreen({ navigation, route }) {
         </View>
       </LinearGradient>
 
-      <KeyboardAvoidingView
+      <KeyboardAvoidingWrapper
         style={styles.keyboardView}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
+        scroll={false}
       >
         <FlatList
           data={replies}
@@ -442,7 +442,7 @@ export default function DiscussionDetailScreen({ navigation, route }) {
           </View>
           <Text style={styles.charCount}>{replyText.length}/500</Text>
         </View>
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingWrapper>
 
       {/* Share/Report Modal */}
       <Modal

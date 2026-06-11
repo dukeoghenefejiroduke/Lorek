@@ -209,27 +209,20 @@ const handleReferralCheck = async (code) => {
 };
 
 
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+// ... other imports
+
+// ...
+
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <KeyboardAvoidingView
-        behavior={Platform.select({
-          ios: 'padding',
-          android: 'height',
-          default: undefined,
-        })}
-        style={styles.container}
-      >
+      <KeyboardAvoidingWrapper>
         <LinearGradient
           colors={isDarkMode ? ['#000000', '#1a1a1a'] : ['#1a4c2e', '#2e7d32', '#4CAF50']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.gradient}
-        >
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
         >
           <Pressable style={styles.content} onPress={Keyboard.dismiss}>
             <View style={styles.headerContainer}>
@@ -486,9 +479,8 @@ const handleReferralCheck = async (code) => {
               <GoogleLoginButton type="register" />
             </View>
           </Pressable>
-        </ScrollView>
         </LinearGradient>
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingWrapper>
 
       {/* Terms Modal */}
       <Modal
