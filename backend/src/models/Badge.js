@@ -331,7 +331,6 @@ const badgeSchema = new mongoose.Schema({
   
   tags: [{
     type: String,
-    index: true,
   }],
   
   notes: String,

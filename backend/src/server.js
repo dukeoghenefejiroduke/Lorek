@@ -14,7 +14,7 @@ const connectDB = require('./config/database');
 const { logger, logStream } = require('./config/logger');
 const redis = require('./config/redis');
 const { auth } = require('./middleware/auth');
-const { apiLimiter, authLimiter, publicLimiter } = require('./middleware/rateLimit');
+const { apiLimiter } = require('./middleware/rateLimit');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 const { requestTracker, performanceMonitor } = require('./middleware/monitoring');
 const { cacheMiddleware } = require('./middleware/cache');
@@ -175,14 +175,8 @@ app.use(performanceMonitor);
 // RATE LIMITING
 // ============================================================================
 
-// Global rate limiter
+// Global rate limiter (standard fallback)
 app.use(apiLimiter);
-
-// Stricter rate limit for auth routes
-app.use('/api/auth', authLimiter);
-
-// Public routes rate limiter (more generous)
-app.use('/api/public', publicLimiter);
 
 // ============================================================================
 // STATIC FILES
