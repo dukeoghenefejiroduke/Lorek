@@ -50,6 +50,9 @@ const ragRoutes = require('./routes/rag');
 
 const app = express();
 
+// Trust the proxy (Render, Heroku, etc.)
+app.set('trust proxy', 1);
+
 // ============================================================================
 // CONFIGURATION & ENVIRONMENT
 // ============================================================================
