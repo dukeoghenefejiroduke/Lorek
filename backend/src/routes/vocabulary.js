@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const rateLimit = require('express-rate-limit');
 const { body, validationResult, param, query } = require('express-validator');
 const cache = require('memory-cache');
 
@@ -19,24 +18,13 @@ const { cacheMiddleware, clearCache } = require('../middleware/cache');
 const { AppError, ValidationError } = require('../middleware/errorHandler');
 const notificationService = require('../services/notificationService');
 const redis = require('../config/redis');
+const { contentLimiter } = require('../middleware/rateLimit');
 
 // ============================================================================
 // RATE LIMITING
 // ============================================================================
 
-const vocabLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 60, // 60 requests per minute
-  message: {
-    success: false,
-    error: 'Too many requests. Please slow down.',
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-  skip: (req) => req.path === '/search' || req.method === 'GET',
-});
-
-router.use(vocabLimiter);
+router.use(contentLimiter);
 
 // ============================================================================
 // VALIDATION RULES

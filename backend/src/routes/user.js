@@ -5,7 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const { body, validationResult } = require('express-validator');
-const rateLimit = require('express-rate-limit');
+const { intensiveLimiter } = require('../middleware/rateLimit');
 
 const { auth } = require('../middleware/auth');
 const User = require('../models/User');
@@ -54,14 +54,6 @@ const upload = multer({
 });
 
 // Rate limiting
-const profileLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 10,
-  message: {
-    success: false,
-    error: 'Too many profile update requests. Please slow down.',
-  },
-});
 
 // ============================================================================
 // VALIDATION RULES
@@ -122,7 +114,7 @@ router.get('/profile', auth, async (req, res, next) => {
  * Update user profile
  * PUT /api/user/profile
  */
-router.put('/profile', auth, profileLimiter, validateProfileUpdate, async (req, res, next) => {
+router.put('/profile', auth, intensiveLimiter, validateProfileUpdate, async (req, res, next) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

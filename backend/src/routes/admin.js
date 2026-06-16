@@ -9,8 +9,10 @@ const Review = require('../models/Review');
 const Progress = require('../models/Progress');
 const { auth } = require('../middleware/auth');
 const { authorize } = require('../middleware/authorize');
+const { intensiveLimiter } = require('../middleware/rateLimit');
 
 // All admin routes require authentication and admin role
+router.use(intensiveLimiter);
 router.use(auth);
 router.use(authorize('admin'));
 

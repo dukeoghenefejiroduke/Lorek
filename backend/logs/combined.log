@@ -1141,3 +1141,8 @@
 {"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-06-08T00:00:28.179Z\n    ================================\n    ","timestamp":"2026-06-08 01:00:28"}
 {"level":"info","message":"Redis client connected","timestamp":"2026-06-08 01:00:28"}
 {"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-06-08 01:00:28"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-06-14T19:16:19.621Z\n    ================================\n    ","timestamp":"2026-06-14 20:16:19"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-06-14 20:16:19"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-06-14 20:16:19"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-06-14 20:16:20"}
+{"error":"Route /favicon.ico not found","level":"warn","message":"Client Error:","method":"GET","statusCode":404,"timestamp":"2026-06-14 20:23:22","url":"/favicon.ico"}

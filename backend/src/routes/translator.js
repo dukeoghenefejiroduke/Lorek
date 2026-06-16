@@ -4,7 +4,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { body, validationResult } = require('express-validator');
-const rateLimit = require('express-rate-limit');
+const { intensiveLimiter } = require('../middleware/rateLimit');
 
 const Vocabulary = require('../models/Vocabulary');
 const Translation = require('../models/Translation');
@@ -19,18 +19,7 @@ const redis = require('../config/redis');
 // RATE LIMITING
 // ============================================================================
 
-const translatorLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 30, // 30 requests per minute
-  message: {
-    success: false,
-    error: 'Too many translation requests. Please slow down.',
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-router.use(translatorLimiter);
+router.use(intensiveLimiter);
 
 // ============================================================================
 // PRONUNCIATION GUIDE

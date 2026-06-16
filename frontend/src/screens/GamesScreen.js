@@ -71,6 +71,7 @@ const GAMES = [
     difficulty: 'Medium',
     players: 'Single Player',
     time: '10 min',
+    disabled: true, // Mark as disabled
   },
   {
     id: 'flashcards',
@@ -735,9 +736,9 @@ const handleLeaderboardPress = async (gameType) => {
   const renderGameCard = (game) => (
     <Animated.View key={game.id} style={{ opacity: fadeAnim, transform: [{ scale: scaleAnim }] }}>
       <TouchableOpacity
-        style={styles.gameCard}
-        onPress={() => handleGamePress(game.id)}
-        disabled={loading}
+        style={[styles.gameCard, game.disabled && { opacity: 0.5 }]}
+        onPress={() => !game.disabled && handleGamePress(game.id)}
+        disabled={loading || game.disabled}
       >
         <LinearGradient
           colors={[game.color, game.color + 'CC']}
@@ -746,6 +747,7 @@ const handleLeaderboardPress = async (gameType) => {
           <Text style={styles.gameIcon}>{game.icon}</Text>
           <Text style={styles.gameTitle}>{game.title}</Text>
           <Text style={styles.gameDescription}>{game.description}</Text>
+          {game.disabled && <Text style={{ color: '#fff', fontSize: 10 }}>Coming Soon</Text>}
           <View style={styles.gameTags}>
             <View style={styles.gameTag}>
               <MaterialIcons name="star" size={12} color="#FFD700" />

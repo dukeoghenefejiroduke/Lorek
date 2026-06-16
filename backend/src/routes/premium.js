@@ -1,19 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const rateLimit = require('express-rate-limit');
+const { contentLimiter } = require('../middleware/rateLimit');
 
 const { auth } = require('../middleware/auth');
 
 const premiumService = require('../services/premiumService');
 const { AppError } = require('../middleware/errorHandler');
 
-const premiumLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 20,
-  message: { success: false, error: 'Too many requests. Please slow down.' },
-});
-
-router.use(premiumLimiter);
+router.use(contentLimiter);
 router.use(auth);
 
 /**

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const rateLimit = require('express-rate-limit');
+const { contentLimiter } = require('../middleware/rateLimit');
 const { query, validationResult } = require('express-validator');
 
 const { auth } = require('../middleware/auth');
@@ -17,16 +17,7 @@ const notificationService = require('../services/notificationService');
 // RATE LIMITING
 // ============================================================================
 
-const leaderboardLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 20,
-  message: {
-    success: false,
-    error: 'Too many leaderboard requests. Please slow down.',
-  },
-});
-
-router.use(leaderboardLimiter);
+router.use(contentLimiter);
 
 // ============================================================================
 // VALIDATION RULES

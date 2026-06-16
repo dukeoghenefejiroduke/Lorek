@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const rateLimit = require('express-rate-limit');
+const { contentLimiter } = require('../middleware/rateLimit');
 const { body, validationResult, param } = require('express-validator');
 const cache = require('memory-cache');
 
@@ -22,18 +22,7 @@ const gamificationController = require('../controllers/gamificationController');
 // RATE LIMITING
 // ============================================================================
 
-const progressLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 30, // 30 requests per minute
-  message: {
-    success: false,
-    error: 'Too many requests. Please slow down.',
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-router.use(progressLimiter);
+router.use(contentLimiter);
 
 
 // GET /api/progress/stats   ← Add this (heavily used in frontend)

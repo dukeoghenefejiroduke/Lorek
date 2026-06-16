@@ -14,7 +14,7 @@ export default function GoogleLoginButton({ type = 'login' }) {
   // NOTE: You must configure your Client IDs in the Google Cloud Console
   // and update these placeholders.
   const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: 'YOUR_ANDROID_CLIENT_ID.apps.googleusercontent.com',
+    androidClientId: '299491860065-8f5l0idc7t5m7bngu2ruo698gcs70892.apps.googleusercontent.com', // Lorek andriod
     iosClientId: 'YOUR_IOS_CLIENT_ID.apps.googleusercontent.com',
     webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
   });
