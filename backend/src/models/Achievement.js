@@ -314,7 +314,6 @@ const achievementSchema = new mongoose.Schema({
   
   tags: [{
     type: String,
-    index: true,
   }],
   
   notes: String,

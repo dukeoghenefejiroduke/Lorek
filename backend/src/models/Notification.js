@@ -56,7 +56,6 @@ const notificationSchema = new mongoose.Schema({
   
   expiresAt: {
     type: Date,
-    index: true,
   },
   
   externalIds: {
