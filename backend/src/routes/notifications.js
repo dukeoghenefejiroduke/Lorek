@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const { body, param, validationResult } = require('express-validator');
-const rateLimit = require('express-rate-limit');
+const { socialLimiter } = require('../middleware/rateLimit');
 
 const { auth } = require('../middleware/auth');
 const Notification = require('../models/Notification');
@@ -15,16 +15,7 @@ const redis = require('../config/redis');
 // RATE LIMITING
 // ============================================================================
 
-const notificationLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 30,
-  message: {
-    success: false,
-    error: 'Too many requests. Please slow down.',
-  },
-});
-
-router.use(notificationLimiter);
+router.use(socialLimiter);
 router.use(auth);
 
 // ============================================================================

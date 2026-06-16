@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const rateLimit = require('express-rate-limit');
 const { body, param, query, validationResult } = require('express-validator');
 const practiceController = require('../controllers/practiceController');
 

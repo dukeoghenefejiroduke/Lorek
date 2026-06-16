@@ -3,6 +3,9 @@ const router = express.Router();
 const crypto = require('crypto');
 const { auth } = require('../middleware/auth');
 const User = require('../models/User');
+const { authLimiter } = require('../middleware/rateLimit');
+
+router.use(authLimiter);
 
 // Get all API keys for current user
 router.get('/api-keys', auth, async (req, res) => {

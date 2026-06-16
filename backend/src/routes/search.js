@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const rateLimit = require('express-rate-limit');
 const { body, query, validationResult } = require('express-validator');
 
 const { auth } = require('../middleware/auth');
@@ -12,21 +11,11 @@ const SearchHistory = require('../models/SearchHistory');
 const { logger } = require('../config/logger');
 const { cacheMiddleware } = require('../middleware/cache');
 const redis = require('../config/redis');
+const { searchLimiter } = require('../middleware/rateLimit');
 
 // ============================================================================
 // RATE LIMITING
 // ============================================================================
-
-const searchLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 30, // 30 requests per minute
-  message: {
-    success: false,
-    error: 'Too many search requests. Please slow down.',
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
 
 router.use(searchLimiter);
 

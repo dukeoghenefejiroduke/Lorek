@@ -2,6 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const ragService = require('../services/ragService');
+const { intensiveLimiter } = require('../middleware/rateLimit');
+
+router.use(intensiveLimiter);
 
 router.post('/ask', async (req, res) => {
   try {

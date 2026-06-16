@@ -3,8 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const mongoose = require('mongoose');
-const rateLimit = require('express-rate-limit');
-const RedisStore = require('rate-limit-redis');
+const { publicLimiter } = require('../middleware/rateLimit');
 const redis = require('../config/redis');
 const { logger } = require('../config/logger');
 const { cacheMiddleware } = require('../middleware/cache');
@@ -20,23 +19,6 @@ const notificationService = require('../services/notificationService');
 // ============================================================================
 // INITIALIZATION & CONFIGURATION
 // ============================================================================
-
-// Rate limiting for public endpoints
-const publicLimiter = rateLimit({
-  store: redis.client ? new RedisStore({
-    client: redis.client,
-    prefix: 'url:public:',
-  }) : undefined,
-  windowMs: 15 * 60 * 1000, // 15 minute
-  max: 60, // 60 requests per minute
-  message: {
-    success: false,
-    error: 'Too many requests. Please slow down.',
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-  skip: (req) => req.path === '/health',
-});
 
 // Apply rate limiting to all public routes
 router.use(publicLimiter);
