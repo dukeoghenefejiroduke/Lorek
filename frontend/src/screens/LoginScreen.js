@@ -26,7 +26,7 @@ import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import GoogleLoginButton from '../components/GoogleLoginButton';
 import LoadingOverlay from '../components/LoadingOverlay';
-
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
 export default function LoginScreen({ navigation }) {
   const { activeLanguage } = useContext(LanguageContext);
@@ -205,11 +205,6 @@ export default function LoginScreen({ navigation }) {
     
     return error;
   };
-
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
-// ... other imports
-
-// ...
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>

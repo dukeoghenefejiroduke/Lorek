@@ -108,7 +108,7 @@ router.post('/register', validateRegistration, async (req, res, next) => {
     const token = user.generateAuthToken();
 
     // Send welcome notification
-    await notificationService.sendWelcomeNotification(user._id);
+    await notificationService.sendWelcome(user._id);
 
     // Send welcome email
     try {

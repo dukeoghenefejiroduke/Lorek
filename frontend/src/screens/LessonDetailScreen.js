@@ -10,6 +10,8 @@ import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import haptics from '../utils/haptics';
 import { lessonAPI, progressAPI } from '../services/api';
 import { LanguageContext } from '../context/LanguageContext';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+
 
 const { width } = Dimensions.get('window');
 
@@ -181,11 +183,6 @@ const handleMultipleChoice = (optionId) => {
       default: return ['#2196F3', '#1565C0'];
     }
   };
-
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
-// ... other imports
-
-// ...
 
   const renderLearningContent = () => {
     const { content } = lesson;
