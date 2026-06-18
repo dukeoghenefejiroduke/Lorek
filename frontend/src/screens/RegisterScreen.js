@@ -23,6 +23,7 @@ import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import { authAPI } from '../services/api';
 import GoogleLoginButton from '../components/GoogleLoginButton';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
 export default function RegisterScreen({ navigation }) {
   const { activeLanguage } = useContext(LanguageContext);
@@ -163,22 +164,25 @@ const handleRegister = async () => {
 
   setLoading(true);
   try {
-const result = await register({
-  username: trimmedUsername, 
-  email: email.trim(), 
-  password: password.trim(),
-  referredByCode: referralCode.trim() || undefined, // Changed key name
-  acceptTerms: agreeToTerms,
-});
-
+    const result = await register({
+      username: trimmedUsername,
+      email: email.trim(),
+      password: password.trim(),
+      referredByCode: referralCode.trim() || undefined,
+      acceptTerms: agreeToTerms,
+    });
 
     if (result?.success) {
       setSuccessMsg('Registration successful! Redirecting...');
     } else {
-      setErrorMsg(result?.error || 'Registration failed. Please try again.');
+      // Improved error parsing
+      const errorMsg = result?.message || result?.error || 'Registration failed. Please try again.';
+      setErrorMsg(errorMsg);
     }
   } catch (error) {
-    setErrorMsg('Network error. Please check your connection.');
+    // Check if error is the structured object from api.js
+    const errorMessage = error?.message || 'Network error. Please check your connection.';
+    setErrorMsg(errorMessage);
     console.error('Registration error:', error);
   } finally {
     setLoading(false);
@@ -209,7 +213,7 @@ const handleReferralCheck = async (code) => {
 };
 
 
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+
 // ... other imports
 
 // ...

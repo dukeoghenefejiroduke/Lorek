@@ -437,6 +437,13 @@ class NotificationService {
   }
 
   /**
+   * Alias for sendWelcome to ensure backward compatibility and prevent errors
+   */
+  async sendWelcomeNotification(userId) {
+    return this.sendWelcome(userId);
+  }
+
+  /**
    * Send streak alert
    */
   async sendStreakAlert(userId, streak) {
