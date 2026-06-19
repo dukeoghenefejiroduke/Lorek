@@ -174,10 +174,6 @@ const handleRegister = async () => {
 
     if (result?.success) {
       setSuccessMsg('Registration successful! Redirecting...');
-      // Small delay to let the user see the success message
-      setTimeout(() => {
-        navigation.navigate('Main');
-      }, 1500);
     } else {
       // Improved error parsing
       if (result?.errors && Array.isArray(result.errors)) {
