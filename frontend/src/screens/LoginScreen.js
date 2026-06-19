@@ -112,9 +112,16 @@ export default function LoginScreen({ navigation }) {
       const result = await login(email.trim(), password, rememberMe);
 
       if (!result?.success) {
-        // Handle specific error messages
-        const errorMessage = handleErrorMessage(result?.error, result?.status);
-        setErrorMsg(errorMessage);
+        // Improved error parsing
+        if (result?.errors && Array.isArray(result.errors)) {
+          // Join all error messages with newlines
+          const errorMsg = result.errors.map(err => err.msg).join('\n');
+          setErrorMsg(errorMsg);
+        } else {
+          // Fallback to existing error parsing
+          const errorMessage = handleErrorMessage(result?.error || result?.message, result?.status);
+          setErrorMsg(errorMessage);
+        }
       }
     } catch (err) {
       console.error('Login error:', err);

@@ -176,8 +176,14 @@ const handleRegister = async () => {
       setSuccessMsg('Registration successful! Redirecting...');
     } else {
       // Improved error parsing
-      const errorMsg = result?.message || result?.error || 'Registration failed. Please try again.';
-      setErrorMsg(errorMsg);
+      if (result?.errors && Array.isArray(result.errors)) {
+        // Join all error messages with newlines
+        const errorMsg = result.errors.map(err => err.msg).join('\n');
+        setErrorMsg(errorMsg);
+      } else {
+        const errorMsg = result?.message || result?.error || 'Registration failed. Please try again.';
+        setErrorMsg(errorMsg);
+      }
     }
   } catch (error) {
     // Check if error is the structured object from api.js
