@@ -352,6 +352,23 @@ router.get('/knowledge', async (req, res) => {
   } catch (err) { next(err); }
 });
 
+router.post('/version', async (req, res, next) => {
+  try {
+    const { latestVersion, updateUrl } = req.body;
+
+    if (!latestVersion) {
+      return res.status(400).json({ success: false, error: 'latestVersion is required' });
+    }
+
+    // Logic to update the version in your DB or persistent store
+    logger.info(`Backend version updated to ${latestVersion}`);
+    
+    res.json({ success: true, message: 'Version updated successfully' });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post('/knowledge', async (req, res) => {
   try {
     const entry = await KnowledgeBase.create(req.body);

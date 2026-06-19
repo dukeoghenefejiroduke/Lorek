@@ -214,6 +214,14 @@ app.get('/health', (req, res) => {
   });
 });
 
+// App version endpoint
+app.get('/api/version', (req, res) => {
+  res.json({
+    latestVersion: process.env.npm_package_version || '1.0.0',
+    updateUrl: 'https://play.google.com/store/apps/details?id=com.izonlearner.app'
+  });
+});
+
 // Readiness probe for Kubernetes/Docker
 app.get('/ready', (req, res) => {
   const dbState = mongoose.connection.readyState;
