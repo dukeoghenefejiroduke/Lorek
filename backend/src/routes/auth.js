@@ -25,27 +25,27 @@ router.use(authLimiter);
 const validateRegistration = [
   body('username')
     .trim()
-    .isLength({ min: 3, max: 30 }).withMessage('Username must be 3-30 characters')
-    .matches(/^[a-zA-Z0-9_]+$/).withMessage('Username can only contain letters, numbers, and underscores')
+    .isLength({ min: 3, max: 30 }).withMessage('Please pick a username between 3 and 30 characters.')
+    .matches(/^[a-zA-Z0-9_]+$/).withMessage('Your username can only have letters, numbers, and underscores.')
     .custom(async (username) => {
       const exists = await User.findOne({ username });
-      if (exists) throw new Error('Username already taken');
+      if (exists) throw new Error('This username is already taken. Try another one.');
       return true;
     }),
   
   body('email')
     .trim()
-    .isEmail().withMessage('Invalid email address')
+    .isEmail().withMessage('That email address doesn\'t look right.')
     .normalizeEmail()
     .custom(async (email) => {
       const exists = await User.findOne({ email });
-      if (exists) throw new Error('Email already in use');
+      if (exists) throw new Error('This email is already registered. Try logging in.');
       return true;
     }),
   
   body('password')
-    .isLength({ min: 8 }).withMessage('Password must be at least 8 characters')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/).withMessage('Password must contain at least one uppercase letter, one lowercase letter, and one number'),
+    .isLength({ min: 8 }).withMessage('Your password needs at least 8 characters.')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/).withMessage('Your password needs to be stronger. Use a mix of uppercase letters, lowercase letters, and numbers.'),
 ];
 
 const validateLogin = [
