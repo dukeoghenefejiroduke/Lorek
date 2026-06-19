@@ -196,18 +196,18 @@ export default function LoginScreen({ navigation }) {
     const errorStr = error.toString().toLowerCase(); 
     
     if (errorStr.includes('401') || errorStr.includes('unauthorized')) {
-    return 'Invalid email or password. Please try again.';
-  }
+      return 'Incorrect email or password.';
+    }
     if (errorStr.includes('user-not-found') || errorStr.includes('no user')) {
-      return 'No account found with this email';
+      return 'We couldn\'t find an account with that email.';
     } else if (errorStr.includes('wrong-password') || errorStr.includes('invalid-password')) {
-      return 'Incorrect password';
+      return 'Incorrect password.';
     } else if (errorStr.includes('network')) {
-      return 'Network error. Please check your connection';
+      return 'Network error. Please check your internet connection.';
     } else if (errorStr.includes('locked') || errorStr.includes('too many attempts')) {
-      return 'Account temporarily locked. Please try again later';
+      return 'Your account is temporarily locked. Please try again later.';
     } else if (errorStr.includes('not verified')) {
-      return 'Please verify your email before logging in';
+      return 'Please verify your email before logging in.';
     }
     
     return error;

@@ -491,12 +491,20 @@ const refreshAuthToken = async (manualToken) => {
       const sessionExpiry = Date.now() + (expiresIn * 1000);
       
       // Store auth data
-      await AsyncStorage.multiSet([
-        ['token', token],
-        ['refreshToken', refreshToken],
-        ['user', JSON.stringify(user)],
+      const storageItems = [
         ['sessionExpiry', sessionExpiry.toString()]
-      ]);
+      ];
+
+      if (token) storageItems.push(['token', token]);
+      if (refreshToken) storageItems.push(['refreshToken', refreshToken]);
+      if (user) storageItems.push(['user', JSON.stringify(user)]);
+
+      await AsyncStorage.multiSet(storageItems);
+      
+      // Ensure removal if missing
+      if (!token) await AsyncStorage.removeItem('token');
+      if (!refreshToken) await AsyncStorage.removeItem('refreshToken');
+      if (!user) await AsyncStorage.removeItem('user');
       
       setUser(user);
       setIsAuthenticated(true);
