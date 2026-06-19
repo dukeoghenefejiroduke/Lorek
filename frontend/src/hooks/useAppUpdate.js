@@ -26,7 +26,7 @@ export const useAppUpdate = () => {
       const { latestVersion, updateUrl } = response.data;
 
       // Compare with current version
-      const currentVersion = Constants.expoConfig.version || '1.0.0';
+      const currentVersion = Constants.expoConfig?.version || '1.0.0';
       if (latestVersion !== currentVersion) {
         setUpdateInfo({ latestVersion, updateUrl });
         setUpdateAvailable(true);

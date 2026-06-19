@@ -1499,6 +1499,29 @@ userSchema.methods.getPublicProfile = function() {
   };
 };
 
+/**
+ * Get public JSON representation
+ */
+userSchema.methods.toPublicJSON = function() {
+  return {
+    id: this._id,
+    username: this.username,
+    email: this.email,
+    role: this.role,
+    profile: {
+      displayName: this.displayName,
+      avatarUrl: this.avatarUrl,
+      bio: this.profile?.bio,
+    },
+    gamification: {
+      level: this.progress?.level || 1,
+      points: this.gamification?.points?.total || 0,
+      streak: this.progress?.streak?.current || 0,
+    },
+    createdAt: this.createdAt,
+  };
+};
+
 // ============================================================================
 // STATIC METHODS
 // ============================================================================
