@@ -7,7 +7,7 @@ const User = require('../models/User');
 const { logger } = require('../config/logger');
 const { AppError, ValidationError } = require('../middleware/errorHandler');
 const notificationService = require('../services/notificationService');
-const { sendEmail } = require('../services/emailService');
+const emailService = require('../services/emailService');
 const redis = require('../config/redis');
 const { authLimiter } = require('../middleware/rateLimit');
 
@@ -89,10 +89,14 @@ router.post('/register', validateRegistration, async (req, res, next) => {
       username,
       email,
       password,
+      status: 'pending_verification',
       'gamification.level': 1,
       'gamification.experience': 0,
       'gamification.points.total': 0,
     });
+
+    // Generate email verification token
+    const verificationToken = user.generateEmailVerificationToken();
 
     // Handle referral if provided
     if (referralCode) {
@@ -111,24 +115,65 @@ router.post('/register', validateRegistration, async (req, res, next) => {
     // Send welcome notification
     await notificationService.sendWelcome(user._id);
 
-    // Send welcome email
+    // Send verification email
     try {
-      await sendEmail({
-        to: user.email,
-        subject: 'Welcome to Learn Izon!',
-        template: 'welcome',
-        context: { username: user.username },
-      });
+      await emailService.sendVerificationEmail(user.email, user.username, verificationToken);
     } catch (emailErr) {
-      logger.error('Failed to send welcome email:', emailErr);
+      logger.error('Failed to send verification email:', emailErr);
     }
 
     res.status(201).json({
       success: true,
+      message: 'Registration successful. Please check your email to verify your account.',
       data: {
         user: user.toPublicJSON(),
         token,
       },
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * Verify user email
+ * POST /api/auth/verify-email
+ */
+router.post('/verify-email', [
+  body('token').notEmpty().withMessage('Token is required'),
+], async (req, res, next) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+
+    const { token } = req.body;
+
+    // Hash token to match stored version
+    const hashedToken = crypto
+      .createHash('sha256')
+      .update(token)
+      .digest('hex');
+
+    const user = await User.findOne({
+      'security.emailVerificationToken': hashedToken,
+      'security.emailVerificationExpires': { $gt: Date.now() },
+    });
+
+    if (!user) {
+      throw new AppError('Invalid or expired verification token', 400);
+    }
+
+    // Activate account
+    user.status = 'active';
+    user.security.emailVerificationToken = undefined;
+    user.security.emailVerificationExpires = undefined;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: 'Email verified successfully. Your account is now active.',
     });
   } catch (err) {
     next(err);
@@ -231,11 +276,11 @@ router.post('/forgot-password', [
     const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
     
     try {
-      await sendEmail({
+      await emailService.sendEmail({
         to: user.email,
         subject: 'Password Reset Request',
         template: 'passwordReset',
-        context: {
+        data: {
           username: user.username,
           resetUrl,
         },
