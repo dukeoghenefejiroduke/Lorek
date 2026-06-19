@@ -1171,3 +1171,12 @@
 {"level":"warn","message":"Redis connection closed","timestamp":"2026-06-16 16:28:56"}
 {"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-06-16 16:28:57"}
 {"level":"warn","message":"Redis connection closed","timestamp":"2026-06-16 16:28:57"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-06-19T09:59:33.987Z\n    ================================\n    ","timestamp":"2026-06-19 10:59:34"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-06-19 10:59:34"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-06-19 10:59:34"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-06-19T10:01:13.450Z\n    ================================\n    ","timestamp":"2026-06-19 11:01:13"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-06-19 11:01:13"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-06-19 11:01:13"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-06-19T10:01:33.266Z\n    ================================\n    ","timestamp":"2026-06-19 11:01:33"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-06-19 11:01:33"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-06-19 11:01:33"}
