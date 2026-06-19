@@ -395,18 +395,28 @@ const refreshAuthToken = async (manualToken) => {
     try {
       console.log('📡 Attempting authAPI.login...');
       const response = await authAPI.login({ email, password });
-      console.log('✅ authAPI.login success');
-      const { token, refreshToken, user, expiresIn } = response.data;
+      console.log('✅ authAPI.login success, full response.data:', JSON.stringify(response.data, null, 2));
+      
+      const { user, token, refreshToken } = response.data.data;
+      const expiresIn = 3600; // Default if not provided in data
       
       const sessionExpiry = Date.now() + (expiresIn * 1000);
       
       // Store auth data
-      await AsyncStorage.multiSet([
-        ['token', token],
-        ['refreshToken', refreshToken],
-        ['user', JSON.stringify(user)],
+      const storageItems = [
         ['sessionExpiry', sessionExpiry.toString()]
-      ]);
+      ];
+
+      if (token) storageItems.push(['token', token]);
+      if (refreshToken) storageItems.push(['refreshToken', refreshToken]);
+      if (user) storageItems.push(['user', JSON.stringify(user)]);
+
+      await AsyncStorage.multiSet(storageItems);
+      
+      // Ensure removal if missing
+      if (!token) await AsyncStorage.removeItem('token');
+      if (!refreshToken) await AsyncStorage.removeItem('refreshToken');
+      if (!user) await AsyncStorage.removeItem('user');
       
       if (rememberMe) {
         await AsyncStorage.setItem('rememberedEmail', email);
@@ -415,7 +425,9 @@ const refreshAuthToken = async (manualToken) => {
       }
       
       setUser(user);
+      console.log('DEBUG: AuthContext setUser called (login block) with:', user?.username);
       setIsAuthenticated(true);
+      console.log('DEBUG: AuthContext isAuthenticated set to true (login block)');
       setSessionExpiry(sessionExpiry);
       
       // Reset login attempts on success
@@ -487,7 +499,8 @@ const refreshAuthToken = async (manualToken) => {
         appVersion: '1.0.4'
       });
       
-      const { token, refreshToken, user, expiresIn } = response.data;
+      const { user, token, refreshToken } = response.data.data;
+      const expiresIn = 3600; // Default if not provided
       const sessionExpiry = Date.now() + (expiresIn * 1000);
       
       // Store auth data
@@ -508,6 +521,7 @@ const refreshAuthToken = async (manualToken) => {
       
       setUser(user);
       setIsAuthenticated(true);
+      console.log('DEBUG: AuthContext isAuthenticated set to true (register block)');
       setSessionExpiry(sessionExpiry);
       
       // Schedule token refresh

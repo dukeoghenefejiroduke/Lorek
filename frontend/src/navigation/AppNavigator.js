@@ -983,6 +983,10 @@ export default function AppNavigator() {
   const [onboardingComplete, setOnboardingComplete] = useState(null);
 
   useEffect(() => {
+    console.log('DEBUG: AppNavigator user state:', user);
+  }, [user]);
+
+  useEffect(() => {
     const checkOnboarding = async () => {
       const completed = await AsyncStorage.getItem('hasCompletedOnboarding');
       setOnboardingComplete(completed === 'true');
