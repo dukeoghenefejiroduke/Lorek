@@ -42,7 +42,6 @@ const AdminScreen = ({ navigation }) => {
   const { user } = useContext(AuthContext);
   const { activeLanguage } = useContext(LanguageContext);
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in AdminScreen.js:', contextValue);
   const { theme, isDarkMode } = contextValue;
   const [selectedLanguage, setSelectedLanguage] = useState('IZON');
 
@@ -183,6 +182,17 @@ const renderEditForm = () => {
         }
       }}
     ]);
+  };
+
+  const updateUserRole = async (userId, role) => {
+    try {
+      await adminAPI.updateUser(userId, { role });
+      Alert.alert('Success', 'User role updated');
+      loadUsers();
+      setUserModalVisible(false);
+    } catch (err) {
+      Alert.alert('Error', 'Failed to update user role');
+    }
   };
 
   // --- CONSOLIDATED FORM STATES ---

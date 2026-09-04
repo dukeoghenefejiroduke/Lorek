@@ -32,7 +32,6 @@ const { width } = Dimensions.get('window');
 
 export default function ProfileScreen() {
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in ProfileScreen.js:', contextValue);
   const { isDarkMode, toggleTheme, theme } = contextValue;
   const { user, logout } = useContext(AuthContext);
   const navigation = useNavigation();

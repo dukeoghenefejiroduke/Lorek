@@ -129,7 +129,6 @@ export default function NotificationsScreen({ navigation }) {
   const [savingSettings, setSavingSettings] = useState(false);
 
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in NotificationsScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
 
   // Animation values
@@ -498,6 +497,7 @@ const NotificationItem = React.memo(({ item, index, slideAnim, fadeAnim, handleP
     </Animated.View>
   );
 });
+NotificationItem.displayName = 'NotificationItem';
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>

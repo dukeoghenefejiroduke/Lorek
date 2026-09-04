@@ -22,7 +22,6 @@ export default function WordCard({
   compact = false 
 }) {
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in WordCard.js:', contextValue);
   const { theme = lightTheme, isDarkMode = false } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
   const [flipped, setFlipped] = useState(false);

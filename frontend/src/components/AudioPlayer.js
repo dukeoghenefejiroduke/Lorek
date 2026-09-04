@@ -11,6 +11,7 @@ import {
   Dimensions
 } from 'react-native';
 import { Audio } from 'expo-av';
+import * as Speech from 'expo-speech';
 import haptics from '../utils/haptics';
 import { MaterialIcons as Icon } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
@@ -27,7 +28,6 @@ export default function AudioPlayer({
   autoPlay = false 
 }) {
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in AudioPlayer.js:', contextValue);
   const { theme = lightTheme } = contextValue;
   const [playbackSpeed, setPlaybackSpeed] = useState(1.0);
   const [userAudioUri, setUserAudioUri] = useState(null);
@@ -114,14 +114,19 @@ export default function AudioPlayer({
       Alert.alert('Audio Error', 'Could not load audio file');
     }
   }
-
-  async function handleNativePlay() {
-    if (!soundRef.current || !audioUrl) {
-      Alert.alert('No Audio', 'Native pronunciation is not available.');
-      return;
+async function handleNativePlay() {
+  if (!soundRef.current || !audioUrl) {
+    if (word) {
+        Speech.speak(word, { language: 'en' });
+    } else {
+        Alert.alert('No Audio', 'Pronunciation is not available.');
     }
+    return;
+  }
 
-    try {
+  try {
+// ...
+
       haptics.impactLight();
       
       const status = await soundRef.current.getStatusAsync();
@@ -170,7 +175,7 @@ export default function AudioPlayer({
 
       const newRecording = new Audio.Recording();
       await newRecording.prepareToRecordAsync(
-        Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
+        Audio.RecordingOptionsPresets.HIGH_QUALITY
       );
       
       await newRecording.startAsync();
@@ -407,7 +412,7 @@ const styles = StyleSheet.create({
             onPress={isRecording ? stopRecording : startRecording}
           >
             <Icon 
-              name={isRecording ? 'stop' : 'mic'} 
+              name={isRecording ? 'stop' : 'microphone'} 
               size={20} 
               color="#fff" 
             />
@@ -497,7 +502,7 @@ const styles = StyleSheet.create({
               ]}
               onPress={isRecording ? stopRecording : startRecording}
             >
-              <Icon name={isRecording ? 'stop' : 'mic'} size={20} color="#fff" />
+              <Icon name={isRecording ? 'stop' : 'microphone'} size={20} color="#fff" />
               <Text style={styles.buttonText}>
                 {isRecording ? `Recording ${recordingDuration}s` : 'Record'}
               </Text>

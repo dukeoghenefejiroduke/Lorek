@@ -5,8 +5,21 @@ import { MaterialIcons as Icon } from '@expo/vector-icons';
 import ProgressBar from './ProgressBar';
 import { ThemeContext } from '../context/ThemeContext';
 
-export default function LessonCard({ lesson, onPress, progress = 0, compact = false }) {
+export default function LessonCard({ lesson, onPress, progress = 0, status = 'available', compact = false }) {
   const { theme } = useContext(ThemeContext);
+
+  const getStatusDisplay = () => {
+    switch (status) {
+      case 'locked': return { icon: 'lock', color: '#9E9E9E', text: 'Locked' };
+      case 'in-progress': return { icon: 'play-circle-filled', color: '#2196F3', text: 'In Progress' };
+      case 'completed': return { icon: 'star', color: '#FFD700', text: 'Completed' };
+      case 'mastered': return { icon: 'emoji-events', color: '#FFC107', text: 'Mastered' };
+      default: return { icon: 'circle-outline', color: '#4CAF50', text: 'Available' };
+    }
+  };
+
+  const statusInfo = getStatusDisplay();
+
 
   const getLevelColor = (level) => {
     switch (level?.toLowerCase()) {
@@ -50,6 +63,7 @@ export default function LessonCard({ lesson, onPress, progress = 0, compact = fa
     <TouchableOpacity style={[styles.card, { backgroundColor: theme.card }]} onPress={onPress} activeOpacity={0.7}>
       <View style={styles.header}>
         <View style={styles.titleContainer}>
+          <Icon name={statusInfo.icon} size={24} color={statusInfo.color} style={{ marginRight: 8 }} />
           <Text style={[styles.title, { color: theme.text }]}>{lesson.title?.english || lesson.title}</Text>
           {lesson.isNew && (
             <View style={styles.newBadge}>

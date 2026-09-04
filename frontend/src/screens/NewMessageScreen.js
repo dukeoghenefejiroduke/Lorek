@@ -1,5 +1,5 @@
 import SafeAreaContainer from '../components/SafeAreaContainer';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import {
   View,
@@ -21,7 +21,6 @@ import { communityAPI, messagesAPI } from '../services/api';
 
 const UserItem = ({ user, onSelect, loading }) => {
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in NewMessageScreen.js:', contextValue);
   const { theme } = contextValue;
   return (
     <TouchableOpacity 
@@ -54,7 +53,6 @@ export default function NewMessageScreen({ navigation }) {
   const [selectingUser, setSelectingUser] = useState(null); // Track which user is being clicked
   
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in NewMessageScreen.js:', contextValue);
   const { theme } = contextValue;
 
   useEffect(() => {

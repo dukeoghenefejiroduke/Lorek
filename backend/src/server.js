@@ -31,7 +31,8 @@ const authRouter = require('./routes/auth'); // Authentication routes
 const lessonsRouter = require('./routes/lessons'); // Lessons routes
 const progressRouter = require('./routes/progress'); // Progress routes
 const vocabularyRouter = require('./routes/vocabulary'); // Vocabulary routes
-const adminRouter = require('./routes/admin'); // Admin routes 
+const adminRouter = require('./routes/admin'); // Admin routes
+ 
 const authApiKeysRoutes = require('./routes/auth-api-keys');
 const translatorRoutes = require('./routes/translator');
 const userRoutes = require('./routes/user');
@@ -289,11 +290,11 @@ app.use('/api/public', cacheMiddleware(300), publicRouter); // 5 minutes cache
 app.use('/api/auth', authRouter);
 app.use('/api/lessons', auth, lessonsRouter);
 app.use('/api/progress', auth, progressRouter);
-app.use('/api/vocabulary', vocabularyRouter);
-
-// Admin routes (with additional authentication)
+const contentRoutes = require('./routes/content');
+// ...
+app.use('/api/content', contentRoutes);
 app.use('/api/admin', auth, adminRouter);
-
+app.use('/api/vocabulary', vocabularyRouter);
 
 app.use('/api/auth', authApiKeysRoutes);
 
@@ -316,6 +317,9 @@ app.use('/api/premium', premiumRoutes);
 app.use('/api/rag', auth, ragRoutes);
 
 
+
+const { scheduleNotificationTasks } = require('./services/notificationScheduler');
+scheduleNotificationTasks();
 
 // ============================================================================
 // AUTOMATION & SCHEDULED TASKS (Option A)

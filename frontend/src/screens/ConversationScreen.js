@@ -8,7 +8,6 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
   TextInput,
   KeyboardAvoidingView,
   Platform,
@@ -19,6 +18,7 @@ import {
   Modal,
   Alert,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import haptics from '../utils/haptics';
@@ -77,7 +77,6 @@ const SCENARIO_DATA = {
 const ConversationScreen = ({ route }) => {
   const { activeLanguage } = useContext(LanguageContext);
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in ConversationScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
   const scenarioId = route?.params?.scenarioId || 'market';
   const scenario = SCENARIO_DATA[scenarioId];
@@ -500,7 +499,7 @@ const ConversationScreen = ({ route }) => {
             onPress={isRecording ? stopRecording : startRecording}
           >
             <Ionicons 
-              name={isRecording ? "stop" : "mic"} 
+              name={isRecording ? "stop" : "microphone"}
               size={24} 
               color={isRecording ? "#fff" : "#4CAF50"} 
             />

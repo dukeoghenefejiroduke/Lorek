@@ -9,18 +9,18 @@ import {
   ActivityIndicator,
   ScrollView,
   Dimensions,
-  SafeAreaView,
   StatusBar,
   Animated,
   Image,
   Modal,
   TextInput,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { vocabularyAPI, pronunciationAPI, gamificationAPI, practiceAPI } from '../services/api';
 import Quiz from '../components/Quiz';
 import AudioPlayer from '../components/AudioPlayer';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
+import { MaterialIcons as Icon } from '@expo/vector-icons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import haptics from '../utils/haptics';
 import * as Speech from 'expo-speech';
@@ -28,6 +28,8 @@ import { BlurView } from 'expo-blur';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
+import { useExerciseEngine } from '../context/ExerciseEngineContext';
+import ExerciseDispatcher from '../components/exercise/ExerciseDispatcher';
 import ScreenHeader from '../components/ScreenHeader';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 
@@ -35,7 +37,14 @@ const { width } = Dimensions.get('window');
 
 export default function PracticeScreen() {
   const navigation = useNavigation();
-  
+  const { loadExercise } = useExerciseEngine();
+
+  useEffect(() => {
+    if (questions && questions[currentQuestion]) {
+      loadExercise(questions[currentQuestion]);
+    }
+  }, [questions, currentQuestion]);
+
   // State management
   const [mode, setMode] = useState(null);
   const [questions, setQuestions] = useState([]);
@@ -78,7 +87,6 @@ export default function PracticeScreen() {
  const { activeLanguage } = useContext(LanguageContext);
     
    const contextValue = useContext(ThemeContext) || {};
-   console.log('DEBUG: Accessing ThemeContext in PracticeScreen.js:', contextValue);
    const { isDarkMode, theme } = contextValue;
     
   // Animation values
@@ -378,12 +386,13 @@ const loadPronunciationWords = async () => {
         question: practiceMode === 'izon-to-english' 
           ? `What does "${word.izonWord || word.word}" mean?` 
           : `How do you say "${word.englishTranslation || word.english}"?`,
-        correctAnswer: practiceMode === 'izon-to-english' 
-          ? (word.englishTranslation || word.english) 
+        correctAnswer: practiceMode === 'izon-to-english'
+          ? (word.englishTranslation || word.english)
           : (word.izonWord || word.word),
         options: generateOptions(word, words, practiceMode),
         word,
-      }));
+        type: 'multiple-choice',
+        }));
       setQuestions(quizQuestions);
       setMode(practiceMode);
     } catch (e) {
@@ -393,52 +402,44 @@ const loadPronunciationWords = async () => {
     }
   };
 
- const startPractice = async (practiceMode) => {
-  haptics.impactLight();
-  setShowResults(false);
-  setShowListeningResults(false);
-  setScore(0);
-  setCurrentQuestion(0);
-  setSessionId(null);
-    if (!(await checkAuth())) return;
+ const startPractice = async (practiceType) => {
+   haptics.impactLight();
+   setShowResults(false);
+   setShowListeningResults(false);
+   setScore(0);
+   setCurrentQuestion(0);
+   setSessionId(null);
+   if (!(await checkAuth())) return;
 
-if (practiceMode === 'srs-daily') {
-  setLoading(true);
-  try {
-    const res = await practiceAPI.getDaily({ limit: 15, lang: activeLanguage.code});
-    const words = res.data?.data?.words || [];
-    const sId = res.data?.data?.sessionId;
+   setLoading(true);
+   try {
+       const res = await practiceAPI.getDaily({ 
+           limit: 15, 
+           lang: activeLanguage.code,
+           practiceType: practiceType 
+       });
 
-    if (words.length === 0) {
-      Alert.alert("All Caught Up!", "No words due for review today.");
-      setLoading(false);
-      return;
-    }
+       if (res.data?.success) {
+           const words = res.data?.data?.words || [];
+           const sId = res.data?.data?.sessionId;
 
-    const srsQuestions = words.map(word => {
-      // FIX: Ensure we extract the strings correctly regardless of nesting
-      const izon = word.izonWord || word.word || "Unknown";
-      const english = word.englishTranslation || word.english || "Unknown";
-      
-      return {
-        question: `How do you say "${english}"?`,
-        correctAnswer: izon,
-        options: generateOptions(word, words, 'english-to-izon'),
-        word: word 
-      };
-    });
+           // Generate and set questions based on practiceType
+           // ... (Logic to generate questions)
 
-    setQuestions(srsQuestions);
-    setSessionId(sId);
-    setMode('srs-daily');
-  } catch (e) {
-    Alert.alert("Error", "Failed to load daily review.");
-  } finally {
-    setLoading(false);
-  }
-  return;
-}
+           setMode(practiceType);
+       } else {
+           Alert.alert("All Caught Up!", "No words due for review today.");
+       }
+   } catch (e) {
+       console.error(e);
+       Alert.alert("Error", "Failed to load practice session.");
+   } finally {
+       setLoading(false);
+   }
 
+ };
+
+  const loadPracticeContent = async (practiceMode) => {
     if (practiceMode === 'listening-quiz') {
       await loadListeningQuiz();
       setMode('listening-quiz');
@@ -1134,55 +1135,52 @@ if (practiceMode === 'srs-daily') {
 
         <View style={styles.modeGrid}>
           <PracticeCard
-            title="Daily Review"
-            description="Spaced Repetition"
-            icon="brain"
+            title="Review Mistakes"
+            description="Focus on your errors"
+            icon="alert-circle-outline"
+            onPress={() => startPractice('srs-mistakes')}
+            gradient={isDarkMode ? ['#442222', '#663333'] : ['#F44336', '#D32F2F']}
+          />
+          
+          <PracticeCard
+            title="Weak Vocabulary"
+            description="Strengthen low-mastery words"
+            icon="trending-down"
+            onPress={() => startPractice('srs-weak')}
+            gradient={isDarkMode ? ['#443322', '#664433'] : ['#FF9800', '#F57C00']}
+          />
+
+          <PracticeCard
+            title="Spaced Repetition"
+            description="Daily scheduled reviews"
+            icon="update"
             onPress={() => startPractice('srs-daily')}
-            gradient={isDarkMode ? ['#442222', '#663333'] : ['#FF5F6D', '#FFC371']}
+            gradient={isDarkMode ? ['#224422', '#336633'] : ['#4CAF50', '#388E3C']}
             badge={srsStats.dueToday > 0 ? `${srsStats.dueToday} DUE` : null}
           />
           
           <PracticeCard
-            title={`${activeLanguage?.name || 'Izon'} → English`}
-            description="Translate to English"
-            icon="translate"
-            onPress={() => startPractice('izon-to-english')}
-            gradient={isDarkMode ? ['#224422', '#336633'] : ['#4CAF50', '#2E7D32']}
-            progress={Math.min(stats.accuracy, 100)}
-          />
-
-          <PracticeCard
-            title={`English → ${activeLanguage?.name || 'Izon'}`}
-            description={`Translate to ${activeLanguage?.name || 'Izon'}`}
-            icon="swap-horizontal"
-            onPress={() => startPractice('english-to-izon')}
-            gradient={isDarkMode ? ['#222244', '#333366'] : ['#2196F3', '#0D47A1']}
+            title="Listening Practice"
+            description="Improve comprehension"
+            icon="ear-hearing"
+            onPress={() => startPractice('listening-quiz')}
+            gradient={isDarkMode ? ['#222244', '#333366'] : ['#2196F3', '#1976D2']}
           />
           
           <PracticeCard
-            title="Conversation"
-            description="AI Chatbot"
-            icon="chat"
-            onPress={() => navigation.navigate("Conversation")}
-            gradient={isDarkMode ? ['#442244', '#663366'] : ['#9C27B0', '#6A1B9A']}
-            badge="NEW"
-          />
-          
-          <PracticeCard
-            title="Pronunciation"
-            description="Speak and Compare"
+            title="Speaking Practice"
+            description="Pronounce & compare"
             icon="microphone"
             onPress={() => startPractice('pronunciation')}
-            gradient={isDarkMode ? ['#443322', '#664433'] : ['#FF9800', '#EF6C00']}
+            gradient={isDarkMode ? ['#442244', '#663366'] : ['#9C27B0', '#7B1FA2']}
           />
 
           <PracticeCard
-            title="Listening Quiz"
-            description="Test your ears"
-            icon="headphones"
-            onPress={() => startPractice('listening-quiz')}
-            gradient={isDarkMode ? ['#224444', '#336666'] : ['#9C27B0', '#6A1B9A']}
-            badge="POPULAR"
+            title="Quick Practice"
+            description="Bite-sized dynamic session"
+            icon="flash"
+            onPress={() => startPractice('izon-to-english')} // Map to quick quiz
+            gradient={isDarkMode ? ['#224444', '#336666'] : ['#00BCD4', '#0097A7']}
           />
         </View>
 
@@ -1378,13 +1376,7 @@ if (practiceMode === 'srs-daily') {
 
   if (mode && mode !== 'pronunciation' && mode !== 'listening-quiz' && questions.length > 0) {
     return (
-      <Quiz
-        question={questions[currentQuestion]}
-        questionNumber={currentQuestion + 1}
-        totalQuestions={questions.length}
-        onAnswer={handleAnswer}
-        score={score}
-      />
+      <ExerciseDispatcher />
     );
   }
 

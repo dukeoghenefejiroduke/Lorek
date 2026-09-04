@@ -10,10 +10,31 @@ const notificationService = require('../services/notificationService');
 const emailService = require('../services/emailService');
 const redis = require('../config/redis');
 const { authLimiter } = require('../middleware/rateLimit');
+const { auth } = require('../middleware/auth');
+
+// ... (existing code)
+
+/**
+ * Logout user
+ * POST /api/auth/logout
+ */
+router.post('/logout', auth, async (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+
+    // Blacklist token in Redis
+    await redis.set(`blacklist:${token}`, 'true', 'EX', 3600); // Expires in 1 hour
+
+    res.json({ success: true, message: 'Logged out successfully' });
+  } catch (err) {
+    next(err);
+  }
+});
 
 // ============================================================================
-// RATE LIMITING
+// ROUTES
 // ============================================================================
+
 
 // Apply rate limiting to all auth routes
 router.use(authLimiter);

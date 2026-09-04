@@ -34,13 +34,7 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const { user } = useContext(AuthContext);
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in HomeScreen.js:', contextValue);
   const { theme, isDarkMode, toggleTheme } = contextValue;
-  
-  if (!theme) {
-    console.warn('DEBUG: ThemeContext value is missing or incomplete in HomeScreen:', { theme, isDarkMode });
-    return null; // Or a fallback UI
-  }
   
   const { activeLanguage } = useContext(LanguageContext);
   
@@ -61,7 +55,9 @@ const HomeScreen = () => {
     streak: 0,
     points: 0,
     words: 0,
-    accuracy: '0%'
+    accuracy: '0%',
+    dailyProgress: 0,
+    dailyGoal: 20
   });
   const [recentActivity, setRecentActivity] = useState([]);
   const [achievements, setAchievements] = useState([]);
@@ -146,19 +142,14 @@ const HomeScreen = () => {
       const progressData = statsRes.data?.data;
 
       setStats({
-        // progress?.progress?.currentStreak
         streak: progressData?.progress?.currentStreak || 0,
-        
-        // progress?.progress?.totalPoints
         points: progressData?.progress?.totalPoints || 0,
-        
-        // Using vocabulary stats from vocabStats directly since we have it
         words: vocabStats.data?.data?.total || 0,
-        
-        // progress?.statistics?.averageScore
         accuracy: progressData?.statistics?.averageScore 
           ? `${Math.round(progressData.statistics.averageScore)}%` 
-          : '0%'
+          : '0%',
+        dailyProgress: progressData?.progress?.dailyProgress || 0,
+        dailyGoal: progressData?.progress?.dailyGoal || 20
       });
 
       // Update achievements and feed using the confirmed working paths
@@ -197,6 +188,11 @@ const HomeScreen = () => {
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
   });
+
+  if (!theme) {
+    console.warn('DEBUG: ThemeContext value is missing or incomplete in HomeScreen:', { theme, isDarkMode });
+    return null;
+  }
 
   return (
     <SafeAreaContainer backgroundColor={theme.background} edges={['top', 'left', 'right']}>
@@ -253,6 +249,17 @@ const HomeScreen = () => {
           <StatCard number={stats.points} label="Points" icon="stars" color="#FFD700" />
           <StatCard number={stats.words} label="Words" icon="menu-book" color="#4CAF50" />
           <StatCard number={stats.accuracy} label="Accuracy" icon="check-circle" color="#2196F3" />
+        </Animated.View>
+
+        {/* Daily Goal */}
+        <Animated.View style={[styles.goalCard, { backgroundColor: theme.card, opacity: fadeAnim }]}>
+           <View style={styles.goalHeader}>
+             <Text style={[styles.goalTitle, { color: theme.text }]}>Today's Goal</Text>
+             <Text style={[styles.goalProgress, { color: theme.text }]}>{stats.dailyProgress} / {stats.dailyGoal} XP</Text>
+           </View>
+           <View style={[styles.goalBarContainer, { backgroundColor: `${theme.primary}20` }]}>
+             <View style={[styles.goalBarFill, { width: `${Math.min(100, (stats.dailyProgress / stats.dailyGoal) * 100)}%`, backgroundColor: theme.primary }]} />
+           </View>
         </Animated.View>
 
         {/* Continue Learning */}
@@ -535,6 +542,35 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: '#666',
     marginLeft: 5,
+  },
+  goalCard: {
+    padding: 16,
+    borderRadius: 16,
+    marginBottom: 16,
+    marginHorizontal: 20,
+    elevation: 3,
+  },
+  goalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  goalTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  goalProgress: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  goalBarContainer: {
+    height: 10,
+    borderRadius: 5,
+    overflow: 'hidden',
+  },
+  goalBarFill: {
+    height: '100%',
+    borderRadius: 5,
   },
   continueCard: {
     margin: 15,

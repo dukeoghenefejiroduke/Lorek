@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Image,
   Modal,
   Alert,
   Dimensions,
@@ -605,7 +606,6 @@ export default function GamesScreen({ navigation }) {
 
   const { activeLanguage } = useContext(LanguageContext); // e.g., { code: 'izon', name: 'Izon' }
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in GamesScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;

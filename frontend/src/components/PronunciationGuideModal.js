@@ -1,5 +1,5 @@
 // components/PronunciationGuideModal.js
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import {
   View,
   Text,
@@ -284,7 +284,7 @@ export default function PronunciationGuideModal({ visible, onClose, guideData, w
           {/* Footer */}
           <View style={styles.modalFooter}>
             <TouchableOpacity style={styles.practiceButton} onPress={onClose}>
-              <Icon name="mic" size={20} color="#fff" />
+              <Icon name="microphone" size={20} color="#fff" />
               <Text style={styles.practiceButtonText}>Practice Now</Text>
             </TouchableOpacity>
           </View>

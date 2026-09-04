@@ -40,7 +40,6 @@ const LeaderboardScreen = ({ navigation }) => {
   const [userRank, setUserRank] = useState(null);
   
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in LeaderboardScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
   
   // Animation values

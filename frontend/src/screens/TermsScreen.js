@@ -126,7 +126,6 @@ export default function TermsScreen({ navigation, route }) {
   }, []);
 
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in TermsScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
 
   const startAnimations = () => {

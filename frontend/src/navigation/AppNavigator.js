@@ -5,16 +5,16 @@ import {
   Animated,
   StyleSheet,
   Dimensions,
-  SafeAreaView,
   StatusBar,
   Text,
   Image,
   Platform,
   Modal,
-  TextInput,  
+  TextInput,
   Alert,
   ScrollView,
-} from 'react-native';
+  } from 'react-native';
+  import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -444,7 +444,7 @@ function MainApp({ navigation }) {
             colors={['#4CAF50', '#2E7D32']}
             style={styles.quickActionGradient}
           >
-            <MaterialIcons name="flash-on" size={20} color="#fff" />
+            <MaterialIcons name="flash" size={20} color="#fff" />
           </LinearGradient>
           <Text style={[styles.quickActionText, { color: theme.subText }]}>Quick Practice</Text>
         </TouchableOpacity>
@@ -983,7 +983,7 @@ export default function AppNavigator() {
   const [onboardingComplete, setOnboardingComplete] = useState(null);
 
   useEffect(() => {
-    console.log('DEBUG: AppNavigator user state:', user);
+    if (__DEV__) console.log('DEBUG: AppNavigator user state:', user);
   }, [user]);
 
   useEffect(() => {

@@ -154,7 +154,6 @@ export default function DiscussionDetailScreen({ navigation, route }) {
   const [reporting, setReporting] = useState(false);
 
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in DiscussionDetailScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
 
   // Animation values
@@ -308,7 +307,7 @@ export default function DiscussionDetailScreen({ navigation, route }) {
   if (!discussion) {
     return (
       <View style={styles.errorContainer}>
-        <MaterialIcons name="error-outline" size={60} color="#f44336" />
+        <MaterialIcons name="alert-circle-outline" size={60} color="#f44336" />
         <Text style={styles.errorText}>Discussion not found</Text>
         <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.goBack()}>
           <Text style={styles.goBackButtonText}>Go Back</Text>

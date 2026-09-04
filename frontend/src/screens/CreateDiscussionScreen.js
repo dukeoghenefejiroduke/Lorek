@@ -39,7 +39,6 @@ export default function CreateDiscussionScreen({ navigation }) {
   const [titleLength, setTitleLength] = useState(0);
   
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in CreateDiscussionScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
   
   // Animation values

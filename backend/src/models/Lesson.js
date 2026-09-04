@@ -39,6 +39,10 @@ const EXERCISE_TYPES = {
   CONVERSATION: 'conversation',
   GRAMMAR_DRILL: 'grammar-drill',
   CONTEXT_COMPLETION: 'context-completion',
+  WORD_BANK: 'word-bank',
+  SELECT_TRANSLATION: 'select-translation',
+  TYPE_TRANSLATION: 'type-translation',
+  IMAGE_SELECTION: 'image-selection',
 };
 
 const DIFFICULTY = {

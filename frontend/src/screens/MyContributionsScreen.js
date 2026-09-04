@@ -1,12 +1,12 @@
 import SafeAreaContainer from '../components/SafeAreaContainer';
 import React, { useState, useEffect, useContext } from 'react';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import { View, Text, StyleSheet, FlatList, ActivityIndicator, Alert, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ActivityIndicator, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { communityAPI } from '../services/api';
 
 const MyContributionsScreen = () => {
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in MyContributionsScreen.js:', contextValue);
   const { theme } = contextValue;
   const [contributions, setContributions] = useState([]);
   const [loading, setLoading] = useState(true);

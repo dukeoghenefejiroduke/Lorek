@@ -8,7 +8,7 @@ import { Platform, Alert } from 'react-native'; // Standard import
 // Environment configuration with fallbacks
 const ENV = {
   development: {
-    API_URL: 'https://lorek.onrender.com/api', // Android Emulator
+    API_URL: 'http://127.0.0.1:5000/api', //'https://lorek.onrender.com/api', // Android Emulator
     API_URL_IOS: 'https://lorek.onrender.com/api', // iOS Simulator
     API_URL_PHYSICAL: 'https://lorek.onrender.com/api', // Physical device
     TIMEOUT: 30000,
@@ -46,7 +46,7 @@ const getApiUrl = () => {
 };
 
 const API_URL = getApiUrl();
-console.log('📡 API Service Initialized with URL:', API_URL);
+if (__DEV__) console.log('📡 API Service Initialized with URL:', API_URL);
 const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
 
 const DEFAULT_LANGUAGE_CODE = 'IZON'; // Neutral/placeholder default
@@ -82,140 +82,63 @@ const api = axios.create({
   validateStatus: (status) => status >= 200 && status < 300,
 });
 
-// Request queue for offline support
-let requestQueue = [];
-let isOnline = true;
+import { addToSyncQueue, processSyncQueue } from './syncService';
 
+// Monitor network status
+let isOnline = true;
 let isRefreshing = false;
 let failedQueue = [];
 
-// Monitor network status
-NetInfo.addEventListener(state => {
-  console.log('📡 NetInfo state changed:', state.isConnected);
-  const wasOnline = isOnline;
-  isOnline = state.isConnected;
-  
-  if (!wasOnline && isOnline) {
-    // Device came online, process queue
-    processRequestQueue();
-  }
-});
-
 const processQueue = (error, token = null) => {
-  failedQueue.forEach((prom) => {
+  failedQueue.forEach(({ resolve, reject }) => {
     if (error) {
-      prom.reject(error);
+      reject(error);
     } else {
-      prom.resolve(token);
+      resolve(token);
     }
   });
+
   failedQueue = [];
 };
 
-// Process queued requests
-const processRequestQueue = async () => {
+NetInfo.addEventListener(state => {
+  const wasOnline = isOnline;
+  isOnline = state.isConnected;
   
-  while (requestQueue.length > 0) {
-    const queuedRequest = requestQueue.shift();
-    try {
-      const response = await api(queuedRequest.config);
-      if (queuedRequest.resolve) {
-        queuedRequest.resolve(response);
-      }
-    } catch (error) {
-      if (queuedRequest.reject) {
-        queuedRequest.reject(error);
-      }
-    }
+  // Sync when coming online
+  if (!wasOnline && isOnline) {
+    processSyncQueue();
   }
-};
+});
 
-// Enhanced request interceptor
+// Interceptor to queue mutations when offline
+// --- INTERCEPTORS ---
+
 api.interceptors.request.use(
   async (config) => {
-    console.log(`🚀 API Request: ${config.method.toUpperCase()} ${config.baseURL}${config.url}`);
-    // Generate request ID for tracking
-    config.metadata = { 
-      startTime: Date.now(),
-      requestId: await Crypto.digestStringAsync(
-        Crypto.CryptoDigestAlgorithm.SHA256,
-        `${config.url}-${Date.now()}-${Math.random()}`
-      ).then(hash => hash.substring(0, 8))
-    };
-
-    // Add auth token if available
-    try {
-      const token = await AsyncStorage.getItem('token');
-      
-      // Check if the URL is a "public" or "auth" endpoint
-      const isAuthRequest = config.url.includes('/auth/') || config.url.includes('/public/');
-      
-      const refreshToken = await AsyncStorage.getItem('refreshToken');
-      
-      const language = extractLanguageCode(await AsyncStorage.getItem('userLanguage')); 
-      
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      } else if (!isAuthRequest) {
-      // OPTIONAL: If it's a private route and no token exists, 
-      // you could throw a custom error here to stop the request early.
-      console.warn(`⚠️ No token found for private route: ${config.url}`);
-    }
-  
-   if (refreshToken) {
-        config.headers['X-Refresh-Token'] = refreshToken;
-      }
-
-      // Re-introducing language context via query parameter only for content-heavy screens
-      config.headers['Accept-Language'] = language;
-      
-      const contentHeavyRoutes = [
-        '/games/',
-        '/practice/',
-        '/lessons/',
-        '/vocabulary/',
-        '/pronunciation/',
-        '/culture/',
-        '/progress/',
-        '/leaderboard/',
-        '/translator/',
-        '/home/' // Placeholder, adjust based on actual endpoint
-      ];
-      
-      const shouldIncludeLang = contentHeavyRoutes.some(route => config.url.includes(route));
-      
-      if (config.method === 'get' && shouldIncludeLang) {
-        config.params = { ...config.params, lang: language };
-      }
-    } catch (err) {
-      console.warn('⚠️ Failed to get language/token from storage', err);
+    // 1. Auth Headers
+    if (!config.url.includes('/auth/')) {
+        const token = await AsyncStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
     }
 
-    // Check for offline mode
-    if (!isOnline && config.method !== 'get') {
-      // Queue the request for later
-      return new Promise((resolve, reject) => {
-        requestQueue.push({
-          config,
-          resolve,
-          reject,
-          timestamp: Date.now(),
-        });
-      });
+    // 2. Offline Mode Handling
+    if (!isOnline && (config.method !== 'get')) {
+        await addToSyncQueue(config.method, config.url, config.data);
+        return Promise.reject('Queued for offline sync');
     }
-
+    
     return config;
   },
-  (error) => {
-    console.error('❌ Request interceptor error:', error);
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Enhanced response interceptor with retry logic
 api.interceptors.response.use(
   (response) => {
-    console.log(`✅ API Response: ${response.config.method.toUpperCase()} ${response.config.url} ${response.status}`);
+    if (__DEV__) console.log(`✅ API Response: ${response.config.method.toUpperCase()} ${response.config.url} ${response.status}`);
     const duration = Date.now() - (response.config.metadata?.startTime || 0);
     
     // Add cache control headers
@@ -545,6 +468,7 @@ export const vocabularyAPI = {
   getPersonalizedMix: () => api.get('/vocabulary/daily-mix/personalized'),
   getRandomSelection: (params) => api.get('/vocabulary/random/selection', { params }),
   getLearningSuggestions: () => api.get('/vocabulary/suggestions/learning'),
+  getReviewQueue: () => api.get('/vocabulary/review'),
   
   // Public methods with caching
   getAll: async (params) => {
@@ -730,20 +654,10 @@ export const notificationAPI = {
   deleteAll: () => api.delete('/notifications'),
   getSettings: () => api.get('/notifications/settings'),
   updateSettings: (data) => api.put('/notifications/settings', data),
-  registerToken: (token) => api.post('/notifications/register-token', { token }),
-  unregisterToken: (token) => api.delete('/notifications/register-token', { data: { token } }),
+  registerToken: (data) => api.post('/notifications/register-token', data),
+  unregisterToken: (data) => api.delete('/notifications/register-token', { data }),
 };
 
-// --- SEARCH API ---
-export const searchAPI = {
-  global: (query, type = 'all', limit = 20) => api.get('/search', { params: { q: query, type, limit } }),
-  byType: (query, type) => api.get('/search', { params: { q: query, type } }),
-  suggestions: (query) => api.get('/search/suggestions', { params: { q: query } }),
-  recent: () => api.get('/search/recent'),
-  trending: () => api.get('/search/trending'),
-  clearHistory: () => api.delete('/search/history'),
-  deleteHistoryItem: (query) => api.delete(`/search/history/${encodeURIComponent(query)}`),
-};
 
 // --- ADMIN API ---
 export const adminAPI = {  // Dashboard
@@ -756,6 +670,10 @@ export const adminAPI = {  // Dashboard
   deleteUser: (id) => api.delete(`/admin/users/${id}`),
   
   // Content
+  importContentPack: (data) => api.post('/admin/content/import-pack', data),
+  createCourse: (data) => api.post('/admin/content/courses', data),
+  createSection: (data) => api.post('/admin/content/sections', data),
+  createUnit: (data) => api.post('/admin/content/units', data),
   getContentStats: () => api.get('/admin/content/stats'),
   getPendingContent: () => api.get('/admin/content/pending'),
   moderateContent: (id, action) => api.post(`/admin/content/moderate/${id}`, { action }),
@@ -774,6 +692,9 @@ export const adminAPI = {  // Dashboard
 
   // Top Contributors
   getTopContributors: () => api.get('/admin/users/contributors/top'),
+  
+  // Versioning
+  createVersion: (data) => api.post('/admin/version', data),
 };
 
 export const userAPI = {
@@ -861,7 +782,9 @@ export const cultureAPI = {
   
   // Public
   public: {
-    getProverbs: (params) => api.get('/public/proverbs', { params }),
+    getAll: () => api.get('/culture/'),
+    getCategories: (params) => api.get('/culture/categories', { params }),
+    getProverbs: (params) => api.get('/culture/proverbs', { params }),
     getProverbToday: () => api.get('/public/proverbs/today'),
   }
 };
@@ -957,12 +880,12 @@ export const apiUtils = {
   
   // Get queue status
   getQueueStatus: () => ({
-    queuedRequests: requestQueue.length,
+    queuedRequests: failedQueue.length,
     isOnline,
   }),
   
   // Force process queue
-  processQueue: processRequestQueue,
+  processQueue,
   
   // Check API health
   checkHealth: () => api.get('/health'),

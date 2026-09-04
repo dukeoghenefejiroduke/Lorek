@@ -464,21 +464,14 @@ if (userAnswer) {
 
     // Update user stats
     const user = await User.findById(req.user._id);
-    
-    // Add points
-    const pointsEarned = totalScore;
-    user.progress.totalPoints += pointsEarned;
-    user.gamification.points.total += pointsEarned;
-    user.gamification.points.history.push({
-      amount: pointsEarned,
-      reason: `game_${session.gameType}`,
-      timestamp: new Date(),
-    });
+    const { addXP, addExperience } = require('../services/xpService');
+    // ...
+        // Add points
+        await addXP(userId, pointsEarned, `game_${session.gameType}`);
 
-    // Add experience
-    const expEarned = calculateExpEarned(totalScore, session.maxScore, timeSpent, session.timeLimit);
-    user.gamification.experience += expEarned;
-    user.updateLevel();
+        // Add experience
+        await addExperience(userId, expEarned);
+
 
     // Update game stats
     if (!user.gamification.gameStats) {

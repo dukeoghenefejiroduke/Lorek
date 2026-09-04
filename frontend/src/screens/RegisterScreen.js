@@ -28,7 +28,6 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 export default function RegisterScreen({ navigation }) {
   const { activeLanguage } = useContext(LanguageContext);
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in RegisterScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -237,12 +236,12 @@ const handleReferralCheck = async (code) => {
           <Pressable style={styles.content} onPress={Keyboard.dismiss}>
             <View style={styles.headerContainer}>
               <Text style={styles.title}>Create Account</Text>
-              <Text style={styles.subtitle}>Join our {activeLanguage?.name || 'Izon'} learning community</Text>
+              <Text style={styles.subtitle}>Join our Native learning community</Text>
             </View>
 
             {errorMsg ? (
               <View style={styles.errorContainer}>
-                <MaterialIcons name="error-outline" size={20} color={theme.error} />
+                <MaterialIcons name="alert-circle-outline" size={20} color={theme.error} />
                 <Text style={[styles.errorText, { color: theme.error }]}>{errorMsg}</Text>
               </View>
             ) : null}
@@ -513,7 +512,7 @@ const handleReferralCheck = async (code) => {
             
             <ScrollView style={styles.modalBody}>
               <Text style={[styles.modalText, { color: theme.text }]}>
-                Welcome to {activeLanguage?.name || 'Izon'} Language App! By creating an account, you agree to:
+                Welcome to LOREK, Language App! By creating an account, you agree to:
                 {'\n\n'}1. Provide accurate information
                 {'\n'}2. Maintain the security of your account
                 {'\n'}3. Respect other users and their learning journey

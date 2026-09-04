@@ -47,7 +47,6 @@ export default function LoginScreen({ navigation }) {
   const { login, authenticateWithBiometric } = useContext(AuthContext);
 
    const contextValue = useContext(ThemeContext) || {};
-   console.log('DEBUG: Accessing ThemeContext in LoginScreen.js:', contextValue);
    const { isDarkMode, theme } = contextValue;
 
   // Check for saved email and biometric availability
@@ -226,14 +225,14 @@ export default function LoginScreen({ navigation }) {
           <Pressable style={styles.content} onPress={Keyboard.dismiss}>
             {/* Header */}
             <View style={styles.headerContainer}>
-              <Text style={[styles.title, { color: '#fff' }]}>{activeLanguage?.name || 'Izon'} Language</Text>
+              <Text style={[styles.title, { color: '#fff' }]}>LOREK, Native Language tutor</Text>
               <Text style={[styles.subtitle, { color: 'rgba(255,255,255,0.9)' }]}>Welcome back! 👋</Text>
             </View>
 
             {/* Error Message */}
             {errorMsg ? (
               <View style={[styles.errorContainer, { backgroundColor: theme.error + '20' }]}>
-                <MaterialIcons name="error-outline" size={20} color={theme.error} />
+                <MaterialIcons name="alert-circle-outline" size={20} color={theme.error} />
                 <Text style={[styles.errorText, { color: theme.error }]}>{errorMsg}</Text>
               </View>
             ) : null}

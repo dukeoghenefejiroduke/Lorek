@@ -28,6 +28,10 @@ const languageSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  isDemo: {
+    type: Boolean,
+    default: false,
+  },
   difficulty: {
     type: String,
     enum: ['beginner', 'intermediate', 'advanced'],

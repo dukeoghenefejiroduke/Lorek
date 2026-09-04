@@ -22,7 +22,6 @@ import { LanguageContext } from '../context/LanguageContext';
 export default function VocabularyDetailScreen({ navigation, route }) {
   const { wordId, word: initialWord } = route.params || {};
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in VocabularyDetailScreen.js:', contextValue);
   const { theme, isDarkMode } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
   const [word, setWord] = useState(initialWord || null);

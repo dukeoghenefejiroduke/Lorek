@@ -10,6 +10,8 @@ import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import haptics from '../utils/haptics';
 import { lessonAPI, progressAPI } from '../services/api';
 import { LanguageContext } from '../context/LanguageContext';
+import { HealthContext } from '../context/HealthContext';
+import { useExerciseEngine } from '../context/ExerciseEngineContext';
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
 
@@ -17,6 +19,8 @@ const { width } = Dimensions.get('window');
 
 const LessonDetailScreen = ({ route, navigation }) => {
   const { lessonId } = route.params;
+  const { health, deduct } = React.useContext(HealthContext);
+  const { loadExercise } = useExerciseEngine();
 
   const [lesson, setLesson] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,7 +38,6 @@ const LessonDetailScreen = ({ route, navigation }) => {
   const { activeLanguage } = useContext(LanguageContext);
 
    const contextValue = useContext(ThemeContext) || {};
-   console.log('DEBUG: Accessing ThemeContext in LessonDetailScreen.js:', contextValue);
    const { isDarkMode, theme } = contextValue;
    
   // Animations
@@ -52,15 +55,11 @@ const LessonDetailScreen = ({ route, navigation }) => {
   }, []);
 
   useEffect(() => {
-    if (!loading && !showSummary) {
-      fadeAnim.setValue(0);
-      slideAnim.setValue(30);
-      Animated.parallel([
-        Animated.timing(fadeAnim, { toValue: 1, duration: 400, useNativeDriver: true }),
-        Animated.timing(slideAnim, { toValue: 0, duration: 450, useNativeDriver: true }),
-      ]).start();
+    if (lesson && lesson.exercises && lesson.exercises[currentExerciseIndex]) {
+      loadExercise(lesson.exercises[currentExerciseIndex]);
     }
-  }, [currentExerciseIndex, loading, showSummary, isLearningMode]);
+  }, [lesson, currentExerciseIndex]);
+
 
   const startTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -154,6 +153,12 @@ const completeLesson = async () => {
   
 // Example for Multiple Choice (Apply similar logic to others)
 const handleMultipleChoice = (optionId) => {
+  if (health <= 0) {
+    Alert.alert('Out of Hearts! ❤️', 'You are out of hearts. Practice to regain them or wait for regeneration.', [
+        { text: 'Go to Practice', onPress: () => navigation.navigate('Practice') },
+    ]);
+    return;
+  }
   const exercise = lesson.exercises[currentExerciseIndex];
   const selectedOptionObj = exercise.options.find(opt => String(opt.id) === String(optionId));
   const isCorrect = selectedOptionObj?.isCorrect === true;
@@ -170,6 +175,7 @@ const handleMultipleChoice = (optionId) => {
     Alert.alert('Correct! 🎉', 'Great job!', [{ text: 'Continue', onPress: nextExercise }]);
   } else {
     haptics.notificationError();
+    deduct();
     const correctOption = exercise.options.find(opt => opt.isCorrect === true);
     Alert.alert('Incorrect ❌', `Correct answer: ${correctOption?.izon || correctOption?.english}`, [{ text: 'Continue', onPress: nextExercise }]);
   }

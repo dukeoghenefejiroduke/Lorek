@@ -1180,3 +1180,228 @@
 {"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-06-19T10:01:33.266Z\n    ================================\n    ","timestamp":"2026-06-19 11:01:33"}
 {"level":"info","message":"Redis client connected","timestamp":"2026-06-19 11:01:33"}
 {"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-06-19 11:01:33"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-01T19:08:10.347Z\n    ================================\n    ","timestamp":"2026-09-01 20:08:10"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:10"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:10"}
+{"level":"error","message":"Failed to connect to Redis: Connection is closed.","stack":"Error: Connection is closed.\n    at EventEmitter.connectionCloseHandler (/data/data/com.termux/files/home/Lorek/backend/node_modules/ioredis/built/Redis.js:208:28)\n    at Object.onceWrapper (node:events:623:12)\n    at EventEmitter.emit (node:events:520:22)\n    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)","timestamp":"2026-09-01 20:08:10"}
+{"0":"C","1":"o","10":" ","11":"i","12":"s","13":" ","14":"c","15":"l","16":"o","17":"s","18":"e","19":"d","2":"n","20":".","3":"n","4":"e","5":"c","6":"t","7":"i","8":"o","9":"n","level":"warn","message":"⚠️ Redis connection failed (continuing without cache):","timestamp":"2026-09-01 20:08:10"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:10"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:10"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:10"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:10"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:10"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:10"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:11"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:11"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:11"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:11"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:11"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:11"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:12"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:12"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:12"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:12"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:13"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:13"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:13"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:13"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-01 20:08:14"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-01 20:08:14"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-01T19:09:57.850Z\n    ================================\n    ","timestamp":"2026-09-01 20:09:57"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-01 20:09:58"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-01 20:09:58"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-04T08:32:12.438Z\n    ================================\n    ","timestamp":"2026-09-04 09:32:12"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:12"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:12"}
+{"level":"error","message":"Failed to connect to Redis: Connection is closed.","stack":"Error: Connection is closed.\n    at EventEmitter.connectionCloseHandler (/data/data/com.termux/files/home/Lorek/backend/node_modules/ioredis/built/Redis.js:208:28)\n    at Object.onceWrapper (node:events:623:12)\n    at EventEmitter.emit (node:events:520:22)\n    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)","timestamp":"2026-09-04 09:32:12"}
+{"0":"C","1":"o","10":" ","11":"i","12":"s","13":" ","14":"c","15":"l","16":"o","17":"s","18":"e","19":"d","2":"n","20":".","3":"n","4":"e","5":"c","6":"t","7":"i","8":"o","9":"n","level":"warn","message":"⚠️ Redis connection failed (continuing without cache):","timestamp":"2026-09-04 09:32:12"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:12"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:12"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:12"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:12"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:13"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:13"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:13"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:13"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:13"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:13"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:13"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:13"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:14"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:14"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:14"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:14"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:15"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:15"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:15"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:15"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:16"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:16"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:16"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:16"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:17"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:17"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:18"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:18"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:18"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:18"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:19"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:19"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:20"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:20"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:21"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:21"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:22"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:22"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:23"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:23"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:24"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:24"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:25"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:25"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:26"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:26"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:28"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:28"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis client error: connect ECONNREFUSED 127.0.0.1:6379","port":6379,"stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)","syscall":"connect","timestamp":"2026-09-04 09:32:29"}
+{"level":"warn","message":"Redis connection closed","timestamp":"2026-09-04 09:32:29"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-04 09:32:30"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-04 09:32:39"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-04 09:32:40"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-04 09:32:40"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-04 09:32:40"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-04 09:32:44"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-04 09:32:44"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-04 09:32:44"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-04 09:32:44"}
+{"level":"error","message":"Could not close connections in time, forcefully shutting down","timestamp":"2026-09-04 09:32:50"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-04T08:33:21.115Z\n    ================================\n    ","timestamp":"2026-09-04 09:33:21"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-04 09:33:21"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-04 09:33:21"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-04T08:55:09.828Z\n    ================================\n    ","timestamp":"2026-09-04 09:55:09"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-04 09:55:10"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-04 09:55:10"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-09-04 09:55:18"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-04T12:36:29.600Z\n    ================================\n    ","timestamp":"2026-09-04 13:36:29"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-04 13:36:29"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-04 13:36:30"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-09-04 13:36:33"}
+{"duration":"2832ms","level":"warn","message":"Slow request detected:","method":"POST","statusCode":200,"timestamp":"2026-09-04 14:01:31","url":"/api/auth/login"}
+{"error":"Route /api/vocabulary/stats not found","level":"warn","message":"Client Error:","method":"GET","statusCode":404,"timestamp":"2026-09-04 14:01:35","url":"/api/vocabulary/stats"}
+{"duration":"1387ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:01:36","url":"/api/progress/badges"}
+{"error":"Route /api/vocabulary/stats not found","level":"warn","message":"Client Error:","method":"GET","statusCode":404,"timestamp":"2026-09-04 14:01:37","url":"/api/vocabulary/stats"}
+{"duration":"2885ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:01:39","url":"/api/progress"}
+{"duration":"3253ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:01:39","url":"/api/community/feed?limit=3"}
+{"duration":"4818ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:01:39","url":"/api/progress"}
+{"duration":"4128ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:01:40","url":"/api/progress"}
+{"duration":"1557ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:01:40","url":"/api/community/feed?limit=3"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-04 14:31:22"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-04 14:31:22"}
+{"level":"info","message":"MongoDB connection closed","timestamp":"2026-09-04 14:31:22"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-04 14:31:22"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-04 14:31:22"}
+{"level":"info","message":"MongoDB connection closed","timestamp":"2026-09-04 14:31:22"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-04T13:31:58.093Z\n    ================================\n    ","timestamp":"2026-09-04 14:31:58"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-04 14:31:58"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-04 14:31:58"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-09-04 14:33:30"}
+{"duration":"1111ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:35:35","url":"/api/vocabulary/stats"}
+{"duration":"2347ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:35:36","url":"/api/progress/badges"}
+{"duration":"3140ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:35:37","url":"/api/community/feed?limit=3"}
+{"error":"Route /api/auth/profile not found","level":"warn","message":"Client Error:","method":"GET","statusCode":404,"timestamp":"2026-09-04 14:35:37","url":"/api/auth/profile"}
+{"duration":"1880ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:35:37","url":"/api/notifications?limit=50"}
+{"error":"Route /api/auth/logout not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-09-04 14:35:38","url":"/api/auth/logout"}
+{"duration":"5442ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:35:39","url":"/api/progress"}
+{"duration":"4833ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:35:39","url":"/api/progress"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-09-04 14:35:44","url":"/api/notifications?limit=50"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-04 14:52:44"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-04 14:52:44"}
+{"level":"info","message":"MongoDB connection closed","timestamp":"2026-09-04 14:52:44"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-04 14:52:44"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-04 14:52:44"}
+{"level":"info","message":"MongoDB connection closed","timestamp":"2026-09-04 14:52:44"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-04T13:53:21.150Z\n    ================================\n    ","timestamp":"2026-09-04 14:53:21"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-04 14:53:21"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-04 14:53:21"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-09-04 14:53:26"}
+{"error":"Invalid email or password","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-09-04 14:57:42","url":"/api/auth/login"}
+{"duration":"3093ms","level":"warn","message":"Slow request detected:","method":"POST","statusCode":401,"timestamp":"2026-09-04 14:57:42","url":"/api/auth/login"}
+{"duration":"2999ms","level":"warn","message":"Slow request detected:","method":"POST","statusCode":200,"timestamp":"2026-09-04 14:58:00","url":"/api/auth/login"}
+{"duration":"1855ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:58:05","url":"/api/progress/badges"}
+{"duration":"2877ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:58:06","url":"/api/community/feed?limit=3"}
+{"duration":"1186ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:58:07","url":"/api/vocabulary/stats"}
+{"duration":"4965ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:58:08","url":"/api/progress"}
+{"duration":"4969ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:58:08","url":"/api/progress"}
+{"duration":"1527ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:58:08","url":"/api/progress/badges"}
+{"duration":"4583ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:58:09","url":"/api/progress"}
+{"duration":"2566ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:58:10","url":"/api/community/feed?limit=3"}
+{"duration":"1493ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:58:10","url":"/api/notifications?limit=50"}
+{"duration":"1005ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:58:45","url":"/api/notifications/settings"}
+{"duration":"1435ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:58:45","url":"/api/notifications?limit=50"}
+{"duration":"1515ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:58:51","url":"/api/notifications?limit=50"}
+{"duration":"2282ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:58:52","url":"/api/user/profile"}
+{"duration":"1023ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:59:16","url":"/api/notifications/settings"}
+{"duration":"1532ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:59:16","url":"/api/notifications?limit=50"}
+{"duration":"5851ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:59:30","url":"/api/user/profile"}
+{"duration":"4642ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:59:33","url":"/api/notifications?limit=50"}
+{"duration":"2886ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:59:33","url":"/api/lessons?lang=IZON"}
+{"duration":"2000ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:59:46","url":"/api/notifications?limit=50"}
+{"duration":"2564ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 14:59:47","url":"/api/user/profile"}
+{"duration":"1043ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:59:55","url":"/api/vocabulary/favorites/list"}
+{"duration":"3515ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 14:59:57","url":"/api/vocabulary/stats/overview"}
+{"duration":"6380ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:00:00","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=IZON"}
+{"duration":"1157ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:00:08","url":"/api/vocabulary/favorites/list"}
+{"duration":"2613ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:00:09","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=IZON&category=family"}
+{"duration":"1488ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:00:14","url":"/api/notifications?limit=50"}
+{"duration":"2192ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:00:15","url":"/api/user/profile"}
+{"duration":"1221ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:00:18","url":"/api/practice/forecast"}
+{"duration":"1968ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:00:18","url":"/api/progress/stats"}
+{"duration":"2003ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:00:18","url":"/api/progress/achievements"}
+{"duration":"4847ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:00:21","url":"/api/practice/daily"}
+{"duration":"5260ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:00:29","url":"/api/practice/daily?limit=15&lang=IZON&practiceType=srs-mistakes"}
+{"duration":"5304ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:00:37","url":"/api/practice/daily?limit=15&lang=IZON&practiceType=srs-weak"}
+{"duration":"5190ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:00:55","url":"/api/practice/daily?limit=15&lang=IZON&practiceType=srs-daily"}
+{"duration":"1685ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:01:19","url":"/api/notifications?limit=50"}
+{"duration":"2242ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:01:20","url":"/api/user/profile"}
+{"duration":"1513ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:01:23","url":"/api/culture/proverbs/daily?lang=IZON"}
+{"duration":"1019ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:01:26","url":"/api/culture/category/traditions?lang=IZON"}
+{"duration":"1685ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:01:41","url":"/api/notifications?limit=50"}
+{"duration":"2120ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:01:41","url":"/api/user/profile"}
+{"duration":"1015ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:01:44","url":"/api/community/friends"}
+{"duration":"1168ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:01:44","url":"/api/community/discussions?limit=20"}
+{"duration":"1242ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:01:44","url":"/api/community/friends/requests/sent"}
+{"duration":"1614ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:01:44","url":"/api/community/friends/requests"}
+{"duration":"1001ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:01:45","url":"/api/community/leaderboard?limit=10"}
+{"duration":"2457ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:01:47","url":"/api/community/feed?page=1&limit=20"}
+{"duration":"5075ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:01:48","url":"/api/community/feed?page=1&limit=20"}
+{"duration":"1020ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:01:55","url":"/api/community/friends/requests/sent"}
+{"duration":"1071ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:01:55","url":"/api/community/friends"}
+{"duration":"1492ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:01:56","url":"/api/community/friends/requests"}
+{"duration":"5198ms","level":"warn","message":"Slow request detected:","method":"POST","statusCode":200,"timestamp":"2026-09-04 15:02:03","url":"/api/community/friends/accept/6a293b5bf5fa5532cadbbf8f"}
+{"error":"Friend request not found or already accepted","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-09-04 15:02:03","url":"/api/community/friends/accept/6a293b5bf5fa5532cadbbf8f"}
+{"duration":"1064ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:05","url":"/api/community/leaderboard?limit=10"}
+{"duration":"1074ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:05","url":"/api/community/friends/requests/sent"}
+{"duration":"1413ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:02:07","url":"/api/community/friends"}
+{"duration":"1044ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:11","url":"/api/community/discussions?limit=20"}
+{"duration":"2464ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:18","url":"/api/community/feed?page=1&limit=20"}
+{"duration":"2528ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:19","url":"/api/community/feed?page=1&limit=20"}
+{"duration":"1130ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:21","url":"/api/community/friends/requests/sent"}
+{"duration":"1162ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:21","url":"/api/community/friends/requests"}
+{"duration":"1705ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:22","url":"/api/community/friends"}
+{"duration":"2537ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:25","url":"/api/community/feed?page=1&limit=20"}
+{"duration":"2417ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:26","url":"/api/community/feed?page=1&limit=20"}
+{"duration":"1553ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:27","url":"/api/notifications?limit=50"}
+{"duration":"2056ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:02:27","url":"/api/user/profile"}
+{"duration":"2054ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:02:32","url":"/api/games/stats"}
+{"duration":"2512ms","level":"warn","message":"Slow request detected:","method":"POST","statusCode":200,"timestamp":"2026-09-04 15:02:42","url":"/api/games/start"}
+{"duration":"1581ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:50","url":"/api/notifications?limit=50"}
+{"duration":"2096ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:02:50","url":"/api/user/profile"}
+{"duration":"1779ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:03:02","url":"/api/progress/graph?period=week"}
+{"duration":"1830ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:03:02","url":"/api/progress/categories"}
+{"duration":"1939ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:03:02","url":"/api/progress/graph?period=week"}
+{"duration":"4877ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:03:05","url":"/api/progress"}
+{"duration":"3049ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:03:24","url":"/api/leaderboard?period=weekly&category=points&limit=50"}
+{"duration":"3046ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:03:30","url":"/api/leaderboard?period=monthly&category=points&limit=50"}
+{"duration":"3125ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-04 15:03:37","url":"/api/leaderboard?period=allTime&category=points&limit=50"}
+{"duration":"2022ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:04:23","url":"/api/user/profile"}
+{"duration":"4459ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-04 15:04:26","url":"/api/progress"}

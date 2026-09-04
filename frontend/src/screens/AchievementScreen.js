@@ -26,7 +26,6 @@ const { width } = Dimensions.get('window');
 const AchievementScreen = () => {
   const navigation = useNavigation();
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in AchievementScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
   

@@ -45,7 +45,6 @@ const DEFAULT_SETTINGS = {
 export default function RemindersScreen({ navigation }) {
   const { activeLanguage } = useContext(LanguageContext);
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in RemindersScreen.js:', contextValue);
   const { theme, isDarkMode } = contextValue;
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
   const [saving, setSaving] = useState(false);

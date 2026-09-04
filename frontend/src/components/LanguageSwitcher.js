@@ -297,9 +297,6 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 2,
   },
-  activeLanguageName: {
-    color: '#1a4c2e',
-  },
   languageNativeName: {
     fontSize: 12,
     color: '#999',

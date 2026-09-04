@@ -16,6 +16,7 @@ import {
   Platform,
   StatusBar,
   Animated,
+  Alert,
 } from 'react-native';
 import { BlurView } from 'expo-blur';
 
@@ -26,6 +27,7 @@ import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import ScreenHeader from '../components/ScreenHeader';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
 import { cultureAPI } from '../services/api';
 
@@ -49,7 +51,6 @@ export default function CultureScreen({ navigation }) {
   const [isCommenting, setIsCommenting] = useState(false);
   
    const contextValue = useContext(ThemeContext) || {};
-   console.log('DEBUG: Accessing ThemeContext in CultureScreen.js:', contextValue);
    const { isDarkMode, theme } = contextValue;
   
   // Animation values
@@ -341,12 +342,6 @@ export default function CultureScreen({ navigation }) {
           Explore the rich heritage and traditions of the {activeLanguage?.name || 'Izon'} people
         </Text>
       </LinearGradient>
-
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
-// ... other imports
-
-// ...
-
       <KeyboardAvoidingWrapper
         style={[styles.content, { backgroundColor: theme.background }]}
         scrollProps={{
@@ -572,8 +567,7 @@ const styles = StyleSheet.create({
   contentDescription: { fontSize: 14, color: '#666', lineHeight: 20, marginBottom: 10 },
   contentFooter: { alignItems: 'flex-end' },
   
-  proverbCard: { borderLeftColor: '#2e7d32', // Matches your header green
-   backgroundColor: '#ffffff', padding: 20, borderRadius: 15, elevation: 3, marginBottom: 15, borderLeftWidth: 4, borderLeftColor: '#FFD700' },
+  proverbCard: { backgroundColor: '#ffffff', padding: 20, borderRadius: 15, elevation: 3, marginBottom: 15, borderLeftWidth: 4, borderLeftColor: '#FFD700' },
   proverbText: { fontSize: 18, fontStyle: 'italic', color: '#333', marginBottom: 8, lineHeight: 26 },
   proverbTranslation: { fontSize: 14, color: '#666', marginBottom: 8 },
   proverbMeaning: { fontSize: 13, color: '#4CAF50', lineHeight: 18 },

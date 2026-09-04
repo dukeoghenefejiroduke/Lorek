@@ -42,7 +42,6 @@ const VocabularyScreen = ({ navigation }) => {
 const [vocabulary, setVocabulary] = useState([]);
 
    const contextValue = useContext(ThemeContext) || {};
-   console.log('DEBUG: Accessing ThemeContext in VocabularyScreen.js:', contextValue);
    const { isDarkMode, theme } = contextValue;
 
 const filteredVocabulary = useMemo(() => {
@@ -1127,11 +1126,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 8,
     right: 8,
-  },
-  categoryIcon: {
-    position: 'absolute',
-    top: 8,
-    left: 8,
   },
   categoryIconText: {
     fontSize: 16,

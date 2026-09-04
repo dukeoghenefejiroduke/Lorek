@@ -208,8 +208,58 @@ router.delete('/users/:id', async (req, res) => {
 });
 
 // ============================================================================
-// CONTENT MANAGEMENT
+// CONTENT ARCHITECT (Dynamic Hierarchy)
 // ============================================================================
+
+const Course = require('../models/Course');
+const Section = require('../models/Section');
+const Unit = require('../models/Unit');
+// Note: Lesson, Vocabulary already declared at top of file.
+
+// Content Packs
+router.post('/content/import-pack', async (req, res, next) => {
+  try {
+    const pack = req.body;
+    if (!pack.pack_id || !pack.lessons || !pack.exercises) {
+      return res.status(400).json({ success: false, message: 'Invalid pack format' });
+    }
+    
+    // Import logic
+    for (const lessonData of pack.lessons) {
+        await Lesson.create({ ...lessonData, language_id: pack.language_id });
+    }
+    
+    res.status(201).json({ success: true, message: 'Pack imported successfully' });
+  } catch (err) { next(err); }
+});
+
+// Courses
+router.post('/content/courses', async (req, res, next) => {
+  try {
+    const course = await Course.create(req.body);
+    res.status(201).json({ success: true, data: course });
+  } catch (err) { next(err); }
+});
+
+// Sections
+router.post('/content/sections', async (req, res, next) => {
+  try {
+    const section = await Section.create(req.body);
+    // Add to course
+    await Course.findByIdAndUpdate(req.body.courseId, { $push: { sections: section._id } });
+    res.status(201).json({ success: true, data: section });
+  } catch (err) { next(err); }
+});
+
+// Units
+router.post('/content/units', async (req, res, next) => {
+  try {
+    const unit = await Unit.create(req.body);
+    // Add to section
+    await Section.findByIdAndUpdate(req.body.sectionId, { $push: { units: unit._id } });
+    res.status(201).json({ success: true, data: unit });
+  } catch (err) { next(err); }
+});
 
 // Get content statistics
 router.get('/content/stats', async (req, res) => {

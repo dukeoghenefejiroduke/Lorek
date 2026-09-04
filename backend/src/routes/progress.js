@@ -724,7 +724,7 @@ router.post('/milestone', auth, async (req, res, next) => {
       { condition: streak >= 100, badge: { name: 'Century Club', icon: '💯', tier: 'platinum', description: '100-day streak', isGlobal: true } },
     ];
 
-    milestoneChecks.forEach(check => {
+    for (const check of milestoneChecks) {
       if (check.condition) {
         // Check if user already has this badge FOR THIS LANGUAGE (or globally if isGlobal)
         const hasBadge = user.progress.badges.some(b => 
@@ -743,14 +743,13 @@ router.post('/milestone', auth, async (req, res, next) => {
           
           earnedBadges.push(badgeData);
           user.progress.badges.push(badgeData);
-
+          
           // Award points for badge
           const badgePoints = getBadgePoints(check.badge.tier);
-          user.progress.totalPoints += badgePoints;
-          user.gamification.points.total += badgePoints;
+          await addXP(userId, badgePoints, 'badge_earned');
         }
       }
-    });
+    }
 
     if (earnedBadges.length > 0) {
       await user.save();

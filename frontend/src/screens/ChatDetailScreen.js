@@ -65,7 +65,6 @@ const MessageBubble = ({ message, isOwn, showAvatar, theme, isDarkMode }) => {
 export default function ChatDetailScreen({ navigation, route }) {
   const { user } = useContext(AuthContext);
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in ChatDetailScreen.js:', contextValue);
   const { theme, isDarkMode } = contextValue;
   const { conversationId, otherUser: initialOtherUser } = route.params;
   

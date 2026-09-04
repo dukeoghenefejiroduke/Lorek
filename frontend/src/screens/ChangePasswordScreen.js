@@ -23,7 +23,6 @@ import { ThemeContext, lightTheme } from '../context/ThemeContext';
 export default function ChangePasswordScreen({ navigation }) {
   const { logout } = useContext(AuthContext);
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in ChangePasswordScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
   
   const [currentPassword, setCurrentPassword] = useState('');

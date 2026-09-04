@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiUtils } from '../services/api';
-import * as Constants from 'expo-constants';
+import Constants from 'expo-constants';
 
 export const useAppUpdate = () => {
   const [updateAvailable, setUpdateAvailable] = useState(false);

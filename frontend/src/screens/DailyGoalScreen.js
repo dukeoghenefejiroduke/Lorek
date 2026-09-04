@@ -29,7 +29,6 @@ const DailyGoalScreen = ({ navigation }) => {
   const [dailyProverb, setDailyProverb] = useState('');
   
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in DailyGoalScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
   
   // Animation values

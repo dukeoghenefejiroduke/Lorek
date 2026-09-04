@@ -616,3 +616,17 @@ async function getUserStatistics(userId) {
 }
 
 module.exports = router;
+router.get('/gems', auth, async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user._id).select('gems');
+        res.json({ success: true, gems: user.gems });
+    } catch (err) { next(err); }
+});
+
+router.post('/gems/update', auth, async (req, res, next) => {
+    try {
+        const { amount } = req.body;
+        const user = await User.findByIdAndUpdate(req.user._id, { $inc: { gems: amount } }, { new: true });
+        res.json({ success: true, gems: user.gems });
+    } catch (err) { next(err); }
+});

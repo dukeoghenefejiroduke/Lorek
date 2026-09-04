@@ -82,7 +82,6 @@ const ConversationItem = ({ item, onPress, currentUser, theme, isDarkMode }) => 
 export default function MessagesScreen({ navigation }) {
   const { user } = useContext(AuthContext);
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in MessagesScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
   const [conversations, setConversations] = useState([]);
   const [loading, setLoading] = useState(true);

@@ -185,7 +185,6 @@ const UserResultItem = ({ item, onPress, theme }) => (
 // ============================================================================
 export default function SearchScreen({ navigation }) {
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in SearchScreen.js:', contextValue);
   const { theme, isDarkMode } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
   const [searchQuery, setSearchQuery] = useState('');

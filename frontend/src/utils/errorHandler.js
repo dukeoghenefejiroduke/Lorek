@@ -1,27 +1,35 @@
 import { Alert } from 'react-native';
 
-/**
- * Global UI error handler to provide consistent feedback
- * across the application.
- */
-export const handleGlobalError = (error, context = '') => {
-  let message = 'An unexpected error occurred. Please try again.';
-  let title = 'Oops!';
+export const handleNetworkError = (error, context = '') => {
+  console.error(`Error in ${context}:`, error);
 
-  if (error.isNetworkError) {
-    title = 'Connection Issue';
-    message = 'Please check your internet connection and try again.';
-  } else if (error.status === 401) {
-    title = 'Session Expired';
-    message = 'Please login again to continue.';
-  } else if (error.status === 429) {
-    title = 'Slow Down';
-    message = 'You are doing that too often. Please wait a moment.';
-  } else if (error.message) {
-    message = error.message;
+  let message = 'An unexpected error occurred.';
+
+  if (!error.response) {
+    // Network error (No internet, timeout)
+    message = 'Network error. Please check your internet connection.';
+  } else if (error.response.status === 401) {
+    message = 'Session expired. Please log in again.';
+    // Handle logout/redirect
+  } else if (error.response.status >= 500) {
+    message = 'Server is currently unreachable. Please try again later.';
+  } else if (error.response.status === 409) {
+    message = 'Sync conflict. Please try again.';
   }
 
-  console.error(`[Error Handler] ${context}:`, error);
+  Alert.alert('Error', message);
+};
 
-  Alert.alert(title, message, [{ text: 'OK' }]);
+export const handleDownloadError = (error, context = '') => {
+  console.error(`Download Error in ${context}:`, error);
+
+  let message = 'Failed to download content.';
+  
+  if (error.code === 'ERR_FILESYSTEM_OUT_OF_SPACE') {
+    message = 'Insufficient storage space on your device.';
+  } else if (error.message && error.message.includes('corrupt')) {
+    message = 'Downloaded content is corrupt. Please try again.';
+  }
+
+  Alert.alert('Download Error', message);
 };

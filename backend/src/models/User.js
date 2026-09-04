@@ -82,6 +82,11 @@ const progressSchema = new mongoose.Schema({
     default: 0,
     min: 0,
   },
+  health: {
+    current: { type: Number, default: 5, min: 0, max: 5 },
+    max: { type: Number, default: 5, min: 1 },
+    lastRegenAt: { type: Date, default: Date.now },
+  },
   dailyProgress: {
     type: Number,
     default: 0,
@@ -98,6 +103,11 @@ const progressSchema = new mongoose.Schema({
     min: 1,
     max: 100,
   },
+  league: {
+    tier: { type: String, enum: ['bronze', 'silver', 'gold', 'sapphire', 'ruby', 'emerald'], default: 'bronze' },
+    rank: { type: Number, default: 0 },
+    previousTier: { type: String },
+  },
   
   experience: {
     current: { type: Number, default: 0 },
@@ -112,6 +122,7 @@ const progressSchema = new mongoose.Schema({
     freezes: { type: Number, default: 0 },
     freezeUsed: { type: Number, default: 0 },
   },
+  gems: { type: Number, default: 0 },
   
   completedLessons: [{
     lessonId: { type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' },

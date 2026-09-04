@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useRef, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { authAPI, apiUtils } from '../services/api';
+import { authAPI, apiUtils, userAPI } from '../services/api';
 import * as Crypto from 'expo-crypto';
 import haptics from '../utils/haptics';
 import { Platform, AppState, Alert } from 'react-native';
@@ -64,9 +64,9 @@ export const AuthProvider = ({ children }) => {
 
 const refreshUser = async () => {
   try {
-    const response = await authAPI.getProfile(); // Assuming you have a /me or /profile endpoint
-    const updatedUser = response.data.data || response.data;
-    
+    const response = await userAPI.getProfile(); 
+    const updatedUser = response.data.data.user || response.data.data;
+
     // Save the fresh data so it persists on reload
     await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
     setUser(updatedUser);
@@ -75,7 +75,6 @@ const refreshUser = async () => {
     console.error('Failed to refresh user stats:', error);
   }
 };
-
   // Initialize authentication
   const initializeAuth = async () => {
     try {
@@ -382,9 +381,9 @@ const refreshAuthToken = async (manualToken) => {
     }
 
     // Check network status
-    console.log('🌐 Network status:', networkStatus);
+    if (__DEV__) console.log('🌐 Network status:', networkStatus);
     if (!networkStatus) {
-      console.log('🚫 Offline');
+      if (__DEV__) console.log('🚫 Offline');
       return { 
         success: false, 
         error: 'No internet connection. Please check your network.',
@@ -393,9 +392,9 @@ const refreshAuthToken = async (manualToken) => {
     }
 
     try {
-      console.log('📡 Attempting authAPI.login...');
+      if (__DEV__) console.log('📡 Attempting authAPI.login...');
       const response = await authAPI.login({ email, password });
-      console.log('✅ authAPI.login success, full response.data:', JSON.stringify(response.data, null, 2));
+      if (__DEV__) console.log('✅ authAPI.login success, full response.data:', JSON.stringify(response.data, null, 2));
       
       const { user, token, refreshToken } = response.data.data;
       const expiresIn = 3600; // Default if not provided in data
@@ -425,9 +424,9 @@ const refreshAuthToken = async (manualToken) => {
       }
       
       setUser(user);
-      console.log('DEBUG: AuthContext setUser called (login block) with:', user?.username);
+      if (__DEV__) console.log('DEBUG: AuthContext setUser called (login block) with:', user?.username);
       setIsAuthenticated(true);
-      console.log('DEBUG: AuthContext isAuthenticated set to true (login block)');
+      if (__DEV__) console.log('DEBUG: AuthContext isAuthenticated set to true (login block)');
       setSessionExpiry(sessionExpiry);
       
       // Reset login attempts on success
@@ -450,7 +449,7 @@ const refreshAuthToken = async (manualToken) => {
       
       return { 
         success: false, 
-        error: error.message || 'Login failed. Please check your credentials.',
+        error: error.response?.data?.error || error.response?.data?.message || error.message || 'Login failed. Please check your credentials.',
         attempts: loginAttempts + 1,
         maxAttempts: MAX_LOGIN_ATTEMPTS
       };
@@ -521,7 +520,7 @@ const refreshAuthToken = async (manualToken) => {
       
       setUser(user);
       setIsAuthenticated(true);
-      console.log('DEBUG: AuthContext isAuthenticated set to true (register block)');
+      if (__DEV__) console.log('DEBUG: AuthContext isAuthenticated set to true (register block)');
       setSessionExpiry(sessionExpiry);
       
       // Schedule token refresh
@@ -628,8 +627,8 @@ const refreshAuthToken = async (manualToken) => {
   // Update user profile
   const updateUserProfile = async (userData) => {
     try {
-      const response = await authAPI.updateProfile(userData);
-      const updatedUser = response.data.user;
+      const response = await userAPI.updateProfile(userData);
+      const updatedUser = response.data.data.user;
       
       await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
       setUser(updatedUser);

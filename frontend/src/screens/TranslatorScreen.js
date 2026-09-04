@@ -30,6 +30,7 @@ import { AuthContext } from '../context/AuthContext';
 import { LanguageContext } from '../context/LanguageContext';
 import AudioPlayer from '../components/AudioPlayer';
 import haptics from '../utils/haptics';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
 const { width, height } = Dimensions.get('window');
 
@@ -309,7 +310,6 @@ export default function TranslatorScreen({ navigation }) {
   const { user } = useContext(AuthContext);
   const { activeLanguage } = useContext(LanguageContext);
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in TranslatorScreen.js:', contextValue);
   const { theme, isDarkMode } = contextValue;
 
   // State
@@ -541,12 +541,6 @@ export default function TranslatorScreen({ navigation }) {
           Translate between English and {activeLanguage?.name || 'Izon'} with AI-powered accuracy
         </Text>
       </LinearGradient>
-
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
-// ... other imports
-
-// ...
-
       <KeyboardAvoidingWrapper
         style={styles.keyboardView}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}

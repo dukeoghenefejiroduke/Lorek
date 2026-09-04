@@ -43,7 +43,6 @@ const LessonsScreen = ({ navigation }) => {
   const [languageSwitcherVisible, setLanguageSwitcherVisible] = useState(false);
 
    const contextValue = useContext(ThemeContext) || {};
-   console.log('DEBUG: Accessing ThemeContext in LessonsScreen.js:', contextValue);
    const { isDarkMode, theme } = contextValue;
 
   // Use useMemo for filtering logic to avoid unnecessary re-renders and simplify code

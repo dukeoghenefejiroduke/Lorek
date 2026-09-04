@@ -34,7 +34,6 @@ export default function CommunityScreen({ navigation }) {
   const { activeLanguage } = useContext(LanguageContext);
   
    const contextValue = useContext(ThemeContext) || {};
-   console.log('DEBUG: Accessing ThemeContext in CommunityScreen.js:', contextValue);
    const { isDarkMode, theme } = contextValue;
   
   const isModerator = user?.role === 'admin' || user?.role === 'moderator';
@@ -163,6 +162,7 @@ export default function CommunityScreen({ navigation }) {
   const slideAnim = useRef(new Animated.Value(50)).current;
 
   const [pendingRequests, setPendingRequests] = useState({}); // { userId: true/false }
+  const [acceptingRequests, setAcceptingRequests] = useState({}); // { requestId: true/false }
 
   useEffect(() => {
     loadInitialData();
@@ -440,14 +440,21 @@ const handleSendFriendRequest = async (userId) => {
 };
 
 const handleAcceptFriendRequest = async (requestId) => {
+  setAcceptingRequests(prev => ({ ...prev, [requestId]: true }));
   try {
     await communityAPI.acceptFriendRequest(requestId);
+    haptics.notificationSuccess();
+  } catch (error) {
+    if (error.response?.status === 404) {
+      console.warn('Friend request already processed or not found');
+    } else {
+      Alert.alert('Error', 'Failed to accept request');
+    }
+  } finally {
+    setAcceptingRequests(prev => ({ ...prev, [requestId]: false }));
     // CRITICAL: Refresh both lists
     await loadFriendRequests(); 
     await loadFriends(); 
-    haptics.notificationSuccess();
-  } catch (error) {
-    Alert.alert('Error', 'Failed to accept request');
   }
 };
 
@@ -595,7 +602,9 @@ const renderPost = ({ item }) => {
     </Animated.View>
   );
 
-  const renderFriendRequest = ({ item }) => (
+  const renderFriendRequest = ({ item }) => {
+    const isAccepting = acceptingRequests[item.id];
+    return (
     <Animated.View style={[styles.requestCard, { backgroundColor: theme.card, opacity: fadeAnim }]}>
       <View style={[styles.requestAvatar, { backgroundColor: theme.primary }]}>
         {item.from?.avatar ? (
@@ -610,10 +619,11 @@ const renderPost = ({ item }) => {
       </View>
       <View style={styles.requestActions}>
         <TouchableOpacity 
-          style={[styles.requestButton, styles.acceptButton, { backgroundColor: theme.primary }]}
+          style={[styles.requestButton, styles.acceptButton, { backgroundColor: theme.primary }, isAccepting && styles.postButtonDisabled]}
           onPress={() => handleAcceptFriendRequest(item.id)}
+          disabled={isAccepting}
         >
-          <Text style={styles.acceptButtonText}>Accept</Text>
+          {isAccepting ? <ActivityIndicator size="small" color="#fff" /> : <Text style={styles.acceptButtonText}>Accept</Text>}
         </TouchableOpacity>
         <TouchableOpacity style={[styles.requestButton, styles.rejectButton, { backgroundColor: theme.border, borderColor: theme.border }]}>
           <Text style={[styles.rejectButtonText, { color: theme.text }]}>Reject</Text>
@@ -621,6 +631,7 @@ const renderPost = ({ item }) => {
       </View>
     </Animated.View>
   );
+  }
 
   const renderDiscussionCard = ({ item }) => (
     <Animated.View style={[styles.discussionCard, { backgroundColor: theme.card, opacity: fadeAnim }]}>

@@ -20,6 +20,7 @@ import { MaterialIcons, Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { AuthContext } from '../context/AuthContext';
 import { authAPI } from '../services/api';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
 export default function ApiKeyScreen({ navigation }) {
   const { user, token } = useContext(AuthContext);
@@ -33,7 +34,6 @@ export default function ApiKeyScreen({ navigation }) {
   const [newlyGeneratedKey, setNewlyGeneratedKey] = useState('');
 
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in ApiKeyScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
 
   useEffect(() => {
@@ -240,11 +240,6 @@ export default function ApiKeyScreen({ navigation }) {
           Manage your API keys for accessing the Lorek API
         </Text>
       </LinearGradient>
-
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
-// ... other imports
-
-// ...
       <KeyboardAvoidingWrapper style={styles.content}>
         <View style={[styles.infoCard, { backgroundColor: theme.card }]}>
           <MaterialIcons name="info" size={24} color={theme.primary} />

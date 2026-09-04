@@ -14,6 +14,9 @@ const { authorize } = require('../middleware/authorize');
 const { logger } = require('../config/logger');
 const { cacheMiddleware, clearCache } = require('../middleware/cache');
 const { AppError, ValidationError } = require('../middleware/errorHandler');
+const { deductHealth } = require('../services/healthService');
+const srsController = require('../controllers/srsController');
+const { addXP, calculatePointsEarned, calculateExpEarned } = require('../services/xpService');
 const notificationService = require('../services/notificationService');
 const redis = require('../config/redis');
 const { contentLimiter } = require('../middleware/rateLimit');
@@ -381,19 +384,31 @@ router.post('/:id/complete', auth, validateLessonId, validateCompletion, async (
 
     // Add points
     const pointsEarned = calculatePointsEarned(score, isFirstCompletion, isNewBestScore);
-    user.progress.totalPoints += pointsEarned;
-    user.gamification.points.total += pointsEarned;
-    user.gamification.points.history.push({
-      amount: pointsEarned,
-      reason: 'lesson_completion',
-      lessonId: id,
-      timestamp: new Date(),
-    });
+    await addXP(userId, pointsEarned, 'lesson_completion', req.body.clientEventId);
+
+    // Deduct health for incorrect answers
+    const totalExercises = responses.length;
+    const incorrectCount = responses.filter(r => !r.correct).length;
+    for (let i = 0; i < incorrectCount; i++) {
+        await deductHealth(user);
+    }
+    
+    // Update SRS metrics
+    for (const response of responses) {
+        if (response.wordId) {
+            await srsController.processMasteryUpdate(
+                userId, 
+                response.wordId, 
+                response.correct ? 4 : 0
+            );
+        }
+    }
 
     // Add experience
     const expEarned = calculateExpEarned(score, timeSpent);
-    user.gamification.experience += expEarned;
-    user.updateLevel();
+    await addExperience(userId, expEarned);
+    
+    await user.save(); // Save health and progress updates
 
     // Track completed lesson
     if (progress.completed && !user.progress.completedLessons.some(l => l.lessonId?.toString() === id)) {
@@ -411,6 +426,10 @@ router.post('/:id/complete', auth, validateLessonId, validateCompletion, async (
       // Update average score
       const totalScore = user.progress.lessonStats.averageScore * (user.progress.lessonStats.totalCompleted - 1);
       user.progress.lessonStats.averageScore = (totalScore + score) / user.progress.lessonStats.totalCompleted;
+      
+      // Log activity
+      const { logActivity } = require('../services/activityService');
+      await logActivity(userId, 'lesson_completed', `${user.username} completed a lesson: ${lesson.title.english || lesson.title}`);
     }
 
     user.lastActive = new Date();
@@ -856,30 +875,36 @@ async function getLessonStats(lessonId) {
 /**
  * Get lesson recommendations
  */
-async function getLessonRecommendations(lesson, userId) {
-  // 1. Basic check
-  if (!userId) return [];
-  
-  // 2. STRICT VALIDATION: Ensure it's a valid 24-char Mongo ID
-  if (!mongoose.Types.ObjectId.isValid(userId) || String(userId).length !== 24) {
-    logger.warn(`Skipping recommendations: Invalid ObjectId format [${userId}]`);
-    return []; 
-  }
 
+async function getLessonRecommendations(lesson, userId) {
+  if (!userId || !mongoose.Types.ObjectId.isValid(userId) || String(userId).length !== 24) return [];
 
   try {
     const user = await User.findById(userId);
-    if (!user) return [];
-   // Get lessons in same category that user hasn't completed
-   const completedIds = user.progress?.completedLessons?.map(l => l.lessonId) || [];
+    const analytics = await LearningAnalytics.findOne({ userId });
+    
+    // Identify struggle topics (e.g., topic with low average accuracy)
+    const struggleTopics = analytics?.dailyStats
+        ?.filter(s => s.averageQuality < 0.7)
+        .map(s => s.topic) || [];
 
-   const recommendations = await Lesson.find({
-     category: lesson.category,
-     _id: { $nin: completedIds },
-     status: 'published',
-   })
-    .limit(3)
-    .select('title.english level order difficulty');
+    const completedIds = user.progress?.completedLessons?.map(l => l.lessonId) || [];
+
+    // Prioritize lessons in struggle topics
+    const query = {
+        _id: { $nin: completedIds },
+        status: 'published'
+    };
+
+    if (struggleTopics.length > 0) {
+        query.tags = { $in: struggleTopics };
+    } else {
+        query.category = lesson.category;
+    }
+
+    const recommendations = await Lesson.find(query)
+        .limit(3)
+        .select('title.english level order difficulty tags');
 
     return recommendations;
   } catch (err) {
@@ -922,35 +947,9 @@ async function checkPrerequisites(userId, lesson) {
   };
 }
 
-/**
- * Calculate points earned
- */
-function calculatePointsEarned(score, isFirstCompletion, isNewBestScore) {
-  let points = Math.floor(score / 2); // Base points: 0-50
+// Check for achievements
+// ...
 
-  if (isFirstCompletion) {
-    points += 50; // First time bonus
-  }
-
-  if (isNewBestScore && score === 100) {
-    points += 25; // Perfect score bonus
-  }
-
-  return points;
-}
-
-/**
- * Calculate experience earned
- */
-function calculateExpEarned(score, timeSpent) {
-  const baseExp = score * 2; // 0-200
-  const timeBonus = Math.min(50, Math.floor(timeSpent / 2)); // Up to 50 bonus
-  return baseExp + timeBonus;
-}
-
-/**
- * Generate lesson feedback
- */
 function generateLessonFeedback(score, timeSpent, estimatedTime) {
   const feedback = [];
 

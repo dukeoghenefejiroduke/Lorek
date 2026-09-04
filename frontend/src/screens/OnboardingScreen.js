@@ -35,7 +35,6 @@ const onboardingData = [
 
 export default function OnboardingScreen({ navigation }) {
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in OnboardingScreen.js:', contextValue);
   const { theme, isDarkMode } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
   const [currentIndex, setCurrentIndex] = useState(0);

@@ -19,7 +19,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import haptics from "../utils/haptics";
 
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 import * as Sharing from 'expo-sharing';
 
 import { LineChart, PieChart, ProgressChart } from 'react-native-chart-kit';
@@ -194,7 +194,6 @@ export default function ProgressScreen({ navigation }) {
   const [categoryProgress, setCategoryProgress] = useState(null);
   
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in ProgressScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
   
   // Animation values

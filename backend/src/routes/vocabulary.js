@@ -673,6 +673,28 @@ router.get('/mastery/stats', auth, srsController.getMasteryStats);
  * Get vocabulary by ID with enhanced data
  * GET /api/vocabulary/:id
  */
+router.get('/review', auth, async (req, res, next) => {
+  try {
+    const userId = req.user._id;
+    const now = new Date();
+    const user = await User.findById(userId).populate('vocabularyMastery.wordId');
+
+    if (!user) throw new AppError('User not found', 404);
+
+    const wordsToReview = user.vocabularyMastery
+      .filter(item => item.nextReview && new Date(item.nextReview) <= now)
+      .sort((a, b) => new Date(a.nextReview) - new Date(b.nextReview))
+      .slice(0, 20);
+
+    res.json({
+      success: true,
+      data: wordsToReview
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/:id', validateWordId, async (req, res, next) => {
   try {
     const { id } = req.params;

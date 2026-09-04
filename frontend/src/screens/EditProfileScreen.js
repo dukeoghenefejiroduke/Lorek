@@ -59,7 +59,6 @@ export default function EditProfileScreen({ navigation }) {
   const [statsModalVisible, setStatsModalVisible] = useState(false);
   
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in EditProfileScreen.js:', contextValue);
   const { isDarkMode, theme } = contextValue;
   
   // Animation values

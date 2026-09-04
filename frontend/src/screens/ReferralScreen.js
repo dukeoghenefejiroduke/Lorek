@@ -123,7 +123,6 @@ const RewardCard = ({ reward, totalReferrals, theme }) => {
 export default function ReferralScreen({ navigation }) {
   const { user } = useContext(AuthContext);
   const contextValue = useContext(ThemeContext) || {};
-  console.log('DEBUG: Accessing ThemeContext in ReferralScreen.js:', contextValue);
   const { theme, isDarkMode } = contextValue;
   
   // State

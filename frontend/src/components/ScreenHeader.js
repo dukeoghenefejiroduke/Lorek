@@ -9,7 +9,6 @@ import { LanguageContext } from '../context/LanguageContext';
 const ScreenHeader = ({ title, showLanguageSelector = false, onLanguagePress, onBackPress, children }) => {
   const insets = useSafeAreaInsets();
   const contextValue = useContext(ThemeContext) || {};
-  console.log("DEBUG: Accessing ThemeContext in ScreenHeader.js:", contextValue);
   const { theme = lightTheme } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
 

@@ -27,6 +27,7 @@ const practiceSessionSchema = new mongoose.Schema({
     },
     category: String,
     difficulty: String,
+    practiceType: String,
     mode: {
       type: String,
       enum: ['learning', 'review', 'test', 'cram'],

@@ -9,7 +9,17 @@ const contributionSchema = new mongoose.Schema({
     url: { type: String },  // e.g., S3 URL
     targetId: { type: mongoose.Schema.Types.ObjectId, ref: 'Vocabulary' } // Link to existing word
   },
-  status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
+  status: { 
+    type: String, 
+    enum: ['draft', 'translator_review', 'native_review', 'approved', 'published', 'rejected'], 
+    default: 'draft' 
+  },
+  metadata: {
+    translationConfidence: { type: Number, min: 0, max: 1 },
+    nativeReviewed: { type: Boolean, default: false },
+    reviewerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    reviewDate: Date,
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Contribution', contributionSchema);

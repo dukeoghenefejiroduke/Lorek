@@ -7,6 +7,8 @@ const notificationService = require('../services/notificationService');
 const { logger } = require('../config/logger');
 const { AppError, ValidationError } = require('../middleware/errorHandler');
 const redis = require('../config/redis');
+const srsController = require('./srsController');
+const { updateStreak } = require('../services/streakService');
 
 // ============================================================================
 // SRS ALGORITHM CONFIGURATION
@@ -76,6 +78,7 @@ exports.getDailyPractice = async (req, res, next) => {
         includeNew: includeNew === 'true',
         category,
         difficulty,
+        practiceType: req.query.practiceType,
         language_id: targetLanguageId,
       });
     }
@@ -192,7 +195,7 @@ exports.submitPracticeResult = async (req, res, next) => {
     const metrics = calculateMetrics(sessionWord, quality, responseTime, confidence);
 
     // Update SRS for the word
-    const updatedSRS = await updateSRS(userId, wordId, quality, metrics);
+    const updatedSRS = await srsController.processMasteryUpdate(userId, wordId, quality, responseTime, { context: 'practice' }, mistakes);
 
     // Update session word data
     Object.assign(sessionWord, {
@@ -201,8 +204,8 @@ exports.submitPracticeResult = async (req, res, next) => {
       confidence,
       mistakes: mistakes || [],
       reviewedAt: new Date(),
-      srsStage: updatedSRS.stage,
-      nextReview: updatedSRS.nextReview,
+      srsStage: updatedSRS.mastery.stage,
+      nextReview: updatedSRS.mastery.nextReview,
     });
 
     // Update session progress
@@ -292,151 +295,8 @@ exports.getReviewForecast = async (req, res, next) => {
 };
 
 // ============================================================================
-// ADVANCED SRS ALGORITHMS
+// WORD SELECTION ALGORITHMS
 // ============================================================================
-
-/**
- * Update SRS using modified SM-2 algorithm
- */
-const updateSRS = async (userId, wordId, quality, metrics) => {
-  try {
-    const user = await User.findById(userId);
-    const masteryItem = user.vocabularyMastery.find(
-      v => v.wordId.toString() === wordId.toString()
-    );
-
-    let stage, ease, interval, nextReview;
-
-    if (!masteryItem) {
-      // First time seeing this word
-      stage = 1;
-      ease = SRS_STAGES[1].ease;
-      interval = SRS_STAGES[1].interval;
-      
-      // Get word to find its language_id
-      const Vocabulary = mongoose.model('Vocabulary');
-      const word = await Vocabulary.findById(wordId);
-
-      // Add to vocabulary mastery
-      user.vocabularyMastery.push({
-        wordId,
-        language_id: word?.language_id,
-        stage,
-        ease,
-        interval,
-        reviewCount: 1,
-        lapses: quality <= QUALITY_SCORES.HARD ? 1 : 0,
-        lastReview: new Date(),
-        nextReview: calculateNextReview(interval, stage),
-        history: [{
-          quality,
-          responseTime: metrics.responseTime,
-          timestamp: new Date(),
-        }],
-      });
-    } else {
-      // Existing word - apply SM-2 algorithm
-      const oldStage = masteryItem.stage;
-      const oldEase = masteryItem.ease || 2.5;
-      
-      // SM-2 algorithm for ease factor
-      ease = oldEase + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
-      ease = Math.max(1.3, Math.min(2.5, ease)); // Clamp between 1.3 and 2.5
-
-      // Determine new stage based on quality
-      if (quality <= QUALITY_SCORES.AGAIN) {
-        // Complete failure - reset to stage 1
-        stage = 1;
-        interval = SRS_STAGES[1].interval;
-        masteryItem.lapses = (masteryItem.lapses || 0) + 1;
-      } else if (quality <= QUALITY_SCORES.HARD) {
-        // Hard recall - decrease stage or interval
-        stage = Math.max(1, oldStage - 1);
-        interval = calculateInterval(stage, ease, masteryItem.reviewCount);
-      } else if (quality <= QUALITY_SCORES.GOOD) {
-        // Good recall - progress normally
-        stage = Math.min(Object.keys(SRS_STAGES).length - 1, oldStage + 1);
-        interval = calculateInterval(stage, ease, masteryItem.reviewCount);
-      } else {
-        // Easy/Perfect recall - progress faster
-        stage = Math.min(Object.keys(SRS_STAGES).length - 1, oldStage + 2);
-        interval = calculateInterval(stage, ease, masteryItem.reviewCount) * 1.5;
-      }
-
-      // Cap interval at maximum
-      interval = Math.min(interval, MAX_INTERVAL);
-      
-      // Calculate next review date
-      nextReview = calculateNextReview(interval, stage);
-
-      // Update mastery item
-      masteryItem.stage = stage;
-      masteryItem.ease = ease;
-      masteryItem.interval = interval;
-      masteryItem.nextReview = nextReview;
-      masteryItem.reviewCount = (masteryItem.reviewCount || 0) + 1;
-      masteryItem.lastReview = new Date();
-      
-      // Add to history
-      if (!masteryItem.history) masteryItem.history = [];
-      masteryItem.history.push({
-        quality,
-        responseTime: metrics.responseTime,
-        stage,
-        timestamp: new Date(),
-      });
-    }
-
-      // FerretDB FIX: Mongoose might not detect the deep change in an array of objects
-     // Tell Mongoose exactly which path in the document was modified
-      user.markModified('vocabularyMastery');
-      await user.save();
-
-    return {
-      stage,
-      ease,
-      interval,
-      nextReview,
-      reviewCount: masteryItem?.reviewCount || 1,
-    };
-
-  } catch (error) {
-    logger.error('SRS update error:', error);
-    throw error;
-  }
-};
-
-/**
- * Calculate interval based on SM-2 algorithm
- */
-const calculateInterval = (stage, ease, reviewCount) => {
-  if (stage <= 1) return SRS_STAGES[stage].interval;
-  
-  if (stage === 2) {
-    return SRS_STAGES[2].interval;
-  }
-  
-  // For stage 3+, apply exponential spacing
-  const baseInterval = SRS_STAGES[stage].interval;
-  const multiplier = Math.pow(ease, stage - 2);
-  
-  return baseInterval * multiplier;
-};
-
-/**
- * Calculate next review date
- */
-const calculateNextReview = (interval, stage) => {
-  const now = new Date();
-  
-  if (stage <= 1) {
-    // Hours for learning stage
-    return new Date(now.getTime() + interval * 60 * 60 * 1000);
-  } else {
-    // Days for review stage
-    return new Date(now.getTime() + interval * 24 * 60 * 60 * 1000);
-  }
-};
 
 /**
  * Calculate learning metrics
@@ -483,30 +343,41 @@ const getDueWords = async (userId, session) => {
   
   const now = new Date();
   const dueItems = [];
+  const practiceType = session.settings.practiceType;
 
   for (const item of user.vocabularyMastery) {
-    if (new Date(item.nextReview) <= now) {
-      // Apply additional filtering based on session settings
-      if (session.settings.category && 
-          item.wordId.category !== session.settings.category) {
-        continue;
-      }
-      
-      if (session.settings.difficulty && 
-          item.wordId.difficulty !== session.settings.difficulty) {
-        continue;
-      }
+    if (!item.wordId) continue;
 
-      if (session.settings.language_id && 
-          item.wordId.language_id.toString() !== session.settings.language_id.toString()) {
-        continue;
-      }
-
-      dueItems.push({
-        ...item.toObject(),
-        priority: calculatePriority(item, now),
-      });
+    // Apply practiceType filtering
+    if (practiceType === 'mistakes') {
+      if (!(item.incorrectCount > 0)) continue;
+    } else if (practiceType === 'weak') {
+      if (!(item.easeFactor < 2.0 || item.stage <= 2)) continue;
+    } else {
+      // Standard review: only show due words
+      if (new Date(item.nextReview) > now) continue;
     }
+
+    // Apply additional filtering based on session settings
+    if (session.settings.category && 
+        item.wordId.category !== session.settings.category) {
+      continue;
+    }
+    
+    if (session.settings.difficulty && 
+        item.wordId.difficulty !== session.settings.difficulty) {
+      continue;
+    }
+
+    if (session.settings.language_id && 
+        item.wordId.language_id.toString() !== session.settings.language_id.toString()) {
+      continue;
+    }
+
+    dueItems.push({
+      ...item.toObject(),
+      priority: calculatePriority(item, now),
+    });
   }
 
   // Sort by priority (highest first)
@@ -610,6 +481,7 @@ const createPracticeSession = async (userId, options) => {
       includeNew: options.includeNew !== false,
       category: options.category,
       difficulty: options.difficulty,
+      practiceType: options.practiceType,
       language_id: options.language_id,
       newWordsLimit: NEW_WORDS_PER_SESSION,
     },
@@ -757,55 +629,6 @@ const shuffleArray = (array) => {
 const calculateExpectedTime = (wordId) => {
   // In production, use ML model based on word complexity
   return 5; // Default 5 seconds
-};
-
-/**
- * Optimized Atomic Streak Update for FerretDB/SQLite
- */
-const updateStreak = async (userId) => {
-  const now = new Date();
-  
-  // Create a timestamp for the very beginning of today
-  const startOfToday = new Date(now);
-  startOfToday.setHours(0, 0, 0, 0);
-
-  // Create a timestamp for the very beginning of yesterday
-  const startOfYesterday = new Date(startOfToday);
-  startOfYesterday.setDate(startOfYesterday.getDate() - 1);
-
-  // 1. Increment streak if lastActive was yesterday
-  const continueStreak = await User.updateOne(
-    { 
-      _id: userId, 
-      lastActive: { $gte: startOfYesterday, $lt: startOfToday } 
-    },
-    { 
-      $inc: { "progress.streak": 1 },
-      $set: { lastActive: now }
-    }
-  );
-
-  // 2. If no documents were modified, they either:
-  //    a) Already updated today (do nothing)
-  //    b) Missed a day (reset streak to 1)
-  if (continueStreak.matchedCount === 0) {
-    await User.updateOne(
-      { 
-        _id: userId, 
-        lastActive: { $lt: startOfYesterday } // Only reset if they actually missed yesterday
-      },
-      { 
-        $set: { 
-          "progress.streak": 1,
-          lastActive: now 
-        }
-      }
-    );
-  }
-
-  // Fetch the final number to return to the UI
-  const user = await User.findById(userId).select('progress.streak');
-  return user.progress.streak;
 };
 
 /**

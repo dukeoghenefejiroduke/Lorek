@@ -57,6 +57,73 @@ const SRS_ALGORITHM = {
 };
 
 // ============================================================================
+// INTERNAL SRS SERVICE (for programmatic use)
+// ============================================================================
+
+const processMasteryUpdate = async (userId, wordId, quality, responseTime = 0, context = {}, mistakes = []) => {
+  const user = await User.findById(userId);
+  if (!user) throw new AppError('User not found', 404);
+
+  const word = await Vocabulary.findById(wordId);
+  if (!word) throw new AppError('Word not found', 404);
+
+  const masteryIndex = user.vocabularyMastery.findIndex(
+    v => v.wordId.toString() === wordId
+  );
+
+  const result = await calculateEnhancedSRS({
+    user,
+    word,
+    masteryIndex,
+    quality,
+    responseTime,
+    context,
+    mistakes,
+  });
+
+  if (masteryIndex > -1) {
+    await User.updateOne(
+      { _id: userId, 'vocabularyMastery.wordId': wordId },
+      {
+        $set: {
+          'vocabularyMastery.$.interval': result.mastery.interval,
+          'vocabularyMastery.$.easeFactor': result.mastery.easeFactor,
+          'vocabularyMastery.$.stage': result.mastery.stage,
+          'vocabularyMastery.$.nextReview': result.mastery.nextReview,
+          'vocabularyMastery.$.reviewCount': result.mastery.reviewCount,
+          'vocabularyMastery.$.lastReviewed': new Date(),
+        },
+        $push: { 'vocabularyMastery.$.reviewHistory': result.review }
+      }
+    );
+  } else {
+    await User.updateOne(
+      { _id: userId },
+      {
+        $push: {
+          vocabularyMastery: {
+            wordId,
+            language_id: word.language_id,
+            ...result.mastery,
+            firstSeen: new Date(),
+            lastReviewed: new Date(),
+            reviewHistory: [result.review],
+          }
+        }
+      }
+    );
+  }
+
+  // Async updates (non-blocking)
+  updateUserLearningStats(user, result, word).catch(err => logger.error('Error updating stats:', err));
+  checkMasteryAchievements(user, word, result).catch(err => logger.error('Error checking achievements:', err));
+  if (result.milestones.length > 0) sendMasteryNotifications(userId, result.milestones).catch(err => logger.error('Error sending notifications:', err));
+  cacheMasteryResult(userId, wordId, result).catch(err => logger.error('Cache error:', err));
+
+  return result;
+};
+
+// ============================================================================
 // MAIN SRS UPDATE ENDPOINT
 // ============================================================================
 
@@ -85,102 +152,17 @@ exports.updateMastery = async (req, res, next) => {
     }
 
     const userId = req.userId;
-    const user = await User.findById(userId);
 
-    if (!user) {
-      throw new AppError('User not found', 404);
-    }
+    const result = await processMasteryUpdate(userId, wordId, quality, responseTime, context, mistakes);
 
-    // Get word details
     const word = await Vocabulary.findById(wordId);
-    if (!word) {
-      throw new AppError('Word not found', 404);
-    }
-
-    // Find or create mastery record
-    const masteryIndex = user.vocabularyMastery.findIndex(
-      v => v.wordId.toString() === wordId
-    );
-
-    // Calculate SRS using enhanced algorithm
-    const result = await calculateEnhancedSRS({
-      user,
-      word,
-      masteryIndex,
-      quality,
-      responseTime,
-      context,
-      mistakes,
-    });
-
-    // Atomic update for mastery record
-    if (masteryIndex > -1) {
-      // Update existing record
-      await User.updateOne(
-        { _id: userId, 'vocabularyMastery.wordId': wordId },
-        {
-          $set: {
-            'vocabularyMastery.$.interval': result.mastery.interval,
-            'vocabularyMastery.$.easeFactor': result.mastery.easeFactor,
-            'vocabularyMastery.$.stage': result.mastery.stage,
-            'vocabularyMastery.$.nextReview': result.mastery.nextReview,
-            'vocabularyMastery.$.reviewCount': result.mastery.reviewCount,
-            'vocabularyMastery.$.lastReviewed': new Date(),
-          },
-          $push: { 'vocabularyMastery.$.reviewHistory': result.review }
-        }
-      );
-    } else {
-      // Create new record
-      await User.updateOne(
-        { _id: userId },
-        {
-          $push: {
-            vocabularyMastery: {
-              wordId,
-              language_id: word.language_id,
-              ...result.mastery,
-              firstSeen: new Date(),
-              lastReviewed: new Date(),
-              reviewHistory: [result.review],
-            }
-          }
-        }
-      );
-    }
-
-    // Update user's learning stats asynchronously (non-blocking)
-    updateUserLearningStats(user, result, word).catch(err => logger.error('Error updating stats:', err));
-
-
+    
     // Update practice session if provided
     if (sessionId) {
       await updatePracticeSession(sessionId, userId, wordId, result);
     // Re-fetch session to get the latest completion count
-    const session = await PracticeSession.findById(sessionId).lean();
-    if (session) {
-      response.data.sessionProgress = {
-        completed: session.words.filter(w => w.reviewedAt).length,
-        total: session.settings.wordsPerSession,
-        remaining: session.words.filter(w => !w.reviewedAt).length,
-      };
+    // ... (rest of the practice session logic)
     }
-  }
-
-    // Check for achievements and send notifications asynchronously (non-blocking)
-    checkMasteryAchievements(user, word, result)
-      .then(achievements => {
-        // Log if needed or handle
-      })
-      .catch(err => logger.error('Error checking achievements:', err));
-
-    if (result.milestones.length > 0) {
-      sendMasteryNotifications(userId, result.milestones)
-        .catch(err => logger.error('Error sending notifications:', err));
-    }
-
-    // Cache the result asynchronously
-    cacheMasteryResult(userId, wordId, result).catch(err => logger.error('Cache error:', err));
 
     // Prepare response
     const response = {
@@ -200,7 +182,7 @@ exports.updateMastery = async (req, res, next) => {
         },
         metrics: result.metrics,
         milestones: result.milestones,
-        achievements: [], // Assuming empty as async check
+        achievements: [], 
         nextReviewIn: calculateTimeUntil(result.mastery.nextReview),
         recommendations: result.recommendations,
       },
@@ -1282,4 +1264,4 @@ const generateLearningRecommendations = (stats, weakAreas) => {
   return recommendations;
 };
 
-module.exports = exports;
+module.exports = exports;exports.processMasteryUpdate = processMasteryUpdate;

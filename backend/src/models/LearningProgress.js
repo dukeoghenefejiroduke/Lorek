@@ -15,7 +15,16 @@ const learningProgressSchema = new mongoose.Schema({
      newWordsLearned: Number,
      sessionTime: Number, // minutes
      averageQuality: Number,
+     xpEarned: { type: Number, default: 0 },
   }],
+  
+  xpHistory: {
+    total: { type: Number, default: 0 },
+    daily: { type: Number, default: 0 },
+    weekly: { type: Number, default: 0 },
+    monthly: { type: Number, default: 0 },
+    lastUpdated: { type: Date, default: Date.now },
+  },
   
   weeklyStats: {
     type: Map,
