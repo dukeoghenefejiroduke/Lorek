@@ -15,6 +15,44 @@ const { auth } = require('../middleware/auth');
 // ... (existing code)
 
 /**
+ * Refresh access token
+ * POST /api/auth/refresh-token
+ */
+router.post('/refresh-token', async (req, res, next) => {
+  try {
+    const { refreshToken } = req.body;
+    
+    if (!refreshToken) {
+      throw new AppError('Refresh token required', 400);
+    }
+    
+    const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+    const user = await User.findById(decoded.id).select('+security.refreshToken');
+    
+    if (!user || user.security.refreshToken !== refreshToken) {
+      throw new AppError('Invalid refresh token', 401);
+    }
+    
+    const token = user.generateAuthToken();
+    const newRefreshToken = user.generateRefreshToken();
+    
+    user.security.refreshToken = newRefreshToken;
+    await user.save();
+    
+    res.json({
+      success: true,
+      token,
+      refreshToken: newRefreshToken,
+    });
+  } catch (err) {
+    if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
+      return next(new AppError('Invalid or expired refresh token', 401));
+    }
+    next(err);
+  }
+});
+
+/**
  * Logout user
  * POST /api/auth/logout
  */
@@ -24,6 +62,13 @@ router.post('/logout', auth, async (req, res, next) => {
 
     // Blacklist token in Redis
     await redis.set(`blacklist:${token}`, 'true', 'EX', 3600); // Expires in 1 hour
+
+    // Remove refresh token from user
+    const user = await User.findById(req.userId).select('+security.refreshToken');
+    if (user) {
+        user.security.refreshToken = undefined;
+        await user.save();
+    }
 
     res.json({ success: true, message: 'Logged out successfully' });
   } catch (err) {
@@ -110,7 +155,7 @@ router.post('/register', validateRegistration, async (req, res, next) => {
       username,
       email,
       password,
-      status: 'pending_verification',
+      status: process.env.NODE_ENV === 'development' ? 'active' : 'pending_verification',
       'gamification.level': 1,
       'gamification.experience': 0,
       'gamification.points.total': 0,
@@ -237,6 +282,11 @@ router.post('/login', validateLogin, async (req, res, next) => {
       throw new AppError('Account is temporarily locked. Please try again later.', 403);
     }
 
+    // Check if account is verified
+    if (user.status === 'pending_verification') {
+      throw new AppError('Account not verified. Please check your email.', 403);
+    }
+
     // Reset failed attempts and update last active
     user.security.failedLoginAttempts = 0;
     user.security.lockUntil = undefined;
@@ -246,12 +296,16 @@ router.post('/login', validateLogin, async (req, res, next) => {
 
     // Generate token
     const token = user.generateAuthToken();
+    const refreshToken = user.generateRefreshToken();
+    user.security.refreshToken = refreshToken;
+    await user.save();
 
     res.json({
       success: true,
       data: {
         user: user.toPublicJSON(),
         token,
+        refreshToken,
       },
     });
   } catch (err) {
@@ -284,17 +338,16 @@ router.post('/forgot-password', [
     }
 
     // Generate reset token
-    const resetToken = crypto.randomBytes(32).toString('hex');
-    user.security.resetPasswordToken = crypto
-      .createHash('sha256')
-      .update(resetToken)
-      .digest('hex');
-    
-    user.security.resetPasswordExpire = Date.now() + 60 * 60 * 1000; // 1 hour
+    const resetToken = user.generatePasswordResetToken();
     await user.save();
 
     // Send email
-    const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+    const webUrl = process.env.WEB_URL || 'http://localhost:3000';
+    const resetUrl = `${webUrl}/reset-password.html#token=${resetToken}`;
+    
+    console.log('--- DEVELOPMENT: Reset URL ---');
+    console.log(resetUrl);
+    console.log('------------------------------');
     
     try {
       await emailService.sendEmail({

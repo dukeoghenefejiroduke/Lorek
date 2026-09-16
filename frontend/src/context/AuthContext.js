@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useRef, useCallback } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { save, get, remove, multiGet, multiSet, multiRemove } from '../services/storage';
 import { authAPI, apiUtils, userAPI } from '../services/api';
 import * as Crypto from 'expo-crypto';
 import haptics from '../utils/haptics';
@@ -7,6 +7,7 @@ import { Platform, AppState, Alert } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import * as LocalAuthentication from 'expo-local-authentication';
 import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext();
 
@@ -64,11 +65,11 @@ export const AuthProvider = ({ children }) => {
 
 const refreshUser = async () => {
   try {
-    const response = await userAPI.getProfile(); 
+    const response = await userAPI.getSummary();
     const updatedUser = response.data.data.user || response.data.data;
 
     // Save the fresh data so it persists on reload
-    await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
+    await save('user', updatedUser);
     setUser(updatedUser);
     return updatedUser;
   } catch (error) {
@@ -90,14 +91,11 @@ const refreshUser = async () => {
   // Load security settings from storage
   const loadSecuritySettings = async () => {
     try {
-      const results = await AsyncStorage.multiGet(['loginAttempts', 'lockoutUntil', 'biometricEnabled']);
-      const attempts = results[0][1];
-      const lockout = results[1][1];
-      const biometric = results[2][1];
+      const results = await multiGet(['loginAttempts', 'lockoutUntil', 'biometricEnabled']);
       
-      if (attempts) setLoginAttempts(parseInt(attempts));
-      if (lockout) setLockoutUntil(parseInt(lockout));
-      if (biometric) setBiometricEnabled(biometric === 'true');
+      if (results.loginAttempts) setLoginAttempts(parseInt(results.loginAttempts));
+      if (results.lockoutUntil) setLockoutUntil(parseInt(results.lockoutUntil));
+      if (results.biometricEnabled) setBiometricEnabled(results.biometricEnabled === 'true');
     } catch (error) {
       console.error('Failed to load security settings:', error);
     }
@@ -178,12 +176,12 @@ const refreshUser = async () => {
   const checkAuth = async () => {
     try {
       const keys = ['token', 'refreshToken', 'user', 'sessionExpiry'];
-      const results = await AsyncStorage.multiGet(keys);
+      const results = await multiGet(keys);
       
-      const token = results[0][1];
-      const refreshToken = results[1][1];
-      const userData = results[2][1];
-      const expiry = results[3][1];
+      const token = results.token;
+      const refreshToken = results.refreshToken;
+      const userData = results.user;
+      const expiry = results.sessionExpiry;
       
       if (token && userData && expiry) {
         const parsedExpiry = parseInt(expiry);
@@ -191,7 +189,7 @@ const refreshUser = async () => {
         // Check if session is still valid
         if (Date.now() < parsedExpiry) {
           try {
-            setUser(JSON.parse(userData));
+            setUser(userData);
             setIsAuthenticated(true);
             setSessionExpiry(parsedExpiry);
             
@@ -230,18 +228,17 @@ const refreshUser = async () => {
   };
 
   // Refresh authentication token
-
 const refreshAuthToken = async (manualToken) => {
   try {
     // 1. Get the best available refresh token
-    const refreshToken = manualToken || await AsyncStorage.getItem('refreshToken');
-    
+    const refreshToken = manualToken || await get('refreshToken');
+
     if (!refreshToken) {
       if (isAuthenticated) await logout(); 
       return null;
     }
 
-    // 2. Call the API (Ensure your authAPI.refreshToken sends { refreshToken } in the body)
+    // 2. Call the API
     const response = await authAPI.refreshToken({ refreshToken });
 
     if (response?.data?.success) {
@@ -252,11 +249,12 @@ const refreshAuthToken = async (manualToken) => {
       const newExpiry = Date.now() + (expiresIn * 1000);
 
       // 3. Update Storage
-      await AsyncStorage.multiSet([
+      const itemsToSet = [
         ['token', newToken],
         ['refreshToken', newRefreshToken],
         ['sessionExpiry', newExpiry.toString()]
-      ]);
+      ];
+      await multiSet(itemsToSet);
 
       // 4. Update State
       setUser(prev => ({ ...prev })); // Trigger a shallow re-render if needed
@@ -273,12 +271,10 @@ const refreshAuthToken = async (manualToken) => {
   } catch (error) {
     // 429 means "Wait", not "Log out"
     if (error.status === 429 || error.response?.status === 429) {
-      console.warn("⚠️ Rate limit hit. Keeping session alive for retry.");
       throw error; 
     }
 
     // If it's a 401 or invalid token, the party is over.
-    console.error('🚨 Refresh failed:', error.message);
     await logout();
     return null;
   }
@@ -304,7 +300,7 @@ const refreshAuthToken = async (manualToken) => {
   // Clear all authentication data
   const clearAuthData = async () => {
     try {
-      await AsyncStorage.multiRemove([
+      await multiRemove([
         'token',
         'refreshToken',
         'user',
@@ -324,11 +320,11 @@ const refreshAuthToken = async (manualToken) => {
 
   // Restore session after network reconnection
   const restoreSession = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const userData = await AsyncStorage.getItem('user');
+    const token = await get('token');
+    const userData = await get('user');
     
     if (token && userData && !user) {
-      setUser(JSON.parse(userData));
+      setUser(userData);
       setIsAuthenticated(true);
     }
   };
@@ -348,16 +344,16 @@ const refreshAuthToken = async (manualToken) => {
       // Reset login attempts on successful login
       setLoginAttempts(0);
       setLockoutUntil(null);
-      await AsyncStorage.multiRemove(['loginAttempts', 'lockoutUntil']);
+      await multiRemove(['loginAttempts', 'lockoutUntil']);
     } else {
       const newAttempts = loginAttempts + 1;
       setLoginAttempts(newAttempts);
-      await AsyncStorage.setItem('loginAttempts', newAttempts.toString());
+      await save('loginAttempts', newAttempts.toString());
       
       if (newAttempts >= MAX_LOGIN_ATTEMPTS) {
         const lockoutTime = Date.now() + LOCKOUT_DURATION;
         setLockoutUntil(lockoutTime);
-        await AsyncStorage.setItem('lockoutUntil', lockoutTime.toString());
+        await save('lockoutUntil', lockoutTime.toString());
         
         // Provide haptic feedback for lockout
         haptics.notificationWarning();
@@ -367,12 +363,10 @@ const refreshAuthToken = async (manualToken) => {
 
   // Enhanced login with security features
   const login = async (email, password, rememberMe = true) => {
-    console.log('🔑 AuthContext.login called for:', email);
     
     // Check if account is locked
     const lockStatus = isAccountLocked();
     if (lockStatus.locked) {
-      console.log('🔒 Account locked');
       return { 
         success: false, 
         error: `Too many failed attempts. Please try again in ${lockStatus.remaining} minutes.`,
@@ -381,9 +375,7 @@ const refreshAuthToken = async (manualToken) => {
     }
 
     // Check network status
-    if (__DEV__) console.log('🌐 Network status:', networkStatus);
     if (!networkStatus) {
-      if (__DEV__) console.log('🚫 Offline');
       return { 
         success: false, 
         error: 'No internet connection. Please check your network.',
@@ -392,14 +384,13 @@ const refreshAuthToken = async (manualToken) => {
     }
 
     try {
-      if (__DEV__) console.log('📡 Attempting authAPI.login...');
       const response = await authAPI.login({ email, password });
-      if (__DEV__) console.log('✅ authAPI.login success, full response.data:', JSON.stringify(response.data, null, 2));
       
-      const { user, token, refreshToken } = response.data.data;
-      const expiresIn = 3600; // Default if not provided in data
+      const { user, token, refreshToken, expiresIn } = response.data.data;
       
-      const sessionExpiry = Date.now() + (expiresIn * 1000);
+      // Use the 'expiresIn' from server, fallback to 3600 seconds
+      const secondsToExpiry = expiresIn || 3600; 
+      const sessionExpiry = Date.now() + (secondsToExpiry * 1000);
       
       // Store auth data
       const storageItems = [
@@ -408,25 +399,23 @@ const refreshAuthToken = async (manualToken) => {
 
       if (token) storageItems.push(['token', token]);
       if (refreshToken) storageItems.push(['refreshToken', refreshToken]);
-      if (user) storageItems.push(['user', JSON.stringify(user)]);
+      if (user) storageItems.push(['user', JSON.stringify(user)]); // Stringify to match MultiSet behavior
 
-      await AsyncStorage.multiSet(storageItems);
+      await multiSet(storageItems);
       
       // Ensure removal if missing
-      if (!token) await AsyncStorage.removeItem('token');
-      if (!refreshToken) await AsyncStorage.removeItem('refreshToken');
-      if (!user) await AsyncStorage.removeItem('user');
+      if (!token) await remove('token');
+      if (!refreshToken) await remove('refreshToken');
+      if (!user) await remove('user');
       
       if (rememberMe) {
-        await AsyncStorage.setItem('rememberedEmail', email);
+        await save('rememberedEmail', email);
       } else {
-        await AsyncStorage.removeItem('rememberedEmail');
+        await remove('rememberedEmail');
       }
       
       setUser(user);
-      if (__DEV__) console.log('DEBUG: AuthContext setUser called (login block) with:', user?.username);
       setIsAuthenticated(true);
-      if (__DEV__) console.log('DEBUG: AuthContext isAuthenticated set to true (login block)');
       setSessionExpiry(sessionExpiry);
       
       // Reset login attempts on success
@@ -440,7 +429,6 @@ const refreshAuthToken = async (manualToken) => {
       
       return { success: true, user };
     } catch (error) {
-      console.error('❌ AuthContext.login error:', error);
       // Handle failed login attempt
       await handleLoginAttempt(false);
       
@@ -509,18 +497,17 @@ const refreshAuthToken = async (manualToken) => {
 
       if (token) storageItems.push(['token', token]);
       if (refreshToken) storageItems.push(['refreshToken', refreshToken]);
-      if (user) storageItems.push(['user', JSON.stringify(user)]);
+      if (user) storageItems.push(['user', JSON.stringify(user)]); // Stringify to match MultiSet behavior
 
-      await AsyncStorage.multiSet(storageItems);
+      await multiSet(storageItems);
       
       // Ensure removal if missing
-      if (!token) await AsyncStorage.removeItem('token');
-      if (!refreshToken) await AsyncStorage.removeItem('refreshToken');
-      if (!user) await AsyncStorage.removeItem('user');
+      if (!token) await remove('token');
+      if (!refreshToken) await remove('refreshToken');
+      if (!user) await remove('user');
       
       setUser(user);
       setIsAuthenticated(true);
-      if (__DEV__) console.log('DEBUG: AuthContext isAuthenticated set to true (register block)');
       setSessionExpiry(sessionExpiry);
       
       // Schedule token refresh
@@ -600,9 +587,9 @@ const refreshAuthToken = async (manualToken) => {
   const enableBiometric = async (email, password) => {
     try {
       // Store credentials securely
-      await AsyncStorage.setItem('biometricEmail', email);
+      await save('biometricEmail', email);
       await SecureStore.setItemAsync('biometricPassword', password);
-      await AsyncStorage.setItem('biometricEnabled', 'true');
+      await save('biometricEnabled', 'true');
       
       setBiometricEnabled(true);
       
@@ -615,7 +602,7 @@ const refreshAuthToken = async (manualToken) => {
   // Disable biometric login
   const disableBiometric = async () => {
     try {
-      await AsyncStorage.multiRemove(['biometricEmail', 'biometricPassword', 'biometricEnabled']);
+      await multiRemove(['biometricEmail', 'biometricPassword', 'biometricEnabled']);
       setBiometricEnabled(false);
       
       return { success: true };
@@ -630,7 +617,7 @@ const refreshAuthToken = async (manualToken) => {
       const response = await userAPI.updateProfile(userData);
       const updatedUser = response.data.data.user;
       
-      await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
+      await save('user', updatedUser);
       setUser(updatedUser);
       
       return { success: true, user: updatedUser };
@@ -679,7 +666,7 @@ const refreshAuthToken = async (manualToken) => {
 
   // Get remembered email for login screen
   const getRememberedEmail = async () => {
-    return await AsyncStorage.getItem('rememberedEmail');
+    return await get('rememberedEmail');
   };
 
   // Get session status

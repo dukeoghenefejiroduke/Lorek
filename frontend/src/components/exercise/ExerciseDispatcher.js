@@ -2,20 +2,20 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { useExerciseEngine } from '../../context/ExerciseEngineContext';
 import { useAudioRecorder } from '../../hooks/useAudioRecorder';
+import MultipleChoiceRenderer from './renderers/MultipleChoiceRenderer';
 
-// Placeholder renderers
-const MultipleChoiceRenderer = ({ exercise }) => <Text>Multiple Choice: {exercise.question.english}</Text>;
-const TranslationRenderer = ({ exercise }) => <Text>Translation: {exercise.question.english}</Text>;
-const ListeningRenderer = ({ exercise }) => <Text>Listening: {exercise.question.english}</Text>;
+// Updated placeholders/renderers
+const TranslationRenderer = ({ exercise, onComplete }) => <Text>Translation: {exercise.question.english}</Text>;
+const ListeningRenderer = ({ exercise, onComplete }) => <Text>Listening: {exercise.question.english}</Text>;
 
-const SpeakingRenderer = ({ exercise }) => {
+const SpeakingRenderer = ({ exercise, onComplete }) => {
     const { startRecording, stopRecording, isRecording } = useAudioRecorder();
     
     const handleSpeak = async () => {
         if (isRecording) {
             const uri = await stopRecording();
             console.log('Recording stopped. URI:', uri);
-            // TODO: Integrate speech recognition & comparison here
+            onComplete(true, "Audio recorded"); // Temporary
         } else {
             await startRecording();
         }
@@ -32,14 +32,14 @@ const SpeakingRenderer = ({ exercise }) => {
     );
 };
 
-const FillBlankRenderer = ({ exercise }) => <Text>Fill Blank: {exercise.question.english}</Text>;
-const WordBankRenderer = ({ exercise }) => <Text>Word Bank: {exercise.question.english}</Text>;
-const SelectTranslationRenderer = ({ exercise }) => <Text>Select Translation: {exercise.question.english}</Text>;
-const TypeTranslationRenderer = ({ exercise }) => <Text>Type Translation: {exercise.question.english}</Text>;
-const ImageSelectionRenderer = ({ exercise }) => <Text>Image Selection: {exercise.question.english}</Text>;
-const MatchingRenderer = ({ exercise }) => <Text>Matching: {exercise.question.english}</Text>;
-const SentenceArrangementRenderer = ({ exercise }) => <Text>Reorder: {exercise.question.english}</Text>;
-const PronunciationRenderer = ({ exercise }) => <Text>Pronunciation: {exercise.question.english}</Text>;
+const FillBlankRenderer = ({ exercise, onComplete }) => <Text>Fill Blank: {exercise.question.english}</Text>;
+const WordBankRenderer = ({ exercise, onComplete }) => <Text>Word Bank: {exercise.question.english}</Text>;
+const SelectTranslationRenderer = ({ exercise, onComplete }) => <Text>Select Translation: {exercise.question.english}</Text>;
+const TypeTranslationRenderer = ({ exercise, onComplete }) => <Text>Type Translation: {exercise.question.english}</Text>;
+const ImageSelectionRenderer = ({ exercise, onComplete }) => <Text>Image Selection: {exercise.question.english}</Text>;
+const MatchingRenderer = ({ exercise, onComplete }) => <Text>Matching: {exercise.question.english}</Text>;
+const SentenceArrangementRenderer = ({ exercise, onComplete }) => <Text>Reorder: {exercise.question.english}</Text>;
+const PronunciationRenderer = ({ exercise, onComplete }) => <Text>Pronunciation: {exercise.question.english}</Text>;
 
 const renderers = {
   'multiple-choice': MultipleChoiceRenderer,
@@ -49,7 +49,7 @@ const renderers = {
   'fill-blank': FillBlankRenderer,
   'word-bank': WordBankRenderer,
   'matching': MatchingRenderer,
-  'reorder': SentenceArrangementRenderer, // Map reorder to sentence arrangement
+  'reorder': SentenceArrangementRenderer, 
   'image-selection': ImageSelectionRenderer,
   'select-translation': SelectTranslationRenderer,
   'type-translation': TypeTranslationRenderer,
@@ -57,7 +57,7 @@ const renderers = {
 };
 
 export default function ExerciseDispatcher() {
-  const { currentExercise } = useExerciseEngine();
+  const { currentExercise, submitAnswer } = useExerciseEngine();
 
   if (!currentExercise) return <View><Text>Loading...</Text></View>;
 
@@ -65,5 +65,5 @@ export default function ExerciseDispatcher() {
 
   if (!Renderer) return <View><Text>Unsupported exercise type: {currentExercise.type}</Text></View>;
 
-  return <Renderer exercise={currentExercise} />;
+  return <Renderer exercise={currentExercise} onComplete={submitAnswer} />;
 }

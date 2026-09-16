@@ -26,7 +26,7 @@ router.use(contentLimiter);
 
 
 // GET /api/progress/stats   ← Add this (heavily used in frontend)
-router.get('/stats', auth, async (req, res, next) => {
+router.get('/stats', auth, cacheMiddleware(300, { authenticated: true }), async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
     if (!user) throw new AppError('User not found', 404);
@@ -248,40 +248,33 @@ router.get('/', auth, async (req, res, next) => {
   try {
     const userId = req.user._id;
 
-    // Get user with populated data
-    const user = await User.findById(userId)
-      .populate({
-        path: 'progress.completedLessons.lessonId',
-        select: 'title.english level category difficulty',
-      })
-      .select('username progress gamification vocabularyMastery analytics learningStats');
+    // Get user and progress records in parallel
+    const [user, allProgress] = await Promise.all([
+      User.findById(userId)
+        .populate({
+          path: 'progress.completedLessons.lessonId',
+          select: 'title.english level category difficulty',
+        })
+        .select('username progress gamification vocabularyMastery analytics learningStats'),
+      Progress.find({ user: userId })
+        .populate('lesson', 'title.english level category difficulty estimatedTime')
+        .sort('-lastAttempt')
+    ]);
 
     if (!user) {
       throw new AppError('User not found', 404);
     }
 
-    // Get all progress records
-    const allProgress = await Progress.find({ user: userId })
-      .populate('lesson', 'title.english level category difficulty estimatedTime')
-      .sort('-lastAttempt');
-
-    // Calculate comprehensive statistics
-    const stats = await calculateUserStats(user, allProgress);
-
-    // Get current rank
-    const rank = await getUserRank(userId);
-
-    // Get streak information
-    const streakInfo = await getStreakInfo(user);
-
-    // Get recent activity
-    const recentActivity = await getRecentActivity(userId, allProgress);
-
-    // Get next milestones
-    const nextMilestones = await getNextMilestones(user);
-
-    // Get learning recommendations
-    const recommendations = await getLearningRecommendations(user, allProgress);
+    // Run heavy operations in parallel
+    const [stats, rank, streakInfo, recentActivity, nextMilestones, recommendations, totalLessons] = await Promise.all([
+      calculateUserStats(user, allProgress),
+      getUserRank(userId),
+      getStreakInfo(user),
+      getRecentActivity(userId, allProgress),
+      getNextMilestones(user),
+      getLearningRecommendations(user, allProgress),
+      getTotalLessonsCount()
+    ]);
 
     res.json({
       success: true,
@@ -298,7 +291,7 @@ router.get('/', auth, async (req, res, next) => {
           currentStreak: user.progress?.streak?.current || 0,
           longestStreak: user.progress?.streak?.longest || 0,
           completedLessons: user.progress?.completedLessons?.length || 0,
-          totalLessons: await getTotalLessonsCount(),
+          totalLessons: totalLessons,
           completionRate: stats.completionRate,
           dailyGoal: user.progress?.dailyGoal || 20,
         },
@@ -364,23 +357,26 @@ router.get('/', auth, async (req, res, next) => {
     }
 
     // Now fetch the clean data for the response (Use .lean() for speed)
-    const user = await User.findById(userId).lean();
+    const [user, allProgress] = await Promise.all([
+      User.findById(userId).lean(),
+      Progress.find({ user: userId })
+        .populate('lesson', 'title.english level category difficulty estimatedTime')
+        .sort('-lastAttempt')
+    ]);
     
     if (!user) {
       throw new AppError('User not found', 404);
     }
 
-    const allProgress = await Progress.find({ user: userId })
-      .populate('lesson', 'title.english level category difficulty estimatedTime')
-      .sort('-lastAttempt');
-
-    // Reuse your helper functions
-    const stats = await calculateUserStats(user, allProgress);
-    const rank = await getUserRank(userId);
-    const streakInfo = await getStreakInfo(user);
-    const recentActivity = await getRecentActivity(userId, allProgress);
-    const nextMilestones = await getNextMilestones(user);
-    const recommendations = await getLearningRecommendations(user, allProgress);
+    // Reuse your helper functions in parallel
+    const [stats, rank, streakInfo, recentActivity, nextMilestones, recommendations] = await Promise.all([
+      calculateUserStats(user, allProgress),
+      getUserRank(userId),
+      getStreakInfo(user),
+      getRecentActivity(userId, allProgress),
+      getNextMilestones(user),
+      getLearningRecommendations(user, allProgress)
+    ]);
 
     res.json({
       success: true,

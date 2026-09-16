@@ -1,0 +1,714 @@
+{
+  "meta": {
+    "description": "Phase 1: Structured Izon (Kolokuma) grammar reference, built from academic sources cited within each section. This is a reference/rules dataset, not a sentence corpus.",
+    "sources_summary": [
+      "Williamson, K. (1965) A Grammar of the Kolokuma Dialect of Ijo",
+      "Okunrinmeta, U. (2013) Singular-Plural Distinction in Izon",
+      "Okotori, E.B. (2022) Focus Construction in Kolokuma",
+      "Okotori, E.B. (2022) English Loanword in Kolokuma",
+      "Isoun, S.T. & Egbuson, E. (2025) Sentence Patterns in Izon",
+      "Isoun, S.T. & Egbuson, E. (2022) Cohesion in Izon Texts",
+      "Evulewuru, A.P.M. & Uwasomba, B.U. (2025) Distinctive Study of Izon and Ogbia"
+    ],
+    "honesty_note": "Sections vary in reliability. Tense/aspect and syntax rules are high-confidence (cross-validated against many example sentences). Tone marking is low-confidence throughout due to OCR corruption. See known_gaps in pronouns.json."
+  },
+  "pronouns": {
+    "description": "Izon (Kolokuma) pronoun forms, consolidated from multiple sources. Sources noted per entry since forms vary by dialect/source and tone marks are often unreliable from OCR.",
+    "personal_pronouns_long": {
+      "1sg": {
+        "izon": "ari",
+        "english": "I / me",
+        "source": "Cohesion in Izon Texts (Williamson 1994 cited)"
+      },
+      "2sg": {
+        "izon": "ari",
+        "english": "you (singular)",
+        "source": "Cohesion in Izon Texts (Williamson 1994 cited)"
+      },
+      "3sg_m": {
+        "izon": "eri",
+        "english": "he / him",
+        "source": "Cohesion in Izon Texts (Williamson 1994 cited)"
+      },
+      "3sg_f": {
+        "izon": "arau",
+        "english": "she / her",
+        "source": "Cohesion in Izon Texts (Williamson 1994 cited)"
+      },
+      "1pl": {
+        "izon": "woni",
+        "english": "we / us",
+        "source": "Cohesion in Izon Texts (Williamson 1994 cited)"
+      },
+      "2pl": {
+        "izon": "omini",
+        "english": "you (plural)",
+        "source": "Cohesion in Izon Texts (Williamson 1994 cited)"
+      },
+      "3pl": {
+        "izon": "omini",
+        "english": "they / them",
+        "source": "Cohesion in Izon Texts (Williamson 1994 cited)"
+      }
+    },
+    "personal_pronouns_short": {
+      "1sg": {
+        "izon": "i / wi",
+        "english": "I, me",
+        "note": "short/clitic form",
+        "source": "Cohesion in Izon Texts"
+      },
+      "2sg": {
+        "izon": "i",
+        "english": "you",
+        "note": "short/clitic form",
+        "source": "Cohesion in Izon Texts"
+      },
+      "3sg_m": {
+        "izon": "u",
+        "english": "he, him",
+        "source": "Cohesion in Izon Texts"
+      },
+      "3sg_f": {
+        "izon": "a",
+        "english": "she, her",
+        "source": "Cohesion in Izon Texts"
+      },
+      "3pl": {
+        "izon": "o",
+        "english": "they, them",
+        "source": "Cohesion in Izon Texts"
+      }
+    },
+    "possessive_pronouns": {
+      "1sg": {
+        "determiner": "ine",
+        "standalone": "inei",
+        "english": "my / mine"
+      },
+      "2sg": {
+        "determiner": "ine",
+        "standalone": "inei",
+        "english": "your / yours",
+        "note": "same form as 1sg per source; tone distinguishes in speech"
+      },
+      "1pl": {
+        "determiner": "wo",
+        "standalone": "woi",
+        "english": "our / ours"
+      },
+      "3sg_m": {
+        "determiner": "wo",
+        "standalone": "woi",
+        "english": "his"
+      },
+      "3sg_f": {
+        "determiner": "ara",
+        "standalone": "aria",
+        "english": "her / hers"
+      },
+      "3pl": {
+        "determiner": "oro",
+        "standalone": "orei",
+        "english": "their / theirs"
+      }
+    },
+    "reflexive_pronouns": {
+      "note": "formed by adding 'ozu' (self) to the possessive form, per Okunrinmeta 2013 (Izon/Ogbia paper)",
+      "1sg": {
+        "izon": "eni ozu",
+        "english": "myself"
+      },
+      "2sg": {
+        "izon": "ini ozu",
+        "english": "yourself"
+      },
+      "1pl": {
+        "izon": "woni ozu",
+        "english": "ourselves"
+      },
+      "3sg_m": {
+        "izon": "uni ozu",
+        "english": "himself"
+      },
+      "3sg_f": {
+        "izon": "ani ozu",
+        "english": "herself"
+      },
+      "3pl": {
+        "izon": "oni ozu",
+        "english": "themselves (informal/attested variant)"
+      }
+    },
+    "known_gaps": [
+      "The 1965 grammar book's Appendix II pronoun table has full tone-marked short/long/object/subject forms but OCR extraction corrupted the tone diacritics badly (numbers substituted for tone marks). Not included here to avoid shipping wrong data.",
+      "Tone marks are omitted throughout this file since reliable source data for them was not extractable.",
+      "2sg and 1sg sharing 'ine'/'inei' for possessive is suspicious and may be an OCR/transcription error in the source paper rather than a real fact about the language - flagged for native speaker review."
+    ]
+  },
+  "tense_aspect": {
+    "description": "Izon (Kolokuma) tense-aspect system, per Williamson 1965 grammar. The system has 4 aspects that combine with 3 tenses, plus 1 tense-independent aspect.",
+    "system_overview": {
+      "aspects": [
+        "Simple (S)",
+        "Immediate (I)",
+        "Continuous (C)",
+        "Stative (St)",
+        "Habitual (Hab) - tense-independent"
+      ],
+      "tenses": [
+        "Past (Pa)",
+        "Present (Pr)",
+        "Future (F)"
+      ],
+      "note": "Aspects S, I, C, St each combine with Pa/Pr/F. Habitual does not vary by tense."
+    },
+    "markers": {
+      "SPa": {
+        "name": "Simple Past",
+        "meaning": "a completed action in the past (simple past tense, like English 'walked', 'saw')",
+        "examples": [
+          {
+            "izon_gloss": "an elephant see SPa",
+            "english": "saw an elephant"
+          },
+          {
+            "izon_gloss": "he turn SPa",
+            "english": "he turned"
+          },
+          {
+            "izon_gloss": "she go SPa",
+            "english": "she went"
+          },
+          {
+            "izon_gloss": "he walk SPa",
+            "english": "he walked"
+          },
+          {
+            "izon_gloss": "I come SPa",
+            "english": "I came"
+          }
+        ]
+      },
+      "IPa": {
+        "name": "Immediate Past",
+        "meaning": "an action completed in the recent past, often translated with English present perfect ('has done')",
+        "examples": [
+          {
+            "izon_gloss": "hear IPa",
+            "english": "has heard"
+          },
+          {
+            "izon_gloss": "man T be-lost IPa",
+            "english": "the man has perished"
+          },
+          {
+            "izon_gloss": "man T drown IPa",
+            "english": "the man has drowned"
+          },
+          {
+            "izon_gloss": "he come IPa",
+            "english": "he has come"
+          },
+          {
+            "izon_gloss": "I door shut IPa",
+            "english": "I have shut the door"
+          }
+        ]
+      },
+      "SPr": {
+        "name": "Simple Present",
+        "meaning": "a present tense state or ongoing action",
+        "examples": [
+          {
+            "izon_gloss": "oil T overflowing SPr",
+            "english": "the oil is overflowing"
+          }
+        ]
+      },
+      "StPr": {
+        "name": "Stative Present",
+        "meaning": "a present state resulting from a completed action",
+        "examples": [
+          {
+            "izon_gloss": "stick T bend st StPr",
+            "english": "the stick is bent"
+          }
+        ]
+      },
+      "CPa": {
+        "name": "Continuous Past",
+        "meaning": "an ongoing action in the past ('was doing')",
+        "examples": [
+          {
+            "izon_gloss": "fowl T burn CPa charcoal peck SPa",
+            "english": "the fowl pecked at some burning charcoal"
+          },
+          {
+            "izon_gloss": "he come CPa as we go road on him reach SPa",
+            "english": "as he was coming, we went and met him on the road"
+          }
+        ]
+      },
+      "SF": {
+        "name": "Simple Future",
+        "meaning": "future tense action",
+        "examples": [
+          {
+            "izon_gloss": "he go canoe paddle SF way say man show IPa",
+            "english": "he has gone and told the man to paddle the canoe"
+          },
+          {
+            "izon_gloss": "thing cook SF because she pepper buy SPa",
+            "english": "intending to cook, she bought pepper"
+          }
+        ]
+      },
+      "Hab": {
+        "name": "Habitual",
+        "meaning": "a habitual or generally-true action, tense-independent",
+        "examples": [
+          {
+            "izon_gloss": "night em at lamp Tpl light Hab",
+            "english": "lamps are lighted at night"
+          }
+        ]
+      },
+      "Tpl": {
+        "name": "Plural marker",
+        "meaning": "marks plurality on a noun (not a tense/aspect marker but frequently co-occurs)",
+        "examples": [
+          {
+            "izon_gloss": "this house Tpl all",
+            "english": "all these houses"
+          },
+          {
+            "izon_gloss": "woman pi Tpl and children Tpl and are-there",
+            "english": "the women and children are there"
+          }
+        ]
+      },
+      "T": {
+        "name": "Definite/topic marker",
+        "meaning": "marks a noun as definite or topical (roughly like English 'the')",
+        "examples": [
+          {
+            "izon_gloss": "man T be-lost IPa",
+            "english": "the man has perished"
+          },
+          {
+            "izon_gloss": "canoe T make sink SPa",
+            "english": "he made the canoe sink"
+          }
+        ]
+      }
+    },
+    "source": "Williamson, K. (1965) A Grammar of the Kolokuma Dialect of Ijo. Sentence examples extracted from body text with intact gloss tags.",
+    "confidence_note": "These markers and their meanings are directly stated in the grammar's prose (section 2.1.12) and cross-validated against ~100 example sentences that retained clean gloss tags during extraction. This is reliable structured data, unlike the tone-marked pronoun tables which had OCR corruption."
+  },
+  "noun_morphology": {
+    "description": "Izon noun and pronoun plural formation rules, from Okunrinmeta 2013 (Arogbo-Izon dialect data) and Williamson 1965 grammar (Kolokuma dialect). Dialect noted per rule since these differ slightly.",
+    "pronoun_plurals": {
+      "note": "Source: Okunrinmeta 2013, Arogbo dialect",
+      "pairs": [
+        {
+          "singular": "e (I/me)",
+          "plural": "wo (we/us)"
+        },
+        {
+          "singular": "i (you)",
+          "plural": "o (you-plural)"
+        },
+        {
+          "singular": "u (he/him)",
+          "plural": "oni (they/them)"
+        },
+        {
+          "singular": "a (she/her)",
+          "plural": "oni (they/them)"
+        },
+        {
+          "singular": "ani (it)",
+          "plural": "oni (they/them)"
+        },
+        {
+          "singular": "eni (my)",
+          "plural": "woni (our)"
+        },
+        {
+          "singular": "ini (your)",
+          "plural": "oni (your-plural)"
+        },
+        {
+          "singular": "uni (his)",
+          "plural": "oni (their)"
+        },
+        {
+          "singular": "ani (her)",
+          "plural": "oni (their)"
+        }
+      ]
+    },
+    "noun_plural_marker_a": {
+      "name": "a- plurality prefix",
+      "rule": "The prefix 'a-' attaches to a consonant-initial singular noun when preceded by a numeral qualifier (two through twenty-nine).",
+      "examples": [
+        {
+          "izon": "ma akimi",
+          "english": "two men"
+        },
+        {
+          "izon": "tara awari",
+          "english": "three houses"
+        },
+        {
+          "izon": "nininen azuru",
+          "english": "eight rooms"
+        }
+      ],
+      "exceptions": [
+        "For vowel-initial nouns already starting with 'a', the plurality marker is elided rather than doubled: e.g. 'ma aga' (two behaviours), not 'ma aaga'.",
+        "From thirty (suwei) through thirty-nine, the 'a' marker is dropped entirely and the numeral follows the noun instead: e.g. 'kimi suwei' (thirty men).",
+        "From forty (mesi) upward, 'a' prefixes to the numeral itself, not the noun: e.g. 'kurai amesi' (forty years)."
+      ]
+    },
+    "noun_plural_marker_definite": {
+      "name": "definite article pluralization",
+      "rule": "'ma' following a singular noun indicates definiteness/femininity in some contexts; 'ma' after a plural noun indicates plurality.",
+      "examples": [
+        {
+          "izon": "tobou bei / tobou ma",
+          "english": "the child"
+        },
+        {
+          "izon": "owou ma",
+          "english": "the children"
+        },
+        {
+          "izon": "zei bei",
+          "english": "the husband"
+        },
+        {
+          "izon": "zei oni ma / zei abu ma",
+          "english": "the husbands"
+        }
+      ]
+    },
+    "reflexive_formation": {
+      "rule": "Reflexive pronouns are formed by adding 'ozu' (self) to the POSSESSIVE form of the pronoun (not the object form, unlike English).",
+      "examples": [
+        {
+          "izon": "eni ozu",
+          "english": "my self / myself"
+        },
+        {
+          "izon": "ini ozu",
+          "english": "your self / yourself"
+        },
+        {
+          "izon": "woni ozu",
+          "english": "our self / ourselves"
+        },
+        {
+          "izon": "uni ozu",
+          "english": "his self / himself"
+        },
+        {
+          "izon": "ani ozu",
+          "english": "her self / herself"
+        }
+      ],
+      "note": "This causes a common transfer error for Izon speakers learning English: 'their selfs' instead of 'themselves', since Izon builds reflexives from possessives (their) not object pronouns (them)."
+    },
+    "sentence_word_order": {
+      "rule": "Izon is SOV (Subject-Object-Verb), unlike English's SVO.",
+      "examples": [
+        {
+          "izon": "Ebi diibi pelemi",
+          "gloss": "Ebi net cut",
+          "pattern": "S-O-V",
+          "english": "Ebi cut the net"
+        },
+        {
+          "izon": "Tarila obiri baami",
+          "gloss": "Tarila dog killed",
+          "pattern": "S-O-V",
+          "english": "Tarila killed the dog"
+        }
+      ],
+      "compound_patterns": "Izon uses SOOV, SOVOV, SOCV, SCOV, SOAV, SAOV for sentences with 2+ objects/complements/adverbials, where English uses SVOO, SVOC, SVOA - see sentence_patterns dataset for full examples."
+    }
+  },
+  "phonology": {
+    "description": "Izon (Kolokuma) phonology reference: vowels, consonants, tone, syllable structure. Sources: English Loanword in Kolokuma (Okotori 2022), Izon/Ogbia comparison (Evulewuru & Uwasomba 2025).",
+    "vowels": {
+      "count": 9,
+      "wide": [
+        "a",
+        "e",
+        "i",
+        "o",
+        "u"
+      ],
+      "narrow": [
+        "ẹ",
+        "ị",
+        "ọ",
+        "ụ"
+      ],
+      "vowel_harmony_rule": "Wide and narrow vowels do not co-occur within a single word. The open vowel /a/ is neutral and can occur with either set.",
+      "nasalization_rule": "When two vowels occur in a word before a final /n/, both are nasalized. Examples: bien (to defecate), afian (shit), fain (to be bent), kaịn (torn), gbain (to keep safe)."
+    },
+    "consonants": {
+      "count": 21,
+      "list": [
+        "b",
+        "d",
+        "f",
+        "g",
+        "gb",
+        "gh",
+        "h",
+        "k",
+        "kp",
+        "l",
+        "m",
+        "n",
+        "ng",
+        "p",
+        "r",
+        "s",
+        "t",
+        "v",
+        "w",
+        "y",
+        "z"
+      ],
+      "digraphs": [
+        "gb",
+        "gh",
+        "kp",
+        "ng"
+      ],
+      "trigraph": "ngh (interchangeable with 'ng' in some standardization schemes)",
+      "note": "gb and kp are labio-velar consonants absent from English; they are single sounds, not consonant clusters."
+    },
+    "tone": {
+      "system": "Izon has two tones: high and low.",
+      "marking_convention": "High tone is marked with an acute accent (á). Low tone is left unmarked.",
+      "examples": [
+        {
+          "izon": "aka",
+          "gloss": "teeth, corn",
+          "pattern": "LH"
+        },
+        {
+          "izon": "tibi",
+          "gloss": "head",
+          "pattern": "HH"
+        },
+        {
+          "izon": "odi",
+          "gloss": "name of a village in Kolokuma",
+          "pattern": "LL"
+        },
+        {
+          "izon": "ari",
+          "gloss": "you",
+          "pattern": "HL"
+        }
+      ],
+      "caveat": "Tone marking was frequently lost or corrupted during OCR extraction across our dictionary and grammar sources. Treat tone marks in other extracted files as unreliable unless cross-checked."
+    },
+    "syllable_structure": {
+      "rule": "Onset and coda are optional; nucleus is obligatory. Izon strongly prefers open syllables (ending in a vowel) and does NOT allow consonant clusters or closed syllables (ending in a consonant) in native structure.",
+      "examples": [
+        {
+          "izon": "toru",
+          "gloss": "eye",
+          "structure": "+onset -coda"
+        },
+        {
+          "izon": "beri",
+          "gloss": "ear",
+          "structure": "+onset -coda"
+        },
+        {
+          "izon": "ere",
+          "gloss": "woman",
+          "structure": "-onset -coda"
+        },
+        {
+          "izon": "ababuru",
+          "gloss": "cassava",
+          "structure": "-onset -coda"
+        }
+      ]
+    },
+    "loanword_adaptation_rules": {
+      "description": "How English loanwords are phonologically nativized into Izon (via epenthesis - inserting vowels to break up clusters/codas the language doesn't allow).",
+      "rule_1_coda_epenthesis": "A final consonant (coda) gets a vowel added after it, since Izon doesn't allow closed syllables.",
+      "rule_2_cluster_simplification": "Consonant clusters get vowels inserted between them to break them into separate syllables.",
+      "examples": [
+        {
+          "english": "milk",
+          "izon": "miliki",
+          "process": "coda epenthesis (added -i after k)"
+        },
+        {
+          "english": "slap",
+          "izon": "silapu",
+          "process": "cluster simplification (sl->si-l) + coda epenthesis"
+        },
+        {
+          "english": "school",
+          "izon": "sukulu",
+          "process": "cluster simplification (sch->su-k) + coda epenthesis"
+        },
+        {
+          "english": "gold",
+          "izon": "golu",
+          "process": "cluster simplification + coda epenthesis"
+        },
+        {
+          "english": "basin",
+          "izon": "bezini",
+          "process": "coda epenthesis + voice assimilation (s->z)"
+        },
+        {
+          "english": "government",
+          "izon": "goomenti",
+          "process": "vowel lengthening + simplification"
+        },
+        {
+          "english": "church",
+          "izon": "sosi",
+          "process": "affricate ch approximated to s (Izon lacks /tʃ/)"
+        },
+        {
+          "english": "table",
+          "izon": "tebulu",
+          "process": "coda epenthesis"
+        },
+        {
+          "english": "comb",
+          "izon": "combu",
+          "process": "coda epenthesis"
+        },
+        {
+          "english": "black",
+          "izon": "blaki",
+          "process": "coda epenthesis"
+        }
+      ],
+      "sounds_izon_lacks": [
+        "/θ/ and /ð/ (th sounds, approximated to /t/ and /d/)",
+        "/ʃ/ and /ʒ/ (sh/zh sounds, approximated to /s/)",
+        "/tʃ/ and /dʒ/ (ch/j sounds, approximated to /z/ or /s/)"
+      ]
+    }
+  },
+  "syntax_rules": {
+    "description": "Izon (Kolokuma) syntactic rules: focus marking and sentence patterns. Source: Okotori 2022 (Focus Construction), Isoun & Egbuson 2025 (Sentence Patterns).",
+    "focus_marking": {
+      "description": "Izon marks emphasis/focus using particles placed AFTER the focused constituent (in-situ, not moved to front like English clefts 'It was X that...').",
+      "particles": {
+        "ki": {
+          "used_for": "subject NP, object NP, verb, genitive NP, subject-position pronouns",
+          "example": {
+            "plain": "Tari fun-bi gou-mi (Tari read the book)",
+            "focused": "Tari ki fun-bi gou-mi (It was Tari that read the book)"
+          }
+        },
+        "ko": {
+          "used_for": "object of postposition WHEN the postposition is locative (place)",
+          "example": {
+            "plain": "Tokoni tebulu ogono boo fiyai-bi gbana-mi (Tokoni placed food on the table)",
+            "focused": "Tokoni tebulu ogono ko fiyai-bi gbana-mi (It was ON THE TABLE that Tokoni put the food)"
+          }
+        },
+        "kiri_ki": {
+          "used_for": "object-position pronouns (except 'wo'=us which uses 'ki')",
+          "example": {
+            "plain": "Tari sili ni I piri-mi (Tari gave me money)",
+            "focused": "Sili-bi, Tari I kiri ki piri-mi (It was ME that Tari gave the money)"
+          }
+        }
+      },
+      "verb_focus_special_rule": "The verb is the only constituent that can be FRONTED (moved) in Izon. When a verb is focused, the object moves to clause-initial position, the focused verb moves to pre-verbal position, and a copy of the verb remains at its original site. Example: 'Obori-bi, Idisemi fe ki fe-mi' (It was BUY that she bought the goat, not steal)."
+    },
+    "sentence_patterns": {
+      "description": "Izon has 10 basic sentence patterns for what English expresses in 7, because Izon splits some English SVOO/SVOC/SVOA patterns into two variants depending on element order.",
+      "izon_is_SOV": "Base word order is Subject-Object-Verb, vs English Subject-Verb-Object.",
+      "patterns": [
+        {
+          "izon_pattern": "SOV",
+          "english_pattern": "SVO",
+          "example_izon": "Ebi diibi pelemi",
+          "example_gloss": "Ebi net cut",
+          "example_english": "Ebi cut the net"
+        },
+        {
+          "izon_pattern": "SOOV / SOVOV",
+          "english_pattern": "SVOO",
+          "example_izon": "Wo dau aru u pirimi",
+          "example_gloss": "His father a-car him gave",
+          "example_english": "His father gave him a car"
+        },
+        {
+          "izon_pattern": "SOCV / SCOV",
+          "english_pattern": "SVOC",
+          "example_izon": "Omini Ebi tibiowei miemi",
+          "example_gloss": "They Ebi chairman made",
+          "example_english": "They made Ebi chairman"
+        },
+        {
+          "izon_pattern": "SAV",
+          "english_pattern": "SVA",
+          "example_izon": "Ebi wari boloubi mi",
+          "example_gloss": "Ebi house inside the is",
+          "example_english": "Ebi is in the house"
+        },
+        {
+          "izon_pattern": "SV",
+          "english_pattern": "SV",
+          "example_izon": "Tobou bi banghimi",
+          "example_gloss": "Boy the ran",
+          "example_english": "The boy ran",
+          "note": "Izon determiner (bi='the') follows the noun; English determiner precedes it."
+        },
+        {
+          "izon_pattern": "SOAV / SAOV",
+          "english_pattern": "SVOA",
+          "example_izon": "Ari fun bi tebulu ongono werimi",
+          "example_gloss": "I book the table on left",
+          "example_english": "I left the book on the table"
+        },
+        {
+          "izon_pattern": "SC",
+          "english_pattern": "SVC",
+          "example_izon": "Diepreye inei binaowei",
+          "example_gloss": "Diepreye my brother",
+          "example_english": "Diepreye is my brother",
+          "note": "Izon SC pattern has no overt copula/linking verb, unlike English 'is'."
+        }
+      ]
+    },
+    "determiner_position": {
+      "rule": "The determiner/article follows the noun in Izon (noun-final), unlike English where it precedes (determiner-initial).",
+      "example": {
+        "izon": "tobou bi",
+        "gloss": "boy the",
+        "english": "the boy"
+      }
+    }
+  },
+  "KNOWN_SUFFIXES" : [
+    {"suffix": "yemi", "marker": "SPr/CPa (present or continuous marker)", "confidence": "medium"},
+    {"suffix": "mi", "marker": "SPa (simple past)", "confidence": "high"},
+    {"suffix": "doy", "marker": "IPa (immediate past)", "confidence": "medium"},
+    {"suffix": "dou", "marker": "IPa (immediate past)", "confidence": "medium"},
+    {"suffix": "nghimi", "marker": "future/habitual-related morpheme", "confidence": "low"},
+    {"suffix": "ghi", "marker": "IPa (immediate past) variant", "confidence": "low"}
+  ]
+}

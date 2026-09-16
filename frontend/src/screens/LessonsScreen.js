@@ -21,7 +21,7 @@ import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import haptics from '../utils/haptics';
 import { BlurView } from 'expo-blur';
 import { lessonAPI } from '../services/api';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// Removed unused AsyncStorage import
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import ScreenHeader from '../components/ScreenHeader';
@@ -31,7 +31,8 @@ import LoadingOverlay from '../components/LoadingOverlay';
 
 const { width } = Dimensions.get('window');
 
-const LessonsScreen = ({ navigation }) => {
+const LessonsScreen = ({ navigation, route }) => {
+  const { unitId } = route.params || {};
   const { activeLanguage } = useContext(LanguageContext);
   const [lessons, setLessons] = useState([]);
   const [filter, setFilter] = useState('all');
@@ -110,21 +111,27 @@ const interpolatedRotate = rotateAnim.interpolate({
 
   useEffect(() => {
     fetchLessons();
-  }, [activeLanguage]);
-
+  }, [activeLanguage, unitId]);
 const fetchLessons = async () => {
   try {
     setLoading(true);
-     const response = await lessonAPI.getAll({  lang: activeLanguage?.code || 'IZON'
-     });
-    
-    // CHANGE THIS LINE: access .data.data
-    const data = response.data?.data || []; 
-    
+    console.log('DEBUG: Fetching lessons for unitId:', unitId);
+    const response = await lessonAPI.getAll({  
+      unitId: unitId,
+      lang: activeLanguage?.code || 'IZON',
+      includeProgress: 'true'
+    });
+
+    const data = response.data?.data || [];
+    console.log('DEBUG: Lessons fetched:', data.length, 'lessons.');
+    // Optionally log titles to confirm grouping
+    // console.log('DEBUG: Lessons:', data.map(l => l.title.english));
+
     setLessons(data);
-    
+
     // Calculate stats using the correct 'data' variable
     const total = data.length;
+//...
     const completed = data.filter(l => l.userProgress?.completed).length;
     const inProgress = data.filter(l => l.userProgress && !l.userProgress.completed).length;
     
@@ -149,6 +156,10 @@ const fetchLessons = async () => {
   };
 
   const startLesson = (lesson) => {
+    if (lesson.isUnlocked === false) {
+      Alert.alert('Lesson Locked', 'Please complete the previous lessons first to unlock this content.');
+      return;
+    }
     setModalVisible(false);
     navigation.navigate('LessonDetail', { lessonId: lesson._id });
   };
@@ -178,7 +189,8 @@ const fetchLessons = async () => {
   );
 
   const renderLessonCard = ({ item, index }) => {
-    const levelColors = getLevelColor(item.level);
+    const isLocked = item.isUnlocked === false;
+    const levelColors = isLocked ? ['#9E9E9E', '#757575'] : getLevelColor(item.level);
     const progress = item.progress || 0;
     const animationDelay = index * 100;
 
@@ -210,8 +222,17 @@ const fetchLessons = async () => {
           >
             {/* Level Badge */}
             <View style={styles.levelBadge}>
-              <Text style={styles.levelIcon}>{getLevelIcon(item.level)}</Text>
-              <Text style={styles.levelText}>{item.level}</Text>
+              {isLocked ? (
+                <>
+                  <MaterialIcons name="lock" size={14} color="#fff" />
+                  <Text style={styles.levelText}>Locked</Text>
+                </>
+              ) : (
+                <>
+                  <Text style={styles.levelIcon}>{getLevelIcon(item.level)}</Text>
+                  <Text style={styles.levelText}>{item.level}</Text>
+                </>
+              )}
             </View>
 
             {/* Lesson Content */}
@@ -248,9 +269,9 @@ const fetchLessons = async () => {
               {/* Start Button */}
               <View style={styles.startButtonContainer}>
                 <Text style={styles.startButtonText}>
-                  {progress > 0 ? 'Continue' : 'Start Lesson'}
+                  {isLocked ? 'Locked' : (progress > 0 ? 'Continue' : 'Start Lesson')}
                 </Text>
-                <MaterialIcons name="arrow-forward" size={16} color="#fff" />
+                <MaterialIcons name={isLocked ? "lock" : "arrow-forward"} size={16} color="#fff" />
               </View>
             </View>
 

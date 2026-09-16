@@ -13,6 +13,7 @@ const CACHE_CLEANUP_THRESHOLD = 0.8; // 80% of max size
 
 // Storage types for different purposes
 export const StorageTypes = {
+  DEFAULT: 'default',
   USER_DATA: 'user_data',
   SETTINGS: 'settings',
   VOCABULARY: 'vocabulary',
@@ -55,8 +56,8 @@ class StorageService {
   }
 
   // Generate consistent storage key with prefix
-  _getKey(key, type = StorageTypes.DEFAULT) {
-    return `${STORAGE_PREFIX}${type}:${key}`;
+  _getKey(key) {
+    return `${STORAGE_PREFIX}${key}`;
   }
 
   // Encrypt data (if encryption enabled)
@@ -106,7 +107,6 @@ class StorageService {
   // Enhanced save method with compression, encryption, and queueing
   async save(key, value, options = {}) {
     const {
-      type = StorageTypes.DEFAULT,
       encrypt = false,
       compress = false,
       ttl = null, // Time to live in milliseconds
@@ -114,7 +114,7 @@ class StorageService {
       skipCache = false,
     } = options;
 
-    const storageKey = this._getKey(key, type);
+    const storageKey = this._getKey(key);
     
     try {
       // Prepare metadata
@@ -123,7 +123,6 @@ class StorageService {
         updatedAt: Date.now(),
         ttl,
         version: '1.0',
-        type,
         encrypted: encrypt,
         compressed: compress,
       };
@@ -232,13 +231,12 @@ class StorageService {
   // Enhanced get method with caching, TTL, and error handling
   async get(key, options = {}) {
     const {
-      type = StorageTypes.DEFAULT,
       defaultValue = null,
       skipCache = false,
       refresh = false, // Force refresh from storage
     } = options;
 
-    const storageKey = this._getKey(key, type);
+    const storageKey = this._getKey(key);
     
     try {
       this.stats.reads++;
@@ -280,7 +278,7 @@ class StorageService {
         const age = Date.now() - storageObject.metadata.updatedAt;
         if (age > storageObject.metadata.ttl) {
           // Data expired, remove it
-          await this.remove(key, { type });
+          await this.remove(key);
           return defaultValue;
         }
       }
@@ -316,11 +314,10 @@ class StorageService {
   }
 
   // Multi-get for batch operations
-  async multiGet(keys, options = {}) {
-    const { type = StorageTypes.DEFAULT } = options;
+  async multiGet(keys) {
     
     try {
-      const storageKeys = keys.map(key => this._getKey(key, type));
+      const storageKeys = keys.map(key => this._getKey(key));
       const results = await AsyncStorage.multiGet(storageKeys);
       
       const parsed = {};
@@ -342,17 +339,14 @@ class StorageService {
   }
 
   // Multi-set for batch operations
-  async multiSet(keyValuePairs, options = {}) {
-    const { type = StorageTypes.DEFAULT } = options;
-    
+  async multiSet(keyValuePairs) {
     try {
       const pairs = keyValuePairs.map(([key, value]) => {
-        const storageKey = this._getKey(key, type);
+        const storageKey = this._getKey(key);
         const storageObject = {
           metadata: {
             createdAt: Date.now(),
             updatedAt: Date.now(),
-            type,
           },
           data: value,
         };
@@ -372,14 +366,14 @@ class StorageService {
 
   // Enhanced remove method
   async remove(key, options = {}) {
-    const { type = StorageTypes.DEFAULT, pattern = false } = options;
+    const { pattern = false } = options;
     
     try {
       if (pattern) {
         // Remove all keys matching pattern
         const allKeys = await AsyncStorage.getAllKeys();
         const matchingKeys = allKeys.filter(k => 
-          k.startsWith(this._getKey(key, type))
+          k.startsWith(this._getKey(key))
         );
         
         await AsyncStorage.multiRemove(matchingKeys);
@@ -387,7 +381,7 @@ class StorageService {
         // Clear from cache
         matchingKeys.forEach(k => this.cache.delete(k));
       } else {
-        const storageKey = this._getKey(key, type);
+        const storageKey = this._getKey(key);
         await AsyncStorage.removeItem(storageKey);
         this.cache.delete(storageKey);
       }
@@ -395,6 +389,22 @@ class StorageService {
       return { success: true };
     } catch (error) {
       console.error('Error removing from storage:', error);
+      return { success: false, error: error.message };
+    }
+  }
+
+  // Remove multiple keys
+  async multiRemove(keys) {
+    try {
+      const storageKeys = keys.map(key => this._getKey(key));
+      await AsyncStorage.multiRemove(storageKeys);
+      
+      // Clear from cache
+      storageKeys.forEach(k => this.cache.delete(k));
+      
+      return { success: true };
+    } catch (error) {
+      console.error('Error in multiRemove:', error);
       return { success: false, error: error.message };
     }
   }
@@ -634,13 +644,13 @@ class StorageService {
   async migrate(fromVersion, toVersion) {
     try {
       const versionKey = `${STORAGE_PREFIX}system:version`;
-      const currentVersion = await this.get('version', { type: 'system' }, '1.0');
+      const currentVersion = await this.get('version', { defaultValue: '1.0' });
       
       if (currentVersion === fromVersion) {
         // Perform migration logic here
         
         // Update version
-        await this.save('version', toVersion, { type: 'system' });
+        await this.save('version', toVersion);
       }
       
       return { success: true };
@@ -726,6 +736,7 @@ export const storage = new StorageService();
 export const save = storage.save.bind(storage);
 export const get = storage.get.bind(storage);
 export const remove = storage.remove.bind(storage);
+export const multiRemove = storage.multiRemove.bind(storage);
 export const clear = storage.clear.bind(storage);
 export const multiGet = storage.multiGet.bind(storage);
 export const multiSet = storage.multiSet.bind(storage);

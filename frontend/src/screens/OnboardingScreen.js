@@ -4,7 +4,7 @@ import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Animated, FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { save } from '../services/storage';
 import { LanguageContext } from '../context/LanguageContext';
 
 const { width } = Dimensions.get('window');
@@ -54,7 +54,7 @@ export default function OnboardingScreen({ navigation }) {
   }).current;
 
   const completeOnboarding = useCallback(async () => {
-    await AsyncStorage.setItem('hasCompletedOnboarding', 'true');
+    await save('hasCompletedOnboarding', 'true');
     navigation.replace('Main');
   }, [navigation]);
 

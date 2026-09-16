@@ -1,0 +1,23 @@
+[
+  {
+    "input": "iséna kimi nine men isein! (",
+    "expected": "isenghi",
+    "actual": "agbalalaa iséna isé abuldku isein (",
+    "type": "grammar_builder_enforced",
+    "confidence": "medium"
+  },
+  {
+    "input": "Naa karagha (It) is not yet complete; Naa pinagha (It) is not yet ripe. naa} (",
+    "expected": "nana) (short for ni aki): Aki naa u piri Give it to him.",
+    "actual": "kirimu kara (it) is not ikén abadabida pinagha bia naa} (",
+    "type": "grammar_builder_enforced",
+    "confidence": "medium"
+  },
+  {
+    "input": "Ogb6éroé saa aki naa, bou gbein ki bou bara finiyémeé Giving ceremonial food to the spirits of the forest opens your way with the forest (",
+    "expected": "Kindness begets kindness).",
+    "actual": "duwei ogb6éroé aru kirimu abaa bidé beri ababu finiyémeé gbaun daani abélebei to the ama of baabou uwou gbari abaligte with (",
+    "type": "grammar_builder_enforced",
+    "confidence": "medium"
+  }
+]

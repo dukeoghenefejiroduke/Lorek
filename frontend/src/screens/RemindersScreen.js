@@ -13,7 +13,7 @@ import {
   Platform,
   Alert,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { get, save } from '../services/storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import haptics from "../utils/haptics";
@@ -55,9 +55,9 @@ export default function RemindersScreen({ navigation }) {
 
   const loadSettings = async () => {
     try {
-      const local = await AsyncStorage.getItem(STORAGE_KEY);
+      const local = await get(STORAGE_KEY);
       if (local) {
-        setSettings({ ...DEFAULT_SETTINGS, ...JSON.parse(local) });
+        setSettings({ ...DEFAULT_SETTINGS, ...local });
       }
 
       const response = await notificationAPI.getSettings();
@@ -90,7 +90,7 @@ export default function RemindersScreen({ navigation }) {
   const saveSettings = async () => {
     setSaving(true);
     try {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+      await save(STORAGE_KEY, settings);
       await notificationAPI.updateSettings({
         channels: { push: settings.enabled, inApp: true },
         types: {
@@ -102,7 +102,7 @@ export default function RemindersScreen({ navigation }) {
       haptics.notificationSuccess();
       Alert.alert('Reminders saved', `Learning nudges are set for ${settings.time}.`);
     } catch (error) {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+      await save(STORAGE_KEY, settings);
       Alert.alert('Saved locally', 'Reminder settings will sync when the server is reachable.');
     } finally {
       setSaving(false);

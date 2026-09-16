@@ -8,6 +8,7 @@ const { body, validationResult } = require('express-validator');
 const { intensiveLimiter } = require('../middleware/rateLimit');
 
 const { auth } = require('../middleware/auth');
+const { cacheMiddleware } = require('../middleware/cache');
 const User = require('../models/User');
 const Progress = require('../models/Progress');
 const Achievement = require('../models/Achievement');
@@ -68,14 +69,34 @@ const validateProfileUpdate = [
   body('location').optional().trim().isLength({ max: 100 }).withMessage('Location must be less than 100 characters'),
 ];
 
-// ============================================================================
-// GET USER PROFILE
-// ============================================================================
-
 /**
- * Get current user profile with full details
- * GET /api/user/profile
+ * Get current user summary (lightweight)
+ * GET /api/user/me
  */
+router.get('/me', auth, cacheMiddleware(60, { authenticated: true }), async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id)
+      .select('username email profile role');
+
+    if (!user) {
+      throw new AppError('User not found', 404);
+    }
+
+    res.json({
+      success: true,
+      data: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        displayName: user.profile?.displayName,
+        avatar: user.profile?.avatar?.thumbnail,
+        role: user.role,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+});
 router.get('/profile', auth, async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id)

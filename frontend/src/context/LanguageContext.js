@@ -1,71 +1,49 @@
 import React, { createContext, useState, useEffect, useMemo } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { get, save } from '../services/storage';
+import api from '../services/api'; // Correct default import
 
 export const LanguageContext = createContext();
 
-export const DEFAULT_LANGUAGE = {
-  code: 'IZON',
-  name: 'Izon',
-  dialect: 'Kolokuma'
-};
-
-const normalizeLanguage = (language) => {
-  if (!language) return DEFAULT_LANGUAGE;
-
-  if (typeof language === 'string') {
-    try {
-      const parsed = JSON.parse(language);
-      return normalizeLanguage(parsed);
-    } catch {
-      return { ...DEFAULT_LANGUAGE, code: language.toUpperCase() };
-    }
-  }
-
-  return {
-    ...DEFAULT_LANGUAGE,
-    ...language,
-    code: (language.code || DEFAULT_LANGUAGE.code).toUpperCase(),
-  };
-};
-
 export const LanguageProvider = ({ children }) => {
-  const [activeLanguage, setActiveLanguage] = useState(DEFAULT_LANGUAGE);
+  const [activeLanguage, setActiveLanguage] = useState(null); // Initially null
+  const [supportedLanguages, setSupportedLanguages] = useState([]);
   const [loadingLanguage, setLoadingLanguage] = useState(true);
 
   useEffect(() => {
-    loadLanguage();
+    fetchSupportedLanguages();
   }, []);
 
-  const loadLanguage = async () => {
+  const fetchSupportedLanguages = async () => {
     try {
-      const savedLanguage = await AsyncStorage.getItem('userLanguage');
-      if (savedLanguage) {
-        setActiveLanguage(normalizeLanguage(savedLanguage));
-      }
+      const response = await api.get('/languages');
+      const languages = response.data.data;
+      setSupportedLanguages(languages);
+      
+      // Load user preference
+      const savedCode = await get('userLanguageCode');
+      const preferred = languages.find(l => l.code === savedCode) || languages.find(l => l.code === 'IZON');
+      setActiveLanguage(preferred || languages[0]);
     } catch (e) {
-      console.error('Failed to load language');
+      console.error('Failed to load supported languages', e);
     } finally {
       setLoadingLanguage(false);
     }
   };
 
-  const changeLanguage = async (lang) => {
-    try {
-      const normalizedLanguage = normalizeLanguage(lang);
-      await AsyncStorage.setItem('userLanguage', JSON.stringify(normalizedLanguage));
-      setActiveLanguage(normalizedLanguage);
-      return normalizedLanguage;
-    } catch (e) {
-      console.error('Failed to save language');
-      throw e;
+  const changeLanguage = async (code) => {
+    const lang = supportedLanguages.find(l => l.code === code);
+    if (lang) {
+      await save('userLanguageCode', code);
+      setActiveLanguage(lang);
     }
   };
 
   const value = useMemo(() => ({
     activeLanguage,
+    supportedLanguages,
     changeLanguage,
     loadingLanguage
-  }), [activeLanguage, loadingLanguage]);
+  }), [activeLanguage, supportedLanguages, loadingLanguage]);
 
   return (
     <LanguageContext.Provider value={value}>

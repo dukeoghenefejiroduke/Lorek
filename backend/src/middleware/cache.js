@@ -1,19 +1,23 @@
 const redis = require('../config/redis');
 const { logger } = require('../config/logger');
 
-const cacheMiddleware = (duration = 300) => {
+const cacheMiddleware = (duration = 300, options = { authenticated: false }) => {
   return async (req, res, next) => {
     // Skip cache for non-GET requests or if Redis is not connected
     if (req.method !== 'GET' || !redis.isConnected) {
       return next();
     }
 
-    // Skip cache if user is authenticated (for personalized data)
-    if (req.user) {
+    // If endpoint is not configured to cache authenticated routes, skip if user is logged in
+    if (!options.authenticated && req.user) {
       return next();
     }
 
-    const key = `cache:${req.originalUrl}`;
+    // Build key: include user ID if authenticated
+    let key = `cache:${req.originalUrl}`;
+    if (options.authenticated && req.user) {
+      key = `cache:user:${req.user._id}:${req.originalUrl}`;
+    }
 
     try {
       const cachedResponse = await redis.get(key);

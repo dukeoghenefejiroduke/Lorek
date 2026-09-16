@@ -72,7 +72,7 @@ const HomeScreen = () => {
   ], [activeLanguage?.name]);
 
   const features = useMemo(() => [
-    { title: 'Lessons', icon: '📚', screen: 'Lessons', gradient: ['#4CAF50', '#2E7D32'], description: 'Structured learning path' },
+    { title: 'Lessons', icon: '📚', screen: 'Course', gradient: ['#4CAF50', '#2E7D32'], description: 'Structured learning path' },
     { title: 'Vocabulary', icon: '📖', screen: 'Vocabulary', gradient: ['#2196F3', '#1565C0'], description: 'Build your word bank' },
     { title: 'Practice', icon: '✍️', screen: 'Practice', gradient: ['#FF9800', '#F57C00'], description: 'Speak & listen exercises' },
     { title: 'Culture', icon: '🏛️', screen: 'Culture', gradient: ['#9C27B0', '#6A1B9A'], description: `Learn ${activeLanguage?.name || 'Izon'} traditions` },

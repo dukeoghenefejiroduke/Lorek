@@ -12,17 +12,22 @@ class RagService {
       const response = await axios.post(
         this.huggingFaceApiUrl,
         { inputs: text },
-        { headers: { Authorization: `Bearer ${process.env.HF_API_KEY}` } }
+        { 
+          headers: { Authorization: `Bearer ${process.env.HF_API_KEY}` },
+          timeout: 2000 // 2 second timeout
+        }
       );
       return response.data;
     } catch (error) {
-      console.error("Error embedding text:", error);
-      throw error;
+      console.warn("⚠️ RAG embedding failed (falling back):", error.message);
+      return null;
     }
   }
 
   async searchContext(query, category) {
     const queryVector = await this.embedText(query);
+    if (!queryVector) return []; // Skip vector search if embedding fails
+    
     const results = await KnowledgeBase.aggregate([
       {
         $vectorSearch: {

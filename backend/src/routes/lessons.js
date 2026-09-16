@@ -3,20 +3,22 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const { body, validationResult, param } = require('express-validator');
 const cache = require('memory-cache');
-
 const Lesson = require('../models/Lesson');
 const Language = require('../models/Language');
 const Progress = require('../models/Progress');
 const User = require('../models/User');
+const Unit = require('../models/Unit');
 const LearningAnalytics = require('../models/LearningAnalytics');
 const { auth } = require('../middleware/auth');
+// ... rest of imports
+
 const { authorize } = require('../middleware/authorize');
 const { logger } = require('../config/logger');
 const { cacheMiddleware, clearCache } = require('../middleware/cache');
 const { AppError, ValidationError } = require('../middleware/errorHandler');
 const { deductHealth } = require('../services/healthService');
 const srsController = require('../controllers/srsController');
-const { addXP, calculatePointsEarned, calculateExpEarned } = require('../services/xpService');
+const { addXP, addExperience, calculatePointsEarned, calculateExpEarned } = require('../services/xpService');
 const notificationService = require('../services/notificationService');
 const redis = require('../config/redis');
 const { contentLimiter } = require('../middleware/rateLimit');
@@ -79,6 +81,7 @@ router.get('/', auth, cacheMiddleware(300), async (req, res, next) => {
       status,
       search,
       lang,
+      unitId,
       page = 1,
       limit = 10,
       sortBy = 'order',
@@ -94,6 +97,17 @@ router.get('/', auth, cacheMiddleware(300), async (req, res, next) => {
       query.status = status;
     } else {
       query.status = 'published';
+    }
+
+    // Filter by Unit if unitId provided
+    if (unitId) {
+      const unit = await Unit.findById(unitId);
+      if (unit) {
+        query._id = { $in: unit.lessons };
+      } else {
+        // If unit doesn't exist, return empty
+        return res.json({ success: true, data: [] });
+      }
     }
 
     // Filter by Language if lang provided
@@ -126,7 +140,7 @@ router.get('/', auth, cacheMiddleware(300), async (req, res, next) => {
     // Execute query
     const [lessons, total] = await Promise.all([
       Lesson.find(query)
-        .select('title.english title.izon description.english level category order estimatedTime rewards.badges difficulty')
+        .select('title.english title.izon description.english level category order estimatedTime rewards.badges difficulty prerequisites')
         .sort(sort)
         .skip(skip)
         .limit(parseInt(limit)),
@@ -136,16 +150,31 @@ router.get('/', auth, cacheMiddleware(300), async (req, res, next) => {
     // Enhance with user progress if authenticated and requested
     let enhancedLessons = lessons;
     if (includeProgress === 'true' && req.userId) {
+      const lessonIds = lessons.map(l => l._id);
+      
+      // Fetch all progress for these lessons at once
+      const progresses = await Progress.find({
+        user: req.userId,
+        lesson: { $in: lessonIds },
+      }).select('lesson completed score attempts lastAttempt');
+
+      const progressMap = new Map(progresses.map(p => [p.lesson.toString(), p]));
+
+      // Note: Prerequisites check is still per-lesson but would require further 
+      // complex refactoring to bulk. Progress lookup is now optimized.
       enhancedLessons = await Promise.all(
         lessons.map(async (lesson) => {
-          const progress = await Progress.findOne({
-            user: req.userId,
-            lesson: lesson._id,
-          }).select('completed score attempts lastAttempt');
+          const progress = progressMap.get(lesson._id.toString());
+          const prerequisiteCheck = await lesson.checkPrerequisites(req.userId);
 
           return {
             ...lesson.toObject(),
-            userProgress: progress || {
+            isUnlocked: prerequisiteCheck.met,
+            userProgress: progress ? {
+              completed: progress.completed,
+              score: progress.score,
+              attempts: progress.attempts,
+            } : {
               completed: false,
               score: 0,
               attempts: 0,
@@ -156,6 +185,7 @@ router.get('/', auth, cacheMiddleware(300), async (req, res, next) => {
     } else {
       enhancedLessons = lessons.map(lesson => ({
         ...lesson.toObject(),
+        isUnlocked: true, // Default to true if not logged in or progress not requested
         userProgress: null,
       }));
     }

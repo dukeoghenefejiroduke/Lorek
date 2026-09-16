@@ -1113,7 +1113,10 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
  * Generate JWT token
  */
 userSchema.methods.generateAuthToken = function() {
-  return jwt.sign(
+  const currentTime = Math.floor(Date.now() / 1000);
+  console.log('DEBUG: Signing token at:', currentTime);
+  
+  const token = jwt.sign(
     {
       id: this._id,
       username: this.username,
@@ -1123,6 +1126,10 @@ userSchema.methods.generateAuthToken = function() {
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
   );
+  
+  const decoded = jwt.decode(token);
+  console.log('DEBUG: Token iat:', decoded.iat, 'exp:', decoded.exp);
+  return token;
 };
 
 /**
@@ -1146,6 +1153,7 @@ userSchema.methods.generateEmailVerificationToken = function() {
     .update(token)
     .digest('hex');
   this.security.emailVerificationExpires = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+  this.markModified('security');
   return token;
 };
 
@@ -1159,6 +1167,7 @@ userSchema.methods.generatePasswordResetToken = function() {
     .update(token)
     .digest('hex');
   this.security.resetPasswordExpires = Date.now() + 60 * 60 * 1000; // 1 hour
+  this.markModified('security');
   return token;
 };
 
@@ -1612,5 +1621,10 @@ userSchema.statics.getStats = async function() {
     topCountries,
   };
 };
+
+userSchema.index({ 'progress.totalPoints': -1 });
+userSchema.index({ 'progress.streak.current': -1 });
+userSchema.index({ 'gamification.experience': -1 });
+userSchema.index({ 'security.emailVerificationExpires': 1 }, { expireAfterSeconds: 0 });
 
 module.exports = mongoose.model('User', userSchema);

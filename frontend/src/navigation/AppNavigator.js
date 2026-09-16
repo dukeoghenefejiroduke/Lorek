@@ -16,7 +16,7 @@ import {
   } from 'react-native';
   import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BlurView } from 'expo-blur';
@@ -33,6 +33,9 @@ import { notificationAPI } from '../services/api';
 
 import { streakService } from '../services/streakService';
 
+import CourseScreen from '../screens/CourseScreen';
+import UnitScreen from '../screens/UnitScreen';
+import ReviewScreen from '../screens/ReviewScreen';
 import PronunciationScreen from '../screens/PronunciationScreen';
 import PremiumScreen from '../screens/PremiumScreen';
 // ── Existing screens ────────────────────────────────────────────────
@@ -59,6 +62,7 @@ import OnboardingScreen    from '../screens/OnboardingScreen';
 
 import ApiKeyScreen      from '../screens/ApiKeyScreen';
 import LessonDetailScreen from '../screens/LessonDetailScreen';
+import ResultScreen from '../screens/ResultScreen';
 
 import CultureScreen from '../screens/CultureScreen';
 import CommunityScreen from '../screens/CommunityScreen';
@@ -104,7 +108,7 @@ function MainApp({ navigation }) {
       category: 'Learning',
       items: [
         { name: 'Home', icon: 'home', screen: HomeScreen, color: '#4CAF50', gradient: ['#4CAF50', '#2E7D32'] },
-        { name: 'Lessons', icon: 'book', screen: LessonsScreen, color: '#2196F3', gradient: ['#2196F3', '#1565C0'] },
+        { name: 'Lessons', icon: 'book', screen: CourseScreen, color: '#2196F3', gradient: ['#2196F3', '#1565C0'] },
         { name: 'Vocabulary', icon: 'list', screen: VocabularyScreen, color: '#FF9800', gradient: ['#FF9800', '#F57C00'] },
         { name: 'Practice', icon: 'pencil', screen: PracticeScreen, color: '#9C27B0', gradient: ['#9C27B0', '#6A1B9A'] },
       ]
@@ -202,7 +206,9 @@ function MainApp({ navigation }) {
       const response = await notificationAPI.getAll({ limit: 50 });
       setUnreadCount(response.data.unreadCount || 0);
     } catch (error) {
-      console.error('Failed to load unread count:', error);
+      if (error.type !== 'NETWORK_ERROR') {
+        console.error('Failed to load unread count:', error);
+      }
     }
   };
 
@@ -444,7 +450,7 @@ function MainApp({ navigation }) {
             colors={['#4CAF50', '#2E7D32']}
             style={styles.quickActionGradient}
           >
-            <MaterialIcons name="flash" size={20} color="#fff" />
+            <MaterialCommunityIcons name="lightning-bolt" size={20} color="#fff" />
           </LinearGradient>
           <Text style={[styles.quickActionText, { color: theme.subText }]}>Quick Practice</Text>
         </TouchableOpacity>
@@ -1007,6 +1013,9 @@ export default function AppNavigator() {
         animation: 'slide_from_right',
       }}>
 
+        <Stack.Screen name="Course" component={CourseScreen} />
+        <Stack.Screen name="UnitScreen" component={UnitScreen} />
+        <Stack.Screen name="Review" component={ReviewScreen} />
         <Stack.Screen name="EditProfile"   component={EditProfileScreen} />
         <Stack.Screen name="Notifications" component={NotificationsScreen} />
         <Stack.Screen name="DailyGoal"     component={DailyGoalScreen} />
@@ -1021,6 +1030,7 @@ export default function AppNavigator() {
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="ApiKey" component={ApiKeyScreen} />
        <Stack.Screen name="LessonDetail" component={LessonDetailScreen} options={{ headerShown: false }} />
+       <Stack.Screen name="Result" component={ResultScreen} options={{ headerShown: false }} />
        
        <Stack.Screen name="Culture" component={CultureScreen} options={{ headerShown: false }} />
        <Stack.Screen name="Community" component={CommunityScreen} options={{ headerShown: false }} />

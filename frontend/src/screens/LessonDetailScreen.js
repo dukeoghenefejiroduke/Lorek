@@ -13,6 +13,11 @@ import { LanguageContext } from '../context/LanguageContext';
 import { HealthContext } from '../context/HealthContext';
 import { useExerciseEngine } from '../context/ExerciseEngineContext';
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+import MultipleChoice from '../components/exercises/MultipleChoice';
+import Translation from '../components/exercises/Translation';
+import FillBlank from '../components/exercises/FillBlank';
+import Matching from '../components/exercises/Matching';
+import Reorder from '../components/exercises/Reorder';
 
 
 const { width } = Dimensions.get('window');
@@ -24,12 +29,10 @@ const LessonDetailScreen = ({ route, navigation }) => {
 
   const [lesson, setLesson] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [timeSpent, setTimeSpent] = useState(0);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState({});
   const userAnswersRef = useRef({});
-  const [showSummary, setShowSummary] = useState(false);
-  const [score, setScore] = useState(0);
-  const [timeSpent, setTimeSpent] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [translationInput, setTranslationInput] = useState('');
   const [fillBlankAnswer, setFillBlankAnswer] = useState('');
@@ -71,10 +74,29 @@ const LessonDetailScreen = ({ route, navigation }) => {
     try {
       setLoading(true);
       const response = await lessonAPI.getById(lessonId);
-      setLesson(response.data.data || response.data);
+      if (response && response.data) {
+        setLesson(response.data.data || response.data);
+        
+        // Trigger entrance animations once lesson loads
+        Animated.parallel([
+          Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 600,
+            useNativeDriver: true,
+          }),
+          Animated.spring(slideAnim, {
+            toValue: 0,
+            friction: 8,
+            useNativeDriver: true,
+          })
+        ]).start();
+      } else {
+        throw new Error('Invalid response format');
+      }
     } catch (error) {
-      Alert.alert('Error', 'Failed to load lesson.');
-      navigation.goBack();
+      console.error('Failed to load lesson:', error);
+      Alert.alert('Error', 'Failed to load lesson. Please check your connection or try again later.');
+      // Do not navigate back automatically, allow user to retry or see the error
     } finally {
       setLoading(false);
     }
@@ -96,7 +118,7 @@ const LessonDetailScreen = ({ route, navigation }) => {
   };
 
 const completeLesson = async () => {
-  const currentAnswers = userAnswersRef.current; // Get the latest data from Ref
+  const currentAnswers = userAnswersRef.current; 
   
   const totalExercises = lesson.exercises.length;
   
@@ -111,9 +133,6 @@ const completeLesson = async () => {
   const totalCorrect = answersArray.filter(a => a.correct).length;
   const calculatedScore = Math.round((totalCorrect / totalExercises) * 100);
 
-  // Set score early so the UI feels fast
-  setScore(calculatedScore);
-
   const payload = {
     score: calculatedScore,
     timeSpent: timeSpent,
@@ -123,29 +142,25 @@ const completeLesson = async () => {
   };
 
   try {
-    // 1. Submit completion
     const response = await lessonAPI.complete(lessonId, payload);
+    const resultData = response.data.data;
     
-    // 2. Use the data RETURNED from the POST (Optimization!)
-    // Your backend returns: data.statistics.streak
-    const newStreak = response.data?.data?.statistics?.streak; 
-    
-    if (newStreak !== undefined && newStreak > 0) {
-       haptics.notificationSuccess();
-    }
-
-    // 3. Finally show summary
-    setShowSummary(true);
+    // Navigate to Result Screen
+    navigation.navigate('Result', {
+        score: calculatedScore,
+        rewards: resultData.rewards,
+        statistics: resultData.statistics,
+        feedback: resultData.feedback
+    });
     
   } catch (error) {
     const errorMsg = error.response?.data?.error || error.message;
     console.error('Lesson completion failed:', errorMsg);
     
-    // Even if saving failed, show the summary so the user isn't stuck
     Alert.alert(
       'Progress Not Saved', 
       `Your score was ${calculatedScore}%, but we couldn't sync it. ${errorMsg}`,
-      [{ text: 'OK', onPress: () => setShowSummary(true) }]
+      [{ text: 'OK', onPress: () => navigation.navigate('Lessons') }]
     );
   }
 };
@@ -195,24 +210,36 @@ const handleMultipleChoice = (optionId) => {
     return (
       <KeyboardAvoidingWrapper style={styles.content}>
         <Animated.View style={[styles.exerciseWrapper, { opacity: fadeAnim, transform: [{ translateY: slideAnim }] }]}>
-          {content?.grammar?.map((item, i) => (
+          
+          {content?.grammar?.length > 0 && content.grammar.map((item, i) => (
             <View key={i} style={[styles.contentCard, { backgroundColor: theme.card }]}>
               <View style={styles.cardHeader}><Ionicons name="book" size={20} color="#4CAF50" /><Text style={styles.cardTitle}>{item.title.english}</Text></View>
               <Text style={styles.cardText}>{item.explanation.english}</Text>
             </View>
           ))}
-          <View style={[styles.contentCard, { backgroundColor: theme.card }]}>
-            <View style={styles.cardHeader}><MaterialIcons name="translate" size={20} color="#2196F3" /><Text style={styles.cardTitle}>Sentence Examples</Text></View>
-            {content?.examples?.map((ex, i) => (
-              <View key={i} style={styles.exampleRow}><Text style={styles.izonText}>{ex.izon}</Text><Text style={[styles.englishText, { color: theme.subText }]}>{ex.english}</Text></View>
-            ))}
-          </View>
-          {content?.culturalNotes?.map((note, i) => (
+
+          {content?.examples?.length > 0 && (
+            <View style={[styles.contentCard, { backgroundColor: theme.card }]}>
+              <View style={styles.cardHeader}><MaterialIcons name="translate" size={20} color="#2196F3" /><Text style={styles.cardTitle}>Sentence Examples</Text></View>
+              {content.examples.map((ex, i) => (
+                <View key={i} style={styles.exampleRow}><Text style={styles.izonText}>{ex.izon}</Text><Text style={[styles.englishText, { color: theme.subText }]}>{ex.english}</Text></View>
+              ))}
+            </View>
+          )}
+
+          {content?.culturalNotes?.length > 0 && content.culturalNotes.map((note, i) => (
             <View key={i} style={[styles.contentCard, styles.cultureCard, { backgroundColor: theme.card }]}>
               <View style={styles.cardHeader}><FontAwesome5 name="landmark" size={18} color="#FF9800" /><Text style={styles.cardTitle}>{note.title.english}</Text></View>
               <Text style={styles.cultureText}>{note.content.english}</Text>
             </View>
           ))}
+
+          {(!content?.grammar?.length && !content?.examples?.length && !content?.culturalNotes?.length) && (
+              <View style={[styles.contentCard, { backgroundColor: theme.card }]}>
+                  <Text style={styles.cardText}>No specific learning content available for this lesson.</Text>
+              </View>
+          )}
+
           <TouchableOpacity style={styles.startQuizButton} onPress={() => setIsLearningMode(false)}>
             <Text style={styles.startQuizText}>Ready to Practice? Start Quiz</Text>
             <MaterialIcons name="arrow-forward" size={20} color="#fff" />
@@ -221,37 +248,134 @@ const handleMultipleChoice = (optionId) => {
       </KeyboardAvoidingWrapper>
     );
   };
-
-  const handleTranslation = () => {
-    if (!translationInput.trim()) return Alert.alert('Error', 'Please enter your translation');
-
+  const handleTranslationInternal = (input) => {
     const exercise = lesson.exercises[currentExerciseIndex];
-    // Simple check: matching lowercase strings
-    const isCorrect = translationInput.trim().toLowerCase() === exercise.correctAnswer?.toLowerCase();
+    
+    // Normalize and clean answers to handle white space and punctuation differences
+    const cleanInput = input.trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
+    const cleanCorrect = (exercise.correctAnswer?.english || exercise.correctAnswer?.izon || "")
+      .trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
+    
+    const isCorrect = cleanInput === cleanCorrect;
 
     setUserAnswers(prev => ({
       ...prev,
-      [currentExerciseIndex]: { answer: translationInput.trim(), correct: isCorrect },
+      [currentExerciseIndex]: { answer: input, correct: isCorrect },
     }));
 
     if (isCorrect) {
       haptics.notificationSuccess();
-      Alert.alert('Correct! 🎉', 'Excellent!', [{ text: 'Continue', onPress: nextExercise }]);
+      Alert.alert('Correct! 🎉', 'Well done!', [{ text: 'Continue', onPress: nextExercise }]);
     } else {
       haptics.notificationError();
-      Alert.alert('Incorrect ❌', `Correct: ${exercise.correctAnswer}`, [{ text: 'Continue', onPress: nextExercise }]);
+      Alert.alert('Incorrect ❌', `Correct: ${exercise.correctAnswer?.english || exercise.correctAnswer?.izon}`, [{ text: 'Continue', onPress: nextExercise }]);
     }
   };
 
-  const handleFillBlank = () => {
-    if (!fillBlankAnswer.trim()) return Alert.alert('Error', 'Please fill in the blank');
+  const renderExercise = () => {
+    const exercise = lesson?.exercises?.[currentExerciseIndex];
+    if (!exercise) return null;
 
+    switch (exercise.type) {
+      case 'multiple-choice':
+        return (
+          <MultipleChoice
+            exercise={exercise}
+            onSelect={handleMultipleChoice}
+            selectedOption={selectedOption}
+            disabled={!!selectedOption}
+          />
+        );
+
+      case 'translation':
+        return (
+          <Translation
+            exercise={exercise}
+            onSubmit={handleTranslationInternal}
+            disabled={false}
+          />
+        );
+
+      case 'fill-blank':
+        return (
+          <FillBlank
+            exercise={exercise}
+            onSubmit={handleFillBlankInternal}
+            disabled={false}
+          />
+        );
+
+      case 'matching':
+        return (
+          <Matching
+            exercise={exercise}
+            onSubmit={handleMatchingInternal}
+            disabled={false}
+          />
+        );
+
+      case 'reorder':
+        return (
+          <Reorder
+            exercise={exercise}
+            onSubmit={handleReorderInternal}
+            disabled={false}
+          />
+        );
+
+      default:
+        return <Text style={styles.cardText}>Unsupported exercise type: {exercise.type}</Text>;
+    }
+  };
+
+  const handleReorderInternal = (orderedWords) => {
     const exercise = lesson.exercises[currentExerciseIndex];
-    const isCorrect = fillBlankAnswer.trim().toLowerCase() === exercise.correctAnswer?.toLowerCase();
+    const isCorrect = JSON.stringify(orderedWords) === JSON.stringify(exercise.correctOrder);
 
     setUserAnswers(prev => ({
       ...prev,
-      [currentExerciseIndex]: { answer: fillBlankAnswer.trim(), correct: isCorrect },
+      [currentExerciseIndex]: { answer: orderedWords, correct: isCorrect },
+    }));
+
+    if (isCorrect) {
+      haptics.notificationSuccess();
+      Alert.alert('Correct! 🎉', 'Perfect order!', [{ text: 'Continue', onPress: nextExercise }]);
+    } else {
+      haptics.notificationError();
+      Alert.alert('Incorrect ❌', `Correct order: ${exercise.correctOrder.join(' ')}`, [{ text: 'Continue', onPress: nextExercise }]);
+    }
+  };
+
+  const handleMatchingInternal = (matches) => {
+    const exercise = lesson.exercises[currentExerciseIndex];
+    let correctCount = 0;
+    exercise.matchingPairs.forEach(pair => {
+        if (matches[pair.left.id] === pair.right.id) correctCount++;
+    });
+    const isCorrect = correctCount === exercise.matchingPairs.length;
+
+    setUserAnswers(prev => ({
+      ...prev,
+      [currentExerciseIndex]: { answer: matches, correct: isCorrect },
+    }));
+
+    if (isCorrect) {
+      haptics.notificationSuccess();
+      Alert.alert('Correct! 🎉', 'Perfect match!', [{ text: 'Continue', onPress: nextExercise }]);
+    } else {
+      haptics.notificationError();
+      Alert.alert('Incorrect ❌', 'Some pairs were not matched correctly.', [{ text: 'Continue', onPress: nextExercise }]);
+    }
+  };
+
+  const handleFillBlankInternal = (input) => {
+    setFillBlankAnswer(input);
+    const exercise = lesson.exercises[currentExerciseIndex];
+    const isCorrect = input.trim().toLowerCase() === exercise.correctAnswer?.toLowerCase();
+
+    setUserAnswers(prev => ({
+      ...prev,
+      [currentExerciseIndex]: { answer: input.trim(), correct: isCorrect },
     }));
 
     if (isCorrect) {
@@ -262,92 +386,16 @@ const handleMultipleChoice = (optionId) => {
       Alert.alert('Incorrect ❌', `Correct: ${exercise.correctAnswer}`, [{ text: 'Continue', onPress: nextExercise }]);
     }
   };
-  
-   const renderExercise = () => {
-    const exercise = lesson?.exercises?.[currentExerciseIndex];
-    if (!exercise) return null;
-
-    switch (exercise.type) {
-      case 'multiple-choice':
-        return (
-          <View style={styles.exerciseContainer}>
-            <Text style={styles.questionText}>{exercise.question?.izon || exercise.question?.english}</Text>
-            <View style={styles.optionsContainer}>
-              {exercise.options?.map((opt, idx) => (
-                <TouchableOpacity 
-                  key={idx} 
-                  style={[styles.optionButton, { backgroundColor: theme.card }, String(selectedOption) === String(opt.id || idx) && styles.selectedOption]} 
-                  onPress={() => handleMultipleChoice(opt.id ?? idx)}
-                  disabled={!!selectedOption}
-                >
-                  <Text style={styles.optionText}>{opt.izon || opt.english}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </View>
-        );
-
-      case 'translation':
-        return (
-          <View style={styles.exerciseContainer}>
-            <Text style={styles.questionText}>Translate this to {exercise.direction === 'en→izon' ? activeLanguage.name : 'English'}:</Text>
-            <Text style={styles.translationPrompt}>{exercise.prompt}</Text>
-            <TextInput
-              style={styles.translationInput}
-              placeholder="Type your answer here..."
-              value={translationInput}
-              onChangeText={setTranslationInput}
-              multiline
-            />
-            <TouchableOpacity style={styles.submitButton} onPress={handleTranslation}>
-              <Text style={styles.submitButtonText}>Submit Answer</Text>
-            </TouchableOpacity>
-          </View>
-        );
-
-      case 'fill-blank':
-        return (
-          <View style={styles.exerciseContainer}>
-            <Text style={styles.questionText}>Complete the sentence:</Text>
-            <Text style={styles.fillBlankSentence}>
-              {exercise.sentence?.split('_____').map((part, idx, arr) => (
-                <React.Fragment key={idx}>
-                  {part}
-                  {idx < arr.length - 1 && (
-                    <TextInput
-                      style={styles.fillBlankInput}
-                      placeholder="..."
-                      value={fillBlankAnswer}
-                      onChangeText={setFillBlankAnswer}
-                      autoFocus
-                    />
-                  )}
-                </React.Fragment>
-              ))}
-            </Text>
-            <TouchableOpacity style={styles.submitButton} onPress={handleFillBlank}>
-              <Text style={styles.submitButtonText}>Check Answer</Text>
-            </TouchableOpacity>
-          </View>
-        );
-
-      default:
-        return <Text style={styles.cardText}>Unsupported exercise type: {exercise.type}</Text>;
-    }
-  };
 
   if (loading) return <View style={styles.loadingContainer}><ActivityIndicator size="large" color="#4CAF50" /></View>;
 
-  if (showSummary) {
+  if (!lesson) {
     return (
-      <View style={[styles.container, { backgroundColor: theme.background }]}>
-        <LinearGradient colors={['#1a4c2e', '#43a047']} style={styles.summaryContainer}>
-          <Text style={styles.summaryTitle}>Lesson Completed!</Text>
-          <Text style={styles.summaryScore}>Score: {score}%</Text>
-          <TouchableOpacity style={[styles.retryButton, { backgroundColor: theme.card }]} onPress={() => navigation.navigate('Lessons')}>
-            <Text style={styles.retryButtonText}>Finish</Text>
-          </TouchableOpacity>
-        </LinearGradient>
+      <View style={styles.loadingContainer}>
+        <Text>No lesson content is available yet.</Text>
+        <TouchableOpacity onPress={fetchLesson} style={{ marginTop: 20, padding: 10, backgroundColor: '#4CAF50', borderRadius: 5 }}>
+          <Text style={{ color: '#fff' }}>Retry</Text>
+        </TouchableOpacity>
       </View>
     );
   }

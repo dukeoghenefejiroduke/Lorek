@@ -1,9 +1,10 @@
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { get, save, multiSet, multiRemove, remove } from './storage';
 import NetInfo from '@react-native-community/netinfo';
 import * as Crypto from 'expo-crypto';
 import haptics from '../utils/haptics';
 import { Platform, Alert } from 'react-native'; // Standard import
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Environment configuration with fallbacks
 const ENV = {
@@ -67,7 +68,9 @@ const extractLanguageCode = (value) => {
   return (value.code || value.language || DEFAULT_LANGUAGE_CODE).toUpperCase();
 };
 
-// Create axios instance with advanced configuration
+// Request deduplication
+// const pendingRequests = new Map(); // Removed redundant
+
 const api = axios.create({
   baseURL: API_URL,
   timeout: config.TIMEOUT,
@@ -81,6 +84,40 @@ const api = axios.create({
   maxRedirects: 5,
   validateStatus: (status) => status >= 200 && status < 300,
 });
+
+api.interceptors.request.use(async (config) => {
+    // Unique key for the request
+    const requestKey = `${config.method}:${config.url}:${JSON.stringify(config.params)}`;
+    
+    if (pendingRequests.has(requestKey)) {
+        // Return existing promise
+        return Promise.reject({ deduplicated: true, promise: pendingRequests.get(requestKey) });
+    }
+    
+    // Create promise
+    const promise = new Promise((resolve) => resolve(config));
+    pendingRequests.set(requestKey, promise);
+    
+    return config;
+});
+
+api.interceptors.response.use(
+    (response) => {
+        // Remove from pending
+        const requestKey = `${response.config.method}:${response.config.url}:${JSON.stringify(response.config.params)}`;
+        pendingRequests.delete(requestKey);
+        
+        return response;
+    },
+    (error) => {
+        // Remove from pending
+        if (error.config) {
+            const requestKey = `${error.config.method}:${error.config.url}:${JSON.stringify(error.config.params)}`;
+            pendingRequests.delete(requestKey);
+        }
+        return Promise.reject(error);
+    }
+);
 
 import { addToSyncQueue, processSyncQueue } from './syncService';
 
@@ -114,16 +151,18 @@ NetInfo.addEventListener(state => {
 // Interceptor to queue mutations when offline
 // --- INTERCEPTORS ---
 
+// ...
+
 api.interceptors.request.use(
   async (config) => {
     // 1. Auth Headers
     if (!config.url.includes('/auth/')) {
-        const token = await AsyncStorage.getItem('token');
+        const token = await get('token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
     }
-
+// ...
     // 2. Offline Mode Handling
     if (!isOnline && (config.method !== 'get')) {
         await addToSyncQueue(config.method, config.url, config.data);
@@ -267,7 +306,9 @@ const handleUnauthorized = async (error) => {
     return Promise.reject(error);
   }
 
-  if (originalRequest._retry) return Promise.reject(error);
+  if (originalRequest._retry) {
+    return Promise.reject(error);
+  }
 
   if (isRefreshing) {
     return new Promise((resolve, reject) => {
@@ -282,7 +323,7 @@ const handleUnauthorized = async (error) => {
   isRefreshing = true;
   
   try {
-    const refreshToken = await AsyncStorage.getItem('refreshToken');
+    const refreshToken = await get('refreshToken');
     
     // CHANGE: If no refresh token exists, just reject silently so the app 
     // can redirect to login without showing a confusing "Token Error" alert.
@@ -294,7 +335,7 @@ const handleUnauthorized = async (error) => {
     const response = await api.post('/auth/refresh-token', { refreshToken });
     const { token: newToken, refreshToken: newRefreshToken } = response.data;
 
-    await AsyncStorage.multiSet([
+    await multiSet([
       ['token', newToken],
       ['refreshToken', newRefreshToken]
     ]);
@@ -306,7 +347,7 @@ const handleUnauthorized = async (error) => {
     processQueue(refreshError, null);
     // Only wipe and alert if it was a genuine authentication failure
     if (refreshError.response?.status !== 429) {
-        await AsyncStorage.multiRemove(['token', 'refreshToken', 'user']);
+        await multiRemove(['token', 'refreshToken', 'user']);
     }
     return Promise.reject(refreshError);
   } finally {
@@ -371,10 +412,10 @@ export const authAPI = {
     const response = await api.post('/auth/register', data);   
     const { token, refreshToken, user } = response.data;
     if (token) {
-      await AsyncStorage.multiSet([
+      await multiSet([
         ['token', token],
         ['refreshToken', refreshToken],
-        ['user', JSON.stringify(user)]
+        ['user', user]
       ]);
       // FORCED UPDATE: Manually attach token to the instance for the next immediate call
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -387,10 +428,10 @@ export const authAPI = {
     const response = await api.post('/auth/login', data);
     const { token, refreshToken, user } = response.data;
     if (token) {
-      await AsyncStorage.multiSet([
+      await multiSet([
         ['token', response.data.token],
         ['refreshToken', refreshToken],
-        ['user', JSON.stringify(user)]
+        ['user', user]
       ]);
       // FORCED UPDATE: Manually attach token to the instance for the next immediate call
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -402,10 +443,10 @@ export const authAPI = {
     const response = await api.post('/auth/google', data);
     const { token, refreshToken, user } = response.data;
     if (token) {
-      await AsyncStorage.multiSet([
+      await multiSet([
         ['token', token],
         ['refreshToken', refreshToken],
-        ['user', JSON.stringify(user)]
+        ['user', user]
       ]);
       // FORCED UPDATE: Manually attach token to the instance for the next immediate call
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -415,14 +456,14 @@ export const authAPI = {
   
 logout: async () => {
   try {
-    const token = await AsyncStorage.getItem('token');
+    const token = await get('token');
     if (token) {
       await api.post('/auth/logout');
     }
   } catch (error) {
     console.warn('Logout API error:', error);
   } finally {
-    await AsyncStorage.multiRemove(['token', 'refreshToken', 'user', 'sessionExpiry']); // Added sessionExpiry
+    await multiRemove(['token', 'refreshToken', 'user', 'sessionExpiry']); // Added sessionExpiry
     delete api.defaults.headers.common['Authorization'];
     cache.clear();
   }
@@ -544,7 +585,11 @@ export const leaderboardAPI = {
 export const lessonAPI = {
   // User Methods
   // Change the default params or pass them when calling
-  getAll: (params = { includeProgress: 'true' }) => api.get('/lessons', { params }),
+  getAll: (params = { includeProgress: 'true' }) => 
+    api.get('/lessons', { 
+      params, 
+      headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Expires': '0' } 
+    }),
   getById: (id) => api.get(`/lessons/${id}`),
   complete: (id, data) => api.post(`/lessons/${id}/complete`, data),
   getProgress: (id) => api.get(`/lessons/${id}/progress`),
@@ -670,7 +715,6 @@ export const adminAPI = {  // Dashboard
   deleteUser: (id) => api.delete(`/admin/users/${id}`),
   
   // Content
-  importContentPack: (data) => api.post('/admin/content/import-pack', data),
   createCourse: (data) => api.post('/admin/content/courses', data),
   createSection: (data) => api.post('/admin/content/sections', data),
   createUnit: (data) => api.post('/admin/content/units', data),
@@ -698,6 +742,7 @@ export const adminAPI = {  // Dashboard
 };
 
 export const userAPI = {
+  getSummary: () => api.get('/user/me'),
   getProfile: () => api.get('/user/profile'),
   updateProfile: (data) => api.put('/user/profile', data),
   uploadAvatar: (formData) => api.post('/user/avatar', formData, {
@@ -833,9 +878,9 @@ export const languagesAPI = {
     const activeLanguage = response.data?.data?.activeLanguage;
 
     if (activeLanguage) {
-      await AsyncStorage.setItem('userLanguage', JSON.stringify(activeLanguage));
+      await save('userLanguage', activeLanguage);
     } else {
-      await AsyncStorage.setItem('userLanguage', JSON.stringify({ code: extractLanguageCode(languageCode) }));
+      await save('userLanguage', { code: extractLanguageCode(languageCode) });
     }
 
     apiUtils.clearCache();
@@ -848,9 +893,9 @@ export const languagesAPI = {
     const response = await api.put('/user/language', { language });
     
     // 2. Save Locally so the interceptor uses it for the next call
-    await AsyncStorage.setItem(
+    await save(
       'userLanguage',
-      typeof language === 'string' ? JSON.stringify({ code: extractLanguageCode(language) }) : JSON.stringify(language)
+      typeof language === 'string' ? { code: extractLanguageCode(language) } : language
     );
     
     // 3. Clear cache since data is language-specific

@@ -14,6 +14,7 @@ const { validateApiKey } = require('../middleware/apiKey');
 const { logger } = require('../config/logger');
 const { cacheMiddleware } = require('../middleware/cache');
 const redis = require('../config/redis');
+const TranslationEngineFactory = require('../translation/TranslationEngineFactory');
 
 // ============================================================================
 // RATE LIMITING
@@ -63,73 +64,6 @@ const PRONUNCIATION_GUIDE = {
   }
 };
 
-// Helper function to generate IPA pronunciation
-function generateIPA(word) {
-  const ipaMap = {
-    "a": "ä", "ẹ": "ɛ", "e": "e", "i": "i", "ị": "ɪ", 
-    "o": "o", "ọ": "ɔ", "u": "u", "ụ": "ʊ",
-    "gb": "ɡ͡b", "kp": "k͡p", "ny": "ɲ", "gh": "ɣ",
-    "b": "b", "d": "d", "f": "f", "g": "ɡ", "h": "h",
-    "j": "d͡ʒ", "k": "k", "l": "l", "m": "m", "n": "n",
-    "p": "p", "r": "ɾ", "s": "s", "t": "t", "v": "v",
-    "w": "w", "y": "j", "z": "z"
-  };
-  
-  let ipa = word.toLowerCase();
-  
-  // Handle multi-character sounds first
-  for (const [sound, ipaSound] of Object.entries(ipaMap)) {
-    if (sound.length > 1) {
-      const regex = new RegExp(sound, 'gu');
-      ipa = ipa.replace(regex, ipaSound);
-    }
-  }
-  
-  // Handle single characters
-  for (const [sound, ipaSound] of Object.entries(ipaMap)) {
-    if (sound.length === 1) {
-      const regex = new RegExp(sound, 'g');
-      ipa = ipa.replace(regex, ipaSound);
-    }
-  }
-  
-  return `/${ipa}/`;
-}
-
-// Helper to generate syllable breakdown
-
-function generateSyllables(word) {
-  if (!word) return [];
-  
-  // Normalize and clean punctuation
-  const cleanWord = word.normalize('NFC').replace(/[.,!?;:]/g, ''); 
-  // Ensure this is inside generateSyllables
-   const vowels = new Set(['a', 'e', 'ẹ', 'i', 'ị', 'o', 'ọ', 'u', 'ụ', 'ɩ']);
-
-  return cleanWord.split(' ').flatMap(w => {
-    const wordSyllables = [];
-    let currentSyllable = '';
-    const chars = Array.from(w);
-    
-    for (let i = 0; i < chars.length; i++) {
-      const char = chars[i];
-      currentSyllable += char;
-      
-      // Lookahead check for combining marks/dots
-      const nextChar = chars[i + 1];
-      const isCombiningMark = nextChar && nextChar.match(/[\u0300-\u036f\u0323]/);
-      
-      if (vowels.has(char.toLowerCase()) && !isCombiningMark) {
-        wordSyllables.push(currentSyllable);
-        currentSyllable = '';
-      }
-    }
-    
-    if (currentSyllable) wordSyllables.push(currentSyllable);
-    return wordSyllables.filter(s => s.trim() !== '');
-  });
-}
-
 // Helper to safely escape regex special characters
 function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -140,67 +74,6 @@ let geminiClient = null;
 if (process.env.GEMINI_API_KEY) {
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
   geminiClient = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-}
-
-// Add this near your other helper functions
-async function translateWithGroq(original, dictMap, hint) {
-  const systemPrompt = `You are a translator for Kolokuma Izon.
-  DICTIONARY: ${dictMap}
-  
-  RULES:
-  1. Use ONLY the Izon words provided in the DICTIONARY.
-  2. If a word is "mother->ọmọ", you MUST use "ọmọ".
-  3. Word order: Subject-Object-Verb.
-  4. Output ONLY the translated string. No explanations.`;
-
-  try {
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: { 
-        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`, 
-        "Content-Type": "application/json" 
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: `Translate: ${original}. Hint: ${hint}` }
-        ],
-        temperature: 0 // Keep it predictable
-      })
-    });
-    const data = await response.json();
-    return data.choices[0]?.message?.content?.trim().replace(/[".]/g, '').toLowerCase();
-  } catch (e) { return null; }
-}
-
-
-// Gemini translation function
-async function translateWithGemini(text, from, to, context = {}, dictionaryContext = "") {
-  if (!geminiClient) return null;
-  
-  try {
-    const contextInstruction = dictionaryContext 
-      ? `\nMandatory Vocabulary: ${dictionaryContext}` 
-      : "";
-
-    const systemPrompt = `You are a native speaker of the Izon language (Kolokuma dialect).
-    RULES:
-    1. WORD ORDER: Strictly Subject-Object-Verb (SOV). 
-    2. DIACRITICS: Use ẹ, ọ, ị, ụ correctly. ${contextInstruction}
-    3. Output ONLY the translation.`;
-
-    const result = await geminiClient.generateContent({
-      contents: [{ role: 'user', parts: [{ text: `${systemPrompt}\n\nTranslate: "${text}"` }] }],
-      generationConfig: { temperature: 0.1, maxOutputTokens: 512 },
-    });
-    
-    const response = await result.response;
-    return response.text().trim();
-  } catch (error) {
-    logger.error('[Gemini Error]:', error.message);
-    return null;
-  }
 }
 
 /**
@@ -301,107 +174,46 @@ function preprocessEnglish(text, wordObjects) {
 
 async function handleTranslationLogic(params, currentUser = null) {
   const { text, from = 'en', to = 'izon', lang } = params;
-  const input = text.trim().normalize('NFC');
+  
+  // Get the appropriate engine dynamically
+  const engine = TranslationEngineFactory.getEngine(to);
+  if (!engine) {
+    throw new AppError('Translation engine not supported for this language', 400);
+  }
 
   let languageId = null;
+  /*
   if (lang) {
     const Language = mongoose.model('Language');
     const languageDoc = await Language.findOne({ code: lang.toUpperCase() });
     if (languageDoc) languageId = languageDoc._id;
   }
-  
-  // 1. Tokenize
-  const rawWords = input.toLowerCase().replace(/[.,!?;:]/g, '').split(' ');
-  const wordObjects = [];
-  
-  // 2. PHASED LOOKUP (Check for phrases first)
-  for (let i = 0; i < rawWords.length; i++) {
-    const current = rawWords[i];
-    const next = rawWords[i + 1];
-    const phrase = next ? `${current} ${next}` : null;
-    const phraseLemma = phrase ? phrase.replace(/s$/, '').replace(/es$/, '') : null;
+  */
 
-    let entry = null;
-
-    // A. Check for 2-word phrase (e.g., "monitor lizard")
-    if (phrase) {
-      const phraseQuery = {
-        $or: [
-          { englishTranslation: new RegExp(`^${phrase}$`, 'i') },
-          { englishTranslation: new RegExp(`^${phraseLemma}$`, 'i') }
-        ],
-        isPublished: true,
-        isActive: true
-      };
-      if (languageId) phraseQuery.language_id = languageId;
-      
-      entry = await Vocabulary.findOne(phraseQuery).select('izonWord grammar.partOfSpeech').lean();
-    }
-
-    if (entry) {
-      wordObjects.push({
-        word: entry.izonWord,
-        pos: entry.grammar?.partOfSpeech || 'noun',
-        isFound: true,
-        original: phrase
-      });
-      i++; // Skip the next word since we matched the pair
-    } else {
-      // B. Fallback to single word lookup
-      const lemma = current.replace(/es$/, '').replace(/s$/, '').replace(/ing$/, '');
-      const wordQuery = {
-        $or: [
-          { englishTranslation: new RegExp(`^${current}$`, 'i') },
-          { englishTranslation: new RegExp(`^${lemma}$`, 'i') }
-        ],
-        isPublished: true,
-        isActive: true
-      };
-      if (languageId) wordQuery.language_id = languageId;
-
-      const singleEntry = await Vocabulary.findOne(wordQuery).select('izonWord grammar.partOfSpeech').lean();
-
-
-      wordObjects.push({
-        word: singleEntry ? singleEntry.izonWord : current,
-        pos: singleEntry?.grammar?.partOfSpeech || 'unknown',
-        isFound: !!singleEntry,
-        original: current
-      });
-    }
-  }
-
-  // 3. GRAMMAR BUILDER (SOV Enforcement)
-  const deterministicHint = preprocessEnglish(input, wordObjects);
-
-  // 4. AI REFINE (Groq)
-  const dictMap = wordObjects.filter(o => o.isFound).map(o => `${o.original}->${o.word}`).join(',');
-  let aiSuggestion = await translateWithGroq(input, dictMap, deterministicHint);
-  
-  // 5. FINAL OUTPUT (The "No English" Filter)
-  const containsEnglish = wordObjects
-    .filter(o => !o.isFound && o.original.length > 2)
-    .some(o => aiSuggestion?.toLowerCase().includes(o.original));
-  
-  // Check if AI kept untranslated English words that ARE in our wordObjects
-  const aiIsHallucinating = containsEnglish || !aiSuggestion;
-  
-  const finalOutput = aiIsHallucinating ? deterministicHint : aiSuggestion;
-
-  let resultData = {
-    original: input,
-    translated: finalOutput,
-    type: aiIsHallucinating ? 'grammar_builder_enforced' : 'groq_refined'
+  // Set context for engine
+  const context = {
+    from,
+    to,
+    geminiClient,
+    languageId
   };
 
-  if (to === 'izon') {
-    resultData.pronunciation = {
-      ipa: generateIPA(resultData.translated),
-      syllables: generateSyllables(resultData.translated)
-    };
-  }
+  // Perform translation using the engine
+  const result = await engine.translate(text, context);
 
-  return resultData;
+  // Return standard response format (Phase 12 requirement)
+  return {
+    original: text,
+    translated: result.translated,
+    sourceLanguage: from,
+    targetLanguage: to,
+    confidence: result.confidence,
+    alternatives: [],
+    warnings: [],
+    unknownTokens: result.unknownTokens,
+    evidence: result.evidence,
+    timestamp: new Date().toISOString()
+  };
 }
 
 // ============================================================================

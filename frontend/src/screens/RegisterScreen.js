@@ -15,7 +15,7 @@ import {
   Modal,
   StatusBar,
 } from 'react-native';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { AuthContext } from '../context/AuthContext';
@@ -241,7 +241,7 @@ const handleReferralCheck = async (code) => {
 
             {errorMsg ? (
               <View style={styles.errorContainer}>
-                <MaterialIcons name="alert-circle-outline" size={20} color={theme.error} />
+                <MaterialIcons name="error-outline" size={20} color={theme.error} />
                 <Text style={[styles.errorText, { color: theme.error }]}>{errorMsg}</Text>
               </View>
             ) : null}

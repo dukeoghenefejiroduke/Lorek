@@ -29,7 +29,7 @@ export const streakService = {
     } catch (error) {
       if (error.status === 429) {
         console.error("Streak sync failed: Rate limited.");
-      } else {
+      } else if (error.type !== 'NETWORK_ERROR') {
         console.error("Streak sync failed:", error.message);
       }
       return { current: 0 };

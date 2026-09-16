@@ -5,6 +5,11 @@ const redis = require('../config/redis');
 // Helper to create limiters with consistent defaults
 const createLimiter = (options) => {
   return rateLimit({
+    // Trust the proxy to identify the real IP address of the client,
+    // and provide a custom key generator to avoid ERR_ERL_UNDEFINED_IP_ADDRESS.
+    validate: { ip: false },
+    keyGenerator: (req) => req.ip || req.connection.remoteAddress || 'anonymous',
+    
     store: redis.client ? new RedisStore({
       client: redis.client,
       prefix: `rl:${options.name}:`,

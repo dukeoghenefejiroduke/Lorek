@@ -14,9 +14,13 @@ export const ExerciseEngineProvider = ({ children }) => {
   const evaluateAnswer = (isCorrect, feedback) => {
     setEvaluation({ isCorrect, feedback });
   };
+  
+  const submitAnswer = (isCorrect, feedback) => {
+    evaluateAnswer(isCorrect, feedback);
+  };
 
   return (
-    <ExerciseEngineContext.Provider value={{ currentExercise, evaluation, loadExercise, evaluateAnswer }}>
+    <ExerciseEngineContext.Provider value={{ currentExercise, evaluation, loadExercise, evaluateAnswer, submitAnswer }}>
       {children}
     </ExerciseEngineContext.Provider>
   );

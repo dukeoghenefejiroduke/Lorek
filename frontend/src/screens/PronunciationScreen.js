@@ -18,24 +18,62 @@ import AudioPlayer from '../components/AudioPlayer';
 import ScreenHeader from '../components/ScreenHeader';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import { LanguageContext } from '../context/LanguageContext';
+import { useExerciseEngine } from '../context/ExerciseEngineContext';
+import Quiz from '../components/Quiz';
 
 export default function PronunciationScreen({ navigation }) {
   const contextValue = useContext(ThemeContext) || {};
   const { theme } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
+  const { loadExercise, evaluation } = useExerciseEngine();
   const [words, setWords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [practiceMode, setPracticeMode] = useState('listening');
   const [showPronunciationGuide, setShowPronunciationGuide] = useState(false);
   const [userRecordings, setUserRecordings] = useState({});
-  const [quizScore, setQuizScore] = useState(0);
+  const [localScore, setLocalScore] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [languageSwitcherVisible, setLanguageSwitcherVisible] = useState(false);
 
   useEffect(() => {
+    if (evaluation && evaluation.isCorrect) {
+      setLocalScore(prev => prev + 1);
+    }
+  }, [evaluation]);
+
+  useEffect(() => {
     loadVocabulary();
   }, [activeLanguage]);
+
+  // When practice mode changes to quiz, initialize engine
+  useEffect(() => {
+    if (practiceMode === 'quiz' && words.length > 0) {
+      const exercise = generateExercise(words[currentWordIndex]);
+      loadExercise(exercise);
+    }
+  }, [practiceMode, currentWordIndex, words]);
+
+  const generateExercise = (correctWord) => {
+    const options = generateQuizOptions(correctWord).map(o => o.text);
+    return {
+      question: "Which word did you hear?",
+      correctAnswer: correctWord.izonWord,
+      options,
+    };
+  };
+
+  const generateQuizOptions = (correctWord) => {
+    const options = [{ text: correctWord.izonWord, isCorrect: true }];
+    
+    const otherWords = words
+      .filter(w => w.id !== correctWord.id)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3)
+      .map(w => ({ text: w.izonWord, isCorrect: false }));
+    
+    return [...options, ...otherWords].sort(() => Math.random() - 0.5);
+  };
 
   const loadVocabulary = async () => {
     try {
@@ -78,13 +116,6 @@ export default function PronunciationScreen({ navigation }) {
     if (currentWordIndex > 0) {
       setCurrentWordIndex(prev => prev - 1);
     }
-  };
-
-  const handleQuizAnswer = (isCorrect) => {
-    if (isCorrect) {
-      setQuizScore(prev => prev + 1);
-    }
-    handleNext();
   };
 
   const renderListeningPractice = () => {
@@ -197,65 +228,12 @@ export default function PronunciationScreen({ navigation }) {
   };
 
   const renderQuiz = () => {
-    const word = words[currentWordIndex];
-    if (!word) return null;
-
-    const options = generateQuizOptions(word);
-
     return (
-      <View style={[styles.practiceContainer, { backgroundColor: theme.card }]}>
-        <Text style={[styles.practiceTitle, { color: theme.text }]}>🧠 Pronunciation Quiz</Text>
-        <Text style={[styles.instruction, { color: theme.subText }]}>
-          Listen to the pronunciation and choose the correct word
-        </Text>
-
-        <View style={styles.quizAudioContainer}>
-          <AudioPlayer 
-            audioUrl={word.audioUrl}
-            word={null}
-            showControls={false}
-          />
-        </View>
-
-        <Text style={[styles.quizQuestion, { color: theme.text }]}>Which word did you hear?</Text>
-
-        <View style={styles.optionsContainer}>
-          {options.map((option, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.optionButton}
-              onPress={() => handleQuizAnswer(option.isCorrect)}
-            >
-              <Text style={[styles.optionText, { color: theme.text }]}>{option.text}</Text>
-              {option.isCorrect && (
-                <Icon name="check-circle" size={20} color="#4CAF50" />
-              )}
-            </TouchableOpacity>
-          ))}
-        </View>
-
-        <View style={[styles.scoreContainer, { backgroundColor: '#F5F5F5' }]}>
-          <Text style={[styles.scoreText, { color: theme.text }]}>
-            Score: {quizScore}/{currentWordIndex}
-          </Text>
-          <Text style={styles.progressText}>
-            Question {currentWordIndex + 1} of {words.length}
-          </Text>
-        </View>
-      </View>
+      <Quiz 
+        totalQuestions={words.length}
+        onQuizComplete={handleNext}
+      />
     );
-  };
-
-  const generateQuizOptions = (correctWord) => {
-    const options = [{ text: correctWord.izonWord, isCorrect: true }];
-    
-    const otherWords = words
-      .filter(w => w.id !== correctWord.id)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3)
-      .map(w => ({ text: w.izonWord, isCorrect: false }));
-    
-    return [...options, ...otherWords].sort(() => Math.random() - 0.5);
   };
 
   if (loading) {
@@ -416,16 +394,16 @@ export default function PronunciationScreen({ navigation }) {
           <View style={[styles.resultsContent, { backgroundColor: theme.card }]}>
             <Text style={[styles.resultsTitle, { color: theme.text }]}>🎉 Quiz Complete!</Text>
             <Text style={[styles.resultsScore, { color: theme.subText }]}>
-              Your Score: {quizScore}/{words.length}
+              Your Score: {localScore}/{words.length}
             </Text>
             <Text style={styles.resultsPercentage}>
-              {Math.round((quizScore / words.length) * 100)}%
+              {Math.round((localScore / words.length) * 100)}%
             </Text>
 
             <View style={styles.resultsFeedback}>
-              {quizScore === words.length ? (
+              {localScore === words.length ? (
                 <Text style={styles.perfectText}>Perfect! Excellent listening skills! 🎯</Text>
-              ) : quizScore >= words.length * 0.7 ? (
+              ) : localScore >= words.length * 0.7 ? (
                 <Text style={styles.goodText}>Good job! Keep practicing! 👍</Text>
               ) : (
                 <Text style={styles.practiceText}>Keep practicing! You'll improve! 💪</Text>
@@ -437,7 +415,7 @@ export default function PronunciationScreen({ navigation }) {
               onPress={() => {
                 setShowResults(false);
                 setCurrentWordIndex(0);
-                setQuizScore(0);
+                setLocalScore(0);
               }}
             >
               <Text style={styles.restartButtonText}>Restart Quiz</Text>

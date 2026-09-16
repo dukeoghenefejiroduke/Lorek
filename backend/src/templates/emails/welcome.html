@@ -3,11 +3,16 @@
 <head>
     <title>Welcome</title>
 </head>
-<body>
-    <h1>Hi {{username}}!</h1>
-    <p>Welcome to the Izon Language App. We are glad to have you!</p>
+<body style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px;">
+    <h2 style="color: #2e7d32; margin-top: 0;">Welcome to Izon Language App</h2>
+    <p>Hi {{username}},</p>
+    <p>Welcome to the Izon Language App. We are glad to have you join our community of learners.</p>
     {{#if referralCode}}
     <p>Your referral code is: <strong>{{referralCode}}</strong></p>
     {{/if}}
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+    <p style="font-size: 11px; color: #999; line-height: 1.5; text-align: center;">
+      If you don't see our emails in your inbox, please check your Spam or Junk folder and mark them as "Not Spam" to ensure you receive future progress updates and reminders.
+    </p>
 </body>
 </html>

@@ -1,0 +1,5 @@
+[
+  { "code": "YOR", "name": "Yoruba", "nativeName": "Èdè Yorùbá", "isActive": false },
+  { "code": "HAU", "name": "Hausa", "nativeName": "Harshen Hausa", "isActive": false },
+  { "code": "IBO", "name": "Igbo", "nativeName": "Asụsụ Igbo", "isActive": false }
+]

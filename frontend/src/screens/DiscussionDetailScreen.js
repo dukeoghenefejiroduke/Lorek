@@ -24,7 +24,7 @@ import {
   Share,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons, Ionicons, FontAwesome5 } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import haptics from '../utils/haptics';
 import { BlurView } from 'expo-blur';
 
@@ -307,7 +307,7 @@ export default function DiscussionDetailScreen({ navigation, route }) {
   if (!discussion) {
     return (
       <View style={styles.errorContainer}>
-        <MaterialIcons name="alert-circle-outline" size={60} color="#f44336" />
+        <MaterialIcons name="error-outline" size={60} color="#f44336" />
         <Text style={styles.errorText}>Discussion not found</Text>
         <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.goBack()}>
           <Text style={styles.goBackButtonText}>Go Back</Text>

@@ -20,6 +20,12 @@ export const initDb = async () => {
             id TEXT PRIMARY KEY,
             data TEXT NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS downloaded_language_packs (
+            code TEXT PRIMARY KEY,
+            name TEXT,
+            uri TEXT,
+            version TEXT
+        );
     `);
 };
 

@@ -16,7 +16,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import haptics from '../utils/haptics';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { get, save } from '../services/storage';
 import { gamificationAPI, progressAPI, cultureAPI } from '../services/api';
 import { LanguageContext } from '../context/LanguageContext';
 
@@ -149,7 +149,7 @@ useEffect(() => {
 
   const loadSavedGoal = async () => {
     try {
-      const savedGoal = await AsyncStorage.getItem('dailyGoal');
+      const savedGoal = await get('dailyGoal');
       if (savedGoal) {
         setGoal(parseInt(savedGoal));
       }
@@ -177,7 +177,7 @@ const saveGoal = async () => {
   } catch (error) {
     console.error('Sync Error:', error);
     // Fallback for your Vivo Y17 Termux environment
-    await AsyncStorage.setItem('dailyGoal', goal.toString());
+    await save('dailyGoal', goal);
     Alert.alert('Offline Mode', 'Saved locally. We will sync when the server is reachable.');
   } finally {
     setLoading(false);

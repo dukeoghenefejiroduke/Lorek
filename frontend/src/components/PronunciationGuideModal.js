@@ -284,7 +284,7 @@ export default function PronunciationGuideModal({ visible, onClose, guideData, w
           {/* Footer */}
           <View style={styles.modalFooter}>
             <TouchableOpacity style={styles.practiceButton} onPress={onClose}>
-              <Icon name="microphone" size={20} color="#fff" />
+              <MaterialIcons name="mic" size={20} color="#fff" />
               <Text style={styles.practiceButtonText}>Practice Now</Text>
             </TouchableOpacity>
           </View>

@@ -16,10 +16,10 @@ import {
   Modal,
   StatusBar,
 } from 'react-native';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as LocalAuthentication from 'expo-local-authentication';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { get } from '../services/storage';
 
 import { AuthContext } from '../context/AuthContext';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
@@ -63,7 +63,7 @@ export default function LoginScreen({ navigation }) {
 
   const loadSavedEmail = async () => {
     try {
-      const savedEmail = await AsyncStorage.getItem('rememberedEmail');
+      const savedEmail = await get('rememberedEmail');
       if (savedEmail) {
         setEmail(savedEmail);
         setRememberMe(true);
@@ -232,7 +232,7 @@ export default function LoginScreen({ navigation }) {
             {/* Error Message */}
             {errorMsg ? (
               <View style={[styles.errorContainer, { backgroundColor: theme.error + '20' }]}>
-                <MaterialIcons name="alert-circle-outline" size={20} color={theme.error} />
+                <MaterialIcons name="error-outline" size={20} color={theme.error} />
                 <Text style={[styles.errorText, { color: theme.error }]}>{errorMsg}</Text>
               </View>
             ) : null}

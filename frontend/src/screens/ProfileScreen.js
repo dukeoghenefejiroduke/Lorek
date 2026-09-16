@@ -69,10 +69,10 @@ useEffect(() => {
       setLoading(true);
       const [progressRes, profileRes] = await Promise.all([
         progressAPI.get(),
-        userAPI.getProfile()
-      ]);
+        userAPI.getSummary()
+        ]);
 
-      if (progressRes.data?.data) {
+        if (progressRes.data?.data) {
         const data = progressRes.data.data;
         setLiveStats({
           streak: data.progress?.currentStreak || 0,
@@ -80,14 +80,14 @@ useEffect(() => {
           lessonsCompleted: data.progress?.completedLessons || 0,
           wordsLearned: data.vocabulary?.totalLearned || 0,
           rank: data.rank?.rank || 'New Learner',
-          rankProgress: data.progress?.completionRate || 0, 
+          rankProgress: data.progress?.completionRate || 0,
           nextRank: data.rank?.nextRank || 'Rising Star',
           achievements: data.achievements?.total || 0,
         });
-      }
+        }
       
-      if (profileRes.data?.avatarUrl) {
-        setProfileImage(profileRes.data.avatarUrl);
+      if (profileRes.data?.data?.avatar) {
+        setProfileImage(profileRes.data.data.avatar);
       }
     } catch (error) {
       console.error("Failed to fetch profile data:", error);

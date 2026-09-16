@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification | Lorek</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .verification-container { padding: 50px; text-align: center; }
+        .status-message { font-size: 1.2rem; margin: 20px 0; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #4CAF50; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <main class="verification-container">
+        <h1>Email Verification</h1>
+        <div id="status" class="status-message">Verifying your account...</div>
+        <div id="spinner" class="spinner"></div>
+    </main>
+
+    <script>
+        async function verifyEmail() {
+            console.log('DEBUG: Full URL:', window.location.href);
+            console.log('DEBUG: Search:', window.location.search);
+            console.log('DEBUG: Hash:', window.location.hash);
+            
+            // Try extracting from search params (?token=...)
+            let urlParams = new URLSearchParams(window.location.search);
+            let token = urlParams.get('token');
+            
+            // Fallback: Try extracting from hash fragment if the server is stripping search params (#token=...)
+            if (!token && window.location.hash) {
+                console.log('DEBUG: Trying hash for token...');
+                const hashParams = new URLSearchParams(window.location.hash.substring(1));
+                token = hashParams.get('token');
+            }
+            
+            console.log('DEBUG: Final Extracted token:', token);
+            
+            const statusDiv = document.getElementById('status');
+            const spinner = document.getElementById('spinner');
+
+            if (!token) {
+                statusDiv.innerHTML = 'Error: No verification token found in URL.<br><small>URL: ' + window.location.href + '</small>';
+                spinner.style.display = 'none';
+                return;
+            }
+
+            try {
+                // Point this to your actual API URL
+                const response = await fetch('http://127.0.0.1:5000/api/auth/verify-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    statusDiv.innerText = 'Success! Your email has been verified. You can now log in to the app.';
+                } else {
+                    statusDiv.innerText = 'Error: ' + (data.error || 'Verification failed.');
+                }
+            } catch (error) {
+                statusDiv.innerText = 'Error: Could not connect to the server.';
+            } finally {
+                spinner.style.display = 'none';
+            }
+        }
+
+        verifyEmail();
+    </script>
+</body>
+</html>

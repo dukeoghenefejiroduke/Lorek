@@ -38,11 +38,6 @@ const { width, height } = Dimensions.get('window');
 // CONSTANTS
 // ============================================================================
 
-const DIRECTION = {
-  EN_TO_IZON: 'en_to_izon',
-  IZON_TO_EN: 'izon_to_en',
-};
-
 const CONFIDENCE_CONFIG = {
   high: { color: '#4CAF50', icon: 'check-circle', label: 'High' },
   medium: { color: '#FF9800', icon: 'info', label: 'Medium' },
@@ -55,21 +50,17 @@ const MAX_TEXT_LENGTH = 500;
 // COMPONENTS
 // ============================================================================
 
-const LanguageSwitcher = ({ direction, onSwap, disabled, activeLanguageName, theme }) => (
+const LanguageSwitcher = ({ sourceLang, targetLang, onSwap, onSourceChange, onTargetChange, supportedLanguages, theme }) => (
   <View style={[styles.directionCard, { backgroundColor: theme.card }]}>
     <View style={styles.directionLabels}>
-      <Text style={[styles.directionLabel, direction === DIRECTION.EN_TO_IZON && styles.activeDirectionLabel, { color: theme.subText }]}>
-        English
+      <Text style={[styles.directionLabel, { color: theme.subText }]}>
+        {sourceLang}
       </Text>
-      <TouchableOpacity
-        style={styles.swapButton}
-        onPress={onSwap}
-        disabled={disabled}
-      >
+      <TouchableOpacity style={styles.swapButton} onPress={onSwap}>
         <MaterialIcons name="swap-horiz" size={24} color="#4CAF50" />
       </TouchableOpacity>
-      <Text style={[styles.directionLabel, direction === DIRECTION.IZON_TO_EN && styles.activeDirectionLabel, { color: theme.subText }]}>
-        {activeLanguageName || 'Izon'}
+      <Text style={[styles.directionLabel, { color: theme.subText }]}>
+        {targetLang}
       </Text>
     </View>
   </View>
@@ -308,14 +299,15 @@ const HistoryItem = ({ item, onPress, theme }) => (
 
 export default function TranslatorScreen({ navigation }) {
   const { user } = useContext(AuthContext);
-  const { activeLanguage } = useContext(LanguageContext);
+  const { supportedLanguages, activeLanguage } = useContext(LanguageContext);
   const contextValue = useContext(ThemeContext) || {};
   const { theme, isDarkMode } = contextValue;
 
   // State
   const [inputText, setInputText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
-  const [direction, setDirection] = useState(DIRECTION.EN_TO_IZON);
+  const [sourceLang, setSourceLang] = useState('EN');
+  const [targetLang, setTargetLang] = useState(activeLanguage?.code || 'IZON');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [translationInfo, setTranslationInfo] = useState({
@@ -395,12 +387,12 @@ export default function TranslatorScreen({ navigation }) {
     haptics.impactMedium();
 
     try {
-      const from = direction === DIRECTION.EN_TO_IZON ? 'en' : 'izon';
-      const to = direction === DIRECTION.EN_TO_IZON ? 'izon' : 'en';
+      const from = sourceLang.toLowerCase();
+      const to = targetLang.toLowerCase();
 
       const response = await translatorAPI.translate({
         text: inputText.trim(),
-        lang: activeLanguage?.code,
+        lang: targetLang,
         from,
         to,
         includePronunciation: includePronunciation ? 'true' : 'false',
@@ -510,7 +502,7 @@ export default function TranslatorScreen({ navigation }) {
     haptics.impactLight();
   };
 
-  const getSourceLabel = () => direction === DIRECTION.EN_TO_IZON ? 'English' : (activeLanguage?.name || 'Izon');
+  const getSourceLabel = () => sourceLang;
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
@@ -553,10 +545,10 @@ export default function TranslatorScreen({ navigation }) {
       >
           <Animated.View style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }] }}>
             <LanguageSwitcher
-              direction={direction}
-              onSwap={swapDirection}
-              disabled={loading}
-              activeLanguageName={activeLanguage?.name}
+              sourceLang={sourceLang}
+              targetLang={targetLang}
+              onSwap={() => { const temp = sourceLang; setSourceLang(targetLang); setTargetLang(temp); }}
+              supportedLanguages={supportedLanguages}
               theme={theme}
             />
 

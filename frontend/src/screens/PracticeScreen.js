@@ -20,12 +20,12 @@ import { vocabularyAPI, pronunciationAPI, gamificationAPI, practiceAPI } from '.
 import Quiz from '../components/Quiz';
 import AudioPlayer from '../components/AudioPlayer';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons as Icon } from '@expo/vector-icons';
+import { MaterialIcons as Icon, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import haptics from '../utils/haptics';
 import * as Speech from 'expo-speech';
 import { BlurView } from 'expo-blur';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { get, save } from '../services/storage';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
 import { LanguageContext } from '../context/LanguageContext';
 import { useExerciseEngine } from '../context/ExerciseEngineContext';
@@ -105,8 +105,8 @@ export default function PracticeScreen() {
 
     useEffect(() => {
     const getPersistedProgress = async () => {
-      const saved = await AsyncStorage.getItem('dailyProgress');
-      if (saved) setDailyProgress(JSON.parse(saved));
+      const saved = await get('dailyProgress');
+      if (saved) setDailyProgress(saved);
     };
     getPersistedProgress();
     
@@ -130,7 +130,7 @@ export default function PracticeScreen() {
   });
 
   const checkAuth = async () => {
-    const token = await AsyncStorage.getItem('token');
+    const token = await get('token');
     if (!token) {
       Alert.alert('Authentication Required', 'Please log in to practice.', [
         { text: 'OK', onPress: () => navigation.navigate('Login') },
@@ -142,6 +142,7 @@ export default function PracticeScreen() {
   
    const loadSrsStats = async () => {
     try {
+      setLoading(true); // Added loading state
       const res = await practiceAPI.getDaily();
       if (res.data?.success) {
         setSrsStats({
@@ -150,6 +151,9 @@ export default function PracticeScreen() {
         });
       }
     } catch (e) {
+      console.error('Error loading SRS stats:', e);
+    } finally {
+      setLoading(false); // Added loading state
     }
   };
 
@@ -161,6 +165,7 @@ export default function PracticeScreen() {
         setForecast(res.data.data);
       }
     } catch (e) {
+      console.error('Error loading forecast:', e);
     } finally {
       setLoadingForecast(false);
     }
@@ -263,7 +268,7 @@ export default function PracticeScreen() {
  const updateStats = (correct) => {
     setDailyProgress(prev => {
       const newProgress = Math.min(prev + 10, dailyGoal);
-      AsyncStorage.setItem('dailyProgress', JSON.stringify(newProgress));
+      save('dailyProgress', newProgress);
       if (newProgress >= dailyGoal && prev < dailyGoal) {
         haptics.notificationSuccess();
         Alert.alert('🎉 Daily Goal Achieved!', 'Great job!');
@@ -382,7 +387,7 @@ const loadPronunciationWords = async () => {
         setMode(null);
         return;
       }
-      const quizQuestions = words.map((word) => ({
+      const quizExercises = words.map((word) => ({
         question: practiceMode === 'izon-to-english' 
           ? `What does "${word.izonWord || word.word}" mean?` 
           : `How do you say "${word.englishTranslation || word.english}"?`,
@@ -393,8 +398,10 @@ const loadPronunciationWords = async () => {
         word,
         type: 'multiple-choice',
         }));
-      setQuestions(quizQuestions);
+      setQuestions(quizExercises);
       setMode(practiceMode);
+      // Load first into engine
+      loadExercise(quizExercises[0]);
     } catch (e) {
       setMode(null);
     } finally {
@@ -622,7 +629,7 @@ const loadPronunciationWords = async () => {
           >
             <View style={styles.questionCard}>
               <View style={styles.questionIcon}>
-                <Icon name="ear-hearing" size={40} color="#667eea" />
+                <MaterialCommunityIcons name="hearing" size={40} color="#667eea" />
               </View>
               <Text style={styles.questionText}>{currentQ.question}</Text>
               
@@ -807,7 +814,7 @@ const loadPronunciationWords = async () => {
               
               <View style={styles.breakdownItem}>
                 <View style={styles.breakdownLabel}>
-                  <Icon name="target" size={20} color="#2196F3" />
+                  <MaterialCommunityIcons name="target" size={20} color="#2196F3" />
                   <Text style={styles.breakdownText}>Accuracy Rate</Text>
                 </View>
                 <Text style={[styles.breakdownValue, { color }]}>
@@ -1096,13 +1103,16 @@ const loadPronunciationWords = async () => {
       <ScreenHeader 
         title={`Practice ${activeLanguage?.name || 'Izon'}`}
         showLanguageSelector={true}
-        onLanguagePress={() => setLanguageSwitcherVisible(true)}
+        onLanguagePress={() => {
+            console.log("LanguageSwitcher button pressed, setting visible to true");
+            setLanguageSwitcherVisible(true);
+        }}
       >
         <TouchableOpacity 
           style={styles.statsButton}
           onPress={() => setShowStatsModal(true)}
         >
-          <Icon name="chart-line" size={24} color="#fff" />
+          <MaterialCommunityIcons name="chart-line" size={24} color="#fff" />
         </TouchableOpacity>
       </ScreenHeader>
 
@@ -1122,13 +1132,13 @@ const loadPronunciationWords = async () => {
       >       
       <View style={[styles.streakCard, { backgroundColor: theme.card }]}>
           <View style={styles.streakContent}>
-            <Icon name="fire" size={24} color={theme.error} />
+            <MaterialCommunityIcons name="fire" size={24} color={theme.error} />
             <Text style={[styles.streakText, { color: theme.error }]}>{stats.streak} Day Streak!</Text>
           </View>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
              <Text style={{marginRight: 10, color: theme.subText, fontWeight: 'bold'}}>{srsStats.dueToday} Due</Text>
              <TouchableOpacity onPress={() => setShowAchievements(true)}>
-                <Icon name="trophy" size={24} color={theme.accent} />
+                <MaterialCommunityIcons name="trophy" size={24} color={theme.accent} />
              </TouchableOpacity>
           </View>
         </View>
@@ -1137,7 +1147,7 @@ const loadPronunciationWords = async () => {
           <PracticeCard
             title="Review Mistakes"
             description="Focus on your errors"
-            icon="alert-circle-outline"
+            icon="error-outline"
             onPress={() => startPractice('srs-mistakes')}
             gradient={isDarkMode ? ['#442222', '#663333'] : ['#F44336', '#D32F2F']}
           />
@@ -1170,7 +1180,7 @@ const loadPronunciationWords = async () => {
           <PracticeCard
             title="Speaking Practice"
             description="Pronounce & compare"
-            icon="microphone"
+            icon="microphone-outline"
             onPress={() => startPractice('pronunciation')}
             gradient={isDarkMode ? ['#442244', '#663366'] : ['#9C27B0', '#7B1FA2']}
           />
@@ -1178,7 +1188,7 @@ const loadPronunciationWords = async () => {
           <PracticeCard
             title="Quick Practice"
             description="Bite-sized dynamic session"
-            icon="flash"
+            icon="lightning-bolt"
             onPress={() => startPractice('izon-to-english')} // Map to quick quiz
             gradient={isDarkMode ? ['#224444', '#336666'] : ['#00BCD4', '#0097A7']}
           />
@@ -1193,12 +1203,12 @@ const loadPronunciationWords = async () => {
               <Text style={[styles.statLabel, { color: theme.subText }]}>Total Practice</Text>
             </View>
             <View style={styles.statBox}>
-              <Icon name="target" size={24} color={theme.secondary} />
+              <MaterialCommunityIcons name="target" size={24} color={theme.secondary} />
               <Text style={[styles.statNumber, { color: theme.text }]}>{stats?.accuracy || 0}%</Text>
               <Text style={[styles.statLabel, { color: theme.subText }]}>Accuracy</Text>
             </View>
             <View style={styles.statBox}>
-              <Icon name="clock" size={24} color={theme.warning} />
+              <MaterialCommunityIcons name="clock" size={24} color={theme.warning} />
               <Text style={[styles.statNumber, { color: theme.text }]}>{pronunciationWords.length}</Text>
               <Text style={[styles.statLabel, { color: theme.subText }]}>Words Learned</Text>
             </View>
@@ -1219,7 +1229,7 @@ const loadPronunciationWords = async () => {
             <Text style={[styles.activityText, { color: theme.subText }]}>Completed listening quiz - 80% accuracy</Text>
           </View>
           <View style={styles.activityItem}>
-            <Icon name="microphone" size={16} color={theme.warning} />
+            <MaterialCommunityIcons name="microphone-outline" size={16} color={theme.warning} />
             <Text style={[styles.activityText, { color: theme.subText }]}>Practiced 5 pronunciation words</Text>
           </View>
         </View>
@@ -1376,7 +1386,19 @@ const loadPronunciationWords = async () => {
 
   if (mode && mode !== 'pronunciation' && mode !== 'listening-quiz' && questions.length > 0) {
     return (
-      <ExerciseDispatcher />
+      <Quiz 
+        totalQuestions={questions.length}
+        onQuizComplete={() => {
+           if (currentQuestion + 1 < questions.length) {
+              const nextIndex = currentQuestion + 1;
+              setCurrentQuestion(nextIndex);
+              loadExercise(questions[nextIndex]);
+           } else {
+              handleFinish(score, questions.length);
+              setShowResults(true);
+           }
+        }}
+      />
     );
   }
 

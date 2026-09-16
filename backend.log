@@ -1,0 +1,120 @@
+
+> backend@1.0.0 start
+> node src/server.js
+
+[dotenv@17.2.3] injecting env (4) from .env -- tip: ⚙️  override existing env vars with { override: true }
+ValidationError: Custom keyGenerator appears to use request IP without calling the ipKeyGenerator helper function for IPv6 addresses. This could allow IPv6 users to bypass limits. See https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/ for more information.
+    at Object.keyGeneratorIpFallback (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:637:13)
+    at wrappedValidations.<computed> [as keyGeneratorIpFallback] (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:680:22)
+    at parseOptions (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:750:16)
+    at rateLimit (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:831:18)
+    at createLimiter (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:7:10)
+    at Object.<anonymous> (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:41:20)
+    at Module._compile (node:internal/modules/cjs/loader:1829:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1969:10)
+    at Module.load (node:internal/modules/cjs/loader:1552:32)
+    at Module._load (node:internal/modules/cjs/loader:1354:12) {
+  code: 'ERR_ERL_KEY_GEN_IPV6',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/'
+}
+ValidationError: Custom keyGenerator appears to use request IP without calling the ipKeyGenerator helper function for IPv6 addresses. This could allow IPv6 users to bypass limits. See https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/ for more information.
+    at Object.keyGeneratorIpFallback (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:637:13)
+    at wrappedValidations.<computed> [as keyGeneratorIpFallback] (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:680:22)
+    at parseOptions (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:750:16)
+    at rateLimit (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:831:18)
+    at createLimiter (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:7:10)
+    at Object.<anonymous> (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:48:21)
+    at Module._compile (node:internal/modules/cjs/loader:1829:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1969:10)
+    at Module.load (node:internal/modules/cjs/loader:1552:32)
+    at Module._load (node:internal/modules/cjs/loader:1354:12) {
+  code: 'ERR_ERL_KEY_GEN_IPV6',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/'
+}
+ValidationError: Custom keyGenerator appears to use request IP without calling the ipKeyGenerator helper function for IPv6 addresses. This could allow IPv6 users to bypass limits. See https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/ for more information.
+    at Object.keyGeneratorIpFallback (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:637:13)
+    at wrappedValidations.<computed> [as keyGeneratorIpFallback] (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:680:22)
+    at parseOptions (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:750:16)
+    at rateLimit (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:831:18)
+    at createLimiter (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:7:10)
+    at Object.<anonymous> (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:59:23)
+    at Module._compile (node:internal/modules/cjs/loader:1829:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1969:10)
+    at Module.load (node:internal/modules/cjs/loader:1552:32)
+    at Module._load (node:internal/modules/cjs/loader:1354:12) {
+  code: 'ERR_ERL_KEY_GEN_IPV6',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/'
+}
+ValidationError: Custom keyGenerator appears to use request IP without calling the ipKeyGenerator helper function for IPv6 addresses. This could allow IPv6 users to bypass limits. See https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/ for more information.
+    at Object.keyGeneratorIpFallback (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:637:13)
+    at wrappedValidations.<computed> [as keyGeneratorIpFallback] (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:680:22)
+    at parseOptions (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:750:16)
+    at rateLimit (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:831:18)
+    at createLimiter (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:7:10)
+    at Object.<anonymous> (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:67:24)
+    at Module._compile (node:internal/modules/cjs/loader:1829:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1969:10)
+    at Module.load (node:internal/modules/cjs/loader:1552:32)
+    at Module._load (node:internal/modules/cjs/loader:1354:12) {
+  code: 'ERR_ERL_KEY_GEN_IPV6',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/'
+}
+ValidationError: Custom keyGenerator appears to use request IP without calling the ipKeyGenerator helper function for IPv6 addresses. This could allow IPv6 users to bypass limits. See https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/ for more information.
+    at Object.keyGeneratorIpFallback (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:637:13)
+    at wrappedValidations.<computed> [as keyGeneratorIpFallback] (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:680:22)
+    at parseOptions (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:750:16)
+    at rateLimit (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:831:18)
+    at createLimiter (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:7:10)
+    at Object.<anonymous> (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:75:23)
+    at Module._compile (node:internal/modules/cjs/loader:1829:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1969:10)
+    at Module.load (node:internal/modules/cjs/loader:1552:32)
+    at Module._load (node:internal/modules/cjs/loader:1354:12) {
+  code: 'ERR_ERL_KEY_GEN_IPV6',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/'
+}
+ValidationError: Custom keyGenerator appears to use request IP without calling the ipKeyGenerator helper function for IPv6 addresses. This could allow IPv6 users to bypass limits. See https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/ for more information.
+    at Object.keyGeneratorIpFallback (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:637:13)
+    at wrappedValidations.<computed> [as keyGeneratorIpFallback] (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:680:22)
+    at parseOptions (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:750:16)
+    at rateLimit (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:831:18)
+    at createLimiter (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:7:10)
+    at Object.<anonymous> (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:83:26)
+    at Module._compile (node:internal/modules/cjs/loader:1829:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1969:10)
+    at Module.load (node:internal/modules/cjs/loader:1552:32)
+    at Module._load (node:internal/modules/cjs/loader:1354:12) {
+  code: 'ERR_ERL_KEY_GEN_IPV6',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/'
+}
+ValidationError: Custom keyGenerator appears to use request IP without calling the ipKeyGenerator helper function for IPv6 addresses. This could allow IPv6 users to bypass limits. See https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/ for more information.
+    at Object.keyGeneratorIpFallback (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:637:13)
+    at wrappedValidations.<computed> [as keyGeneratorIpFallback] (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:680:22)
+    at parseOptions (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:750:16)
+    at rateLimit (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-rate-limit/dist/index.cjs:831:18)
+    at createLimiter (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:7:10)
+    at Object.<anonymous> (/data/data/com.termux/files/home/Lorek/backend/src/middleware/rateLimit.js:91:23)
+    at Module._compile (node:internal/modules/cjs/loader:1829:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1969:10)
+    at Module.load (node:internal/modules/cjs/loader:1552:32)
+    at Module._load (node:internal/modules/cjs/loader:1354:12) {
+  code: 'ERR_ERL_KEY_GEN_IPV6',
+  help: 'https://express-rate-limit.github.io/ERR_ERL_KEY_GEN_IPV6/'
+}
+/data/data/com.termux/files/home/Lorek/backend/node_modules/openai/client.js:94
+            throw new Errors.OpenAIError('Missing credentials. Please pass an `apiKey`, or set the `OPENAI_API_KEY` environment variable.');
+            ^
+
+OpenAIError: Missing credentials. Please pass an `apiKey`, or set the `OPENAI_API_KEY` environment variable.
+    at new OpenAI (/data/data/com.termux/files/home/Lorek/backend/node_modules/openai/client.js:94:19)
+    at Object.<anonymous> (/data/data/com.termux/files/home/Lorek/backend/src/controllers/vocabularyController.js:17:16)
+    at Module._compile (node:internal/modules/cjs/loader:1829:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1969:10)
+    at Module.load (node:internal/modules/cjs/loader:1552:32)
+    at Module._load (node:internal/modules/cjs/loader:1354:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1575:12)
+    at require (node:internal/modules/helpers:191:16)
+    at Object.<anonymous> (/data/data/com.termux/files/home/Lorek/backend/src/routes/vocabulary.js:12:30)
+
+Node.js v25.8.2

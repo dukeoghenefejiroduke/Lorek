@@ -16,6 +16,15 @@ const languageSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  family: {
+    type: String,
+    default: 'unknown',
+  },
+  directionality: {
+    type: String,
+    enum: ['ltr', 'rtl'],
+    default: 'ltr',
+  },
   description: String,
   region: String,
   icon: String,
@@ -28,36 +37,13 @@ const languageSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  isDemo: {
-    type: Boolean,
-    default: false,
-  },
-  difficulty: {
-    type: String,
-    enum: ['beginner', 'intermediate', 'advanced'],
-    default: 'beginner',
-  },
-  totalWords: {
-    type: Number,
-    default: 0,
-  },
-  totalLessons: {
-    type: Number,
-    default: 0,
-  },
-  totalSpeakers: {
-    type: Number,
-    default: 0,
-  },
-  order: {
-    type: Number,
-    default: 0,
-  },
   features: {
     hasAudio: { type: Boolean, default: false },
     hasPronunciation: { type: Boolean, default: false },
     hasGrammar: { type: Boolean, default: false },
     hasCulture: { type: Boolean, default: false },
+    hasMorphology: { type: Boolean, default: false },
+    hasCorpus: { type: Boolean, default: false },
   },
   metadata: {
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
@@ -67,5 +53,12 @@ const languageSchema = new mongoose.Schema({
   timestamps: true,
   collection: 'languages_bb953498'
 });
+
+// Static helper to get registry for frontend
+languageSchema.statics.getRegistry = function() {
+  return this.find({ isActive: true, isPublished: true })
+    .select('code name nativeName family directionality features')
+    .sort({ order: 1 });
+};
 
 module.exports = mongoose.model('Language', languageSchema);
