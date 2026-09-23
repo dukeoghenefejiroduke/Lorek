@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
 import {
   View,
   Text,
@@ -18,10 +18,10 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import haptics from '../utils/haptics';
-import { AuthContext } from '../context/AuthContext';
-import SafeAreaContainer from '../components/SafeAreaContainer';
-import { messagesAPI } from '../services/api';
+import haptics from '../../utils/haptics';
+import { AuthContext } from '../../context/AuthContext';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
+import { messagesAPI } from '../../services/api';
 
 const formatTime = (dateString) => {
   const date = new Date(dateString);

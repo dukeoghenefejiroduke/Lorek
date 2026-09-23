@@ -1,6 +1,6 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useContext, useState, useEffect, useCallback } from 'react';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
 import {
   View,
   Text,
@@ -18,11 +18,11 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons, FontAwesome5 } from '@expo/vector-icons';
-import haptics from "../utils/haptics";
-import LoadingOverlay from '../components/LoadingOverlay';
+import haptics from '../../utils/haptics';
+import LoadingOverlay from '../../components/LoadingOverlay';
 
-import { userAPI, communityAPI, progressAPI, messagesAPI } from '../services/api';
-import { AuthContext } from '../context/AuthContext';
+import { userAPI, communityAPI, progressAPI, messagesAPI } from '../../services/api';
+import { AuthContext } from '../../context/AuthContext';
 
 const { width } = Dimensions.get('window');
 

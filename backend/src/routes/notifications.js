@@ -51,12 +51,7 @@ router.get('/', async (req, res, next) => {
 
     const skip = (parseInt(page) - 1) * parseInt(limit);
     const query = { 
-      user: req.user._id,
-      $or: [
-        { language_id: req.languageId },
-        { language_id: { $exists: false } },
-        { language_id: null }
-      ]
+      user: req.user._id
     };
 
     if (unreadOnly === 'true') {

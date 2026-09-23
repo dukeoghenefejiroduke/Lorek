@@ -103,6 +103,11 @@ router.get('/', auth, cacheMiddleware(300), async (req, res, next) => {
     if (unitId) {
       const unit = await Unit.findById(unitId);
       if (unit) {
+        // Authorization check: Is this unit in one of the user's enrolled courses?
+        const section = await mongoose.model('Section').findById(unit.sectionId);
+        if (!section || !req.user.enrolledCourses.includes(section.courseId)) {
+            throw new AppError('Unauthorized: You are not enrolled in the course containing this unit', 403);
+        }
         query._id = { $in: unit.lessons };
       } else {
         // If unit doesn't exist, return empty

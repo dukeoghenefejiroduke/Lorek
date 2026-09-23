@@ -1,23 +1,23 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
 import {
   View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator,
   Animated, Dimensions, Platform, StatusBar, Alert, TextInput,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
-import haptics from '../utils/haptics';
-import { lessonAPI, progressAPI } from '../services/api';
-import { LanguageContext } from '../context/LanguageContext';
-import { HealthContext } from '../context/HealthContext';
-import { useExerciseEngine } from '../context/ExerciseEngineContext';
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
-import MultipleChoice from '../components/exercises/MultipleChoice';
-import Translation from '../components/exercises/Translation';
-import FillBlank from '../components/exercises/FillBlank';
-import Matching from '../components/exercises/Matching';
-import Reorder from '../components/exercises/Reorder';
+import haptics from '../../utils/haptics';
+import { lessonAPI, progressAPI } from '../../services/api';
+import { LanguageContext } from '../../context/LanguageContext';
+import { HealthContext } from '../../context/HealthContext';
+import { useExerciseEngine } from '../../context/ExerciseEngineContext';
+import KeyboardAvoidingWrapper from '../../components/KeyboardAvoidingWrapper';
+import MultipleChoice from '../../components/exercises/MultipleChoice';
+import Translation from '../../components/exercises/Translation';
+import FillBlank from '../../components/exercises/FillBlank';
+import Matching from '../../components/exercises/Matching';
+import Reorder from '../../components/exercises/Reorder';
 
 
 const { width } = Dimensions.get('window');

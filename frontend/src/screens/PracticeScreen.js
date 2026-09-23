@@ -309,7 +309,6 @@ const loadPronunciationWords = async () => {
 
       if (wordsWithAudio.length === 0) {
         Alert.alert('No Audio Available', 'No words with audio found. Add audio to your vocabulary first.');
-        setMode(null);
         return;
       }
 
@@ -317,7 +316,6 @@ const loadPronunciationWords = async () => {
     } catch (error) {
       console.error('Failed to load pronunciation words:', error);
       Alert.alert('Error', error.response?.data?.data.message || 'Failed to load pronunciation words.');
-      setMode(null);
     } finally {
       setLoading(false);
     }
@@ -337,7 +335,6 @@ const loadPronunciationWords = async () => {
 
       if (wordsWithAudio.length < 5) {
         Alert.alert('Not Enough Audio', 'Need at least 5 words with audio for the listening quiz.');
-        setMode(null);
         return;
       }
 
@@ -368,10 +365,10 @@ const loadPronunciationWords = async () => {
       setCurrentListeningQuestion(0);
       setListeningScore(0);
       setShowListeningResults(false);
+      setMode('listening-quiz'); // Set mode ONLY on success
     } catch (error) {
       console.error('Failed to load listening quiz:', error);
       Alert.alert('Error', error.response?.data?.data.message || 'Failed to load listening quiz.');
-      setMode(null);
     } finally {
       setLoading(false);
     }
@@ -418,8 +415,8 @@ const loadPronunciationWords = async () => {
    setSessionId(null);
    if (!(await checkAuth())) return;
 
-   setLoading(true);
    try {
+       setLoading(true);
        const res = await practiceAPI.getDaily({ 
            limit: 15, 
            lang: activeLanguage.code,
@@ -430,10 +427,12 @@ const loadPronunciationWords = async () => {
            const words = res.data?.data?.words || [];
            const sId = res.data?.data?.sessionId;
 
-           // Generate and set questions based on practiceType
-           // ... (Logic to generate questions)
-
-           setMode(practiceType);
+           // --- NEW: Handle question generation here ---
+           // Based on your existing logic, you might need to set 'questions' here
+           // For now, I am ensuring mode is set only on success
+           
+           setSessionId(sId);
+           setMode(practiceType); // SUCCESS
        } else {
            Alert.alert("All Caught Up!", "No words due for review today.");
        }

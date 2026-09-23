@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
-import { ThemeContext } from '../context/ThemeContext';
-import ScreenHeader from '../components/ScreenHeader';
+import { ThemeContext } from '../../context/ThemeContext';
+import ScreenHeader from '../../components/ScreenHeader';
 
 const ReviewScreen = ({ navigation, route }) => {
   const { mistakes } = route.params || { mistakes: [] };

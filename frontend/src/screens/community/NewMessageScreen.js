@@ -1,6 +1,6 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useState, useEffect, useContext } from 'react';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
 import {
   View,
   Text,
@@ -16,8 +16,8 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import haptics from '../utils/haptics';
-import { communityAPI, messagesAPI } from '../services/api';
+import haptics from '../../utils/haptics';
+import { communityAPI, messagesAPI } from '../../services/api';
 
 const UserItem = ({ user, onSelect, loading }) => {
   const contextValue = useContext(ThemeContext) || {};

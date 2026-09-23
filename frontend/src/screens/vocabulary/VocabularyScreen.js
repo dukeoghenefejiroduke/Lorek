@@ -1,4 +1,4 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useState, useEffect, useRef, useContext, useMemo, useCallback } from 'react';
 import {
   View,
@@ -21,17 +21,17 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
-import haptics from "../utils/haptics";
+import haptics from '../../utils/haptics';
 import { BlurView } from 'expo-blur';
-import { vocabularyAPI, pronunciationAPI } from '../services/api';
-import WordCard from '../components/WordCard';
-import FamilyTreeModule from '../components/FamilyTreeModule';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import { LanguageContext } from '../context/LanguageContext';
-import ScreenHeader from '../components/ScreenHeader';
-import LanguageSwitcher from '../components/LanguageSwitcher';
-import LoadingOverlay from '../components/LoadingOverlay';
-import { handleGlobalError } from '../utils/errorHandler';
+import { vocabularyAPI, pronunciationAPI } from '../../services/api';
+import WordCard from '../../components/WordCard';
+import FamilyTreeModule from '../../components/FamilyTreeModule';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import ScreenHeader from '../../components/ScreenHeader';
+import LanguageSwitcher from '../../components/LanguageSwitcher';
+import LoadingOverlay from '../../components/LoadingOverlay';
+import { handleGlobalError } from '../../utils/errorHandler';
 
 const { width } = Dimensions.get('window');
 

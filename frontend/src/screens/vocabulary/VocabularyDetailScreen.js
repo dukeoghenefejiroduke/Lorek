@@ -1,4 +1,4 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useEffect, useState, useContext } from 'react';
 import {
   View,
@@ -14,10 +14,10 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
-import haptics from "../utils/haptics";
-import { vocabularyAPI } from '../services/api';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import { LanguageContext } from '../context/LanguageContext';
+import haptics from '../../utils/haptics';
+import { vocabularyAPI } from '../../services/api';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
 
 export default function VocabularyDetailScreen({ navigation, route }) {
   const { wordId, word: initialWord } = route.params || {};

@@ -8,7 +8,7 @@ const { authLimiter } = require('../middleware/rateLimit');
 router.use(authLimiter);
 
 // Get all API keys for current user
-router.get('/api-keys', auth, async (req, res) => {
+router.get('/api-keys', auth, async (req, res, next) => {
   try {
     const user = await User.findById(req.userId || req.user?.id);
     
@@ -39,10 +39,15 @@ router.get('/api-keys', auth, async (req, res) => {
 });
 
 // Generate new API key
-router.post('/generate-api-key', auth, async (req, res) => {
+router.post('/generate-api-key', auth, async (req, res, next) => {
   try {
-    const { name = 'Default' } = req.body;
+    const body = req.body || {};
+    const { name = 'Default' } = body;
     const user = await User.findById(req.userId);
+    
+    if (!user) {
+      return res.status(404).json({ success: false, error: "User not found" });
+    }
     
     // Generate API key
     const apiKey = 'izon_' + crypto.randomBytes(32).toString('hex');
@@ -59,7 +64,7 @@ router.post('/generate-api-key', auth, async (req, res) => {
     
     user.security.apiKeys.push({
       key: hashedKey,
-      name: name.trim(),
+      name: (name || 'Default').toString().trim(),
       permissions: ['read', 'translate'],
       createdAt: new Date(),
       expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year

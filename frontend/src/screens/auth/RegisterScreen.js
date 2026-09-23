@@ -1,4 +1,4 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import {
   View,
@@ -18,12 +18,12 @@ import {
 import { MaterialIcons, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { AuthContext } from '../context/AuthContext';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import { LanguageContext } from '../context/LanguageContext';
-import { authAPI } from '../services/api';
-import GoogleLoginButton from '../components/GoogleLoginButton';
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+import { AuthContext } from '../../context/AuthContext';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import { authAPI } from '../../services/api';
+import GoogleLoginButton from '../../components/GoogleLoginButton';
+import KeyboardAvoidingWrapper from '../../components/KeyboardAvoidingWrapper';
 
 export default function RegisterScreen({ navigation }) {
   const { activeLanguage } = useContext(LanguageContext);

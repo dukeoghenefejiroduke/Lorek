@@ -1,7 +1,7 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
+import KeyboardAvoidingWrapper from '../../components/KeyboardAvoidingWrapper';
 import {
   View,
   Text,
@@ -21,13 +21,13 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
-import haptics from '../utils/haptics';
+import haptics from '../../utils/haptics';
 import { Audio } from 'expo-av';
 import * as Speech from 'expo-speech';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { StatusBar } from 'expo-status-bar';
-import { LanguageContext } from '../context/LanguageContext';
-import api from '../services/api';
+import { LanguageContext } from '../../context/LanguageContext';
+import api from '../../services/api';
 
 const { width } = Dimensions.get('window');
 

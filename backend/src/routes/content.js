@@ -10,7 +10,7 @@ router.use(auth);
 // Get full course hierarchy
 router.get('/hierarchy', async (req, res, next) => {
     try {
-        const courses = await Course.find()
+        const courses = await Course.find({ _id: { $in: req.user.enrolledCourses } })
             .populate({
                 path: 'sections',
                 populate: {

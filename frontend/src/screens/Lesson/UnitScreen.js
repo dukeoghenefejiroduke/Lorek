@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, ActivityIndicator, StatusBar } from 'react-native';
-import { ThemeContext } from '../context/ThemeContext';
-import ScreenHeader from '../components/ScreenHeader';
-import { lessonAPI } from '../services/api';
+import { ThemeContext } from '../../context/ThemeContext';
+import ScreenHeader from '../../components/ScreenHeader';
+import { lessonAPI } from '../../services/api';
 
 const UnitScreen = ({ navigation, route }) => {
   const { course } = route.params;

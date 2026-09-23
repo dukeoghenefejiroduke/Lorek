@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, ActivityIndicator, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { ThemeContext } from '../context/ThemeContext';
-import ScreenHeader from '../components/ScreenHeader';
-import api from '../services/api';
+import { ThemeContext } from '../../context/ThemeContext';
+import ScreenHeader from '../../components/ScreenHeader';
+import api from '../../services/api';
 
 const CourseScreen = ({ navigation }) => {
   const { theme } = useContext(ThemeContext);

@@ -1,7 +1,7 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
+import KeyboardAvoidingWrapper from '../../components/KeyboardAvoidingWrapper';
 // ... (imports) ...
 import {
   View,
@@ -18,9 +18,9 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import haptics from '../utils/haptics';
-import { AuthContext } from '../context/AuthContext';
-import { messagesAPI } from '../services/api'; // Ensure this path is correct
+import haptics from '../../utils/haptics';
+import { AuthContext } from '../../context/AuthContext';
+import { messagesAPI } from '../../services/api'; // Ensure this path is correct
 
 const formatTime = (dateString) => {
   if (!dateString) return '';

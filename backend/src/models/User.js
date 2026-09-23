@@ -724,14 +724,17 @@ const userSchema = new mongoose.Schema({
   
   // Add to userSchema
 activeLanguage: {
-  type: mongoose.Schema.Types.ObjectId,
-  ref: 'Language',
+type: mongoose.Schema.Types.ObjectId,
+ref: 'Language',
 },
 learningLanguages: [{
-  type: mongoose.Schema.Types.ObjectId,
-  ref: 'Language',
+type: mongoose.Schema.Types.ObjectId,
+ref: 'Language',
 }],
-  
+enrolledCourses: [{
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'Course',
+}],
   // Core authentication
   username: {
     type: String,

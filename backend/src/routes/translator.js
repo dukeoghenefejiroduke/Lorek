@@ -173,45 +173,44 @@ function preprocessEnglish(text, wordObjects) {
 
 
 async function handleTranslationLogic(params, currentUser = null) {
-  const { text, from = 'en', to = 'izon', lang } = params;
+  const { text, from = 'en', to } = params;
   
-  // Get the appropriate engine dynamically
-  const engine = TranslationEngineFactory.getEngine(to);
-  if (!engine) {
-    throw new AppError('Translation engine not supported for this language', 400);
+  // Normalize 'to' to an array
+  const targetLanguages = Array.isArray(to) ? to : [to];
+  
+  const results = {};
+
+  for (const targetLang of targetLanguages) {
+      // Get the appropriate engine dynamically
+      const engine = TranslationEngineFactory.getEngine(targetLang);
+      if (!engine) {
+        results[targetLang] = { error: 'Translation engine not supported' };
+        continue;
+      }
+
+      // Set context for engine
+      const context = {
+        from,
+        to: targetLang,
+        geminiClient,
+      };
+
+      // Perform translation using the engine
+      const result = await engine.translate(text, context);
+
+      results[targetLang] = {
+        translated: result.translated,
+        sourceLanguage: from,
+        targetLanguage: targetLang,
+        confidence: result.confidence,
+        timestamp: new Date().toISOString()
+      };
   }
 
-  let languageId = null;
-  /*
-  if (lang) {
-    const Language = mongoose.model('Language');
-    const languageDoc = await Language.findOne({ code: lang.toUpperCase() });
-    if (languageDoc) languageId = languageDoc._id;
-  }
-  */
-
-  // Set context for engine
-  const context = {
-    from,
-    to,
-    geminiClient,
-    languageId
-  };
-
-  // Perform translation using the engine
-  const result = await engine.translate(text, context);
-
-  // Return standard response format (Phase 12 requirement)
+  // Return standard response format
   return {
     original: text,
-    translated: result.translated,
-    sourceLanguage: from,
-    targetLanguage: to,
-    confidence: result.confidence,
-    alternatives: [],
-    warnings: [],
-    unknownTokens: result.unknownTokens,
-    evidence: result.evidence,
+    translations: results,
     timestamp: new Date().toISOString()
   };
 }

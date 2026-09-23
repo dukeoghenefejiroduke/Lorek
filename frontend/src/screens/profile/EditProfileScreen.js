@@ -1,4 +1,4 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import {
   View,
@@ -22,13 +22,13 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import haptics from '../utils/haptics';
+import haptics from '../../utils/haptics';
 import DateTimePicker from '@react-native-community/datetimepicker'; 
 
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
-import { useAuth } from '../context/AuthContext';
-import { authAPI, userAPI } from '../services/api';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
+import KeyboardAvoidingWrapper from '../../components/KeyboardAvoidingWrapper';
+import { useAuth } from '../../context/AuthContext';
+import { authAPI, userAPI } from '../../services/api';
 
 const { width } = Dimensions.get('window');
 

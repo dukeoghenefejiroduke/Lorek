@@ -18,15 +18,15 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
-import haptics from "../utils/haptics";
+import haptics from '../../utils/haptics';
 import * as ImagePicker from 'expo-image-picker';
 import { BlurView } from 'expo-blur';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 
-import { progressAPI, gamificationAPI, userAPI, notificationAPI } from '../services/api';
+import { progressAPI, gamificationAPI, userAPI, notificationAPI } from '../../services/api';
 
 const { width } = Dimensions.get('window');
 

@@ -1,8 +1,8 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useState, useEffect, useRef, useCallback, useContext } from 'react';
 
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
+import KeyboardAvoidingWrapper from '../../components/KeyboardAvoidingWrapper';
 import {
   View,
   Text,
@@ -25,11 +25,11 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
-import haptics from '../utils/haptics';
+import haptics from '../../utils/haptics';
 import { BlurView } from 'expo-blur';
 
-import { communityAPI } from '../services/api';
-import { AuthContext } from '../context/AuthContext';
+import { communityAPI } from '../../services/api';
+import { AuthContext } from '../../context/AuthContext';
 
 const { width } = Dimensions.get('window');
 

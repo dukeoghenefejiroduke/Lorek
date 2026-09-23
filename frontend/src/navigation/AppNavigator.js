@@ -33,54 +33,54 @@ import { notificationAPI } from '../services/api';
 
 import { streakService } from '../services/streakService';
 
-import CourseScreen from '../screens/CourseScreen';
-import UnitScreen from '../screens/UnitScreen';
-import ReviewScreen from '../screens/ReviewScreen';
+import CourseScreen from '../screens/Lesson/CourseScreen';
+import UnitScreen from '../screens/Lesson/UnitScreen';
+import ReviewScreen from '../screens/Lesson/ReviewScreen';
 import PronunciationScreen from '../screens/PronunciationScreen';
 import PremiumScreen from '../screens/PremiumScreen';
 // ── Existing screens ────────────────────────────────────────────────
 import HomeScreen          from '../screens/HomeScreen';
-import LessonsScreen       from '../screens/LessonsScreen';
-import VocabularyScreen    from '../screens/VocabularyScreen';
+import LessonsScreen       from '../screens/Lesson/LessonsScreen';
+import VocabularyScreen    from '../screens/vocabulary/VocabularyScreen';
 import PracticeScreen      from '../screens/PracticeScreen';
 import ProgressScreen      from '../screens/ProgressScreen';
-import ProfileScreen       from '../screens/ProfileScreen';
-import LoginScreen         from '../screens/LoginScreen';
-import RegisterScreen      from '../screens/RegisterScreen';
+import ProfileScreen       from '../screens/profile/ProfileScreen';
+import LoginScreen         from '../screens/auth/LoginScreen';
+import RegisterScreen      from '../screens/auth/RegisterScreen';
 import TranslatorScreen    from '../screens/TranslatorScreen';
-import AdminScreen         from '../screens/AdminScreen';
+import AdminScreen         from '../screens/admin/AdminScreen';
 import LeaderboardScreen   from '../screens/LeaderboardScreen';
 import ReferralScreen      from '../screens/ReferralScreen';
-import ConversationScreen  from '../screens/ConversationScreen';
+import ConversationScreen  from '../screens/community/ConversationScreen';
 
 // ── NEW screens added from ProfileScreen ────────────────────────────
-import EditProfileScreen   from '../screens/EditProfileScreen';
+import EditProfileScreen   from '../screens/profile/EditProfileScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import DailyGoalScreen     from '../screens/DailyGoalScreen';
 import AboutAppScreen      from '../screens/AboutAppScreen';
 import OnboardingScreen    from '../screens/OnboardingScreen';
 
 import ApiKeyScreen      from '../screens/ApiKeyScreen';
-import LessonDetailScreen from '../screens/LessonDetailScreen';
-import ResultScreen from '../screens/ResultScreen';
+import LessonDetailScreen from '../screens/Lesson/LessonDetailScreen';
+import ResultScreen from '../screens/Lesson/ResultScreen';
 
 import CultureScreen from '../screens/CultureScreen';
-import CommunityScreen from '../screens/CommunityScreen';
+import CommunityScreen from '../screens/community/CommunityScreen';
 import GamesScreen from '../screens/GamesScreen';
 import ChangePasswordScreen from '../screens/ChangePasswordScreen';
-import CreateDiscussionScreen from '../screens/CreateDiscussionScreen';
-import DiscussionDetailScreen from '../screens/DiscussionDetailScreen';
+import CreateDiscussionScreen from '../screens/community/CreateDiscussionScreen';
+import DiscussionDetailScreen from '../screens/community/DiscussionDetailScreen';
 import TermsScreen from '../screens/TermsScreen';
 import SearchScreen from '../screens/SearchScreen';
 
-import NewMessageScreen from '../screens/NewMessageScreen';
-import ChatDetailScreen from '../screens/ChatDetailScreen';
-import MessagesScreen from '../screens/MessagesScreen';
-import UserProfileScreen from '../screens/UserProfileScreen';
+import NewMessageScreen from '../screens/community/NewMessageScreen';
+import ChatDetailScreen from '../screens/community/ChatDetailScreen';
+import MessagesScreen from '../screens/community/MessagesScreen';
+import UserProfileScreen from '../screens/profile/UserProfileScreen';
 import MyContributionsScreen from '../screens/MyContributionsScreen';
 import AchievementScreen from '../screens/AchievementScreen';
 import RemindersScreen from '../screens/RemindersScreen';
-import VocabularyDetailScreen from '../screens/VocabularyDetailScreen';
+import VocabularyDetailScreen from '../screens/vocabulary/VocabularyDetailScreen';
 
 const { width, height } = Dimensions.get('window');
 const Stack = createNativeStackNavigator();

@@ -1,4 +1,4 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import {
   View,
@@ -19,14 +19,14 @@ import {
 import { MaterialIcons, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as LocalAuthentication from 'expo-local-authentication';
-import { get } from '../services/storage';
+import { get } from '../../services/storage';
 
-import { AuthContext } from '../context/AuthContext';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import { LanguageContext } from '../context/LanguageContext';
-import GoogleLoginButton from '../components/GoogleLoginButton';
-import LoadingOverlay from '../components/LoadingOverlay';
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+import { AuthContext } from '../../context/AuthContext';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import GoogleLoginButton from '../../components/GoogleLoginButton';
+import LoadingOverlay from '../../components/LoadingOverlay';
+import KeyboardAvoidingWrapper from '../../components/KeyboardAvoidingWrapper';
 
 export default function LoginScreen({ navigation }) {
   const { activeLanguage } = useContext(LanguageContext);

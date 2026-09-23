@@ -1,7 +1,7 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
+import KeyboardAvoidingWrapper from '../../components/KeyboardAvoidingWrapper';
 import {
   View,
   Text,
@@ -18,9 +18,9 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons, FontAwesome5 } from '@expo/vector-icons';
-import haptics from '../utils/haptics';
-import { communityAPI } from '../services/api';
-import LoadingOverlay from '../components/LoadingOverlay';
+import haptics from '../../utils/haptics';
+import { communityAPI } from '../../services/api';
+import LoadingOverlay from '../../components/LoadingOverlay';
 
 const CATEGORIES = [
   { id: 'general', name: 'General', icon: 'forum', color: '#4CAF50' },

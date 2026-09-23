@@ -34,6 +34,12 @@ const ENV = {
 const ENVIRONMENT = process.env.EXPO_PUBLIC_APP_ENV || 'development';
 const config = ENV[ENVIRONMENT];
 
+// Helper to get language headers
+export const getLanguageHeaders = async () => {
+    const lang = await get('userLanguageCode');
+    return lang ? { 'Accept-Language': lang.toUpperCase() } : {};
+};
+
 // Get appropriate API URL based on platform
 const getApiUrl = () => {
   if (ENVIRONMENT !== 'development') return config.API_URL;
@@ -156,13 +162,14 @@ NetInfo.addEventListener(state => {
 api.interceptors.request.use(
   async (config) => {
     // 1. Auth Headers
-    if (!config.url.includes('/auth/')) {
+    const publicAuthRoutes = ['/auth/login', '/auth/register', '/auth/forgot-password', '/auth/reset-password', '/auth/verify-email'];
+    if (!publicAuthRoutes.some(route => config.url.includes(route))) {
         const token = await get('token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
     }
-// ...
+    
     // 2. Offline Mode Handling
     if (!isOnline && (config.method !== 'get')) {
         await addToSyncQueue(config.method, config.url, config.data);
@@ -375,7 +382,7 @@ const setCachedResponse = (key, data) => {
 };
 
 // Enhanced GET with caching and deduplication
-api.getWithCache = async (url, params = {}, ttl = config.CACHE_TTL) => {
+api.getWithCache = async (url, params = {}, ttl = config.CACHE_TTL, headers = {}) => {
   const cacheKey = `${url}_${JSON.stringify(params)}`;
   
   // Check cache first
@@ -391,7 +398,7 @@ api.getWithCache = async (url, params = {}, ttl = config.CACHE_TTL) => {
   }
   
   // Make the request
-  const requestPromise = api.get(url, { params })
+  const requestPromise = api.get(url, { params, headers })
     .then(response => {
       setCachedResponse(cacheKey, response.data);
       pendingRequests.delete(pendingKey);
@@ -503,44 +510,44 @@ export const vocabularyAPI = {
   verifyWord: (id) => api.post(`/vocabulary/${id}/verify`),
   
   // Learning methods
-  getSmartReview: (params) => api.get('/vocabulary/mastery/stats', { params }),
-  updateSRS: (wordId, score) => api.post('/vocabulary/mastery/update', { wordId, quality: score }),
-  batchUpdateSRS: (updates) => api.post('/vocabulary/mastery/batch-update', { updates }),
-  getPersonalizedMix: () => api.get('/vocabulary/daily-mix/personalized'),
-  getRandomSelection: (params) => api.get('/vocabulary/random/selection', { params }),
-  getLearningSuggestions: () => api.get('/vocabulary/suggestions/learning'),
-  getReviewQueue: () => api.get('/vocabulary/review'),
+  getSmartReview: async (params) => api.get('/vocabulary/mastery/stats', { params, headers: await getLanguageHeaders() }),
+  updateSRS: async (wordId, score) => api.post('/vocabulary/mastery/update', { wordId, quality: score }, { headers: await getLanguageHeaders() }),
+  batchUpdateSRS: async (updates) => api.post('/vocabulary/mastery/batch-update', { updates }, { headers: await getLanguageHeaders() }),
+  getPersonalizedMix: async () => api.get('/vocabulary/daily-mix/personalized', { headers: await getLanguageHeaders() }),
+  getRandomSelection: async (params) => api.get('/vocabulary/random/selection', { params, headers: await getLanguageHeaders() }),
+  getLearningSuggestions: async () => api.get('/vocabulary/suggestions/learning', { headers: await getLanguageHeaders() }),
+  getReviewQueue: async () => api.get('/vocabulary/review', { headers: await getLanguageHeaders() }),
   
   // Public methods with caching
   getAll: async (params) => {
-    return api.getWithCache('/vocabulary', params);
+    return api.getWithCache('/vocabulary', params, config.CACHE_TTL, await getLanguageHeaders());
   },
   
-  getById: (id) => api.get(`/vocabulary/${id}`),
+  getById: async (id) => api.get(`/vocabulary/${id}`, { headers: await getLanguageHeaders() }),
   
   search: async (query) => {
-    return api.getWithCache('/vocabulary/search', { q: query });
+    return api.getWithCache('/vocabulary/search', { q: query }, config.CACHE_TTL, await getLanguageHeaders());
   },
   
-  getByCategory: (category) => {
-    return api.getWithCache('/vocabulary/category/' + category);
+  getByCategory: async (category) => {
+    return api.getWithCache('/vocabulary/category/' + category, {}, config.CACHE_TTL, await getLanguageHeaders());
   },
   
-  getDailyWord: () => api.get('/vocabulary/daily-mix/personalized'), // Updated to personalized if possible
-  getFeaturedWordOfDay: () => api.get('/vocabulary/word-of-day/featured'),
+  getDailyWord: async () => api.get('/vocabulary/daily-mix/personalized', { headers: await getLanguageHeaders() }),
+  getFeaturedWordOfDay: async () => api.get('/vocabulary/word-of-day/featured', { headers: await getLanguageHeaders() }),
   
-  getFavorites: () => api.get('/vocabulary/favorites/list'),
+  getFavorites: async () => api.get('/vocabulary/favorites/list', { headers: await getLanguageHeaders() }),
   
-  addToFavorites: (wordId) => api.post(`/vocabulary/${wordId}/favorite`),
+  addToFavorites: async (wordId) => api.post(`/vocabulary/${wordId}/favorite`, {}, { headers: await getLanguageHeaders() }),
   
-  removeFromFavorites: (wordId) => api.delete(`/vocabulary/${wordId}/favorite`),
+  removeFromFavorites: async (wordId) => api.delete(`/vocabulary/${wordId}/favorite`, { headers: await getLanguageHeaders() }),
   
   reportWord: (wordId, data) => api.post(`/vocabulary/${wordId}/report`, data),
   
-  getRecent: () => api.get('/vocabulary/recent'),
+  getRecent: async () => api.get('/vocabulary/recent', { headers: await getLanguageHeaders() }),
   
-  getStats: () => api.get('/vocabulary/stats'),
-  getOverviewStats: () => api.get('/vocabulary/stats/overview'),
+  getStats: async () => api.get('/vocabulary/stats', { headers: await getLanguageHeaders() }),
+  getOverviewStats: async () => api.get('/vocabulary/stats/overview', { headers: await getLanguageHeaders() }),
   
   // Public endpoints
   public: {
@@ -555,24 +562,24 @@ export const vocabularyAPI = {
 
 // --- GAMIFICATION API ---
 export const gamificationAPI = {
-  getUserStats: () => api.get('/progress/stats'), 
-  updateProgress: (lessonId, data) => api.post(`/progress/lesson/${lessonId}`, data),
+  getUserStats: async () => api.get('/progress/stats', { headers: await getLanguageHeaders() }), 
+  updateProgress: async (lessonId, data) => api.post(`/progress/lesson/${lessonId}`, data, { headers: await getLanguageHeaders() }),
   
-  getLeaderboard: (params = { period: 'weekly' }) => api.get('/progress/leaderboard', { params }),
+  getLeaderboard: async (params = { period: 'weekly' }) => api.get('/progress/leaderboard', { params, headers: await getLanguageHeaders() }),
   
-  checkBadges: () => api.post('/progress/achievements/check'),
+  checkBadges: async () => api.post('/progress/achievements/check', {}, { headers: await getLanguageHeaders() }),
   
-  getBadges: () => api.get('/progress/badges'),
+  getBadges: async () => api.get('/progress/badges', { headers: await getLanguageHeaders() }),
   
-  getAchievements: () => api.get('/progress/achievements'),
+  getAchievements: async () => api.get('/progress/achievements', { headers: await getLanguageHeaders() }),
   
-  getStreakInfo: () => api.get('/progress/streak'),
+  getStreakInfo: async () => api.get('/progress/streak', { headers: await getLanguageHeaders() }),
   
-  getPoints: () => api.get('/progress/points'),
+  getPoints: async () => api.get('/progress/points', { headers: await getLanguageHeaders() }),
   
-  getRank: () => api.get('/progress/rank'),
+  getRank: async () => api.get('/progress/rank', { headers: await getLanguageHeaders() }),
   
-  claimReward: (rewardId) => api.post(`/progress/rewards/${rewardId}/claim`),
+  claimReward: async (rewardId) => api.post(`/progress/rewards/${rewardId}/claim`, {}, { headers: await getLanguageHeaders() }),
 };
 
 export const leaderboardAPI = {
@@ -585,18 +592,18 @@ export const leaderboardAPI = {
 export const lessonAPI = {
   // User Methods
   // Change the default params or pass them when calling
-  getAll: (params = { includeProgress: 'true' }) => 
+  getAll: async (params = { includeProgress: 'true' }) => 
     api.get('/lessons', { 
       params, 
-      headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Expires': '0' } 
+      headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Expires': '0', ...await getLanguageHeaders() } 
     }),
-  getById: (id) => api.get(`/lessons/${id}`),
-  complete: (id, data) => api.post(`/lessons/${id}/complete`, data),
-  getProgress: (id) => api.get(`/lessons/${id}/progress`),
-  getRecommendations: () => api.get('/lessons/recommendations/list'),
-  search: (query) => api.get('/lessons', { params: { search: query } }),
-  getByLevel: (level) => api.get('/lessons', { params: { level } }),
-  getByCategory: (category) => api.get('/lessons', { params: { category } }),
+  getById: async (id) => api.get(`/lessons/${id}`, { headers: await getLanguageHeaders() }),
+  complete: async (id, data) => api.post(`/lessons/${id}/complete`, data, { headers: await getLanguageHeaders() }),
+  getProgress: async (id) => api.get(`/lessons/${id}/progress`, { headers: await getLanguageHeaders() }),
+  getRecommendations: async () => api.get('/lessons/recommendations/list', { headers: await getLanguageHeaders() }),
+  search: async (query) => api.get('/lessons', { params: { search: query }, headers: await getLanguageHeaders() }),
+  getByLevel: async (level) => api.get('/lessons', { params: { level }, headers: await getLanguageHeaders() }),
+  getByCategory: async (category) => api.get('/lessons', { params: { category }, headers: await getLanguageHeaders() }),
 
   // Admin Methods
     create: (data) => api.post('/lessons', data),
@@ -609,62 +616,63 @@ export const lessonAPI = {
     // Public Methods
     public: {
       getAll: (params) => api.get('/public/lessons', { params }),
-      getById: (id) => api.get(`/public/lessons/${id}`),
+      getById: (id) => api.get('/public/lessons/' + id),
     }
 };
 
 // --- PROGRESS API ---
 export const progressAPI = {
-  get: () => api.get('/progress'),
-  getCategories: () => api.get('/progress/categories'),
-  update: (data) => api.post('/progress', data),
+  get: async () => api.get('/progress', { headers: await getLanguageHeaders() }),
+  getCategories: async () => api.get('/progress/categories', { headers: await getLanguageHeaders() }),
+  update: async (data) => api.post('/progress', data, { headers: await getLanguageHeaders() }),
   
-  getGraph: (params) => api.get('/progress/graph', { params }),
+  getGraph: async (params) => api.get('/progress/graph', { params, headers: await getLanguageHeaders() }),
   
-  getMonthly: (month, year) => api.get('/progress/monthly', { params: { month, year } }),
+  getMonthly: async (month, year) => api.get('/progress/monthly', { params: { month, year }, headers: await getLanguageHeaders() }),
   
-  getYearly: (year) => api.get('/progress/yearly', { params: { year } }),
+  getYearly: async (year) => api.get('/progress/yearly', { params: { year }, headers: await getLanguageHeaders() }),
   
-  reset: () => api.post('/progress/reset'),
+  reset: async () => api.post('/progress/reset', {}, { headers: await getLanguageHeaders() }),
   
   export: () => api.get('/progress/export', { responseType: 'blob' }),
   
   
-  updateStreak: (forceCheck = false) => api.post('/progress/streak', { forceCheck }),
-  checkMilestones: () => api.post('/progress/milestone'),
-  getLeaderboard: (params) => api.get('/progress/leaderboard', { params }),
-  getAchievements: () => api.get('/progress/achievements'),
-  getDetailedStats: () => api.get('/progress/stats/detailed'),
+  updateStreak: async (forceCheck = false) => api.post('/progress/streak', { forceCheck }, { headers: await getLanguageHeaders() }),
+  checkMilestones: async () => api.post('/progress/milestone', {}, { headers: await getLanguageHeaders() }),
+  getLeaderboard: async (params) => api.get('/progress/leaderboard', { params, headers: await getLanguageHeaders() }),
+  getAchievements: async () => api.get('/progress/achievements', { headers: await getLanguageHeaders() }),
+  getDetailedStats: async () => api.get('/progress/stats/detailed', { headers: await getLanguageHeaders() }),
 };
 
 // --- TRANSLATOR API ---
 export const translatorAPI = {
-  translate: (data) => api.post('/translator/translate', data),
-  translateBatch: (data) => api.post('/translator/translate/batch', data),
-  translateGet: (params) => api.get('/translator/translate', { params }),
-  detectLanguage: (text) => api.post('/translator/detect', { text }),
-  saveToHistory: (data) => api.post('/translator/translations', data),
-  getHistory: () => api.get('/translator/translations'),
-  getFavorites: () => api.get('/translator/translations/favorites'),
-  toggleFavorite: (id) => api.put(`/translator/translations/${id}/favorite`),
-  deleteTranslation: (id) => api.delete(`/translator/translations/${id}`),
-  clearHistory: () => api.delete('/translator/translations/clear'),
-  getOfflinePack: () => api.get('/translator/translations/offline-pack'),
+  translate: async (data) => api.post('/translator/translate', data, { headers: await getLanguageHeaders() }),
+  translateBatch: async (data) => api.post('/translator/translate/batch', data, { headers: await getLanguageHeaders() }),
+  translateGet: async (params) => api.get('/translator/translate', { params, headers: await getLanguageHeaders() }),
+  detectLanguage: async (text) => api.post('/translator/detect', { text }, { headers: await getLanguageHeaders() }),
+  saveToHistory: async (data) => api.post('/translator/translations', data, { headers: await getLanguageHeaders() }),
+  getHistory: async () => api.get('/translator/translations', { headers: await getLanguageHeaders() }),
+  getFavorites: async () => api.get('/translator/translations/favorites', { headers: await getLanguageHeaders() }),
+  toggleFavorite: async (id) => api.put(`/translator/translations/${id}/favorite`, {}, { headers: await getLanguageHeaders() }),
+  deleteTranslation: async (id) => api.delete(`/translator/translations/${id}`, { headers: await getLanguageHeaders() }),
+  clearHistory: async () => api.delete('/translator/translations/clear', { headers: await getLanguageHeaders() }),
+  getOfflinePack: async () => api.get('/translator/translations/offline-pack', { headers: await getLanguageHeaders() }),
 };
 
 // --- PRONUNCIATION API ---
 export const pronunciationAPI = {
-  getGuide: () => api.get('/public/pronunciation/guide'),
+  getGuide: async () => api.get('/public/pronunciation/guide', { headers: await getLanguageHeaders() }),
   
-  getVocabularyWithPronunciation: (params = {}) => api.get('/vocabulary', {
-    params: { ...params, includePronunciation: 'true' }
+  getVocabularyWithPronunciation: async (params = {}) => api.get('/vocabulary', {
+    params: { ...params, includePronunciation: 'true' },
+    headers: await getLanguageHeaders()
   }),
   
-  validate: (data) => api.post('/public/validate', data),
+  validate: async (data) => api.post('/public/validate', data, { headers: await getLanguageHeaders() }),
   
-  getAudio: (wordId) => api.get(`/pronunciation/audio/${wordId}`, { responseType: 'blob' }),
+  getAudio: async (wordId) => api.get(`/pronunciation/audio/${wordId}`, { responseType: 'blob', headers: await getLanguageHeaders() }),
   
-  submitRecording: (wordId, audioBlob) => {
+  submitRecording: async (wordId, audioBlob) => {
     const formData = new FormData();
     formData.append('audio', {
       uri: audioBlob,
@@ -672,11 +680,11 @@ export const pronunciationAPI = {
       name: `recording_${wordId}.m4a`,
     });
     return api.post(`/pronunciation/${wordId}/validate`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: { 'Content-Type': 'multipart/form-data', ...await getLanguageHeaders() },
     });
   },
   
-  getTips: (wordId) => api.get(`/pronunciation/${wordId}/tips`),
+  getTips: async (wordId) => api.get(`/pronunciation/${wordId}/tips`, { headers: await getLanguageHeaders() }),
 };
 
 // --- REFERRAL API ---
@@ -796,26 +804,26 @@ export const communityAPI = {
 
 export const cultureAPI = {
   // Categories
-  getCategories: (params) => api.get('/culture/categories', { params }),
+  getCategories: async (params) => api.get('/culture/categories', { params, headers: await getLanguageHeaders() }),
   
   // Content
-  getContentByCategory: (categoryId, params) => api.get(`/culture/category/${categoryId}`, { params }),
-  getContentItem: (contentId) => api.get(`/culture/content/${contentId}`),
+  getContentByCategory: async (categoryId, params) => api.get(`/culture/category/${categoryId}`, { params, headers: await getLanguageHeaders() }),
+  getContentItem: async (contentId) => api.get(`/culture/content/${contentId}`, { headers: await getLanguageHeaders() }),
   
   // Proverbs
-  getProverbs: (params) => api.get('/culture/proverbs', { params }),
-  getProverbOfDay: (params) => api.get('/culture/proverbs/daily', { params }),
-  getProverb: (id) => api.get(`/culture/proverbs/${id}`),
-  getFeaturedProverbs: () => api.get('/culture/proverbs/featured'),
-  getProverbsByCategory: (category) => api.get(`/culture/proverbs/category/${category}`),
-  searchProverbs: (query) => api.get('/culture/proverbs/search', { params: { q: query } }),
-  getProverbStats: () => api.get('/culture/proverbs/stats'),
+  getProverbs: async (params) => api.get('/culture/proverbs', { params, headers: await getLanguageHeaders() }),
+  getProverbOfDay: async (params) => api.get('/culture/proverbs/daily', { params, headers: await getLanguageHeaders() }),
+  getProverb: async (id) => api.get(`/culture/proverbs/${id}`, { headers: await getLanguageHeaders() }),
+  getFeaturedProverbs: async () => api.get('/culture/proverbs/featured', { headers: await getLanguageHeaders() }),
+  getProverbsByCategory: async (category) => api.get(`/culture/proverbs/category/${category}`, { headers: await getLanguageHeaders() }),
+  searchProverbs: async (query) => api.get('/culture/proverbs/search', { params: { q: query }, headers: await getLanguageHeaders() }),
+  getProverbStats: async () => api.get('/culture/proverbs/stats', { headers: await getLanguageHeaders() }),
   
   // Interactions
-  submitProverbFeedback: (id, data) => api.post(`/culture/proverbs/${id}/feedback`, data),
-  addProverbComment: (id, data) => api.post(`/culture/proverbs/${id}/comments`, data),
-  likeProverb: (id) => api.post(`/culture/proverbs/${id}/like`),
-  shareProverb: (id) => api.post(`/culture/proverbs/${id}/share`),
+  submitProverbFeedback: async (id, data) => api.post(`/culture/proverbs/${id}/feedback`, data, { headers: await getLanguageHeaders() }),
+  addProverbComment: async (id, data) => api.post(`/culture/proverbs/${id}/comments`, data, { headers: await getLanguageHeaders() }),
+  likeProverb: async (id) => api.post(`/culture/proverbs/${id}/like`, {}, { headers: await getLanguageHeaders() }),
+  shareProverb: async (id) => api.post(`/culture/proverbs/${id}/share`, {}, { headers: await getLanguageHeaders() }),
   
   // Admin
   createContent: (data) => api.post('/culture/admin/content', data),
@@ -835,12 +843,12 @@ export const cultureAPI = {
 };
 
 export const gamesAPI = {
-  startGame: (data) => api.post('/games/start', data),
-  submitGame: (data) => api.post('/games/submit', data),
-  getStats: () => api.get('/games/stats'),
-  getLeaderboard: (gameType, params) => api.get(`/games/leaderboard/${gameType}`, { params }),
-  getHistory: (params) => api.get('/games/history', { params }),
-  getWords: (params) => api.get('/games/words', { params }),
+  startGame: async (data) => api.post('/games/start', data, { headers: await getLanguageHeaders() }),
+  submitGame: async (data) => api.post('/games/submit', data, { headers: await getLanguageHeaders() }),
+  getStats: async () => api.get('/games/stats', { headers: await getLanguageHeaders() }),
+  getLeaderboard: async (gameType, params) => api.get(`/games/leaderboard/${gameType}`, { params, headers: await getLanguageHeaders() }),
+  getHistory: async (params) => api.get('/games/history', { params, headers: await getLanguageHeaders() }),
+  getWords: async (params) => api.get('/games/words', { params, headers: await getLanguageHeaders() }),
 };
 
 export const messagesAPI = {
@@ -860,10 +868,10 @@ export const messagesAPI = {
 };
 
 export const practiceAPI = {
-  getDaily: (params) => api.get('/practice/daily', { params }),
-  submitResult: (data) => api.post('/practice/submit', data),
-  getStats: () => api.get('/practice/stats'),
-  getForecast: () => api.get('/practice/forecast'),
+  getDaily: async (params) => api.get('/practice/daily', { params, headers: await getLanguageHeaders() }),
+  submitResult: async (data) => api.post('/practice/submit', data, { headers: await getLanguageHeaders() }),
+  getStats: async () => api.get('/practice/stats', { headers: await getLanguageHeaders() }),
+  getForecast: async () => api.get('/practice/forecast', { headers: await getLanguageHeaders() }),
 };
 
 export const languagesAPI = {

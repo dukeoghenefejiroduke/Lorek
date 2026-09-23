@@ -16,13 +16,33 @@ Authorization: Bearer <your-jwt-token>
 
 ### API Key Authentication (for public API)
 
-Public API endpoints require an API key in the header:
+Public API endpoints (e.g., `/api/public/*`) require an API key to be included in the request header.
 
+#### Usage
+
+Include the `X-API-Key` header in your HTTP requests:
+
+```http
+GET /api/public/vocabulary?limit=50
+X-API-Key: your_generated_api_key_here
 ```
 
-X-API-Key: <your-api-key>
+## Developer Guide
 
-```
+If you are a developer looking to integrate Izon Language data into your own applications, follow these steps:
+
+1. **Create an Account**: Register a user account on the main Izon Language platform.
+2. **Generate API Key**:
+   - Authenticate with the API using your user credentials to receive a JWT.
+   - Use the JWT to call the `/api/auth/generate-api-key` endpoint to receive your unique `X-API-Key`.
+   - You can generate multiple keys for different projects if needed.
+3. **Use the API**: Include your `X-API-Key` in the header of all requests to endpoints under the `/api/public` path.
+4. **Manage Keys**: Use the `/api/auth/api-keys` endpoint to list your active keys and revoke them via `/api/auth/api-keys/:keyId` if you believe a key has been compromised.
+
+**Best Practices**:
+- **Security**: Never hardcode your API keys in public repositories or client-side application code.
+- **Environment Variables**: Store keys in environment variables or a secure key management system.
+- **Monitoring**: Regularly review your generated keys and revoke any that are no longer in use.
 
 ## Endpoints
 
@@ -103,19 +123,71 @@ Response: {
 
 ```http
 
-POST /auth/generate-api-key
+POST /api/auth/generate-api-key
 
-Content-Type: application/json
-
-{
-
-"userId": "string"
-
-}
+Authorization: Bearer <your-jwt-token>
 
 Response: {
 
-"apiKey": "string"
+"success": true,
+
+"data": {
+
+"key": "string",
+
+"name": "string",
+
+"createdAt": "timestamp"
+
+}
+
+}
+
+```
+
+#### Get API Keys
+
+```http
+
+GET /api/auth/api-keys
+
+Authorization: Bearer <your-jwt-token>
+
+Response: {
+
+"success": true,
+
+"data": [
+
+{
+
+"id": "string",
+
+"name": "string",
+
+"createdAt": "timestamp"
+
+}
+
+]
+
+}
+
+```
+
+#### Revoke API Key
+
+```http
+
+DELETE /api/auth/api-keys/:keyId
+
+Authorization: Bearer <your-jwt-token>
+
+Response: {
+
+"success": true,
+
+"message": "API key revoked successfully"
 
 }
 

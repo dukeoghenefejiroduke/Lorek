@@ -1,6 +1,6 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
 import {
   View,
   Text,
@@ -21,14 +21,14 @@ import {
 import { Picker } from '@react-native-picker/picker';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
-import haptics from '../utils/haptics';
+import haptics from '../../utils/haptics';
 import * as ImagePicker from 'expo-image-picker';
 import { StatusBar } from 'expo-status-bar';
 
 // APIs
-import { adminAPI, vocabularyAPI, lessonAPI, cultureAPI, apiUtils } from '../services/api';
-import { AuthContext } from '../context/AuthContext';
-import { LanguageContext } from '../context/LanguageContext';
+import { adminAPI, vocabularyAPI, lessonAPI, cultureAPI, apiUtils } from '../../services/api';
+import { AuthContext } from '../../context/AuthContext';
+import { LanguageContext } from '../../context/LanguageContext';
 
 const { width } = Dimensions.get('window');
 

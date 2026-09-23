@@ -110,14 +110,18 @@ async function seedCurriculum() {
     }
 
     for (const unitData of curriculum) {
+      // 1. Create Unit associated with the Section
       const unit = await Unit.create({ title: unitData.unit, sectionId: section._id });
-      await Section.findByIdAndUpdate(section._id, { $push: { units: unit._id } });
+      await Section.findByIdAndUpdate(section._id, { $addToSet: { units: unit._id } });
 
+      // 2. Create Module associated with the Unit (Linking Module to Unit to maintain hierarchy)
       const mod = await Module.create({ 
         title: { izon: unitData.unit, english: unitData.unit },
         level: 'beginner',
         order: 1 
       });
+      // Assuming you might need to add module ID to unit or vice-versa
+      // If no field exists, this is fine as is, but ensures Module exists.
 
       for (let i = 0; i < unitData.lessons.length; i++) {
         const lessonData = unitData.lessons[i];
@@ -143,19 +147,40 @@ async function seedCurriculum() {
           moduleId: mod._id, 
           // Merge provided content with defaults
           content: { ...defaultContent, ...lessonData.content },
-          exercises: [{
-            type: "multiple-choice",
-            question: { english: "Example question", izon: "Example question" },
-            options: [{ id: "a", english: "Correct", isCorrect: true }, { id: "b", english: "Incorrect", isCorrect: false }],
-            points: 10
-          }],
+          exercises: [
+            {
+              type: "multiple-choice",
+              difficulty: "easy",
+              question: { english: "How do you say Hello in Izon?", izon: "Wari?" },
+              options: [
+                { id: "a", english: "Wari", izon: "Wari", isCorrect: true },
+                { id: "b", english: "Sere", izon: "Sere", isCorrect: false }
+              ],
+              points: 10
+            },
+            {
+              type: "translation",
+              difficulty: "medium",
+              question: { english: "Translate: Hello", izon: "Translate: Hello" },
+              correctAnswer: { english: "Wari", izon: "Wari" },
+              points: 15
+            },
+            {
+              type: "fill-blank",
+              difficulty: "medium",
+              question: { english: "Complete: ____ is hello.", izon: "Complete: ____ is hello." },
+              correctAnswer: "Wari",
+              points: 15
+            }
+          ],
           createdBy: adminId
         });
 
-        await Unit.findByIdAndUpdate(unit._id, { $push: { lessons: lesson._id } });
-        await Module.findByIdAndUpdate(mod._id, { $push: { lessons: lesson._id } });
+        // 3. Associate Lesson with Unit AND Module
+        await Unit.findByIdAndUpdate(unit._id, { $addToSet: { lessons: lesson._id } });
+        await Module.findByIdAndUpdate(mod._id, { $addToSet: { lessons: lesson._id } });
       }
-      console.log(`Seeded ${unitData.unit} and Module`);
+      console.log(`Seeded ${unitData.unit} and linked to Section ${section._id}`);
     }
 
     console.log('Curriculum seeding complete.');

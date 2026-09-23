@@ -1,4 +1,4 @@
-import SafeAreaContainer from '../components/SafeAreaContainer';
+import SafeAreaContainer from '../../components/SafeAreaContainer';
 import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
 import {
   View,
@@ -22,11 +22,11 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
-import haptics from '../utils/haptics';
-import { AuthContext } from '../context/AuthContext';
-import { communityAPI } from '../services/api';
-import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import { LanguageContext } from '../context/LanguageContext';
+import haptics from '../../utils/haptics';
+import { AuthContext } from '../../context/AuthContext';
+import { communityAPI } from '../../services/api';
+import { ThemeContext, lightTheme } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
 
 const { width } = Dimensions.get('window');
 export default function CommunityScreen({ navigation }) {
