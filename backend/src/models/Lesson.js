@@ -441,7 +441,7 @@ const lessonSchema = new mongoose.Schema({
   
   category: {
     type: String,
-    enum: ['greetings', 'family', 'food', 'travel', 'work', 'school', 'health', 'nature', 'numbers', 'time', 'colors', 'emotions'],
+    enum: ['greetings', 'family', 'food', 'travel', 'work', 'school', 'health', 'nature', 'numbers', 'time', 'colors', 'emotions', 'grammar', 'conversation', 'home', 'review', 'descriptions'],
     required: true,
     index: true,
   },
