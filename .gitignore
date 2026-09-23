@@ -2,3 +2,7 @@ node_modules/
 .DS_Store
 *.db
 .env
+
+# Application logs
+backend/logs/
+*.log
