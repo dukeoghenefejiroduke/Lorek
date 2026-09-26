@@ -46,7 +46,7 @@ const UnitScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   centered: { flex: 1, justifyContent: 'center' },
-  list: { padding: 20 },
+  list: { padding: 20, paddingBottom: 100 },
   card: { padding: 20, borderRadius: 15, marginBottom: 15, elevation: 3 },
   cardTitle: { fontSize: 18, fontWeight: 'bold' },
 });

@@ -92,7 +92,7 @@ export default function FamilyTreeModule({ expanded = true }) {
         <Text style={styles.sideSub}>{data.description}</Text>
       </View>
 
-      <ScrollView style={styles.treeContainer} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.treeContainer} showsVerticalScrollIndicator={false}>
         {data.members.map((member, index) => (
           <Animated.View 
             key={index} 

@@ -767,7 +767,7 @@ const loadPronunciationWords = async () => {
           </View>
         </LinearGradient>
 
-        <ScrollView style={styles.container}>
+        <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
           <View style={styles.resultsContainer}>
             <View style={styles.resultsHeader}>
               <View style={[styles.resultIcon, { backgroundColor: color + '20' }]}>
@@ -882,7 +882,7 @@ const loadPronunciationWords = async () => {
           </View>
         </LinearGradient>
 
-        <ScrollView style={styles.container}>
+        <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
           <View style={styles.resultsContainer}>
             <View style={styles.resultsHeader}>
               <Text style={[styles.resultsMessage, { color }]}>{message}</Text>
@@ -950,7 +950,7 @@ const loadPronunciationWords = async () => {
           </View>
         </LinearGradient>
 
-        <ScrollView style={styles.container}>
+        <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
           <View style={styles.pronunciationContent}>
             <View style={styles.wordCard}>
               <Text style={styles.izonWord}>{currentWord.izonWord || currentWord.word}</Text>

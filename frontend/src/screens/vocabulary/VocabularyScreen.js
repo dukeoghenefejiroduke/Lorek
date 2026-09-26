@@ -632,7 +632,7 @@ const playAudio = async (wordId) => {
             </LinearGradient>
 
             {selectedWord && (
-              <ScrollView style={styles.modalBody}>
+              <ScrollView contentContainerStyle={styles.modalBody}>
                 {/* Word Header */}
                 <View style={styles.modalWordHeader}>
                   <View style={[styles.modalIconContainer, { backgroundColor: `${theme.success}20` }]}>
@@ -799,7 +799,7 @@ const playAudio = async (wordId) => {
               </TouchableOpacity>
             </LinearGradient>
 
-            <ScrollView style={styles.modalBody}>
+            <ScrollView contentContainerStyle={styles.modalBody}>
               <View style={styles.statsGrid}>
                 <View style={[styles.statBox, { backgroundColor: theme.background }]}>
                   <Text style={[styles.statBoxNumber, { color: theme.primary }]}>

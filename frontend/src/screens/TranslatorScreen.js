@@ -400,17 +400,47 @@ export default function TranslatorScreen({ navigation }) {
       });
 
       if (response.data.success) {
-        const data = response.data.data;
-        setTranslatedText(data.translated);
-        setTranslationInfo({
-          type: data.type,
-          note: data.note || '',
-          pronunciation: data.pronunciation || null,
-          provider: data.provider || null,
-          confidence: data.confidence || null,
-          alternatives: data.alternatives || [],
-          examples: data.examples || [],
-        });
+        const responseData = response.data.data;
+        let translatedVal = '';
+        let infoObj = {
+          type: '',
+          note: '',
+          pronunciation: null,
+          provider: null,
+          confidence: null,
+          alternatives: [],
+          examples: [],
+        };
+
+        if (responseData.translations) {
+          const targetKey = targetLang.toLowerCase();
+          const firstKey = Object.keys(responseData.translations)[0];
+          const transObj = responseData.translations[targetKey] || responseData.translations[firstKey] || {};
+          translatedVal = transObj.translated || '';
+          infoObj = {
+            type: transObj.type || responseData.type || '',
+            note: transObj.note || responseData.note || '',
+            pronunciation: transObj.pronunciation || responseData.pronunciation || null,
+            provider: transObj.provider || responseData.provider || null,
+            confidence: transObj.confidence || responseData.confidence || null,
+            alternatives: transObj.alternatives || responseData.alternatives || [],
+            examples: transObj.examples || responseData.examples || [],
+          };
+        } else if (responseData.translated) {
+          translatedVal = responseData.translated;
+          infoObj = {
+            type: responseData.type || '',
+            note: responseData.note || '',
+            pronunciation: responseData.pronunciation || null,
+            provider: responseData.provider || null,
+            confidence: responseData.confidence || null,
+            alternatives: responseData.alternatives || [],
+            examples: responseData.examples || [],
+          };
+        }
+
+        setTranslatedText(translatedVal);
+        setTranslationInfo(infoObj);
         
         haptics.notificationSuccess();
         loadHistory(); // Refresh history
@@ -427,10 +457,9 @@ export default function TranslatorScreen({ navigation }) {
   };
 
   const swapDirection = () => {
-    setDirection(prev => prev === DIRECTION.EN_TO_IZON 
-      ? DIRECTION.IZON_TO_EN 
-      : DIRECTION.EN_TO_IZON);
-    // Swap texts
+    const temp = sourceLang;
+    setSourceLang(targetLang);
+    setTargetLang(temp);
     setInputText(translatedText);
     setTranslatedText('');
     setTranslationInfo({
@@ -467,7 +496,7 @@ export default function TranslatorScreen({ navigation }) {
       await translatorAPI.saveToHistory({
         original: inputText,
         translated: translatedText,
-        direction: direction,
+        direction: `${sourceLang.toLowerCase()}_to_${targetLang.toLowerCase()}`,
         confidence: translationInfo.confidence,
         pronunciation: translationInfo.pronunciation,
       });
@@ -482,7 +511,12 @@ export default function TranslatorScreen({ navigation }) {
 
   const loadFromHistory = (item) => {
     setInputText(item.sourceText || item.original);
-    setDirection(item.sourceLanguage === 'en' ? DIRECTION.EN_TO_IZON : DIRECTION.IZON_TO_EN);
+    if (item.sourceLanguage) {
+      setSourceLang(item.sourceLanguage.toUpperCase());
+    }
+    if (item.targetLanguage) {
+      setTargetLang(item.targetLanguage.toUpperCase());
+    }
     setShowHistory(false);
     setTimeout(() => handleTranslate(), 100);
   };

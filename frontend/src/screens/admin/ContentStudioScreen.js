@@ -20,7 +20,7 @@ export default function ContentStudioScreen() {
     };
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.title}>Content Studio</Text>
             
             <View style={styles.actions}>

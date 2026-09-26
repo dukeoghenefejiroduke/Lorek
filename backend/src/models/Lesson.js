@@ -463,6 +463,11 @@ const lessonSchema = new mongoose.Schema({
     ref: 'Module',
     index: true,
   },
+  unitId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Unit',
+    index: true,
+  },
   
   // Prerequisites
   prerequisites: [prerequisiteSchema],

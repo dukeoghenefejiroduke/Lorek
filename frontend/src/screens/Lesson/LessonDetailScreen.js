@@ -211,6 +211,22 @@ const handleMultipleChoice = (optionId) => {
       <KeyboardAvoidingWrapper style={styles.content}>
         <Animated.View style={[styles.exerciseWrapper, { opacity: fadeAnim, transform: [{ translateY: slideAnim }] }]}>
           
+          {content?.vocabulary?.length > 0 && (
+            <View style={[styles.contentCard, { backgroundColor: theme.card }]}>
+              <View style={styles.cardHeader}><MaterialIcons name="list" size={20} color="#4CAF50" /><Text style={styles.cardTitle}>Vocabulary</Text></View>
+              {content.vocabulary.map((vocab, i) => {
+                const word = vocab.wordId;
+                if (!word) return null;
+                return (
+                  <View key={i} style={styles.exampleRow}>
+                    <Text style={styles.izonText}>{word.izonWord}</Text>
+                    <Text style={[styles.englishText, { color: theme.subText }]}>{word.englishTranslation}</Text>
+                  </View>
+                );
+              })}
+            </View>
+          )}
+
           {content?.grammar?.length > 0 && content.grammar.map((item, i) => (
             <View key={i} style={[styles.contentCard, { backgroundColor: theme.card }]}>
               <View style={styles.cardHeader}><Ionicons name="book" size={20} color="#4CAF50" /><Text style={styles.cardTitle}>{item.title.english}</Text></View>
@@ -234,7 +250,7 @@ const handleMultipleChoice = (optionId) => {
             </View>
           ))}
 
-          {(!content?.grammar?.length && !content?.examples?.length && !content?.culturalNotes?.length) && (
+          {(!content?.vocabulary?.length && !content?.grammar?.length && !content?.examples?.length && !content?.culturalNotes?.length) && (
               <View style={[styles.contentCard, { backgroundColor: theme.card }]}>
                   <Text style={styles.cardText}>No specific learning content available for this lesson.</Text>
               </View>

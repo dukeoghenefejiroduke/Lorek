@@ -203,6 +203,12 @@ async function handleTranslationLogic(params, currentUser = null) {
         sourceLanguage: from,
         targetLanguage: targetLang,
         confidence: result.confidence,
+        type: result.type,
+        pronunciation: result.pronunciation,
+        examples: result.examples,
+        note: result.note,
+        alternatives: result.alternatives,
+        provider: result.provider,
         timestamp: new Date().toISOString()
       };
   }

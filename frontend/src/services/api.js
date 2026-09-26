@@ -480,7 +480,7 @@ logout: async () => {
 
   refreshToken: (data) => api.post('/auth/refresh-token', data),
   
-  generateApiKey: () => api.post('/auth/generate-api-key'),
+  generateApiKey: (data) => api.post('/auth/generate-api-key', data),
   
   getApiKeys: () => api.get('/auth/api-keys'),
   

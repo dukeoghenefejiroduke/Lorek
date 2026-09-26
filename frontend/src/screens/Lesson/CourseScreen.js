@@ -57,7 +57,7 @@ const CourseScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   centered: { flex: 1, justifyContent: 'center' },
-  list: { padding: 20 },
+  list: { padding: 20, paddingBottom: 100 },
   card: { borderRadius: 15, marginBottom: 15, overflow: 'hidden', elevation: 3 },
   cardGradient: { padding: 20 },
   cardTitle: { fontSize: 20, fontWeight: 'bold', color: '#fff' },

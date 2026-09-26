@@ -117,30 +117,30 @@ export default function CultureScreen({ navigation }) {
   };
 
   const loadContentByCategory = async (categoryId) => {
-  try {
-    const response = await cultureAPI.getContentByCategory(categoryId, {
-        lang: activeLanguage.code 
+    try {
+      const response = await cultureAPI.getContentByCategory(categoryId, {
+        lang: activeLanguage?.code || 'IZON'
       });
-    if (response.data.success) {
-      const data = response.data.data;
-      
-      const isProverbSection = categoryId === 'proverbs' || 
-                               (Array.isArray(data) && data.length > 0 && data[0].izon);
-
-      if (Array.isArray(data)) {
-        if (isProverbSection) {
-          setProverbs(data);
-          setContent([]);
-        } else {
-          setContent(data);
-          setProverbs([]);
+      if (response.data.success) {
+        const data = response.data.data;
+        
+        if (data && typeof data === 'object' && !Array.isArray(data)) {
+          setContent(data.content || []);
+          setProverbs(data.proverbs || []);
+        } else if (Array.isArray(data)) {
+          if (categoryId === 'proverbs' || (data.length > 0 && data[0].izon)) {
+            setProverbs(data);
+            setContent([]);
+          } else {
+            setContent(data);
+            setProverbs([]);
+          }
         }
       }
+    } catch (error) {
+      console.error('Failed to load content:', error);
     }
-  } catch (error) {
-    console.error('Failed to load content:', error);
-  }
-};
+  };
 
   const onRefresh = async () => {
     setRefreshing(true);

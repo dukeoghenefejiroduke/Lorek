@@ -291,7 +291,7 @@ export default function PronunciationScreen({ navigation }) {
         </Text>
       </View>
 
-      <ScrollView style={styles.content}>
+      <ScrollView contentContainerStyle={styles.content}>
         {practiceMode === 'listening' && renderListeningPractice()}
         {practiceMode === 'speaking' && renderSpeakingPractice()}
         {practiceMode === 'quiz' && renderQuiz()}
