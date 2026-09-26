@@ -736,7 +736,7 @@ response = await lessonAPI.create({
     {/* Check both dashboard recent and your new state */}{(dashboardData.recent?.lessons || []).map(lesson => (
   <Picker.Item 
     key={lesson._id} 
-    label={`${lesson.title.english} (${lesson.status})`} // Add status here so you know if it's live
+    label={`${lesson?.title?.english || lesson?.title || 'Untitled'} (${lesson.status})`} // Add status here so you know if it's live
     value={lesson._id} 
   />
 ))}
@@ -950,9 +950,9 @@ response = await lessonAPI.create({
 {/* Add this inside your ScrollView, below the Form Card */}
 <View style={styles.listSection}>
   <Text style={styles.sectionTitle}>Recent Lessons (Drafts)</Text>
-  {dashboardData.recent.lessons.map(lesson => (
+  {(dashboardData?.recent?.lessons || []).map(lesson => (
     <View key={lesson._id} style={styles.listItem}>
-       <Text>{lesson.title.english} - {lesson.status}</Text>
+       <Text>{lesson?.title?.english || lesson?.title || 'Untitled'} - {lesson.status}</Text>
        {lesson.status === 'draft' && (
          <TouchableOpacity onPress={() => handlePublish(lesson._id)}>
            <Text style={{color: 'green'}}>Publish Now</Text>

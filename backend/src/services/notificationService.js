@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+const emailService = require('./emailService');
 const twilio = require('twilio');
 const webpush = require('web-push');
 const Expo = require('expo-server-sdk').default;
@@ -13,17 +13,6 @@ const mongoose = require('mongoose');
 
 // Initialize Expo SDK for push notifications
 const expo = new Expo();
-
-// Configure email transporter
-const emailTransporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: process.env.EMAIL_SECURE === 'true',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
 
 // Configure SMS client
 const twilioClient = process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN
@@ -362,23 +351,18 @@ class NotificationService {
     }
     
     try {
-      const mailOptions = {
-        from: `"Izon Language App" <${process.env.EMAIL_FROM}>`,
+      const result = await emailService.sendEmail({
+        from: `"Izon Language App" <${process.env.EMAIL_FROM || 'noreply@izonapp.com'}>`,
         to: user.email,
         subject: notification.title,
         html: this.buildEmailTemplate(notification),
         text: notification.body,
-      };
-      
-      if (notification.attachments) {
-        mailOptions.attachments = notification.attachments;
-      }
-      
-      const info = await emailTransporter.sendMail(mailOptions);
+        attachments: notification.attachments || [],
+      });
       
       return {
-        success: true,
-        externalId: info.messageId,
+        success: result.success,
+        externalId: result.messageId || result.error,
       };
     } catch (error) {
       logger.error('Failed to send email:', error);

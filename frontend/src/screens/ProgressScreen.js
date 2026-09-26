@@ -409,27 +409,40 @@ export default function ProgressScreen({ navigation }) {
   const loadProgress = async () => {
     try {
       const response = await progressAPI.get();
-      setProgress(response.data.data);
+      setProgress(response.data?.data || null);
     } catch (error) {
-      console.error('Error fetching progress:', error);
+      if (!error?.isNetworkError) {
+        console.warn('Error fetching progress:', error?.message || error);
+      }
     }
   };
 
   const loadCategoryProgress = async () => {
     try {
       const response = await progressAPI.getCategories();
-      setCategoryProgress(response.data.data);
+      setCategoryProgress(response.data?.data || null);
     } catch (error) {
-      console.error('Error fetching category progress:', error);
+      if (!error?.isNetworkError) {
+        console.warn('Error fetching category progress:', error?.message || error);
+      }
     }
   };
 
   const loadGraphData = async () => {
     try {
       const response = await progressAPI.getGraph({ period: timeRange });
-      setGraphData(response.data.data);
+      setGraphData(response.data?.data || null);
     } catch (error) {
-      console.error('Error fetching graph data:', error);
+      // Gracefully handle network errors / offline state without breaking UI
+      if (!error?.isNetworkError) {
+        console.warn('Error fetching graph data:', error?.message || error);
+      }
+      setGraphData({
+        daily: [],
+        cumulative: [],
+        byCategory: {},
+        summary: { totalPoints: 0, totalLessons: 0, totalTime: 0, averageAccuracy: 0 }
+      });
     }
   };
 

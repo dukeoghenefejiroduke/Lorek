@@ -135,7 +135,7 @@ const LessonResultItem = ({ item, onPress, theme }) => (
       <Text style={styles.resultIconText}>📚</Text>
     </View>
     <View style={styles.resultContent}>
-      <Text style={[styles.resultTitle, { color: theme.text }]}>{item.title.english}</Text>
+      <Text style={[styles.resultTitle, { color: theme.text }]}>{item?.title?.english || item?.title || ''}</Text>
       <Text style={[styles.resultSubtitle, { color: theme.subText }]}>{item.description?.english?.substring(0, 60)}...</Text>
       <View style={styles.resultTags}>
         <View style={[styles.resultTag, { backgroundColor: theme.background }]}>

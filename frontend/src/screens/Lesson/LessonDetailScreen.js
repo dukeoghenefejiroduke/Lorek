@@ -229,8 +229,8 @@ const handleMultipleChoice = (optionId) => {
 
           {content?.grammar?.length > 0 && content.grammar.map((item, i) => (
             <View key={i} style={[styles.contentCard, { backgroundColor: theme.card }]}>
-              <View style={styles.cardHeader}><Ionicons name="book" size={20} color="#4CAF50" /><Text style={styles.cardTitle}>{item.title.english}</Text></View>
-              <Text style={styles.cardText}>{item.explanation.english}</Text>
+              <View style={styles.cardHeader}><Ionicons name="book" size={20} color="#4CAF50" /><Text style={styles.cardTitle}>{item?.title?.english || item?.title || ''}</Text></View>
+              <Text style={styles.cardText}>{item?.explanation?.english || item?.explanation || ''}</Text>
             </View>
           ))}
 
@@ -238,15 +238,15 @@ const handleMultipleChoice = (optionId) => {
             <View style={[styles.contentCard, { backgroundColor: theme.card }]}>
               <View style={styles.cardHeader}><MaterialIcons name="translate" size={20} color="#2196F3" /><Text style={styles.cardTitle}>Sentence Examples</Text></View>
               {content.examples.map((ex, i) => (
-                <View key={i} style={styles.exampleRow}><Text style={styles.izonText}>{ex.izon}</Text><Text style={[styles.englishText, { color: theme.subText }]}>{ex.english}</Text></View>
+                <View key={i} style={styles.exampleRow}><Text style={styles.izonText}>{ex?.izon || ''}</Text><Text style={[styles.englishText, { color: theme.subText }]}>{ex?.english || ''}</Text></View>
               ))}
             </View>
           )}
 
           {content?.culturalNotes?.length > 0 && content.culturalNotes.map((note, i) => (
             <View key={i} style={[styles.contentCard, styles.cultureCard, { backgroundColor: theme.card }]}>
-              <View style={styles.cardHeader}><FontAwesome5 name="landmark" size={18} color="#FF9800" /><Text style={styles.cardTitle}>{note.title.english}</Text></View>
-              <Text style={styles.cultureText}>{note.content.english}</Text>
+              <View style={styles.cardHeader}><FontAwesome5 name="landmark" size={18} color="#FF9800" /><Text style={styles.cardTitle}>{note?.title?.english || note?.title || ''}</Text></View>
+              <Text style={styles.cultureText}>{note?.content?.english || note?.content || ''}</Text>
             </View>
           ))}
 
@@ -264,12 +264,23 @@ const handleMultipleChoice = (optionId) => {
       </KeyboardAvoidingWrapper>
     );
   };
+  const getCorrectAnswerString = (correctAnswer) => {
+    if (!correctAnswer) return '';
+    if (typeof correctAnswer === 'string') return correctAnswer;
+    if (typeof correctAnswer === 'object') {
+      const val = correctAnswer.english || correctAnswer.izon || Object.values(correctAnswer)[0];
+      return typeof val === 'string' ? val : (val != null ? String(val) : '');
+    }
+    return String(correctAnswer);
+  };
+
   const handleTranslationInternal = (input) => {
     const exercise = lesson.exercises[currentExerciseIndex];
+    const correctStr = getCorrectAnswerString(exercise.correctAnswer);
     
     // Normalize and clean answers to handle white space and punctuation differences
-    const cleanInput = input.trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
-    const cleanCorrect = (exercise.correctAnswer?.english || exercise.correctAnswer?.izon || "")
+    const cleanInput = String(input || '').trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
+    const cleanCorrect = String(correctStr || '')
       .trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
     
     const isCorrect = cleanInput === cleanCorrect;
@@ -284,7 +295,7 @@ const handleMultipleChoice = (optionId) => {
       Alert.alert('Correct! 🎉', 'Well done!', [{ text: 'Continue', onPress: nextExercise }]);
     } else {
       haptics.notificationError();
-      Alert.alert('Incorrect ❌', `Correct: ${exercise.correctAnswer?.english || exercise.correctAnswer?.izon}`, [{ text: 'Continue', onPress: nextExercise }]);
+      Alert.alert('Incorrect ❌', `Correct: ${correctStr}`, [{ text: 'Continue', onPress: nextExercise }]);
     }
   };
 
@@ -387,7 +398,8 @@ const handleMultipleChoice = (optionId) => {
   const handleFillBlankInternal = (input) => {
     setFillBlankAnswer(input);
     const exercise = lesson.exercises[currentExerciseIndex];
-    const isCorrect = input.trim().toLowerCase() === exercise.correctAnswer?.toLowerCase();
+    const correctStr = getCorrectAnswerString(exercise.correctAnswer);
+    const isCorrect = String(input || '').trim().toLowerCase() === String(correctStr || '').trim().toLowerCase();
 
     setUserAnswers(prev => ({
       ...prev,
@@ -399,7 +411,7 @@ const handleMultipleChoice = (optionId) => {
       Alert.alert('Correct! 🎉', 'Well done!', [{ text: 'Continue', onPress: nextExercise }]);
     } else {
       haptics.notificationError();
-      Alert.alert('Incorrect ❌', `Correct: ${exercise.correctAnswer}`, [{ text: 'Continue', onPress: nextExercise }]);
+      Alert.alert('Incorrect ❌', `Correct: ${correctStr}`, [{ text: 'Continue', onPress: nextExercise }]);
     }
   };
 
@@ -420,7 +432,7 @@ const handleMultipleChoice = (optionId) => {
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <StatusBar barStyle="light-content" />
       <LinearGradient colors={getLevelColor()} style={styles.header}>
-        <Text style={styles.headerTitle}>{isLearningMode ? "Learn" : "Quiz"}: {lesson?.title?.english}</Text>
+        <Text style={styles.headerTitle}>{isLearningMode ? "Learn" : "Quiz"}: {lesson?.title?.english || lesson?.title || ''}</Text>
         {!isLearningMode && (
           <View style={styles.progressBarContainer}>
             <Animated.View style={[styles.progressBar, { width: progressAnim.interpolate({ inputRange: [0, 100], outputRange: ['0%', '100%'] }) }]} />

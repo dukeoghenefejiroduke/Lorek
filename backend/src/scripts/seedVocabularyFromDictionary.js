@@ -1,4 +1,4 @@
-require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
+require('dotenv').config({ path: require('path').join(__dirname, '../../.env') });
 const mongoose = require('mongoose');
 const Vocabulary = require('../models/Vocabulary');
 const Language = require('../models/Language');
@@ -83,6 +83,8 @@ async function seedVocabulary() {
         examples: rawText ? [{ izon: izonWord, english: rawText }] : [],
         audioAvailable: false,
         verified: true,
+        isPublished: true,
+        isActive: true,
         createdBy: adminId
       });
     }

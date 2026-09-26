@@ -80,10 +80,10 @@ export default function CultureScreen({ navigation }) {
       setLoading(true);
       const [categoriesRes, proverbDayRes] = await Promise.all([
         cultureAPI.getCategories({ 
-          lang: activeLanguage.code  || 'IZON'
+          lang: activeLanguage?.code  || 'IZON'
         }),
         cultureAPI.getProverbOfDay({ 
-          lang: activeLanguage.code || 'IZON'
+          lang: activeLanguage?.code || 'IZON'
         }),
      ]);
       if (categoriesRes.data.success) {

@@ -377,7 +377,7 @@ const loadPronunciationWords = async () => {
  const loadQuizQuestions = async (practiceMode) => {
     setLoading(true);
     try {
-      const response = await pronunciationAPI.getVocabularyWithPronunciation({ limit: 10, lang: activeLanguage.code});
+      const response = await pronunciationAPI.getVocabularyWithPronunciation({ limit: 10, lang: activeLanguage?.code || 'IZON'});
       const words = extractWords(response);
       if (words.length === 0) {
         Alert.alert('No Vocabulary Found', 'Add words to your database first!');
@@ -419,7 +419,7 @@ const loadPronunciationWords = async () => {
        setLoading(true);
        const res = await practiceAPI.getDaily({ 
            limit: 15, 
-           lang: activeLanguage.code,
+           lang: activeLanguage?.code || 'IZON',
            practiceType: practiceType 
        });
 

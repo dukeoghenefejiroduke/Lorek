@@ -59,8 +59,8 @@ const LessonsScreen = ({ navigation, route }) => {
     // Apply search
     if (searchQuery) {
       filtered = filtered.filter(lesson =>
-        lesson?.title?.english?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        lesson?.description?.english?.toLowerCase().includes(searchQuery.toLowerCase())
+        (lesson?.title?.english || lesson?.title || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (lesson?.description?.english || lesson?.description || '').toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
@@ -237,9 +237,9 @@ const fetchLessons = async () => {
 
             {/* Lesson Content */}
             <View style={styles.cardContent}>
-              <Text style={styles.lessonTitle}>{item.title.english}</Text>
+              <Text style={styles.lessonTitle}>{item?.title?.english || item?.title || ''}</Text>
               <Text style={styles.lessonDescription} numberOfLines={2}>
-                {item.description.english}
+                {item?.description?.english || item?.description || ''}
               </Text>
 
               {/* Stats Row */}
@@ -419,13 +419,13 @@ const fetchLessons = async () => {
                   </View>
                 </View>
 
-                <Text style={[styles.modalLessonTitle, { color: theme.text }]}>{selectedLesson.title.english}</Text>
+                <Text style={[styles.modalLessonTitle, { color: theme.text }]}>{selectedLesson?.title?.english || selectedLesson?.title || ''}</Text>
                 
                 <View style={[styles.modalLevelBadge, { backgroundColor: `${theme.success}20` }]}>
                   <Text style={[styles.modalLevelText, { color: theme.success }]}>{selectedLesson.level}</Text>
                 </View>
 
-                <Text style={[styles.modalDescription, { color: theme.subText }]}>{selectedLesson.description.english}</Text>
+                <Text style={[styles.modalDescription, { color: theme.subText }]}>{selectedLesson?.description?.english || selectedLesson?.description || ''}</Text>
 
                 {/* Lesson Stats Grid */}
                 <View style={[styles.modalStatsGrid, { backgroundColor: theme.background }]}>
