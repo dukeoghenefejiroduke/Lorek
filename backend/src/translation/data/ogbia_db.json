@@ -1,0 +1,3711 @@
+{
+  "language": {
+    "code": "OGBIA",
+    "name": "Ogbia",
+    "nativeName": "Ọgbiạ",
+    "description": "Ogbia is a Central Delta language spoken in Bayelsa State, Nigeria.",
+    "region": "Bayelsa, Nigeria",
+    "icon": "🐟",
+    "color": "#2196F3",
+    "difficulty": "intermediate",
+    "totalWords": 520,
+    "totalLessons": 8,
+    "totalSpeakers": 500000,
+    "order": 2,
+    "isActive": true,
+    "features": {
+      "hasAudio": false,
+      "hasPronunciation": true,
+      "hasGrammar": true,
+      "hasCulture": true
+    }
+  },
+  "vocabulary": [
+    {
+      "ogbiaWord": "ade",
+      "englishTranslation": "farm",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "arua",
+      "englishTranslation": "garment/clothing",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "amati",
+      "englishTranslation": "music",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạlai",
+      "englishTranslation": "tooth",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạguo",
+      "englishTranslation": "hand",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạsighal",
+      "englishTranslation": "hair",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "eru",
+      "englishTranslation": "juju/evil spirit",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "emugh",
+      "englishTranslation": "head",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ekpom",
+      "englishTranslation": "basket",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹnur",
+      "englishTranslation": "chicken",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹsúá",
+      "englishTranslation": "hoe",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹghoi",
+      "englishTranslation": "snail/hat",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "izin",
+      "englishTranslation": "tears",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "izon",
+      "englishTranslation": "nose",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "idú",
+      "englishTranslation": "pepper",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "otu",
+      "englishTranslation": "house",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogir",
+      "englishTranslation": "work",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okolo",
+      "englishTranslation": "cocoyam",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọba",
+      "englishTranslation": "story",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọso",
+      "englishTranslation": "soap",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọkpe",
+      "englishTranslation": "case/lawsuit",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọgum",
+      "englishTranslation": "frog",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạmum",
+      "englishTranslation": "water",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạmunu",
+      "englishTranslation": "oil",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọgbua",
+      "englishTranslation": "big (thing)",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọgaun",
+      "englishTranslation": "grasshopper",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "id`iobh",
+      "englishTranslation": "ten",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okiel",
+      "englishTranslation": "left (side)/elderly",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ad`io",
+      "englishTranslation": "flood/day",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹgiazi",
+      "englishTranslation": "spoon",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạmeun",
+      "englishTranslation": "honey",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "elegíen",
+      "englishTranslation": "tomorrow/yesterday",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "otitiom",
+      "englishTranslation": "advice",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạpipia",
+      "englishTranslation": "hornbill",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ib`áku",
+      "englishTranslation": "box/chair",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "aluzu",
+      "englishTranslation": "body",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "alukpógh",
+      "englishTranslation": "sugarcane",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "awel",
+      "englishTranslation": "leg/foot",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "abobh",
+      "englishTranslation": "salt",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "agugh",
+      "englishTranslation": "pot",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọnu",
+      "englishTranslation": "mouth",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọya",
+      "englishTranslation": "female",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "obì",
+      "englishTranslation": "abdomen",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọd`al/ọb`al",
+      "englishTranslation": "white/light-coloured",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "iyi",
+      "englishTranslation": "creek",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "igo",
+      "englishTranslation": "eagle",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "esi",
+      "englishTranslation": "sore/place",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹnu",
+      "englishTranslation": "mouths",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹnam",
+      "englishTranslation": "meat/beast",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạkpa",
+      "englishTranslation": "bag",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "atam",
+      "englishTranslation": "feather",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọwu",
+      "englishTranslation": "five",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹsar",
+      "englishTranslation": "three",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạla",
+      "englishTranslation": "year",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "idú/ẹká/ạsú",
+      "englishTranslation": "pepper/horn/horse",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "oví",
+      "englishTranslation": "cow",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ed`úm",
+      "englishTranslation": "bush",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạkpó",
+      "englishTranslation": "mushroom",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọtír",
+      "englishTranslation": "pole for punting a canoe",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "iwóbh",
+      "englishTranslation": "climbing rope",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạdón",
+      "englishTranslation": "long flowing robe",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ikpé",
+      "englishTranslation": "cloth/clothing/loincloth",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹgí",
+      "englishTranslation": "journey",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "éwú",
+      "englishTranslation": "pond",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ípó",
+      "englishTranslation": "masquerade",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ó`rím",
+      "englishTranslation": "a kind of fish",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "énwén",
+      "englishTranslation": "kitchen rack",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ád`úgh",
+      "englishTranslation": "death",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "á`kom",
+      "englishTranslation": "jaundice",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "á`da",
+      "englishTranslation": "father",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "éri",
+      "englishTranslation": "thread",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "igbogi",
+      "englishTranslation": "money",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "egbolom",
+      "englishTranslation": "land",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "egberb`a",
+      "englishTranslation": "story/tale",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹgaga",
+      "englishTranslation": "lobster",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹruru",
+      "englishTranslation": "ashes",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "obodo",
+      "englishTranslation": "road",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạsiga",
+      "englishTranslation": "worm",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "azib`a",
+      "englishTranslation": "god",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "asido",
+      "englishTranslation": "proverb",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "od`id`igh",
+      "englishTranslation": "rope",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ib`ógú",
+      "englishTranslation": "fever",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹbúdú",
+      "englishTranslation": "mud",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "obúrú",
+      "englishTranslation": "parlour",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "olókó",
+      "englishTranslation": "law",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "osókpó",
+      "englishTranslation": "banana",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ad`írí",
+      "englishTranslation": "book",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọghóghó",
+      "englishTranslation": "medicine",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ikpélkpé",
+      "englishTranslation": "lizard",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ibhówú",
+      "englishTranslation": "breath",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "órérén",
+      "englishTranslation": "tree",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ákúb`ú",
+      "englishTranslation": "fathom",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ítila",
+      "englishTranslation": "influenza",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ó`kuru",
+      "englishTranslation": "okro",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okére",
+      "englishTranslation": "which",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "iyíkpo",
+      "englishTranslation": "measles",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "igbóma",
+      "englishTranslation": "bell",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "olótu",
+      "englishTranslation": "champion",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "oyóba",
+      "englishTranslation": "cowife",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạyíga",
+      "englishTranslation": "baby",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "awúre",
+      "englishTranslation": "pipe",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọkúru",
+      "englishTranslation": "porcupine",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ipési",
+      "englishTranslation": "falsehood",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "abézin",
+      "englishTranslation": "basin",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "asadín",
+      "englishTranslation": "sardine (loanword)",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogení",
+      "englishTranslation": "slave",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ologbó",
+      "englishTranslation": "cat",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "od`ud`úl",
+      "englishTranslation": "legend/history",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạnwaní",
+      "englishTranslation": "girls",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "adodón",
+      "englishTranslation": "today",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okpukpú",
+      "englishTranslation": "owl",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹsasár",
+      "englishTranslation": "sand",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ikpakpú",
+      "englishTranslation": "bedbug",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "agayí",
+      "englishTranslation": "true?",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "obodo",
+      "englishTranslation": "road",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "od`i",
+      "englishTranslation": "grave",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogibh",
+      "englishTranslation": "nerve",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okób`a",
+      "englishTranslation": "cowrie",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "onweni",
+      "englishTranslation": "mother",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọbáku",
+      "englishTranslation": "chair",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọsalab`a",
+      "englishTranslation": "comb",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọkarabhabhár",
+      "englishTranslation": "snake",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ewu",
+      "englishTranslation": "pond",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹd`úm",
+      "englishTranslation": "pestle",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹkol",
+      "englishTranslation": "sacrifice",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹnyaní",
+      "englishTranslation": "girl",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "apolo",
+      "englishTranslation": "compound",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạsabi",
+      "englishTranslation": "key",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạtukpa",
+      "englishTranslation": "lamp",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạsóghó",
+      "englishTranslation": "grass",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogbo",
+      "englishTranslation": "age group",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "obenam",
+      "englishTranslation": "elephant",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọbhíí",
+      "englishTranslation": "river",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọd`any",
+      "englishTranslation": "protective charm",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ibú",
+      "englishTranslation": "thing/load",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ịgbína",
+      "englishTranslation": "bead",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ikuku",
+      "englishTranslation": "wind",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ilom",
+      "englishTranslation": "marriage",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ize",
+      "englishTranslation": "drum",
+      "category": "nouns",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọfel/oyel",
+      "englishTranslation": "youngster (Otakeme: oyel)",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "è-mú",
+      "englishTranslation": "head",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "é-dù",
+      "englishTranslation": "thigh",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "é-nə̀",
+      "englishTranslation": "fish",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "è-kpò",
+      "englishTranslation": "seed",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "è-kùkù",
+      "englishTranslation": "water pot",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "è-wùnù",
+      "englishTranslation": "stomach",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "è-kúnè",
+      "englishTranslation": "mat",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "e-kpom",
+      "englishTranslation": "basket",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "è-gú",
+      "englishTranslation": "door",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "è-ɗúrùm",
+      "englishTranslation": "knee",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ̀-nʊ̀",
+      "englishTranslation": "mouth",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ̀-βágʊ̀ɔ̀",
+      "englishTranslation": "arm",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ̀-kpɔ̀kpɔ̀",
+      "englishTranslation": "bone",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ́-fʊ́rʊ́ma",
+      "englishTranslation": "shark",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ̀-ɓʊ̀gɔ̀",
+      "englishTranslation": "monkey",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ̀-nánà",
+      "englishTranslation": "sheep",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ̀-gàgà",
+      "englishTranslation": "shrimp",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ̀-gɪa",
+      "englishTranslation": "knife",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ́-ɓɛ́lɛ́",
+      "englishTranslation": "pot",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ̀-sɔ̀β",
+      "englishTranslation": "spear",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ́-fɔ̀ɪ",
+      "englishTranslation": "plantain",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ɔ̀-ɓàmɪ́",
+      "englishTranslation": "banana",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ò-gomə",
+      "englishTranslation": "axe",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ò-gìdì",
+      "englishTranslation": "machete",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ò-kúròr",
+      "englishTranslation": "iron",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ó-ví",
+      "englishTranslation": "cow",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ò-lògbó",
+      "englishTranslation": "cat",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ò-dùnə",
+      "englishTranslation": "ram",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ó-póríópò",
+      "englishTranslation": "pig",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ò-nom",
+      "englishTranslation": "husband",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ò-won",
+      "englishTranslation": "mother",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ò-jel",
+      "englishTranslation": "boy",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ì-zon",
+      "englishTranslation": "nose",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ì-kpókí",
+      "englishTranslation": "buttocks",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "í-kùrúsì",
+      "englishTranslation": "cannon",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ì-kpímə",
+      "englishTranslation": "manilla",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "í-gùlə́",
+      "englishTranslation": "room",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ì-kpútú",
+      "englishTranslation": "stone",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ì-kpìkìlom",
+      "englishTranslation": "tail",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "í-kpe",
+      "englishTranslation": "wrapper",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ì-re",
+      "englishTranslation": "tobacco",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ə-ɗìen",
+      "englishTranslation": "eye",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ə̀-to",
+      "englishTranslation": "ear",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ə̀-nem",
+      "englishTranslation": "tongue",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ə̀-líkè",
+      "englishTranslation": "leg",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ə̀-nóm",
+      "englishTranslation": "aerial yam",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ə̀-pogì",
+      "englishTranslation": "bat",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ə̀-ɗìo",
+      "englishTranslation": "rainy season",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ə̀-ségì",
+      "englishTranslation": "crocodile",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ə̀-ɗùle",
+      "englishTranslation": "tortoise",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ə̀-boβ",
+      "englishTranslation": "salt",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ə̀-rùə̀",
+      "englishTranslation": "dress",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-sɪ̀al",
+      "englishTranslation": "hair",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-laɪ̀",
+      "englishTranslation": "tooth",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-gʊ̀ɔ̀",
+      "englishTranslation": "hand",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-ɓágʊ́",
+      "englishTranslation": "chin",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-man",
+      "englishTranslation": "back",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-sɪ̀",
+      "englishTranslation": "blood",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-mʊ̀",
+      "englishTranslation": "water",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-mùgù",
+      "englishTranslation": "smoke",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-lɛ̀pɛ̀",
+      "englishTranslation": "smoke",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-và",
+      "englishTranslation": "gun",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-ɓɛ̀gɛ̀rɛ",
+      "englishTranslation": "spear",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-gbànà",
+      "englishTranslation": "arrow",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "á-lágá",
+      "englishTranslation": "needle",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "à-gbàká",
+      "englishTranslation": "shoe",
+      "category": "nouns",
+      "dialect": "Otakeme",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "onini",
+      "englishTranslation": "one",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "iwal",
+      "englishTranslation": "two",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "esari",
+      "englishTranslation": "three",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "inyoun",
+      "englishTranslation": "four",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "owu",
+      "englishTranslation": "five",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "odin",
+      "englishTranslation": "six",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "oduon",
+      "englishTranslation": "seven",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "inyan",
+      "englishTranslation": "eight",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "isio",
+      "englishTranslation": "nine",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "diobh",
+      "englishTranslation": "ten",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "awafu",
+      "englishTranslation": "bridge",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogogo",
+      "englishTranslation": "sun",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ino",
+      "englishTranslation": "fish",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "elei",
+      "englishTranslation": "yam",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ofoi",
+      "englishTranslation": "plantain",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ewei",
+      "englishTranslation": "goat",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "owunom",
+      "englishTranslation": "people",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ololo",
+      "englishTranslation": "bottle",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "isukulu",
+      "englishTranslation": "school (loanword)",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ibasikoro",
+      "englishTranslation": "bicycle (loanword)",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "idrava",
+      "englishTranslation": "driver (loanword)",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "imagoro",
+      "englishTranslation": "mango (loanword)",
+      "category": "nouns",
+      "dialect": "General",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạbóí",
+      "englishTranslation": "boy/boys",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạbóli",
+      "englishTranslation": "bowl/bowls",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạgilási",
+      "englishTranslation": "glass/glasses",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạpénsul",
+      "englishTranslation": "pencil/pencils",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạsónde",
+      "englishTranslation": "Sunday/Sundays",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạsósi",
+      "englishTranslation": "church/churches",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạwósi",
+      "englishTranslation": "watch/watches",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạkéndul",
+      "englishTranslation": "candle/candles",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạdóti",
+      "englishTranslation": "dirt/filth",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạbulóku",
+      "englishTranslation": "block/blocks",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "abézin",
+      "englishTranslation": "basin/basins",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "agôl",
+      "englishTranslation": "gold",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "akósi",
+      "englishTranslation": "coast/coasts",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "amáketi",
+      "englishTranslation": "market/markets",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "amóto",
+      "englishTranslation": "motor car/motor cars",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "arédio",
+      "englishTranslation": "radio/radios",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "asadín",
+      "englishTranslation": "sardine/sardines",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "aséni",
+      "englishTranslation": "chain/chains",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "azín",
+      "englishTranslation": "gin",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "atísa",
+      "englishTranslation": "teacher/teachers",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "abía",
+      "englishTranslation": "beer/beers",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "abíki",
+      "englishTranslation": "biro pen/biro pens",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "azínki",
+      "englishTranslation": "zinc/zincs",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "isukulu",
+      "englishTranslation": "school",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ibasikoro",
+      "englishTranslation": "bicycle",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "idrava",
+      "englishTranslation": "driver",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "imagoro",
+      "englishTranslation": "mango",
+      "category": "loan_words",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "owura",
+      "englishTranslation": "to wash",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okperen",
+      "englishTranslation": "to open",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "opuru",
+      "englishTranslation": "to ask",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ototol",
+      "englishTranslation": "to wash",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "omen",
+      "englishTranslation": "to fall",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "oru",
+      "englishTranslation": "to come",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọtara",
+      "englishTranslation": "to sit",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọbhigi",
+      "englishTranslation": "to roast",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọmin",
+      "englishTranslation": "to swallow",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ofo",
+      "englishTranslation": "to peel",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogor",
+      "englishTranslation": "to beat",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "od`i",
+      "englishTranslation": "to bury",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "od`e",
+      "englishTranslation": "to eat",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ozu",
+      "englishTranslation": "to pour",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "od`ime",
+      "englishTranslation": "to extinguish",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ofugu",
+      "englishTranslation": "to throw away",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọkoko",
+      "englishTranslation": "to demolish",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọsuma",
+      "englishTranslation": "to wake",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọrugi",
+      "englishTranslation": "to divide",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "otibira",
+      "englishTranslation": "to turn",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "osirigia",
+      "englishTranslation": "to rest",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogbodogi",
+      "englishTranslation": "to cut into pieces",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọgi",
+      "englishTranslation": "to go",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọne",
+      "englishTranslation": "to endure",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọru",
+      "englishTranslation": "to say",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọkpo",
+      "englishTranslation": "to tie",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọd`a",
+      "englishTranslation": "to drink",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogodo",
+      "englishTranslation": "to talk",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okod`u",
+      "englishTranslation": "to wait",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "orogi",
+      "englishTranslation": "to abuse",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "omite",
+      "englishTranslation": "to go out",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "obhin",
+      "englishTranslation": "to take",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogim",
+      "englishTranslation": "to build",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "oghil",
+      "englishTranslation": "to run",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "oteny",
+      "englishTranslation": "to shoot",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọfel",
+      "englishTranslation": "to desire/want",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọkom",
+      "englishTranslation": "to start",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogoiny",
+      "englishTranslation": "to be poor",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "osubh",
+      "englishTranslation": "to hold",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogbebh",
+      "englishTranslation": "to plant",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ozogh",
+      "englishTranslation": "to play",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ob`igh",
+      "englishTranslation": "to steal",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogir",
+      "englishTranslation": "to work/do",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "osor",
+      "englishTranslation": "to climb down/descend",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "owol",
+      "englishTranslation": "to sweep/sell",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọtey",
+      "englishTranslation": "to reach",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "oley/oleghe",
+      "englishTranslation": "to suffice / to cry (careful: near-homophones)",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogogh/ogho",
+      "englishTranslation": "to buy",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": "ogho appears as 'to buy' in examples"
+    },
+    {
+      "ogbiaWord": "ozuan",
+      "englishTranslation": "to meet",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "osorogi",
+      "englishTranslation": "to quarrel",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "opelegi",
+      "englishTranslation": "to exceed",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "oye",
+      "englishTranslation": "to suffer",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọgbal",
+      "englishTranslation": "to feed/nurture",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "owe",
+      "englishTranslation": "to fight",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "oyil",
+      "englishTranslation": "to run (race)",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọwal",
+      "englishTranslation": "to count / to marry (context-dependent)",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọkan",
+      "englishTranslation": "to carve",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọkol",
+      "englishTranslation": "to offer sacrifice",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọsa",
+      "englishTranslation": "to brew (wine)",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọson",
+      "englishTranslation": "to cut (firewood)",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okpogh",
+      "englishTranslation": "to sew",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "oti",
+      "englishTranslation": "to beat (drum)",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogigh",
+      "englishTranslation": "to kill",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọgba",
+      "englishTranslation": "to tell lies",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọsi",
+      "englishTranslation": "to clear bush",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okue",
+      "englishTranslation": "to trap (fishing)",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "od`igh",
+      "englishTranslation": "to do farmwork / to enter / to tell (context-dependent)",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ogbo",
+      "englishTranslation": "to cut (palm)",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọkpabh",
+      "englishTranslation": "to seize/grip",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "omobh",
+      "englishTranslation": "to bail water from a canoe",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "oghor",
+      "englishTranslation": "to scrape",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "odu",
+      "englishTranslation": "to fan",
+      "category": "verbs",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "omom",
+      "englishTranslation": "new",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okiel",
+      "englishTranslation": "elderly",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "opona",
+      "englishTranslation": "another",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ob`eb`í",
+      "englishTranslation": "good",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "odí",
+      "englishTranslation": "certain",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọgbara",
+      "englishTranslation": "small",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọgbua",
+      "englishTranslation": "big",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọlala",
+      "englishTranslation": "rich",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọb`al",
+      "englishTranslation": "white/light coloured",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "igbain",
+      "englishTranslation": "old/stale",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ọzuzúá",
+      "englishTranslation": "black",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": "derived, from -zu`"
+    },
+    {
+      "ogbiaWord": "ob`alab`ál",
+      "englishTranslation": "white",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": "derived, from -b`al"
+    },
+    {
+      "ogbiaWord": "ọb`ab`am",
+      "englishTranslation": "ripe/red",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": "derived, from -b`ạm"
+    },
+    {
+      "ogbiaWord": "ọmelmel",
+      "englishTranslation": "sweet",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": "derived, from -mẹl"
+    },
+    {
+      "ogbiaWord": "ọkparakpar",
+      "englishTranslation": "hard",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": "derived, from -kpạr"
+    },
+    {
+      "ogbiaWord": "owewegh",
+      "englishTranslation": "tall",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": "derived, from -wegh"
+    },
+    {
+      "ogbiaWord": "okperokper",
+      "englishTranslation": "short",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": "derived, from -kper"
+    },
+    {
+      "ogbiaWord": "ọpuru",
+      "englishTranslation": "first",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ovuravúra",
+      "englishTranslation": "rich/fertile (of soil)",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "osusuwo",
+      "englishTranslation": "left-over",
+      "category": "adjectives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "obhalabhal",
+      "englishTranslation": "white",
+      "category": "adjectives",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ozuzua",
+      "englishTranslation": "black",
+      "category": "adjectives",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okrabh",
+      "englishTranslation": "bad",
+      "category": "adjectives",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "obabeh",
+      "englishTranslation": "good",
+      "category": "adjectives",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ikuloh",
+      "englishTranslation": "cripple",
+      "category": "adjectives",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "idí",
+      "englishTranslation": "some",
+      "category": "quantifiers",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ib`éla",
+      "englishTranslation": "all",
+      "category": "quantifiers",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ibaab`útú",
+      "englishTranslation": "many",
+      "category": "quantifiers",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "odógá",
+      "englishTranslation": "a part of a whole",
+      "category": "quantifiers",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ekakáram",
+      "englishTranslation": "few/little",
+      "category": "quantifiers",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "emugh emúgh",
+      "englishTranslation": "each and every person",
+      "category": "quantifiers",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ekpo ekpo",
+      "englishTranslation": "one by one",
+      "category": "quantifiers",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "kaka",
+      "englishTranslation": "each/every",
+      "category": "quantifiers",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "b`é",
+      "englishTranslation": "that",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "bhé",
+      "englishTranslation": "then",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "d`é",
+      "englishTranslation": "while/yet/but",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ká",
+      "englishTranslation": "so that/that",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "na",
+      "englishTranslation": "and",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "tá",
+      "englishTranslation": "and/of",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "sá",
+      "englishTranslation": "then",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "b`aka",
+      "englishTranslation": "because",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "bhá`dó",
+      "englishTranslation": "or",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "kí`tá / kí`ná",
+      "englishTranslation": "before",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ekísé",
+      "englishTranslation": "since",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹgheri / oka / ifiébhá",
+      "englishTranslation": "when",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "tú`tú`",
+      "englishTranslation": "until",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ạguo",
+      "englishTranslation": "if/the way or manner",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "mạaguo",
+      "englishTranslation": "so that/in this manner",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "sakina",
+      "englishTranslation": "and/with",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "esadíó",
+      "englishTranslation": "between",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "kpé`lémúnú",
+      "englishTranslation": "instead",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ka...ka",
+      "englishTranslation": "whether or",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "nobo",
+      "englishTranslation": "if it were not for",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "la3",
+      "englishTranslation": "also/as well",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "kwa4 / kọ3 / pọ̀1 / fọ̀1",
+      "englishTranslation": "also",
+      "category": "conjunctions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "sekine",
+      "englishTranslation": "and",
+      "category": "conjunctions",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "dá",
+      "englishTranslation": "at/on",
+      "category": "prepositions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "má",
+      "englishTranslation": "in, from, at, to, towards, etc.",
+      "category": "prepositions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "tá",
+      "englishTranslation": "of",
+      "category": "prepositions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "akaka",
+      "englishTranslation": "beside",
+      "category": "prepositions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "gbá",
+      "englishTranslation": "in/on/at",
+      "category": "prepositions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "gbá á`nyu",
+      "englishTranslation": "on top/at top",
+      "category": "prepositions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "gbá áde",
+      "englishTranslation": "on the floor/down below",
+      "category": "prepositions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "gbá ólogi",
+      "englishTranslation": "inside",
+      "category": "prepositions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "gbá égbetíre",
+      "englishTranslation": "outside",
+      "category": "prepositions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "gbá éma",
+      "englishTranslation": "in the village",
+      "category": "prepositions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ologi",
+      "englishTranslation": "a, in, on, at, etc.",
+      "category": "prepositions",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ma-/mạ-",
+      "englishTranslation": "object marker (prefixed to nouns/pronouns used as objects)",
+      "category": "particles",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ta-",
+      "englishTranslation": "independent possessive marker",
+      "category": "particles",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "d`a-",
+      "englishTranslation": "dependent possessive marker prefix",
+      "category": "particles",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ka-",
+      "englishTranslation": "negative imperative prefix / question particle / intensifier / conjunction (highly homophonous — meaning depends on context)",
+      "category": "particles",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "-d`ọ / -mu`",
+      "englishTranslation": "negation suffixes ('not' / 'no more/no longer')",
+      "category": "particles",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "kpa",
+      "englishTranslation": "as well as/too",
+      "category": "particles",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹmi",
+      "englishTranslation": "very much",
+      "category": "particles",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "kaka",
+      "englishTranslation": "just (recent past marker) / each (as quantifier, written separately)",
+      "category": "particles",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "-bha",
+      "englishTranslation": "definite article / determiner 'the' (suffix, invariable) — also marks relativisation ('who/which') when suffixed to a verb",
+      "category": "particles",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "bha",
+      "englishTranslation": "the (determiner)",
+      "category": "particles",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "A`lúa!",
+      "englishTranslation": "Welcome!/Thank you!/Hello!/Hi!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Wá`áb`ali!",
+      "englishTranslation": "Good morning!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Ob`eb`i ápíobh!",
+      "englishTranslation": "Good morning!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Webhai",
+      "englishTranslation": "Good morning",
+      "category": "greetings_and_common_expressions",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Wáágule!",
+      "englishTranslation": "Good day!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Wogberia",
+      "englishTranslation": "Good afternoon",
+      "category": "greetings_and_common_expressions",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Wáádile!",
+      "englishTranslation": "Good evening!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Wigui",
+      "englishTranslation": "Good evening",
+      "category": "greetings_and_common_expressions",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Edi á`b`áÕlu",
+      "englishTranslation": "Good night!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Diebhali",
+      "englishTranslation": "Good night",
+      "category": "greetings_and_common_expressions",
+      "dialect": "General/comparative",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Díla!",
+      "englishTranslation": "Sorry!/It's a pity!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Duméó!",
+      "englishTranslation": "Get well!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Má`rá reré!",
+      "englishTranslation": "Farewell!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "A`gí bọlobolo arú bọlobolo!",
+      "englishTranslation": "Safe journey!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Bhiné ka ạbhár ka ạbhár mạlugburu ísísi!",
+      "englishTranslation": "Take it easy!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Wẹle máíye!",
+      "englishTranslation": "Leave those alone!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Kọme má ísen!",
+      "englishTranslation": "Start now!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "D`ié ma arú!",
+      "englishTranslation": "Come in!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Tibira na arú!",
+      "englishTranslation": "Come back!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Kạogí ma égbein!",
+      "englishTranslation": "Don't go far!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "KaoléÕghé!",
+      "englishTranslation": "Don't cry!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Merenie máád`ien d`íóm!",
+      "englishTranslation": "Mind yourself!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Azib`a kaod`úrá",
+      "englishTranslation": "Heaven forbid!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "OpúÕd`ọ!",
+      "englishTranslation": "Perhaps!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Ó`kubhái!",
+      "englishTranslation": "Is it so?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "O`gbua ó`kpe!",
+      "englishTranslation": "It's a big problem!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Agayi.",
+      "englishTranslation": "It is true.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Ipési.",
+      "englishTranslation": "It is false.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Ob`eb`í.",
+      "englishTranslation": "It's okay./It's good./It's nice!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "A`ní`Õghé.",
+      "englishTranslation": "It's fine./It's lovely.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "O`nínghéd`ó",
+      "englishTranslation": "It's bad./It's not good.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Náámizogh.",
+      "englishTranslation": "It's full.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Ná`álóbh.",
+      "englishTranslation": "It's raining.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Náámunie.",
+      "englishTranslation": "It's finished.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Ná`ákpar.",
+      "englishTranslation": "It's hard.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Náágurom.",
+      "englishTranslation": "It's bad/rotten/spoilt.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Azib`a olóbha.",
+      "englishTranslation": "God exists./There is God.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Igbogi baá.",
+      "englishTranslation": "There's no money.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "NááÕlei má`ógi.",
+      "englishTranslation": "Let's go!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Adio ná`áÕkpo.",
+      "englishTranslation": "The day is far gone.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Epobh náásubh á`mi.",
+      "englishTranslation": "I am hungry.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Onón ótami.",
+      "englishTranslation": "This is mine.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "O`melmel.",
+      "englishTranslation": "It's sweet.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "O`ghereden.",
+      "englishTranslation": "It's bitter.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Anyén ká álegiri?",
+      "englishTranslation": "Who knows?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Mị náádúm!",
+      "englishTranslation": "What a surprise!",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Otubha ará ma id`ímé.",
+      "englishTranslation": "The house is in darkness.",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Ere kí`ná ámite?",
+      "englishTranslation": "What happened?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Akara é`ghiri?",
+      "englishTranslation": "When?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Obhá ká ére?",
+      "englishTranslation": "What's that?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Anwá ka anyén?",
+      "englishTranslation": "Who are you?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Ótáányen?",
+      "englishTranslation": "Whose is it?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Erê?",
+      "englishTranslation": "What?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "E`níe?",
+      "englishTranslation": "How many?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Akárá ága?",
+      "englishTranslation": "Where?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Aléí éka?",
+      "englishTranslation": "How much?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Atéí maanwá á`ra?",
+      "englishTranslation": "Is it your business?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Nwá íÕrú ma akara adúma?",
+      "englishTranslation": "On which day did you come?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Nwá ná`ágí ma akárá ága?",
+      "englishTranslation": "Where are you going to?",
+      "category": "greetings_and_common_expressions",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Mí` náárú.",
+      "englishTranslation": "I'm coming.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "present progressive, singular"
+    },
+    {
+      "ogbiaWord": "I`yár wáárú.",
+      "englishTranslation": "We're coming.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "present progressive, plural"
+    },
+    {
+      "ogbiaWord": "Nwá náárú.",
+      "englishTranslation": "You're coming.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Ená náárú.",
+      "englishTranslation": "He/she is coming.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Awá wáárú.",
+      "englishTranslation": "They're coming.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Mí` naarú.",
+      "englishTranslation": "I will come.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "simple future"
+    },
+    {
+      "ogbiaWord": "Mị nááru.",
+      "englishTranslation": "I have come.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "perfect"
+    },
+    {
+      "ogbiaWord": "Éki ebera máód`e énám.",
+      "englishTranslation": "Eki loves eating meat.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "habitual aspect"
+    },
+    {
+      "ogbiaWord": "Mí` naarú máóyel.",
+      "englishTranslation": "I'm about to go home.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "immediate future"
+    },
+    {
+      "ogbiaWord": "Imád`íó náátia á`lobh.",
+      "englishTranslation": "The rain is likely to fall.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "probable future"
+    },
+    {
+      "ogbiaWord": "Naab`orá ká áwa id`é.",
+      "englishTranslation": "It's been long since they ate.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "remote past"
+    },
+    {
+      "ogbiaWord": "Mị nákakaarú.",
+      "englishTranslation": "I have just come.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "recent past"
+    },
+    {
+      "ogbiaWord": "Mi náád`e awéÕlé.",
+      "englishTranslation": "I have finished eating.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "completed perfect"
+    },
+    {
+      "ogbiaWord": "Nwá náása asâ?",
+      "englishTranslation": "You're engaged in cooking?",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "durative aspect"
+    },
+    {
+      "ogbiaWord": "bhíné!",
+      "englishTranslation": "take! (sg. imperative)",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ibhíne!",
+      "englishTranslation": "take! (pl. imperative)",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "gímé!",
+      "englishTranslation": "build! (sg. imperative)",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ghílé!",
+      "englishTranslation": "run! (sg. imperative)",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "gí`é!",
+      "englishTranslation": "go! (sg. imperative)",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "rú`é!",
+      "englishTranslation": "speak!/come! (sg. imperative)",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "kạogí!",
+      "englishTranslation": "Don't go!",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "negative imperative"
+    },
+    {
+      "ogbiaWord": "kaorú!",
+      "englishTranslation": "Don't come!",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "kaoghíl!",
+      "englishTranslation": "Don't run!",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Tue tá ád`e!",
+      "englishTranslation": "Come and eat!",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Nááléghe tú`tú` adíle.",
+      "englishTranslation": "He/she cried until evening.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "B`etíná na reré!",
+      "englishTranslation": "Get up and walk!",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Mí` náád`úmóm má ázib`a.",
+      "englishTranslation": "I believe in God.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "É`so okéí ó`nyi tá Áda.",
+      "englishTranslation": "Éso is Ada's older child.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Kaotíbírá ákpon dá áman.",
+      "englishTranslation": "Don't look backwards!",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Yele má ógu d`íóm.",
+      "englishTranslation": "Go to your house!",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Epobh ásúbh á`mi ẹmí.",
+      "englishTranslation": "I am very hungry.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Onón ótu.",
+      "englishTranslation": "This is a house.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "singular demonstrative agreement"
+    },
+    {
+      "ogbiaWord": "Inyen ítu.",
+      "englishTranslation": "These are houses.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "plural demonstrative agreement"
+    },
+    {
+      "ogbiaWord": "obhá ólolo.",
+      "englishTranslation": "That is a bottle.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "iye ílolo.",
+      "englishTranslation": "Those are bottles.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Ódo nááyel.",
+      "englishTranslation": "Odo has gone home.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Kábhelegi máÓdo!",
+      "englishTranslation": "Call Odo!",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Onón é`lel.",
+      "englishTranslation": "This is yam.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Sa má`élel!",
+      "englishTranslation": "Cook yam!",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "A`mum olóbha.",
+      "englishTranslation": "There is water.",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "B`áru má`ámum!",
+      "englishTranslation": "Bring water!",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Ere ká ásor",
+      "englishTranslation": "What happened?",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": "with question particle ká"
+    },
+    {
+      "ogbiaWord": "Anyén ká ágor maanwâ?",
+      "englishTranslation": "Who beat you?",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "Anwá ka anyén?",
+      "englishTranslation": "You are who? = Who are you?",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "E`ni ánwúnom ká írue?",
+      "englishTranslation": "How many people came?",
+      "category": "example_sentences",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "okére",
+      "englishTranslation": "which",
+      "category": "interrogatives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "anyén",
+      "englishTranslation": "who",
+      "category": "interrogatives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "akára",
+      "englishTranslation": "which",
+      "category": "interrogatives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ẹní",
+      "englishTranslation": "how many",
+      "category": "interrogatives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "eré / erê",
+      "englishTranslation": "what",
+      "category": "interrogatives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ekâ",
+      "englishTranslation": "how/in what way",
+      "category": "interrogatives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "id`iéka / atugu",
+      "englishTranslation": "why",
+      "category": "interrogatives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "ka",
+      "englishTranslation": "question particle (QP)",
+      "category": "interrogatives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "onón",
+      "englishTranslation": "this",
+      "category": "demonstratives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "inyen",
+      "englishTranslation": "these",
+      "category": "demonstratives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "obhá",
+      "englishTranslation": "that",
+      "category": "demonstratives",
+      "dialect": "Agholo",
+      "note": ""
+    },
+    {
+      "ogbiaWord": "iye",
+      "englishTranslation": "those",
+      "category": "demonstratives",
+      "dialect": "Agholo",
+      "note": ""
+    }
+  ],
+  "culturalContent": [
+    {
+      "title": "Ogbia Traditional Attire & Noun Classes",
+      "description": "Learn about the traditional culture and noun class systems of Ogbia.",
+      "category": "attire",
+      "details": "Ogbia culture features distinctive vowel-prefixed noun classes and vibrant festivals in Bayelsa State.",
+      "isPublished": true
+    },
+    {
+      "title": "Ogbia River Heritage",
+      "description": "The historical and economic significance of the Kolo Creek and rivers to the Ogbia people.",
+      "category": "history",
+      "details": "Rivers and creeks form the lifeline of fishing, transportation, and folklore in Ogbia land.",
+      "isPublished": true
+    }
+  ],
+  "curriculum": [
+    {
+      "title": "Ogbia Basics & Greetings",
+      "type": "vocabulary",
+      "category": "greetings",
+      "vocabulary": [
+        {
+          "ogbia": "Ade",
+          "english": "Farm"
+        },
+        {
+          "ogbia": "Amum",
+          "english": "Water"
+        },
+        {
+          "ogbia": "Otu",
+          "english": "House"
+        }
+      ]
+    }
+  ],
+  "proverbs": [
+    {
+      "ogbia": "Ogbia asido: Asido odi.",
+      "english": "Truth is powerful.",
+      "literalTranslation": "Ogbia proverb: Word of the land.",
+      "meaning": "Reflects the wisdom and cultural heritage of Ogbia speakers.",
+      "category": "wisdom"
+    }
+  ]
+}
