@@ -215,12 +215,14 @@ const handleMultipleChoice = (optionId) => {
             <View style={[styles.contentCard, { backgroundColor: theme.card }]}>
               <View style={styles.cardHeader}><MaterialIcons name="list" size={20} color="#4CAF50" /><Text style={styles.cardTitle}>Vocabulary</Text></View>
               {content.vocabulary.map((vocab, i) => {
-                const word = vocab.wordId;
-                if (!word) return null;
+                const word = vocab.wordId || vocab;
+                const izonText = word.izonWord || word.izon || '';
+                const englishText = word.englishTranslation || word.english || '';
+                if (!izonText && !englishText) return null;
                 return (
                   <View key={i} style={styles.exampleRow}>
-                    <Text style={styles.izonText}>{word.izonWord}</Text>
-                    <Text style={[styles.englishText, { color: theme.subText }]}>{word.englishTranslation}</Text>
+                    <Text style={styles.izonText}>{izonText}</Text>
+                    <Text style={[styles.englishText, { color: theme.subText }]}>{englishText}</Text>
                   </View>
                 );
               })}

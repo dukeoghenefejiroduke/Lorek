@@ -3540,3 +3540,19 @@
 {"level":"info","message":"MongoDB connection closed","timestamp":"2026-09-26 15:48:58"}
 {"level":"info","message":"MongoDB connection closed","timestamp":"2026-09-26 15:48:58"}
 {"level":"info","message":"Redis connection closed","timestamp":"2026-09-26 15:48:58"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-26T14:49:28.462Z\n    ================================\n    ","timestamp":"2026-09-26 15:49:28"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-26 15:49:28"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-26 15:49:28"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-09-26 15:49:31"}
+{"duration":"1538ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-26 15:52:50","url":"/api/vocabulary/stats"}
+{"duration":"2475ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-26 15:52:50","url":"/api/community/feed?limit=3"}
+{"duration":"3115ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-26 15:52:51","url":"/api/notifications?limit=50"}
+{"duration":"4326ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-26 15:52:52","url":"/api/progress"}
+{"duration":"3596ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-26 15:53:00","url":"/api/content/hierarchy"}
+{"duration":"2728ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-26 15:53:10","url":"/api/lessons?unitId=6ab6d83ae4c4e3b1da39a57a&lang=IZON&includeProgress=true"}
+{"duration":"2494ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-26 15:53:27","url":"/api/lessons/6ab6d84fe4c4e3b1da39a5db"}
+{"level":"info","message":"Email sent via SendGrid to dukeoghenefejiroduke@gmail.com","timestamp":"2026-09-26 15:53:42"}
+{"level":"info","message":"Email sent via SendGrid to dukeoghenefejiroduke@gmail.com","timestamp":"2026-09-26 15:53:43"}
+{"level":"info","message":"User 6aaab50b5e945f632c02c93c completed lesson 6ab6d84fe4c4e3b1da39a5db with score 100","timestamp":"2026-09-26 15:53:43"}
+{"duration":"8133ms","level":"warn","message":"Slow request detected:","method":"POST","statusCode":200,"timestamp":"2026-09-26 15:53:43","url":"/api/lessons/6ab6d84fe4c4e3b1da39a5db/complete"}
+{"duration":"3787ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-26 15:54:06","url":"/api/lessons?lang=IZON&includeProgress=true"}

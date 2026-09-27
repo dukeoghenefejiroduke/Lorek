@@ -75,7 +75,7 @@ const extractLanguageCode = (value) => {
 };
 
 // Request deduplication
-// const pendingRequests = new Map(); // Removed redundant
+const pendingRequests = new Map();
 
 const api = axios.create({
   baseURL: API_URL,

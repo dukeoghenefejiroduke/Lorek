@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "language": "Ogbia (Agholo/Oloibiri dialect)",
+    "sources": [
+      "Isukul, Caroline. 'A Grammar of Agholo [Ogbia]' (draft, Kay Williamson editorial comments)",
+      "Lawson-Ikuru, Merosobo. 'The Noun Class System of Ogbia' (JOLAN Supplement Vol. III, 2018)",
+      "Evulewuru & Uwasomba. 'Distinctive Study of Izon and Ogbia Grammatical Structures' (EJOSED 2025)"
+    ],
+    "classification": "Central Delta language, Cross River family (Niger-Congo). Spoken in Ogbia LGA, Bayelsa State, Nigeria. Major varieties: Anyama, Agholo (Kolo group), Otakeme (Oloibiri clan).",
+    "word_order": "SVO (Subject-Verb-Object) — unlike neighboring Izon (Ijoid family), which is SOV."
+  },
+  "alphabet": {
+    "vowels_agholo_1979_orthography": ["a", "ạ", "e", "ẹ", "i", "ị", "o", "ọ", "u", "u`"],
+    "consonants_agholo_1979_orthography": ["b", "b`", "bh", "d", "d`", "f", "g", "gb", "gh", "k", "kp", "l", "m", "n", "nw", "ny", "p", "r", "s", "t", "v", "w", "y", "z"],
+    "digraphs": ["bh", "gb", "gh", "kp", "ny", "nw"],
+    "trigraph": ["ngh"],
+    "note_u_and_u_grave": "u and u` (a distinct back vowel) never begin a word in Agholo.",
+    "note_dialectal_variation": "The 2018 Otakeme description (Lawson-Ikuru) uses IPA symbols for some of the same sounds: ɔ,ɛ,ə,ɓ,ɗ,ʊ,ɪ where Isukul's Agholo orthography writes ọ,ẹ,ạ(or similar),b`,d`,u,ị. Treat these as orthographic/phonetic variants across sources, not different sounds.",
+    "vowel_count_note": "Sidi Ọlali's 1950s primer proposed 8 vowels; Williamson's 1979 Oloibiri-based orthography (used by Isukul) posits 10 vowel phonemes; Evulewuru & Uwasomba's 2025 comparative paper also counts 10."
+  },
+  "vowel_harmony": {
+    "description": "Ogbia/Agholo has near-complete vowel harmony. Vowels split into two harmonizing sets; only vowels from one set normally co-occur within a simple word.",
+    "wide_set": ["i", "e", "o", "u", "a"],
+    "narrow_set": ["ị", "ẹ", "ọ", "u`", "ạ"],
+    "spelling_convention": "To avoid over-marking, only the FIRST vowel in a word is dotted/marked for the narrow set — later vowels are assumed to harmonize automatically.",
+    "complex_word_exception": "Complex/compound words can mix wide and narrow vowels across their parts; a hyphen marks this compounding (e.g. igbigi-fạri 'file', ạni-óbhom 'woman')."
+  },
+  "tone_system": {
+    "description": "Ogbia is a tone language. Tone can distinguish otherwise-identical words, and can distinguish nouns from verbs, and statements from questions.",
+    "level_tones": {
+      "low": "unmarked (most common tone)",
+      "high": "marked with ´",
+      "downstep": "marked with ˥ between syllables (rare, per Lawson-Ikuru: high, low, mid + rare downstep)"
+    },
+    "gliding_tone": {
+      "falling": "marked with ˆ; restricted to word-final position"
+    },
+    "lexical_examples": [
+      {"word": "ẹgi", "tone": "LL", "meaning": "house fly"},
+      {"word": "ẹgí", "tone": "LH", "meaning": "journey"},
+      {"word": "esi", "tone": "LL", "meaning": "sore"},
+      {"word": "esí", "tone": "LH", "meaning": "place"},
+      {"word": "ewel", "tone": "LL", "meaning": "goat"},
+      {"word": "ewél", "tone": "LH", "meaning": "beard"},
+      {"word": "ilu", "tone": "LL", "meaning": "lie"},
+      {"word": "ílu", "tone": "HL", "meaning": "proverb"}
+    ],
+    "noun_verb_pairs": [
+      {"verb": "osuan (to go north)", "noun": "osúán (northwards)"},
+      {"verb": "ọtama (to go south)", "noun": "ọtámá (southwards)"},
+      {"verb": "ogeni (to be big)", "noun": "ogení (slave)"},
+      {"verb": "ọwal (to count)", "noun": "ọwál (counting)"}
+    ],
+    "statement_vs_question": [
+      {"statement": "Abobh. ('It is salt.')", "question": "Ábóbh? ('Is it salt?')"},
+      {"statement": "Ewel. ('It is a goat.')", "question": "Éwél? ('Is it a goat?')"},
+      {"statement": "Agayi. ('It is true.')", "question": "Agayí? ('Is it true?')"}
+    ],
+    "mood_aspect_by_tone": [
+      {"imperative": "gí`é ('go!')", "hortative": "gịê ('go on now!')"},
+      {"imperative": "túé ('come!')", "hortative": "tuê ('come now!')"},
+      {"present_progressive": "Náárú ('he/she is coming')"},
+      {"future": "Naarú ('he/she will come')"},
+      {"present_perfect": "Nááru ('he/she has come')"},
+      {"perfective_past": "NááÕru ('he/she came')"}
+    ],
+    "noun_tone_classes": "Disyllabic nouns fall into four tone classes (LL, LH, HH, HL); trisyllabic nouns into six (LLL, LHH, HHH, HLL, LHL, LLH). See Isukul ch.2 for full tables."
+  },
+  "noun_morphology": {
+    "vowel_prefix_rule": "Virtually all Ogbia nouns begin with a vowel prefix (e-, ẹ-, a-, ạ-, o-, ọ-, i-, ị-). Consonants do not begin nouns.",
+    "three_back_vowels_never_initial": "Per Lawson-Ikuru (Otakeme): the back vowels /u/, /ʊ/ and front vowel /ɪ/ never occur at noun-stem-initial position.",
+    "plural_formation_patterns": [
+      {"pattern": "o- / ọ- (sg) → i- / ẹ- (pl)", "examples": ["obodo 'road' / ibodo 'roads'", "ọbáku 'chair' / ẹbáku 'chairs'", "ọgum 'frog' / ẹgum 'frogs'"]},
+      {"pattern": "invariant singular=plural (many e-, ẹ-, a-, ạ- nouns)", "examples": ["ekpóm 'basket(s)'", "eru 'juju/juju(s)'", "abobh 'salt(s)'"], "note": "Number then shown only via verb concord/context, or by prefixing ara-/ạra- for emphatic plurality (e.g. araési 'many places', araekpóm 'many baskets')."},
+      {"pattern": "loanwords: a-/ạ- prefixed to English-origin consonant-initial words", "examples": ["ạbóí 'boy(s)'", "amáketi 'market(s)'", "atísa 'teacher(s)'"], "note": "same form typically used for singular and plural; ara-/ạra- added if plurality must be stressed"}
+    ],
+    "case_marking": {
+      "object_marker": "ma-/mạ- prefixes a noun functioning as a grammatical object; written attached to the noun (it has no independent meaning).",
+      "examples": [
+        {"ogbia": "Ódo nááyel.", "english": "Odo has gone home. (subject, unmarked)"},
+        {"ogbia": "Kábhelegi máÓdo!", "english": "Call Odo! (object, ma- prefixed)"},
+        {"ogbia": "Onón é`lel.", "english": "This is yam. (subject)"},
+        {"ogbia": "Sa má`élel!", "english": "Cook yam! (object)"}
+      ]
+    },
+    "deverbal_nominalisation": {
+      "infinitive_formation": "Prefix a low-toned o-/ọ- to the verb stem (harmonizing vowel choice), e.g. -wura 'wash' → owura 'to wash'.",
+      "abstract_nouns": "Prefix e-, ẹ-, a-, ạ-, or i- to a verb stem for abstract deverbal nouns, e.g. -tete 'fear' → etete 'fear/fright'; -b`igh 'steal' → ab`igh 'theft'.",
+      "agentives": "Prefix o-/ọ- (singular) or i-/ẹ- (plural) to a verb phrase (verb + its object) to form an agent noun, e.g. ọkan ọkan 'to carve carving' → ọkanmaokan 'carver/carpenter', plural ẹkanmaekan.",
+      "instrumentals": "Replace the infinitive prefix with the noun prefix and add suffix -ạma/-oma/-ma/-an, e.g. ọkpabh 'to seize' → ọkpábháma 'scissors'."
+    },
+    "determiner": {
+      "form": "-bha",
+      "description": "The only determiner in Ogbia/Agholo; invariable (doesn't inflect for number); suffixed directly to the noun it modifies.",
+      "examples": ["olobhíríbha 'the man'", "ilobhíríbha 'the men'", "owubha 'the canoe'", "iwubha 'the canoes'"],
+      "cross_check": "Lawson-Ikuru (Otakeme) confirms the definite article is a suffix, not a prefix, and that it marks number."
+    },
+    "relativisation": {
+      "marker": "-bha suffixed to a verb, meaning 'who' or 'which'",
+      "examples": ["O`níbhá ámúghÕbhá 'the person who died'", "anwúnómbha káóruÕbhá 'the people who didn't come'"]
+    }
+  },
+  "noun_class_system_otakeme": {
+    "source": "Lawson-Ikuru 2018; based on the Otakeme variety (Oloibiri clan)",
+    "classification_note": "Ogbia can be described as having a 'vestigial' noun class system (per Welmers 1973's terms): prefixes alternate for singular/plural with partial semantic correlation and DO show some concordial agreement, but not as robustly as classic Bantu noun classes.",
+    "classes": [
+      {"class": 1, "prefix_sg": "e-", "prefix_pl": "i-", "concord_marker": "ə́- / zə́-", "example": "è-mú 'head' / ì-mú 'heads'", "semantic_group": "body parts and household items"},
+      {"class": 3, "prefix_sg": "ɔ-", "prefix_pl": "ɛ-", "concord_marker": "á- / zá-", "example": "ɔ̀-nʊ̀ 'mouth' / ɛ̀-nʊ̀ 'mouths'", "semantic_group": "body parts, animals, utensils, edibles"},
+      {"class": 5, "prefix_sg": "o-", "prefix_pl": "i-", "concord_marker": "ə́- / zə́-", "example": "ò-ren 'stick' / ì-ren 'sticks'", "semantic_group": "animals, tools, human referents"},
+      {"class": 6, "prefix": "ə-", "concord_marker": "ə́- (sg) / zə- (pl)", "example": "ə́-ɗìen 'eye(s)'", "semantic_group": "body parts, animals, food items", "note": "invariant singular=plural prefix; number shown via concord only"},
+      {"class": 7, "prefix": "a-", "concord_marker": "a- (sg) / za- (pl)", "example": "à-gʊ́ɔ̀ 'hand(s)'", "semantic_group": "non-count nouns, weapons, body parts", "note": "invariant singular=plural prefix"},
+      {"class": "4 (i- invariant)", "prefix": "i-", "example": "ì-zon 'nose', ì-kpókí 'buttocks'", "note": "mixed items whose singular/plural is contextual; also functions as the plural of class 1/3/5"}
+    ],
+    "concord_types": ["Attributive adjectival concord", "Predicative adjectival concord", "Relative pronoun concord", "Associative construction concord", "Demonstrative concord", "Possessive-pronoun concord", "Adjectival phrase concord"],
+    "example_full_paradigm_head": {
+      "noun": "è-mú 'head' (class 1) / ì-mú 'heads' (class 2/plural)",
+      "attributive": "e-mú da-ɓàɪ̀ ni 'a head that is good' / i-mú zɛ-ɓàɪ̀ ni 'heads that are good'",
+      "predicative": "è-mú-ə á-ɓàɪ̀ 'the head is good' / ì-mú-zə̀ wá-ɓàɪ̀ 'the heads are good'",
+      "possessive": "è-kpóm ə́-mìnì 'my basket' (parallel pattern)",
+      "demonstrative": "e-gú ɔ́-mana 'this door' (parallel pattern, different noun)"
+    }
+  },
+  "pronoun_system": {
+    "structure": "prefix + root; prefix marked [+wide] or [-wide] per vowel harmony",
+    "object_marking": "ma-/mạ- prefixes the pronoun when it is a grammatical object",
+    "possessive_markers": {
+      "independent": "ta- (used predicatively/independently, e.g. 'it is mine')",
+      "dependent": "d`a- (used attributively before a noun, e.g. 'my house')"
+    },
+    "shortened_fast_speech_forms_exist": "Full forms (e.g. ótạami 'mine') often contract in fast speech (e.g. ótami)."
+  },
+  "verb_morphology": {
+    "root_structure": "Every verb has a root/stem; inflectional prefixes and suffixes attach around it. E.g. imperative 'itotóla!' (wash-pl) = i- (plural prefix) + -totól (stem) + -a (extensional suffix).",
+    "syllable_types": {
+      "closed_by_nasals": ["ọkom 'to start'", "ogim 'to build'", "obhin 'to take'"],
+      "closed_by_fricatives": ["osubh 'to hold'", "ogbebh 'to plant'", "ozogh 'to play'"],
+      "closed_by_liquids_glides": ["ogir 'to work'", "osor 'to descend'", "owol 'to sweep/sell'"],
+      "open_syllable_verbs": "All ten vowel phonemes occur root-finally in open-syllable verbs, e.g. orogi 'to abuse' (wide), ọgi 'to go' (narrow)."
+    },
+    "infinitive_tone": "All infinitives are prefixed with a LOW-toned harmonizing vowel (o- or ọ-); infinitive verbs form a single, uniformly low tone class.",
+    "categories": ["Tense (not very prominent)", "Aspect (completed/in-progress, instantaneous/enduring, habitual/momentary)", "Mood (speaker's attitude to factuality)", "Negation", "Number concord (verb agrees with subject for singular/plural)"],
+    "inflectional_devices": ["number agreement prefixes na- (sg) and wa- (pl)", "vowel prefixes i- ị- e- ẹ- o- ọ- a- ạ-", "particles ma, mu`, ta, d`ọ, ka", "the infix kaka (uncertain status per Isukul's own notes)", "auxiliaries oru, ebera, otia", "verb complements ạsíghé and awélé", "tone"],
+    "tense_aspect_mood_forms": [
+      {"name": "Present Progressive", "formation": "na-/wa- + a-/ạ- prefix on verb stem + high tone throughout", "example": "Mí` náárú 'I'm coming' / I`yár wáárú 'We're coming'"},
+      {"name": "Simple Future", "formation": "same structure as present progressive, but only the LAST vowel of the stem is high-toned", "example": "Mí` naarú 'I will come'"},
+      {"name": "Perfect", "formation": "same structure again; last stem vowel AND the pronominal subject are low-toned", "example": "Mị nááru 'I have come.'"},
+      {"name": "Habitual Aspect", "formation": "auxiliary verb ebera + nominalised verb form (prefixed with ma-)", "example": "Éki ebera máód`e énám. 'Eki loves eating meat.'"},
+      {"name": "Immediate Future", "formation": "present-progressive form of oru 'to come' (as auxiliary) + nominalised verb (prefixed ma-)", "example": "Mí` naarú máóyel. 'I'm about to go home.'"},
+      {"name": "Probable Future", "formation": "auxiliary otia ('it's likely') + secondary verb construction", "example": "Imád`íó náátia á`lobh. 'The rain is likely to fall.'"},
+      {"name": "Remote Past", "formation": "impersonal verb naab`orá ('it's been long since...') + relativizer ká + subordinate clause", "example": "Naab`orá ká áwa id`é. 'It's been long since they ate.'"},
+      {"name": "Recent Past", "formation": "prefix kaka ('just') as secondary verb modifier", "example": "Mị nákakaarú. 'I have just come.'"},
+      {"name": "Unfulfilled Aspect", "formation": "particle tá- replaces na-/wa- number markers; initial stem vowel becomes i-", "example": "Mi táíÕgho.... 'I should have bought but for...'"},
+      {"name": "Completed Perfect", "formation": "lexical verb ạwéÕlé ('leave') or ạsíÕghé ('finish') placed sentence-finally", "example": "Mi náád`e awéÕlé. 'I have finished eating.'"},
+      {"name": "Durative Aspect", "formation": "verb reduplication to emphasize prolonged activity (Isukul flags this analysis as tentative)", "example": "Nwá náása asâ? 'You're engaged in cooking?'"}
+    ],
+    "imperative": {
+      "monosyllabic_closed_syllable": {
+        "singular": "no prefix; high tone; suffix -E (copies stem's high tone)",
+        "plural": "low-toned i- prefix; first syllable stays high, final syllable becomes low",
+        "examples": [
+          {"infinitive": "obhin 'to take'", "sg": "bhíné!", "pl": "ibhíne!"},
+          {"infinitive": "ogim 'to build'", "sg": "gímé!", "pl": "igíme!"},
+          {"infinitive": "oteny 'to shoot'", "sg": "tényé!", "pl": "iténye!"}
+        ]
+      },
+      "monosyllabic_open_syllable_high_vowels": {
+        "description": "verbs ending in high front/back vowels -i/-u take suffix -E in both sg and pl",
+        "examples": [
+          {"infinitive": "ọgi 'to go'", "sg": "gí`é!", "pl": "ịgíe!"},
+          {"infinitive": "ọru 'to speak'", "sg": "rú`é!", "pl": "ịrúe!"}
+        ]
+      },
+      "polysyllabic": "high and low tone occur in free variation in the singular imperative (e.g. otibira → tíbírá or tibira, both meaning 'turn!')",
+      "inceptive_imperative": "Composed of imperative form of orere ('to go') or ọkom ('to start') + present progressive of the main verb, e.g. Reré náárú! 'Start coming!'",
+      "hortative": "Made with olei ('to reach') in primary construction + infinitive verb preceded by particle ma, e.g. NaáÕléí má`ógi. 'It's time to go./Let's go!'"
+    },
+    "negation": {
+      "prefixes": ["ka- (negates imperatives, prefixed to infinitive)", "ta- (used with hortative negation and modal 'could have')"],
+      "suffixes": ["-d`ọ ('not')", "-mu` ('no more/no longer')"],
+      "examples": [
+        {"ogbia": "kạogí!", "english": "Don't go!"},
+        {"ogbia": "kaorú!", "english": "Don't come!"},
+        {"ogbia": "I`yar írúÕd`ọ maadodón.", "english": "We're not coming today."},
+        {"ogbia": "Ena ob`éná!d`ọ má`ánwiny.", "english": "He/she is childless."}
+      ],
+      "hortative_negation": "requires BOTH prefix ta- AND suffix -d`ọ, e.g. TaóléiÕd`ọ máód`e 'Let's not eat!'"
+    }
+  },
+  "syntax": {
+    "basic_word_order": "SVO (Subject-Verb-Object), matching English and unlike Izon (SOV). Confirmed independently by Evulewuru & Uwasomba (2025) with the example: Ani-BhoGi-Me-Ewel (S-V-O) 'the man killed the goat'.",
+    "serial_verb_constructions": "Prepositional notions are frequently expressed by stringing two verbs together rather than using a preposition, e.g. oghil ó`d`ua (run + go-out) = 'to run away'; omen ód`igh (fall + enter) = 'to fall into'.",
+    "homophonous_grammatical_morphemes": "Ogbia has many grammatical morphemes that are spelled/pronounced alike but serve different functions depending on context — most notably -ma- (preposition 'in/at/on/from/towards' when written separately, vs. agentive/complement marker when written attached) and -ka- (question particle / intensifier / conjunction / negative imperative prefix)."
+  },
+  "izon_ogbia_contrast": {
+    "source": "Evulewuru & Uwasomba 2025",
+    "language_families": "Izon = Ijoid family; Ogbia = Cross River family (both are 'Ijaw'/Niger Delta ethnically, but genetically distinct language families)",
+    "word_order": {"izon": "SOV", "ogbia": "SVO (same as English)"},
+    "consonant_cluster_handling": "Neither language tolerates English-style consonant clusters; both insert vowels to break them up when borrowing English words (e.g. English 'school' → Izon 'sukulu', Ogbia 'isukulu'; English 'driver' → Izon 'deraiva', Ogbia 'idrava').",
+    "vowel_initial_tendency": "Ogbia nouns overwhelmingly begin with vowels; when borrowing English words, Ogbia speakers tend to impose a vowel prefix on the loanword (isukulu, ibasikoro, idrava, imagoro) more consistently than Izon speakers do.",
+    "mutual_intelligibility": "The study found NO mutual intelligibility between Izon and Ogbia, despite both being spoken in Bayelsa State and both being considered part of the broader 'Ijaw' ethnic/cultural grouping.",
+    "shared_cognates_with_efik": "Ogbia and Efik (also Cross River family) share a number of cognates, e.g. 'ten': Efik diop / Ogbia diobh; 'not': Efik ba / Ogbia ba; 'until': Efik tutu / Ogbia tutu."
+  },
+  "word_division_rules": {
+    "written_together_with_stem": ["definiteness/plurality/objecthood/negation/aspect/agentive/relativisation morphemes"],
+    "written_separately": ["prepositions", "conjunctions", "particles", "pronouns (dependent and independent)"],
+    "hyphen_use": "Introduced to write complex/compound words that mix vowels from the wide and narrow harmony sets (see vowel_harmony above)."
+  }
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Learning Report | Lorek</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container { padding: 40px; text-align: center; max-width: 500px; margin: auto; font-family: sans-serif; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 40px; }
+        .icon { font-size: 64px; margin-bottom: 15px; }
+        h1 { color: #388e3c; margin-bottom: 10px; }
+        .stats-box { display: flex; justify-content: space-around; margin: 25px 0; background: #f1f8e9; padding: 15px; border-radius: 8px; }
+        .stat-item h3 { margin: 0; color: #2e7d32; font-size: 24px; }
+        .stat-item p { margin: 5px 0 0; color: #555; font-size: 14px; }
+        p.desc { color: #666; font-size: 16px; line-height: 1.5; }
+        .btn { display: inline-block; margin-top: 20px; padding: 12px 25px; background-color: #388e3c; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="icon">📊</div>
+        <h1>Your Weekly Learning Report</h1>
+        <p class="desc">Here is a summary of your recent progress in Izon Language Learning:</p>
+        
+        <div class="stats-box">
+            <div class="stat-item">
+                <h3 id="stat-lessons">0</h3>
+                <p>Lessons</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="stat-words">0</h3>
+                <p>Words</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="stat-points">0</h3>
+                <p>Points</p>
+            </div>
+        </div>
+
+        <a href="index.html" class="btn">Open Lorek App Dashboard</a>
+    </main>
+    <script>
+        if (window.location.hash) {
+            const hashParams = new URLSearchParams(window.location.hash.substring(1));
+            const lessons = hashParams.get('lessons');
+            const words = hashParams.get('words');
+            const points = hashParams.get('points');
+
+            if (lessons) document.getElementById('stat-lessons').innerText = lessons;
+            if (words) document.getElementById('stat-words').innerText = words;
+            if (points) document.getElementById('stat-points').innerText = points;
+        }
+    </script>
+</body>
+</html>

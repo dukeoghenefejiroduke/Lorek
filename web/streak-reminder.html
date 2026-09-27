@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streak Reminder | Lorek</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container { padding: 40px; text-align: center; max-width: 500px; margin: auto; font-family: sans-serif; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 40px; }
+        .icon { font-size: 72px; margin-bottom: 15px; }
+        h1 { color: #f57f17; margin-bottom: 10px; }
+        .streak-box { margin: 25px 0; background: #fffde7; padding: 20px; border-radius: 8px; border: 2px dashed #fbc02d; }
+        .streak-box h2 { margin: 0; color: #f57f17; font-size: 36px; }
+        .streak-box p { margin: 5px 0 0; color: #666; font-size: 16px; }
+        p.desc { color: #555; font-size: 16px; line-height: 1.5; }
+        .btn { display: inline-block; margin-top: 20px; padding: 12px 25px; background-color: #f57f17; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="icon">🔥</div>
+        <h1>Protect Your Streak!</h1>
+        <p class="desc">You've built amazing learning momentum. Don't let your streak slip away today!</p>
+        
+        <div class="streak-box">
+            <h2 id="streak-count">0 Days</h2>
+            <p>Current Active Streak</p>
+        </div>
+
+        <a href="index.html" class="btn">Open Lorek App & Practice</a>
+    </main>
+    <script>
+        if (window.location.hash) {
+            const hashParams = new URLSearchParams(window.location.hash.substring(1));
+            const streak = hashParams.get('streak');
+
+            if (streak) {
+                document.getElementById('streak-count').innerText = `${streak} Day${streak > 1 ? 's' : ''}`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -118,6 +118,10 @@ class EmailService {
   };
 
   sendAchievementEmail = async (to, username, achievement) => {
+    const webUrl = process.env.WEB_URL || 'http://localhost:3000';
+    const name = encodeURIComponent(achievement.name || 'Milestone Reached');
+    const desc = encodeURIComponent(achievement.description || 'Great job mastering Izon vocabulary!');
+    const icon = encodeURIComponent(achievement.icon || '🏆');
     return this.sendEmail({
       to,
       subject: `Achievement Unlocked: ${achievement.name}`,
@@ -128,13 +132,17 @@ class EmailService {
         achievementDescription: achievement.description,
         achievementIcon: achievement.icon,
         badgeImage: achievement.badgeImage,
-        shareUrl: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/achievements/${achievement.id}`,
+        shareUrl: `${webUrl}/achievements.html#name=${name}&desc=${desc}&icon=${icon}`,
         currentYear: new Date().getFullYear(),
       },
     });
   };
 
   sendWeeklyReport = async (to, username, stats) => {
+    const webUrl = process.env.WEB_URL || 'http://localhost:3000';
+    const lessons = stats?.lessonsCompleted || 0;
+    const words = stats?.wordsLearned || 0;
+    const points = stats?.pointsEarned || 0;
     return this.sendEmail({
       to,
       subject: 'Your Weekly Learning Progress - Izon Language App',
@@ -142,13 +150,14 @@ class EmailService {
       data: {
         username,
         stats,
-        dashboardUrl: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/dashboard`,
+        dashboardUrl: `${webUrl}/weekly-report.html#lessons=${lessons}&words=${words}&points=${points}`,
         currentYear: new Date().getFullYear(),
       },
     });
   };
 
   sendStreakReminder = async (to, username, streak) => {
+    const webUrl = process.env.WEB_URL || 'http://localhost:3000';
     return this.sendEmail({
       to,
       subject: `${streak}-Day Streak - Keep it up`,
@@ -156,7 +165,7 @@ class EmailService {
       data: {
         username,
         streak,
-        practiceUrl: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/practice`,
+        practiceUrl: `${webUrl}/streak-reminder.html#streak=${streak}`,
         currentYear: new Date().getFullYear(),
       },
     });

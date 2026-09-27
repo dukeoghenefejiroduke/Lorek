@@ -1,0 +1,3596 @@
+{
+  "meta": {
+    "description": "English -> Ogbia reverse lookup index, auto-generated from ogbia_dictionary.json",
+    "entry_count": 546
+  },
+  "index": {
+    "farm": [
+      {
+        "ogbia": "ade",
+        "category": "nouns"
+      }
+    ],
+    "garment": [
+      {
+        "ogbia": "arua",
+        "category": "nouns"
+      }
+    ],
+    "clothing": [
+      {
+        "ogbia": "arua",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ikpé",
+        "category": "nouns"
+      }
+    ],
+    "music": [
+      {
+        "ogbia": "amati",
+        "category": "nouns"
+      }
+    ],
+    "tooth": [
+      {
+        "ogbia": "ạlai",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "à-laɪ̀",
+        "category": "nouns"
+      }
+    ],
+    "hand": [
+      {
+        "ogbia": "ạguo",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "à-gʊ̀ɔ̀",
+        "category": "nouns"
+      }
+    ],
+    "hair": [
+      {
+        "ogbia": "ạsighal",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "à-sɪ̀al",
+        "category": "nouns"
+      }
+    ],
+    "juju": [
+      {
+        "ogbia": "eru",
+        "category": "nouns"
+      }
+    ],
+    "evil spirit": [
+      {
+        "ogbia": "eru",
+        "category": "nouns"
+      }
+    ],
+    "head": [
+      {
+        "ogbia": "emugh",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "è-mú",
+        "category": "nouns"
+      }
+    ],
+    "basket": [
+      {
+        "ogbia": "ekpom",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "e-kpom",
+        "category": "nouns"
+      }
+    ],
+    "chicken": [
+      {
+        "ogbia": "ẹnur",
+        "category": "nouns"
+      }
+    ],
+    "hoe": [
+      {
+        "ogbia": "ẹsúá",
+        "category": "nouns"
+      }
+    ],
+    "snail": [
+      {
+        "ogbia": "ẹghoi",
+        "category": "nouns"
+      }
+    ],
+    "hat": [
+      {
+        "ogbia": "ẹghoi",
+        "category": "nouns"
+      }
+    ],
+    "tears": [
+      {
+        "ogbia": "izin",
+        "category": "nouns"
+      }
+    ],
+    "nose": [
+      {
+        "ogbia": "izon",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ì-zon",
+        "category": "nouns"
+      }
+    ],
+    "pepper": [
+      {
+        "ogbia": "idú",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "idú/ẹká/ạsú",
+        "category": "nouns"
+      }
+    ],
+    "house": [
+      {
+        "ogbia": "otu",
+        "category": "nouns"
+      }
+    ],
+    "work": [
+      {
+        "ogbia": "ogir",
+        "category": "nouns"
+      }
+    ],
+    "cocoyam": [
+      {
+        "ogbia": "okolo",
+        "category": "nouns"
+      }
+    ],
+    "story": [
+      {
+        "ogbia": "ọba",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "egberb`a",
+        "category": "nouns"
+      }
+    ],
+    "soap": [
+      {
+        "ogbia": "ọso",
+        "category": "nouns"
+      }
+    ],
+    "case": [
+      {
+        "ogbia": "ọkpe",
+        "category": "nouns"
+      }
+    ],
+    "lawsuit": [
+      {
+        "ogbia": "ọkpe",
+        "category": "nouns"
+      }
+    ],
+    "frog": [
+      {
+        "ogbia": "ọgum",
+        "category": "nouns"
+      }
+    ],
+    "water": [
+      {
+        "ogbia": "ạmum",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "à-mʊ̀",
+        "category": "nouns"
+      }
+    ],
+    "oil": [
+      {
+        "ogbia": "ạmunu",
+        "category": "nouns"
+      }
+    ],
+    "big": [
+      {
+        "ogbia": "ọgbua",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ọgbua",
+        "category": "adjectives"
+      }
+    ],
+    "grasshopper": [
+      {
+        "ogbia": "ọgaun",
+        "category": "nouns"
+      }
+    ],
+    "ten": [
+      {
+        "ogbia": "id`iobh",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "diobh",
+        "category": "nouns"
+      }
+    ],
+    "left": [
+      {
+        "ogbia": "okiel",
+        "category": "nouns"
+      }
+    ],
+    "elderly": [
+      {
+        "ogbia": "okiel",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "okiel",
+        "category": "adjectives"
+      }
+    ],
+    "flood": [
+      {
+        "ogbia": "ad`io",
+        "category": "nouns"
+      }
+    ],
+    "day": [
+      {
+        "ogbia": "ad`io",
+        "category": "nouns"
+      }
+    ],
+    "spoon": [
+      {
+        "ogbia": "ẹgiazi",
+        "category": "nouns"
+      }
+    ],
+    "honey": [
+      {
+        "ogbia": "ạmeun",
+        "category": "nouns"
+      }
+    ],
+    "tomorrow": [
+      {
+        "ogbia": "elegíen",
+        "category": "nouns"
+      }
+    ],
+    "yesterday": [
+      {
+        "ogbia": "elegíen",
+        "category": "nouns"
+      }
+    ],
+    "advice": [
+      {
+        "ogbia": "otitiom",
+        "category": "nouns"
+      }
+    ],
+    "hornbill": [
+      {
+        "ogbia": "ạpipia",
+        "category": "nouns"
+      }
+    ],
+    "box": [
+      {
+        "ogbia": "ib`áku",
+        "category": "nouns"
+      }
+    ],
+    "chair": [
+      {
+        "ogbia": "ib`áku",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ọbáku",
+        "category": "nouns"
+      }
+    ],
+    "body": [
+      {
+        "ogbia": "aluzu",
+        "category": "nouns"
+      }
+    ],
+    "sugarcane": [
+      {
+        "ogbia": "alukpógh",
+        "category": "nouns"
+      }
+    ],
+    "leg": [
+      {
+        "ogbia": "awel",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ə̀-líkè",
+        "category": "nouns"
+      }
+    ],
+    "foot": [
+      {
+        "ogbia": "awel",
+        "category": "nouns"
+      }
+    ],
+    "salt": [
+      {
+        "ogbia": "abobh",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ə̀-boβ",
+        "category": "nouns"
+      }
+    ],
+    "pot": [
+      {
+        "ogbia": "agugh",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ɔ́-ɓɛ́lɛ́",
+        "category": "nouns"
+      }
+    ],
+    "mouth": [
+      {
+        "ogbia": "ọnu",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ɔ̀-nʊ̀",
+        "category": "nouns"
+      }
+    ],
+    "female": [
+      {
+        "ogbia": "ọya",
+        "category": "nouns"
+      }
+    ],
+    "abdomen": [
+      {
+        "ogbia": "obì",
+        "category": "nouns"
+      }
+    ],
+    "white": [
+      {
+        "ogbia": "ọd`al/ọb`al",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ọb`al",
+        "category": "adjectives"
+      },
+      {
+        "ogbia": "ob`alab`ál",
+        "category": "adjectives"
+      },
+      {
+        "ogbia": "obhalabhal",
+        "category": "adjectives"
+      }
+    ],
+    "light-coloured": [
+      {
+        "ogbia": "ọd`al/ọb`al",
+        "category": "nouns"
+      }
+    ],
+    "creek": [
+      {
+        "ogbia": "iyi",
+        "category": "nouns"
+      }
+    ],
+    "eagle": [
+      {
+        "ogbia": "igo",
+        "category": "nouns"
+      }
+    ],
+    "sore": [
+      {
+        "ogbia": "esi",
+        "category": "nouns"
+      }
+    ],
+    "place": [
+      {
+        "ogbia": "esi",
+        "category": "nouns"
+      }
+    ],
+    "mouths": [
+      {
+        "ogbia": "ẹnu",
+        "category": "nouns"
+      }
+    ],
+    "meat": [
+      {
+        "ogbia": "ẹnam",
+        "category": "nouns"
+      }
+    ],
+    "beast": [
+      {
+        "ogbia": "ẹnam",
+        "category": "nouns"
+      }
+    ],
+    "bag": [
+      {
+        "ogbia": "ạkpa",
+        "category": "nouns"
+      }
+    ],
+    "feather": [
+      {
+        "ogbia": "atam",
+        "category": "nouns"
+      }
+    ],
+    "five": [
+      {
+        "ogbia": "ọwu",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "owu",
+        "category": "nouns"
+      }
+    ],
+    "three": [
+      {
+        "ogbia": "ẹsar",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "esari",
+        "category": "nouns"
+      }
+    ],
+    "year": [
+      {
+        "ogbia": "ạla",
+        "category": "nouns"
+      }
+    ],
+    "horn": [
+      {
+        "ogbia": "idú/ẹká/ạsú",
+        "category": "nouns"
+      }
+    ],
+    "horse": [
+      {
+        "ogbia": "idú/ẹká/ạsú",
+        "category": "nouns"
+      }
+    ],
+    "cow": [
+      {
+        "ogbia": "oví",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ó-ví",
+        "category": "nouns"
+      }
+    ],
+    "bush": [
+      {
+        "ogbia": "ed`úm",
+        "category": "nouns"
+      }
+    ],
+    "mushroom": [
+      {
+        "ogbia": "ạkpó",
+        "category": "nouns"
+      }
+    ],
+    "pole for punting a canoe": [
+      {
+        "ogbia": "ọtír",
+        "category": "nouns"
+      }
+    ],
+    "climbing rope": [
+      {
+        "ogbia": "iwóbh",
+        "category": "nouns"
+      }
+    ],
+    "long flowing robe": [
+      {
+        "ogbia": "ạdón",
+        "category": "nouns"
+      }
+    ],
+    "cloth": [
+      {
+        "ogbia": "ikpé",
+        "category": "nouns"
+      }
+    ],
+    "loincloth": [
+      {
+        "ogbia": "ikpé",
+        "category": "nouns"
+      }
+    ],
+    "journey": [
+      {
+        "ogbia": "ẹgí",
+        "category": "nouns"
+      }
+    ],
+    "pond": [
+      {
+        "ogbia": "éwú",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ewu",
+        "category": "nouns"
+      }
+    ],
+    "masquerade": [
+      {
+        "ogbia": "ípó",
+        "category": "nouns"
+      }
+    ],
+    "a kind of fish": [
+      {
+        "ogbia": "ó`rím",
+        "category": "nouns"
+      }
+    ],
+    "kitchen rack": [
+      {
+        "ogbia": "énwén",
+        "category": "nouns"
+      }
+    ],
+    "death": [
+      {
+        "ogbia": "ád`úgh",
+        "category": "nouns"
+      }
+    ],
+    "jaundice": [
+      {
+        "ogbia": "á`kom",
+        "category": "nouns"
+      }
+    ],
+    "father": [
+      {
+        "ogbia": "á`da",
+        "category": "nouns"
+      }
+    ],
+    "thread": [
+      {
+        "ogbia": "éri",
+        "category": "nouns"
+      }
+    ],
+    "money": [
+      {
+        "ogbia": "igbogi",
+        "category": "nouns"
+      }
+    ],
+    "land": [
+      {
+        "ogbia": "egbolom",
+        "category": "nouns"
+      }
+    ],
+    "tale": [
+      {
+        "ogbia": "egberb`a",
+        "category": "nouns"
+      }
+    ],
+    "lobster": [
+      {
+        "ogbia": "ẹgaga",
+        "category": "nouns"
+      }
+    ],
+    "ashes": [
+      {
+        "ogbia": "ẹruru",
+        "category": "nouns"
+      }
+    ],
+    "road": [
+      {
+        "ogbia": "obodo",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "obodo",
+        "category": "nouns"
+      }
+    ],
+    "worm": [
+      {
+        "ogbia": "ạsiga",
+        "category": "nouns"
+      }
+    ],
+    "god": [
+      {
+        "ogbia": "azib`a",
+        "category": "nouns"
+      }
+    ],
+    "proverb": [
+      {
+        "ogbia": "asido",
+        "category": "nouns"
+      }
+    ],
+    "rope": [
+      {
+        "ogbia": "od`id`igh",
+        "category": "nouns"
+      }
+    ],
+    "fever": [
+      {
+        "ogbia": "ib`ógú",
+        "category": "nouns"
+      }
+    ],
+    "mud": [
+      {
+        "ogbia": "ẹbúdú",
+        "category": "nouns"
+      }
+    ],
+    "parlour": [
+      {
+        "ogbia": "obúrú",
+        "category": "nouns"
+      }
+    ],
+    "law": [
+      {
+        "ogbia": "olókó",
+        "category": "nouns"
+      }
+    ],
+    "banana": [
+      {
+        "ogbia": "osókpó",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ɔ̀-ɓàmɪ́",
+        "category": "nouns"
+      }
+    ],
+    "book": [
+      {
+        "ogbia": "ad`írí",
+        "category": "nouns"
+      }
+    ],
+    "medicine": [
+      {
+        "ogbia": "ọghóghó",
+        "category": "nouns"
+      }
+    ],
+    "lizard": [
+      {
+        "ogbia": "ikpélkpé",
+        "category": "nouns"
+      }
+    ],
+    "breath": [
+      {
+        "ogbia": "ibhówú",
+        "category": "nouns"
+      }
+    ],
+    "tree": [
+      {
+        "ogbia": "órérén",
+        "category": "nouns"
+      }
+    ],
+    "fathom": [
+      {
+        "ogbia": "ákúb`ú",
+        "category": "nouns"
+      }
+    ],
+    "influenza": [
+      {
+        "ogbia": "ítila",
+        "category": "nouns"
+      }
+    ],
+    "okro": [
+      {
+        "ogbia": "ó`kuru",
+        "category": "nouns"
+      }
+    ],
+    "which": [
+      {
+        "ogbia": "okére",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "okére",
+        "category": "interrogatives"
+      },
+      {
+        "ogbia": "akára",
+        "category": "interrogatives"
+      }
+    ],
+    "measles": [
+      {
+        "ogbia": "iyíkpo",
+        "category": "nouns"
+      }
+    ],
+    "bell": [
+      {
+        "ogbia": "igbóma",
+        "category": "nouns"
+      }
+    ],
+    "champion": [
+      {
+        "ogbia": "olótu",
+        "category": "nouns"
+      }
+    ],
+    "cowife": [
+      {
+        "ogbia": "oyóba",
+        "category": "nouns"
+      }
+    ],
+    "baby": [
+      {
+        "ogbia": "ạyíga",
+        "category": "nouns"
+      }
+    ],
+    "pipe": [
+      {
+        "ogbia": "awúre",
+        "category": "nouns"
+      }
+    ],
+    "porcupine": [
+      {
+        "ogbia": "ọkúru",
+        "category": "nouns"
+      }
+    ],
+    "falsehood": [
+      {
+        "ogbia": "ipési",
+        "category": "nouns"
+      }
+    ],
+    "basin": [
+      {
+        "ogbia": "abézin",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "abézin",
+        "category": "loan_words"
+      }
+    ],
+    "sardine": [
+      {
+        "ogbia": "asadín",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "asadín",
+        "category": "loan_words"
+      }
+    ],
+    "slave": [
+      {
+        "ogbia": "ogení",
+        "category": "nouns"
+      }
+    ],
+    "cat": [
+      {
+        "ogbia": "ologbó",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ò-lògbó",
+        "category": "nouns"
+      }
+    ],
+    "legend": [
+      {
+        "ogbia": "od`ud`úl",
+        "category": "nouns"
+      }
+    ],
+    "history": [
+      {
+        "ogbia": "od`ud`úl",
+        "category": "nouns"
+      }
+    ],
+    "girls": [
+      {
+        "ogbia": "ạnwaní",
+        "category": "nouns"
+      }
+    ],
+    "today": [
+      {
+        "ogbia": "adodón",
+        "category": "nouns"
+      }
+    ],
+    "owl": [
+      {
+        "ogbia": "okpukpú",
+        "category": "nouns"
+      }
+    ],
+    "sand": [
+      {
+        "ogbia": "ẹsasár",
+        "category": "nouns"
+      }
+    ],
+    "bedbug": [
+      {
+        "ogbia": "ikpakpú",
+        "category": "nouns"
+      }
+    ],
+    "true": [
+      {
+        "ogbia": "agayí",
+        "category": "nouns"
+      }
+    ],
+    "grave": [
+      {
+        "ogbia": "od`i",
+        "category": "nouns"
+      }
+    ],
+    "nerve": [
+      {
+        "ogbia": "ogibh",
+        "category": "nouns"
+      }
+    ],
+    "cowrie": [
+      {
+        "ogbia": "okób`a",
+        "category": "nouns"
+      }
+    ],
+    "mother": [
+      {
+        "ogbia": "onweni",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ò-won",
+        "category": "nouns"
+      }
+    ],
+    "comb": [
+      {
+        "ogbia": "ọsalab`a",
+        "category": "nouns"
+      }
+    ],
+    "snake": [
+      {
+        "ogbia": "ọkarabhabhár",
+        "category": "nouns"
+      }
+    ],
+    "pestle": [
+      {
+        "ogbia": "ẹd`úm",
+        "category": "nouns"
+      }
+    ],
+    "sacrifice": [
+      {
+        "ogbia": "ẹkol",
+        "category": "nouns"
+      }
+    ],
+    "girl": [
+      {
+        "ogbia": "ẹnyaní",
+        "category": "nouns"
+      }
+    ],
+    "compound": [
+      {
+        "ogbia": "apolo",
+        "category": "nouns"
+      }
+    ],
+    "key": [
+      {
+        "ogbia": "ạsabi",
+        "category": "nouns"
+      }
+    ],
+    "lamp": [
+      {
+        "ogbia": "ạtukpa",
+        "category": "nouns"
+      }
+    ],
+    "grass": [
+      {
+        "ogbia": "ạsóghó",
+        "category": "nouns"
+      }
+    ],
+    "age group": [
+      {
+        "ogbia": "ogbo",
+        "category": "nouns"
+      }
+    ],
+    "elephant": [
+      {
+        "ogbia": "obenam",
+        "category": "nouns"
+      }
+    ],
+    "river": [
+      {
+        "ogbia": "ọbhíí",
+        "category": "nouns"
+      }
+    ],
+    "protective charm": [
+      {
+        "ogbia": "ọd`any",
+        "category": "nouns"
+      }
+    ],
+    "thing": [
+      {
+        "ogbia": "ibú",
+        "category": "nouns"
+      }
+    ],
+    "load": [
+      {
+        "ogbia": "ibú",
+        "category": "nouns"
+      }
+    ],
+    "bead": [
+      {
+        "ogbia": "ịgbína",
+        "category": "nouns"
+      }
+    ],
+    "wind": [
+      {
+        "ogbia": "ikuku",
+        "category": "nouns"
+      }
+    ],
+    "marriage": [
+      {
+        "ogbia": "ilom",
+        "category": "nouns"
+      }
+    ],
+    "drum": [
+      {
+        "ogbia": "ize",
+        "category": "nouns"
+      }
+    ],
+    "youngster": [
+      {
+        "ogbia": "ọfel/oyel",
+        "category": "nouns"
+      }
+    ],
+    "thigh": [
+      {
+        "ogbia": "é-dù",
+        "category": "nouns"
+      }
+    ],
+    "fish": [
+      {
+        "ogbia": "é-nə̀",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ino",
+        "category": "nouns"
+      }
+    ],
+    "seed": [
+      {
+        "ogbia": "è-kpò",
+        "category": "nouns"
+      }
+    ],
+    "water pot": [
+      {
+        "ogbia": "è-kùkù",
+        "category": "nouns"
+      }
+    ],
+    "stomach": [
+      {
+        "ogbia": "è-wùnù",
+        "category": "nouns"
+      }
+    ],
+    "mat": [
+      {
+        "ogbia": "è-kúnè",
+        "category": "nouns"
+      }
+    ],
+    "door": [
+      {
+        "ogbia": "è-gú",
+        "category": "nouns"
+      }
+    ],
+    "knee": [
+      {
+        "ogbia": "è-ɗúrùm",
+        "category": "nouns"
+      }
+    ],
+    "arm": [
+      {
+        "ogbia": "ɔ̀-βágʊ̀ɔ̀",
+        "category": "nouns"
+      }
+    ],
+    "bone": [
+      {
+        "ogbia": "ɔ̀-kpɔ̀kpɔ̀",
+        "category": "nouns"
+      }
+    ],
+    "shark": [
+      {
+        "ogbia": "ɔ́-fʊ́rʊ́ma",
+        "category": "nouns"
+      }
+    ],
+    "monkey": [
+      {
+        "ogbia": "ɔ̀-ɓʊ̀gɔ̀",
+        "category": "nouns"
+      }
+    ],
+    "sheep": [
+      {
+        "ogbia": "ɔ̀-nánà",
+        "category": "nouns"
+      }
+    ],
+    "shrimp": [
+      {
+        "ogbia": "ɔ̀-gàgà",
+        "category": "nouns"
+      }
+    ],
+    "knife": [
+      {
+        "ogbia": "ɔ̀-gɪa",
+        "category": "nouns"
+      }
+    ],
+    "spear": [
+      {
+        "ogbia": "ɔ̀-sɔ̀β",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "à-ɓɛ̀gɛ̀rɛ",
+        "category": "nouns"
+      }
+    ],
+    "plantain": [
+      {
+        "ogbia": "ɔ́-fɔ̀ɪ",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ofoi",
+        "category": "nouns"
+      }
+    ],
+    "axe": [
+      {
+        "ogbia": "ò-gomə",
+        "category": "nouns"
+      }
+    ],
+    "machete": [
+      {
+        "ogbia": "ò-gìdì",
+        "category": "nouns"
+      }
+    ],
+    "iron": [
+      {
+        "ogbia": "ò-kúròr",
+        "category": "nouns"
+      }
+    ],
+    "ram": [
+      {
+        "ogbia": "ò-dùnə",
+        "category": "nouns"
+      }
+    ],
+    "pig": [
+      {
+        "ogbia": "ó-póríópò",
+        "category": "nouns"
+      }
+    ],
+    "husband": [
+      {
+        "ogbia": "ò-nom",
+        "category": "nouns"
+      }
+    ],
+    "boy": [
+      {
+        "ogbia": "ò-jel",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ạbóí",
+        "category": "loan_words"
+      }
+    ],
+    "buttocks": [
+      {
+        "ogbia": "ì-kpókí",
+        "category": "nouns"
+      }
+    ],
+    "cannon": [
+      {
+        "ogbia": "í-kùrúsì",
+        "category": "nouns"
+      }
+    ],
+    "manilla": [
+      {
+        "ogbia": "ì-kpímə",
+        "category": "nouns"
+      }
+    ],
+    "room": [
+      {
+        "ogbia": "í-gùlə́",
+        "category": "nouns"
+      }
+    ],
+    "stone": [
+      {
+        "ogbia": "ì-kpútú",
+        "category": "nouns"
+      }
+    ],
+    "tail": [
+      {
+        "ogbia": "ì-kpìkìlom",
+        "category": "nouns"
+      }
+    ],
+    "wrapper": [
+      {
+        "ogbia": "í-kpe",
+        "category": "nouns"
+      }
+    ],
+    "tobacco": [
+      {
+        "ogbia": "ì-re",
+        "category": "nouns"
+      }
+    ],
+    "eye": [
+      {
+        "ogbia": "ə-ɗìen",
+        "category": "nouns"
+      }
+    ],
+    "ear": [
+      {
+        "ogbia": "ə̀-to",
+        "category": "nouns"
+      }
+    ],
+    "tongue": [
+      {
+        "ogbia": "ə̀-nem",
+        "category": "nouns"
+      }
+    ],
+    "aerial yam": [
+      {
+        "ogbia": "ə̀-nóm",
+        "category": "nouns"
+      }
+    ],
+    "bat": [
+      {
+        "ogbia": "ə̀-pogì",
+        "category": "nouns"
+      }
+    ],
+    "rainy season": [
+      {
+        "ogbia": "ə̀-ɗìo",
+        "category": "nouns"
+      }
+    ],
+    "crocodile": [
+      {
+        "ogbia": "ə̀-ségì",
+        "category": "nouns"
+      }
+    ],
+    "tortoise": [
+      {
+        "ogbia": "ə̀-ɗùle",
+        "category": "nouns"
+      }
+    ],
+    "dress": [
+      {
+        "ogbia": "ə̀-rùə̀",
+        "category": "nouns"
+      }
+    ],
+    "chin": [
+      {
+        "ogbia": "à-ɓágʊ́",
+        "category": "nouns"
+      }
+    ],
+    "back": [
+      {
+        "ogbia": "à-man",
+        "category": "nouns"
+      }
+    ],
+    "blood": [
+      {
+        "ogbia": "à-sɪ̀",
+        "category": "nouns"
+      }
+    ],
+    "smoke": [
+      {
+        "ogbia": "à-mùgù",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "à-lɛ̀pɛ̀",
+        "category": "nouns"
+      }
+    ],
+    "gun": [
+      {
+        "ogbia": "à-và",
+        "category": "nouns"
+      }
+    ],
+    "arrow": [
+      {
+        "ogbia": "à-gbànà",
+        "category": "nouns"
+      }
+    ],
+    "needle": [
+      {
+        "ogbia": "á-lágá",
+        "category": "nouns"
+      }
+    ],
+    "shoe": [
+      {
+        "ogbia": "à-gbàká",
+        "category": "nouns"
+      }
+    ],
+    "one": [
+      {
+        "ogbia": "onini",
+        "category": "nouns"
+      }
+    ],
+    "two": [
+      {
+        "ogbia": "iwal",
+        "category": "nouns"
+      }
+    ],
+    "four": [
+      {
+        "ogbia": "inyoun",
+        "category": "nouns"
+      }
+    ],
+    "six": [
+      {
+        "ogbia": "odin",
+        "category": "nouns"
+      }
+    ],
+    "seven": [
+      {
+        "ogbia": "oduon",
+        "category": "nouns"
+      }
+    ],
+    "eight": [
+      {
+        "ogbia": "inyan",
+        "category": "nouns"
+      }
+    ],
+    "nine": [
+      {
+        "ogbia": "isio",
+        "category": "nouns"
+      }
+    ],
+    "bridge": [
+      {
+        "ogbia": "awafu",
+        "category": "nouns"
+      }
+    ],
+    "sun": [
+      {
+        "ogbia": "ogogo",
+        "category": "nouns"
+      }
+    ],
+    "yam": [
+      {
+        "ogbia": "elei",
+        "category": "nouns"
+      }
+    ],
+    "goat": [
+      {
+        "ogbia": "ewei",
+        "category": "nouns"
+      }
+    ],
+    "people": [
+      {
+        "ogbia": "owunom",
+        "category": "nouns"
+      }
+    ],
+    "bottle": [
+      {
+        "ogbia": "ololo",
+        "category": "nouns"
+      }
+    ],
+    "school": [
+      {
+        "ogbia": "isukulu",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "isukulu",
+        "category": "loan_words"
+      }
+    ],
+    "bicycle": [
+      {
+        "ogbia": "ibasikoro",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "ibasikoro",
+        "category": "loan_words"
+      }
+    ],
+    "driver": [
+      {
+        "ogbia": "idrava",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "idrava",
+        "category": "loan_words"
+      }
+    ],
+    "mango": [
+      {
+        "ogbia": "imagoro",
+        "category": "nouns"
+      },
+      {
+        "ogbia": "imagoro",
+        "category": "loan_words"
+      }
+    ],
+    "boys": [
+      {
+        "ogbia": "ạbóí",
+        "category": "loan_words"
+      }
+    ],
+    "bowl": [
+      {
+        "ogbia": "ạbóli",
+        "category": "loan_words"
+      }
+    ],
+    "bowls": [
+      {
+        "ogbia": "ạbóli",
+        "category": "loan_words"
+      }
+    ],
+    "glass": [
+      {
+        "ogbia": "ạgilási",
+        "category": "loan_words"
+      }
+    ],
+    "glasses": [
+      {
+        "ogbia": "ạgilási",
+        "category": "loan_words"
+      }
+    ],
+    "pencil": [
+      {
+        "ogbia": "ạpénsul",
+        "category": "loan_words"
+      }
+    ],
+    "pencils": [
+      {
+        "ogbia": "ạpénsul",
+        "category": "loan_words"
+      }
+    ],
+    "sunday": [
+      {
+        "ogbia": "ạsónde",
+        "category": "loan_words"
+      }
+    ],
+    "sundays": [
+      {
+        "ogbia": "ạsónde",
+        "category": "loan_words"
+      }
+    ],
+    "church": [
+      {
+        "ogbia": "ạsósi",
+        "category": "loan_words"
+      }
+    ],
+    "churches": [
+      {
+        "ogbia": "ạsósi",
+        "category": "loan_words"
+      }
+    ],
+    "watch": [
+      {
+        "ogbia": "ạwósi",
+        "category": "loan_words"
+      }
+    ],
+    "watches": [
+      {
+        "ogbia": "ạwósi",
+        "category": "loan_words"
+      }
+    ],
+    "candle": [
+      {
+        "ogbia": "ạkéndul",
+        "category": "loan_words"
+      }
+    ],
+    "candles": [
+      {
+        "ogbia": "ạkéndul",
+        "category": "loan_words"
+      }
+    ],
+    "dirt": [
+      {
+        "ogbia": "ạdóti",
+        "category": "loan_words"
+      }
+    ],
+    "filth": [
+      {
+        "ogbia": "ạdóti",
+        "category": "loan_words"
+      }
+    ],
+    "block": [
+      {
+        "ogbia": "ạbulóku",
+        "category": "loan_words"
+      }
+    ],
+    "blocks": [
+      {
+        "ogbia": "ạbulóku",
+        "category": "loan_words"
+      }
+    ],
+    "basins": [
+      {
+        "ogbia": "abézin",
+        "category": "loan_words"
+      }
+    ],
+    "gold": [
+      {
+        "ogbia": "agôl",
+        "category": "loan_words"
+      }
+    ],
+    "coast": [
+      {
+        "ogbia": "akósi",
+        "category": "loan_words"
+      }
+    ],
+    "coasts": [
+      {
+        "ogbia": "akósi",
+        "category": "loan_words"
+      }
+    ],
+    "market": [
+      {
+        "ogbia": "amáketi",
+        "category": "loan_words"
+      }
+    ],
+    "markets": [
+      {
+        "ogbia": "amáketi",
+        "category": "loan_words"
+      }
+    ],
+    "motor car": [
+      {
+        "ogbia": "amóto",
+        "category": "loan_words"
+      }
+    ],
+    "motor cars": [
+      {
+        "ogbia": "amóto",
+        "category": "loan_words"
+      }
+    ],
+    "radio": [
+      {
+        "ogbia": "arédio",
+        "category": "loan_words"
+      }
+    ],
+    "radios": [
+      {
+        "ogbia": "arédio",
+        "category": "loan_words"
+      }
+    ],
+    "sardines": [
+      {
+        "ogbia": "asadín",
+        "category": "loan_words"
+      }
+    ],
+    "chain": [
+      {
+        "ogbia": "aséni",
+        "category": "loan_words"
+      }
+    ],
+    "chains": [
+      {
+        "ogbia": "aséni",
+        "category": "loan_words"
+      }
+    ],
+    "gin": [
+      {
+        "ogbia": "azín",
+        "category": "loan_words"
+      }
+    ],
+    "teacher": [
+      {
+        "ogbia": "atísa",
+        "category": "loan_words"
+      }
+    ],
+    "teachers": [
+      {
+        "ogbia": "atísa",
+        "category": "loan_words"
+      }
+    ],
+    "beer": [
+      {
+        "ogbia": "abía",
+        "category": "loan_words"
+      }
+    ],
+    "beers": [
+      {
+        "ogbia": "abía",
+        "category": "loan_words"
+      }
+    ],
+    "biro pen": [
+      {
+        "ogbia": "abíki",
+        "category": "loan_words"
+      }
+    ],
+    "biro pens": [
+      {
+        "ogbia": "abíki",
+        "category": "loan_words"
+      }
+    ],
+    "zinc": [
+      {
+        "ogbia": "azínki",
+        "category": "loan_words"
+      }
+    ],
+    "zincs": [
+      {
+        "ogbia": "azínki",
+        "category": "loan_words"
+      }
+    ],
+    "to wash": [
+      {
+        "ogbia": "owura",
+        "category": "verbs"
+      },
+      {
+        "ogbia": "ototol",
+        "category": "verbs"
+      }
+    ],
+    "to open": [
+      {
+        "ogbia": "okperen",
+        "category": "verbs"
+      }
+    ],
+    "to ask": [
+      {
+        "ogbia": "opuru",
+        "category": "verbs"
+      }
+    ],
+    "to fall": [
+      {
+        "ogbia": "omen",
+        "category": "verbs"
+      }
+    ],
+    "to come": [
+      {
+        "ogbia": "oru",
+        "category": "verbs"
+      }
+    ],
+    "to sit": [
+      {
+        "ogbia": "ọtara",
+        "category": "verbs"
+      }
+    ],
+    "to roast": [
+      {
+        "ogbia": "ọbhigi",
+        "category": "verbs"
+      }
+    ],
+    "to swallow": [
+      {
+        "ogbia": "ọmin",
+        "category": "verbs"
+      }
+    ],
+    "to peel": [
+      {
+        "ogbia": "ofo",
+        "category": "verbs"
+      }
+    ],
+    "to beat": [
+      {
+        "ogbia": "ogor",
+        "category": "verbs"
+      },
+      {
+        "ogbia": "oti",
+        "category": "verbs"
+      }
+    ],
+    "to bury": [
+      {
+        "ogbia": "od`i",
+        "category": "verbs"
+      }
+    ],
+    "to eat": [
+      {
+        "ogbia": "od`e",
+        "category": "verbs"
+      }
+    ],
+    "to pour": [
+      {
+        "ogbia": "ozu",
+        "category": "verbs"
+      }
+    ],
+    "to extinguish": [
+      {
+        "ogbia": "od`ime",
+        "category": "verbs"
+      }
+    ],
+    "to throw away": [
+      {
+        "ogbia": "ofugu",
+        "category": "verbs"
+      }
+    ],
+    "to demolish": [
+      {
+        "ogbia": "ọkoko",
+        "category": "verbs"
+      }
+    ],
+    "to wake": [
+      {
+        "ogbia": "ọsuma",
+        "category": "verbs"
+      }
+    ],
+    "to divide": [
+      {
+        "ogbia": "ọrugi",
+        "category": "verbs"
+      }
+    ],
+    "to turn": [
+      {
+        "ogbia": "otibira",
+        "category": "verbs"
+      }
+    ],
+    "to rest": [
+      {
+        "ogbia": "osirigia",
+        "category": "verbs"
+      }
+    ],
+    "to cut into pieces": [
+      {
+        "ogbia": "ogbodogi",
+        "category": "verbs"
+      }
+    ],
+    "to go": [
+      {
+        "ogbia": "ọgi",
+        "category": "verbs"
+      }
+    ],
+    "to endure": [
+      {
+        "ogbia": "ọne",
+        "category": "verbs"
+      }
+    ],
+    "to say": [
+      {
+        "ogbia": "ọru",
+        "category": "verbs"
+      }
+    ],
+    "to tie": [
+      {
+        "ogbia": "ọkpo",
+        "category": "verbs"
+      }
+    ],
+    "to drink": [
+      {
+        "ogbia": "ọd`a",
+        "category": "verbs"
+      }
+    ],
+    "to talk": [
+      {
+        "ogbia": "ogodo",
+        "category": "verbs"
+      }
+    ],
+    "to wait": [
+      {
+        "ogbia": "okod`u",
+        "category": "verbs"
+      }
+    ],
+    "to abuse": [
+      {
+        "ogbia": "orogi",
+        "category": "verbs"
+      }
+    ],
+    "to go out": [
+      {
+        "ogbia": "omite",
+        "category": "verbs"
+      }
+    ],
+    "to take": [
+      {
+        "ogbia": "obhin",
+        "category": "verbs"
+      }
+    ],
+    "to build": [
+      {
+        "ogbia": "ogim",
+        "category": "verbs"
+      }
+    ],
+    "to run": [
+      {
+        "ogbia": "oghil",
+        "category": "verbs"
+      },
+      {
+        "ogbia": "oyil",
+        "category": "verbs"
+      }
+    ],
+    "to shoot": [
+      {
+        "ogbia": "oteny",
+        "category": "verbs"
+      }
+    ],
+    "to desire": [
+      {
+        "ogbia": "ọfel",
+        "category": "verbs"
+      }
+    ],
+    "want": [
+      {
+        "ogbia": "ọfel",
+        "category": "verbs"
+      }
+    ],
+    "to start": [
+      {
+        "ogbia": "ọkom",
+        "category": "verbs"
+      }
+    ],
+    "to be poor": [
+      {
+        "ogbia": "ogoiny",
+        "category": "verbs"
+      }
+    ],
+    "to hold": [
+      {
+        "ogbia": "osubh",
+        "category": "verbs"
+      }
+    ],
+    "to plant": [
+      {
+        "ogbia": "ogbebh",
+        "category": "verbs"
+      }
+    ],
+    "to play": [
+      {
+        "ogbia": "ozogh",
+        "category": "verbs"
+      }
+    ],
+    "to steal": [
+      {
+        "ogbia": "ob`igh",
+        "category": "verbs"
+      }
+    ],
+    "to work": [
+      {
+        "ogbia": "ogir",
+        "category": "verbs"
+      }
+    ],
+    "do": [
+      {
+        "ogbia": "ogir",
+        "category": "verbs"
+      }
+    ],
+    "to climb down": [
+      {
+        "ogbia": "osor",
+        "category": "verbs"
+      }
+    ],
+    "descend": [
+      {
+        "ogbia": "osor",
+        "category": "verbs"
+      }
+    ],
+    "to sweep": [
+      {
+        "ogbia": "owol",
+        "category": "verbs"
+      }
+    ],
+    "sell": [
+      {
+        "ogbia": "owol",
+        "category": "verbs"
+      }
+    ],
+    "to reach": [
+      {
+        "ogbia": "ọtey",
+        "category": "verbs"
+      }
+    ],
+    "to suffice": [
+      {
+        "ogbia": "oley/oleghe",
+        "category": "verbs"
+      }
+    ],
+    "to cry": [
+      {
+        "ogbia": "oley/oleghe",
+        "category": "verbs"
+      }
+    ],
+    "to buy": [
+      {
+        "ogbia": "ogogh/ogho",
+        "category": "verbs"
+      }
+    ],
+    "to meet": [
+      {
+        "ogbia": "ozuan",
+        "category": "verbs"
+      }
+    ],
+    "to quarrel": [
+      {
+        "ogbia": "osorogi",
+        "category": "verbs"
+      }
+    ],
+    "to exceed": [
+      {
+        "ogbia": "opelegi",
+        "category": "verbs"
+      }
+    ],
+    "to suffer": [
+      {
+        "ogbia": "oye",
+        "category": "verbs"
+      }
+    ],
+    "to feed": [
+      {
+        "ogbia": "ọgbal",
+        "category": "verbs"
+      }
+    ],
+    "nurture": [
+      {
+        "ogbia": "ọgbal",
+        "category": "verbs"
+      }
+    ],
+    "to fight": [
+      {
+        "ogbia": "owe",
+        "category": "verbs"
+      }
+    ],
+    "to count": [
+      {
+        "ogbia": "ọwal",
+        "category": "verbs"
+      }
+    ],
+    "to marry": [
+      {
+        "ogbia": "ọwal",
+        "category": "verbs"
+      }
+    ],
+    "to carve": [
+      {
+        "ogbia": "ọkan",
+        "category": "verbs"
+      }
+    ],
+    "to offer sacrifice": [
+      {
+        "ogbia": "ọkol",
+        "category": "verbs"
+      }
+    ],
+    "to brew": [
+      {
+        "ogbia": "ọsa",
+        "category": "verbs"
+      }
+    ],
+    "to cut": [
+      {
+        "ogbia": "ọson",
+        "category": "verbs"
+      },
+      {
+        "ogbia": "ogbo",
+        "category": "verbs"
+      }
+    ],
+    "to sew": [
+      {
+        "ogbia": "okpogh",
+        "category": "verbs"
+      }
+    ],
+    "to kill": [
+      {
+        "ogbia": "ogigh",
+        "category": "verbs"
+      }
+    ],
+    "to tell lies": [
+      {
+        "ogbia": "ọgba",
+        "category": "verbs"
+      }
+    ],
+    "to clear bush": [
+      {
+        "ogbia": "ọsi",
+        "category": "verbs"
+      }
+    ],
+    "to trap": [
+      {
+        "ogbia": "okue",
+        "category": "verbs"
+      }
+    ],
+    "to do farmwork": [
+      {
+        "ogbia": "od`igh",
+        "category": "verbs"
+      }
+    ],
+    "to enter": [
+      {
+        "ogbia": "od`igh",
+        "category": "verbs"
+      }
+    ],
+    "to tell": [
+      {
+        "ogbia": "od`igh",
+        "category": "verbs"
+      }
+    ],
+    "to seize": [
+      {
+        "ogbia": "ọkpabh",
+        "category": "verbs"
+      }
+    ],
+    "grip": [
+      {
+        "ogbia": "ọkpabh",
+        "category": "verbs"
+      }
+    ],
+    "to bail water from a canoe": [
+      {
+        "ogbia": "omobh",
+        "category": "verbs"
+      }
+    ],
+    "to scrape": [
+      {
+        "ogbia": "oghor",
+        "category": "verbs"
+      }
+    ],
+    "to fan": [
+      {
+        "ogbia": "odu",
+        "category": "verbs"
+      }
+    ],
+    "new": [
+      {
+        "ogbia": "omom",
+        "category": "adjectives"
+      }
+    ],
+    "another": [
+      {
+        "ogbia": "opona",
+        "category": "adjectives"
+      }
+    ],
+    "good": [
+      {
+        "ogbia": "ob`eb`í",
+        "category": "adjectives"
+      },
+      {
+        "ogbia": "obabeh",
+        "category": "adjectives"
+      }
+    ],
+    "certain": [
+      {
+        "ogbia": "odí",
+        "category": "adjectives"
+      }
+    ],
+    "small": [
+      {
+        "ogbia": "ọgbara",
+        "category": "adjectives"
+      }
+    ],
+    "rich": [
+      {
+        "ogbia": "ọlala",
+        "category": "adjectives"
+      },
+      {
+        "ogbia": "ovuravúra",
+        "category": "adjectives"
+      }
+    ],
+    "light coloured": [
+      {
+        "ogbia": "ọb`al",
+        "category": "adjectives"
+      }
+    ],
+    "old": [
+      {
+        "ogbia": "igbain",
+        "category": "adjectives"
+      }
+    ],
+    "stale": [
+      {
+        "ogbia": "igbain",
+        "category": "adjectives"
+      }
+    ],
+    "black": [
+      {
+        "ogbia": "ọzuzúá",
+        "category": "adjectives"
+      },
+      {
+        "ogbia": "ozuzua",
+        "category": "adjectives"
+      }
+    ],
+    "ripe": [
+      {
+        "ogbia": "ọb`ab`am",
+        "category": "adjectives"
+      }
+    ],
+    "red": [
+      {
+        "ogbia": "ọb`ab`am",
+        "category": "adjectives"
+      }
+    ],
+    "sweet": [
+      {
+        "ogbia": "ọmelmel",
+        "category": "adjectives"
+      }
+    ],
+    "hard": [
+      {
+        "ogbia": "ọkparakpar",
+        "category": "adjectives"
+      }
+    ],
+    "tall": [
+      {
+        "ogbia": "owewegh",
+        "category": "adjectives"
+      }
+    ],
+    "short": [
+      {
+        "ogbia": "okperokper",
+        "category": "adjectives"
+      }
+    ],
+    "first": [
+      {
+        "ogbia": "ọpuru",
+        "category": "adjectives"
+      }
+    ],
+    "fertile": [
+      {
+        "ogbia": "ovuravúra",
+        "category": "adjectives"
+      }
+    ],
+    "left-over": [
+      {
+        "ogbia": "osusuwo",
+        "category": "adjectives"
+      }
+    ],
+    "bad": [
+      {
+        "ogbia": "okrabh",
+        "category": "adjectives"
+      }
+    ],
+    "cripple": [
+      {
+        "ogbia": "ikuloh",
+        "category": "adjectives"
+      }
+    ],
+    "some": [
+      {
+        "ogbia": "idí",
+        "category": "quantifiers"
+      }
+    ],
+    "all": [
+      {
+        "ogbia": "ib`éla",
+        "category": "quantifiers"
+      }
+    ],
+    "many": [
+      {
+        "ogbia": "ibaab`útú",
+        "category": "quantifiers"
+      }
+    ],
+    "a part of a whole": [
+      {
+        "ogbia": "odógá",
+        "category": "quantifiers"
+      }
+    ],
+    "few": [
+      {
+        "ogbia": "ekakáram",
+        "category": "quantifiers"
+      }
+    ],
+    "little": [
+      {
+        "ogbia": "ekakáram",
+        "category": "quantifiers"
+      }
+    ],
+    "each and every person": [
+      {
+        "ogbia": "emugh emúgh",
+        "category": "quantifiers"
+      }
+    ],
+    "one by one": [
+      {
+        "ogbia": "ekpo ekpo",
+        "category": "quantifiers"
+      }
+    ],
+    "each": [
+      {
+        "ogbia": "kaka",
+        "category": "quantifiers"
+      }
+    ],
+    "every": [
+      {
+        "ogbia": "kaka",
+        "category": "quantifiers"
+      }
+    ],
+    "that": [
+      {
+        "ogbia": "b`é",
+        "category": "conjunctions"
+      },
+      {
+        "ogbia": "ká",
+        "category": "conjunctions"
+      },
+      {
+        "ogbia": "obhá",
+        "category": "demonstratives"
+      }
+    ],
+    "then": [
+      {
+        "ogbia": "bhé",
+        "category": "conjunctions"
+      },
+      {
+        "ogbia": "sá",
+        "category": "conjunctions"
+      }
+    ],
+    "while": [
+      {
+        "ogbia": "d`é",
+        "category": "conjunctions"
+      }
+    ],
+    "yet": [
+      {
+        "ogbia": "d`é",
+        "category": "conjunctions"
+      }
+    ],
+    "but": [
+      {
+        "ogbia": "d`é",
+        "category": "conjunctions"
+      }
+    ],
+    "so that": [
+      {
+        "ogbia": "ká",
+        "category": "conjunctions"
+      },
+      {
+        "ogbia": "mạaguo",
+        "category": "conjunctions"
+      }
+    ],
+    "and": [
+      {
+        "ogbia": "na",
+        "category": "conjunctions"
+      },
+      {
+        "ogbia": "tá",
+        "category": "conjunctions"
+      },
+      {
+        "ogbia": "sakina",
+        "category": "conjunctions"
+      },
+      {
+        "ogbia": "sekine",
+        "category": "conjunctions"
+      }
+    ],
+    "of": [
+      {
+        "ogbia": "tá",
+        "category": "conjunctions"
+      },
+      {
+        "ogbia": "tá",
+        "category": "prepositions"
+      }
+    ],
+    "because": [
+      {
+        "ogbia": "b`aka",
+        "category": "conjunctions"
+      }
+    ],
+    "or": [
+      {
+        "ogbia": "bhá`dó",
+        "category": "conjunctions"
+      }
+    ],
+    "before": [
+      {
+        "ogbia": "kí`tá / kí`ná",
+        "category": "conjunctions"
+      }
+    ],
+    "since": [
+      {
+        "ogbia": "ekísé",
+        "category": "conjunctions"
+      }
+    ],
+    "when": [
+      {
+        "ogbia": "ẹgheri / oka / ifiébhá",
+        "category": "conjunctions"
+      },
+      {
+        "ogbia": "Akara é`ghiri?",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "until": [
+      {
+        "ogbia": "tú`tú`",
+        "category": "conjunctions"
+      }
+    ],
+    "if": [
+      {
+        "ogbia": "ạguo",
+        "category": "conjunctions"
+      }
+    ],
+    "the way or manner": [
+      {
+        "ogbia": "ạguo",
+        "category": "conjunctions"
+      }
+    ],
+    "in this manner": [
+      {
+        "ogbia": "mạaguo",
+        "category": "conjunctions"
+      }
+    ],
+    "with": [
+      {
+        "ogbia": "sakina",
+        "category": "conjunctions"
+      }
+    ],
+    "between": [
+      {
+        "ogbia": "esadíó",
+        "category": "conjunctions"
+      }
+    ],
+    "instead": [
+      {
+        "ogbia": "kpé`lémúnú",
+        "category": "conjunctions"
+      }
+    ],
+    "whether or": [
+      {
+        "ogbia": "ka...ka",
+        "category": "conjunctions"
+      }
+    ],
+    "if it were not for": [
+      {
+        "ogbia": "nobo",
+        "category": "conjunctions"
+      }
+    ],
+    "also": [
+      {
+        "ogbia": "la3",
+        "category": "conjunctions"
+      },
+      {
+        "ogbia": "kwa4 / kọ3 / pọ̀1 / fọ̀1",
+        "category": "conjunctions"
+      }
+    ],
+    "as well": [
+      {
+        "ogbia": "la3",
+        "category": "conjunctions"
+      }
+    ],
+    "at": [
+      {
+        "ogbia": "dá",
+        "category": "prepositions"
+      },
+      {
+        "ogbia": "má",
+        "category": "prepositions"
+      },
+      {
+        "ogbia": "gbá",
+        "category": "prepositions"
+      },
+      {
+        "ogbia": "ologi",
+        "category": "prepositions"
+      }
+    ],
+    "on": [
+      {
+        "ogbia": "dá",
+        "category": "prepositions"
+      },
+      {
+        "ogbia": "gbá",
+        "category": "prepositions"
+      },
+      {
+        "ogbia": "ologi",
+        "category": "prepositions"
+      }
+    ],
+    "in": [
+      {
+        "ogbia": "má",
+        "category": "prepositions"
+      },
+      {
+        "ogbia": "gbá",
+        "category": "prepositions"
+      },
+      {
+        "ogbia": "ologi",
+        "category": "prepositions"
+      }
+    ],
+    "from": [
+      {
+        "ogbia": "má",
+        "category": "prepositions"
+      }
+    ],
+    "to": [
+      {
+        "ogbia": "má",
+        "category": "prepositions"
+      }
+    ],
+    "towards": [
+      {
+        "ogbia": "má",
+        "category": "prepositions"
+      }
+    ],
+    "etc": [
+      {
+        "ogbia": "má",
+        "category": "prepositions"
+      },
+      {
+        "ogbia": "ologi",
+        "category": "prepositions"
+      }
+    ],
+    "beside": [
+      {
+        "ogbia": "akaka",
+        "category": "prepositions"
+      }
+    ],
+    "on top": [
+      {
+        "ogbia": "gbá á`nyu",
+        "category": "prepositions"
+      }
+    ],
+    "at top": [
+      {
+        "ogbia": "gbá á`nyu",
+        "category": "prepositions"
+      }
+    ],
+    "on the floor": [
+      {
+        "ogbia": "gbá áde",
+        "category": "prepositions"
+      }
+    ],
+    "down below": [
+      {
+        "ogbia": "gbá áde",
+        "category": "prepositions"
+      }
+    ],
+    "inside": [
+      {
+        "ogbia": "gbá ólogi",
+        "category": "prepositions"
+      }
+    ],
+    "outside": [
+      {
+        "ogbia": "gbá égbetíre",
+        "category": "prepositions"
+      }
+    ],
+    "in the village": [
+      {
+        "ogbia": "gbá éma",
+        "category": "prepositions"
+      }
+    ],
+    "object marker (prefixed to nouns": [
+      {
+        "ogbia": "ma-/mạ-",
+        "category": "particles"
+      }
+    ],
+    "pronouns used as objects)": [
+      {
+        "ogbia": "ma-/mạ-",
+        "category": "particles"
+      }
+    ],
+    "independent possessive marker": [
+      {
+        "ogbia": "ta-",
+        "category": "particles"
+      }
+    ],
+    "dependent possessive marker prefix": [
+      {
+        "ogbia": "d`a-",
+        "category": "particles"
+      }
+    ],
+    "negative imperative prefix": [
+      {
+        "ogbia": "ka-",
+        "category": "particles"
+      }
+    ],
+    "question particle": [
+      {
+        "ogbia": "ka-",
+        "category": "particles"
+      },
+      {
+        "ogbia": "ka",
+        "category": "interrogatives"
+      }
+    ],
+    "intensifier": [
+      {
+        "ogbia": "ka-",
+        "category": "particles"
+      }
+    ],
+    "conjunction": [
+      {
+        "ogbia": "ka-",
+        "category": "particles"
+      }
+    ],
+    "negation suffixes ('not'": [
+      {
+        "ogbia": "-d`ọ / -mu`",
+        "category": "particles"
+      }
+    ],
+    "'no more": [
+      {
+        "ogbia": "-d`ọ / -mu`",
+        "category": "particles"
+      }
+    ],
+    "no longer')": [
+      {
+        "ogbia": "-d`ọ / -mu`",
+        "category": "particles"
+      }
+    ],
+    "as well as": [
+      {
+        "ogbia": "kpa",
+        "category": "particles"
+      }
+    ],
+    "too": [
+      {
+        "ogbia": "kpa",
+        "category": "particles"
+      }
+    ],
+    "very much": [
+      {
+        "ogbia": "ẹmi",
+        "category": "particles"
+      }
+    ],
+    "just": [
+      {
+        "ogbia": "kaka",
+        "category": "particles"
+      }
+    ],
+    "each (as quantifier": [
+      {
+        "ogbia": "kaka",
+        "category": "particles"
+      }
+    ],
+    "written separately)": [
+      {
+        "ogbia": "kaka",
+        "category": "particles"
+      }
+    ],
+    "definite article": [
+      {
+        "ogbia": "-bha",
+        "category": "particles"
+      }
+    ],
+    "determiner 'the' (suffix": [
+      {
+        "ogbia": "-bha",
+        "category": "particles"
+      }
+    ],
+    "invariable) — also marks relativisation ('who": [
+      {
+        "ogbia": "-bha",
+        "category": "particles"
+      }
+    ],
+    "which') when suffixed to a verb": [
+      {
+        "ogbia": "-bha",
+        "category": "particles"
+      }
+    ],
+    "the": [
+      {
+        "ogbia": "bha",
+        "category": "particles"
+      }
+    ],
+    "welcome": [
+      {
+        "ogbia": "A`lúa!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "thank you": [
+      {
+        "ogbia": "A`lúa!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "hello": [
+      {
+        "ogbia": "A`lúa!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "hi": [
+      {
+        "ogbia": "A`lúa!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "good morning": [
+      {
+        "ogbia": "Wá`áb`ali!",
+        "category": "greetings_and_common_expressions"
+      },
+      {
+        "ogbia": "Ob`eb`i ápíobh!",
+        "category": "greetings_and_common_expressions"
+      },
+      {
+        "ogbia": "Webhai",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "good day": [
+      {
+        "ogbia": "Wáágule!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "good afternoon": [
+      {
+        "ogbia": "Wogberia",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "good evening": [
+      {
+        "ogbia": "Wáádile!",
+        "category": "greetings_and_common_expressions"
+      },
+      {
+        "ogbia": "Wigui",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "good night": [
+      {
+        "ogbia": "Edi á`b`áÕlu",
+        "category": "greetings_and_common_expressions"
+      },
+      {
+        "ogbia": "Diebhali",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "sorry": [
+      {
+        "ogbia": "Díla!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's a pity": [
+      {
+        "ogbia": "Díla!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "get well": [
+      {
+        "ogbia": "Duméó!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "farewell": [
+      {
+        "ogbia": "Má`rá reré!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "safe journey": [
+      {
+        "ogbia": "A`gí bọlobolo arú bọlobolo!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "take it easy": [
+      {
+        "ogbia": "Bhiné ka ạbhár ka ạbhár mạlugburu ísísi!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "leave those alone": [
+      {
+        "ogbia": "Wẹle máíye!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "start now": [
+      {
+        "ogbia": "Kọme má ísen!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "come in": [
+      {
+        "ogbia": "D`ié ma arú!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "come back": [
+      {
+        "ogbia": "Tibira na arú!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "don't go far": [
+      {
+        "ogbia": "Kạogí ma égbein!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "don't cry": [
+      {
+        "ogbia": "KaoléÕghé!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "mind yourself": [
+      {
+        "ogbia": "Merenie máád`ien d`íóm!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "heaven forbid": [
+      {
+        "ogbia": "Azib`a kaod`úrá",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "perhaps": [
+      {
+        "ogbia": "OpúÕd`ọ!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "is it so": [
+      {
+        "ogbia": "Ó`kubhái!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's a big problem": [
+      {
+        "ogbia": "O`gbua ó`kpe!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it is true": [
+      {
+        "ogbia": "Agayi.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it is false": [
+      {
+        "ogbia": "Ipési.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's okay": [
+      {
+        "ogbia": "Ob`eb`í.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's good": [
+      {
+        "ogbia": "Ob`eb`í.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's nice": [
+      {
+        "ogbia": "Ob`eb`í.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's fine": [
+      {
+        "ogbia": "A`ní`Õghé.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's lovely": [
+      {
+        "ogbia": "A`ní`Õghé.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's bad": [
+      {
+        "ogbia": "O`nínghéd`ó",
+        "category": "greetings_and_common_expressions"
+      },
+      {
+        "ogbia": "Náágurom.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's not good": [
+      {
+        "ogbia": "O`nínghéd`ó",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's full": [
+      {
+        "ogbia": "Náámizogh.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's raining": [
+      {
+        "ogbia": "Ná`álóbh.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's finished": [
+      {
+        "ogbia": "Náámunie.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's hard": [
+      {
+        "ogbia": "Ná`ákpar.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "rotten": [
+      {
+        "ogbia": "Náágurom.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "spoilt": [
+      {
+        "ogbia": "Náágurom.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "god exists": [
+      {
+        "ogbia": "Azib`a olóbha.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "there is god": [
+      {
+        "ogbia": "Azib`a olóbha.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "there's no money": [
+      {
+        "ogbia": "Igbogi baá.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "let's go": [
+      {
+        "ogbia": "NááÕlei má`ógi.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "the day is far gone": [
+      {
+        "ogbia": "Adio ná`áÕkpo.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "i am hungry": [
+      {
+        "ogbia": "Epobh náásubh á`mi.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "this is mine": [
+      {
+        "ogbia": "Onón ótami.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's sweet": [
+      {
+        "ogbia": "O`melmel.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "it's bitter": [
+      {
+        "ogbia": "O`ghereden.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "who knows": [
+      {
+        "ogbia": "Anyén ká álegiri?",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "what a surprise": [
+      {
+        "ogbia": "Mị náádúm!",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "the house is in darkness": [
+      {
+        "ogbia": "Otubha ará ma id`ímé.",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "what happened": [
+      {
+        "ogbia": "Ere kí`ná ámite?",
+        "category": "greetings_and_common_expressions"
+      },
+      {
+        "ogbia": "Ere ká ásor",
+        "category": "example_sentences"
+      }
+    ],
+    "what's that": [
+      {
+        "ogbia": "Obhá ká ére?",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "who are you": [
+      {
+        "ogbia": "Anwá ka anyén?",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "whose is it": [
+      {
+        "ogbia": "Ótáányen?",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "what": [
+      {
+        "ogbia": "Erê?",
+        "category": "greetings_and_common_expressions"
+      },
+      {
+        "ogbia": "eré / erê",
+        "category": "interrogatives"
+      }
+    ],
+    "how many": [
+      {
+        "ogbia": "E`níe?",
+        "category": "greetings_and_common_expressions"
+      },
+      {
+        "ogbia": "ẹní",
+        "category": "interrogatives"
+      }
+    ],
+    "where": [
+      {
+        "ogbia": "Akárá ága?",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "how much": [
+      {
+        "ogbia": "Aléí éka?",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "is it your business": [
+      {
+        "ogbia": "Atéí maanwá á`ra?",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "on which day did you come": [
+      {
+        "ogbia": "Nwá íÕrú ma akara adúma?",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "where are you going to": [
+      {
+        "ogbia": "Nwá ná`ágí ma akárá ága?",
+        "category": "greetings_and_common_expressions"
+      }
+    ],
+    "i'm coming": [
+      {
+        "ogbia": "Mí` náárú.",
+        "category": "example_sentences"
+      }
+    ],
+    "we're coming": [
+      {
+        "ogbia": "I`yár wáárú.",
+        "category": "example_sentences"
+      }
+    ],
+    "you're coming": [
+      {
+        "ogbia": "Nwá náárú.",
+        "category": "example_sentences"
+      }
+    ],
+    "he": [
+      {
+        "ogbia": "Ená náárú.",
+        "category": "example_sentences"
+      },
+      {
+        "ogbia": "Nááléghe tú`tú` adíle.",
+        "category": "example_sentences"
+      }
+    ],
+    "she is coming": [
+      {
+        "ogbia": "Ená náárú.",
+        "category": "example_sentences"
+      }
+    ],
+    "they're coming": [
+      {
+        "ogbia": "Awá wáárú.",
+        "category": "example_sentences"
+      }
+    ],
+    "i will come": [
+      {
+        "ogbia": "Mí` naarú.",
+        "category": "example_sentences"
+      }
+    ],
+    "i have come": [
+      {
+        "ogbia": "Mị nááru.",
+        "category": "example_sentences"
+      }
+    ],
+    "eki loves eating meat": [
+      {
+        "ogbia": "Éki ebera máód`e énám.",
+        "category": "example_sentences"
+      }
+    ],
+    "i'm about to go home": [
+      {
+        "ogbia": "Mí` naarú máóyel.",
+        "category": "example_sentences"
+      }
+    ],
+    "the rain is likely to fall": [
+      {
+        "ogbia": "Imád`íó náátia á`lobh.",
+        "category": "example_sentences"
+      }
+    ],
+    "it's been long since they ate": [
+      {
+        "ogbia": "Naab`orá ká áwa id`é.",
+        "category": "example_sentences"
+      }
+    ],
+    "i have just come": [
+      {
+        "ogbia": "Mị nákakaarú.",
+        "category": "example_sentences"
+      }
+    ],
+    "i have finished eating": [
+      {
+        "ogbia": "Mi náád`e awéÕlé.",
+        "category": "example_sentences"
+      }
+    ],
+    "you're engaged in cooking": [
+      {
+        "ogbia": "Nwá náása asâ?",
+        "category": "example_sentences"
+      }
+    ],
+    "take": [
+      {
+        "ogbia": "bhíné!",
+        "category": "example_sentences"
+      },
+      {
+        "ogbia": "ibhíne!",
+        "category": "example_sentences"
+      }
+    ],
+    "build": [
+      {
+        "ogbia": "gímé!",
+        "category": "example_sentences"
+      }
+    ],
+    "run": [
+      {
+        "ogbia": "ghílé!",
+        "category": "example_sentences"
+      }
+    ],
+    "go": [
+      {
+        "ogbia": "gí`é!",
+        "category": "example_sentences"
+      }
+    ],
+    "speak": [
+      {
+        "ogbia": "rú`é!",
+        "category": "example_sentences"
+      }
+    ],
+    "come": [
+      {
+        "ogbia": "rú`é!",
+        "category": "example_sentences"
+      }
+    ],
+    "don't go": [
+      {
+        "ogbia": "kạogí!",
+        "category": "example_sentences"
+      }
+    ],
+    "don't come": [
+      {
+        "ogbia": "kaorú!",
+        "category": "example_sentences"
+      }
+    ],
+    "don't run": [
+      {
+        "ogbia": "kaoghíl!",
+        "category": "example_sentences"
+      }
+    ],
+    "come and eat": [
+      {
+        "ogbia": "Tue tá ád`e!",
+        "category": "example_sentences"
+      }
+    ],
+    "she cried until evening": [
+      {
+        "ogbia": "Nááléghe tú`tú` adíle.",
+        "category": "example_sentences"
+      }
+    ],
+    "get up and walk": [
+      {
+        "ogbia": "B`etíná na reré!",
+        "category": "example_sentences"
+      }
+    ],
+    "i believe in god": [
+      {
+        "ogbia": "Mí` náád`úmóm má ázib`a.",
+        "category": "example_sentences"
+      }
+    ],
+    "éso is ada's older child": [
+      {
+        "ogbia": "É`so okéí ó`nyi tá Áda.",
+        "category": "example_sentences"
+      }
+    ],
+    "don't look backwards": [
+      {
+        "ogbia": "Kaotíbírá ákpon dá áman.",
+        "category": "example_sentences"
+      }
+    ],
+    "go to your house": [
+      {
+        "ogbia": "Yele má ógu d`íóm.",
+        "category": "example_sentences"
+      }
+    ],
+    "i am very hungry": [
+      {
+        "ogbia": "Epobh ásúbh á`mi ẹmí.",
+        "category": "example_sentences"
+      }
+    ],
+    "this is a house": [
+      {
+        "ogbia": "Onón ótu.",
+        "category": "example_sentences"
+      }
+    ],
+    "these are houses": [
+      {
+        "ogbia": "Inyen ítu.",
+        "category": "example_sentences"
+      }
+    ],
+    "that is a bottle": [
+      {
+        "ogbia": "obhá ólolo.",
+        "category": "example_sentences"
+      }
+    ],
+    "those are bottles": [
+      {
+        "ogbia": "iye ílolo.",
+        "category": "example_sentences"
+      }
+    ],
+    "odo has gone home": [
+      {
+        "ogbia": "Ódo nááyel.",
+        "category": "example_sentences"
+      }
+    ],
+    "call odo": [
+      {
+        "ogbia": "Kábhelegi máÓdo!",
+        "category": "example_sentences"
+      }
+    ],
+    "this is yam": [
+      {
+        "ogbia": "Onón é`lel.",
+        "category": "example_sentences"
+      }
+    ],
+    "cook yam": [
+      {
+        "ogbia": "Sa má`élel!",
+        "category": "example_sentences"
+      }
+    ],
+    "there is water": [
+      {
+        "ogbia": "A`mum olóbha.",
+        "category": "example_sentences"
+      }
+    ],
+    "bring water": [
+      {
+        "ogbia": "B`áru má`ámum!",
+        "category": "example_sentences"
+      }
+    ],
+    "who beat you": [
+      {
+        "ogbia": "Anyén ká ágor maanwâ?",
+        "category": "example_sentences"
+      }
+    ],
+    "you are who? = who are you": [
+      {
+        "ogbia": "Anwá ka anyén?",
+        "category": "example_sentences"
+      }
+    ],
+    "how many people came": [
+      {
+        "ogbia": "E`ni ánwúnom ká írue?",
+        "category": "example_sentences"
+      }
+    ],
+    "who": [
+      {
+        "ogbia": "anyén",
+        "category": "interrogatives"
+      }
+    ],
+    "how": [
+      {
+        "ogbia": "ekâ",
+        "category": "interrogatives"
+      }
+    ],
+    "in what way": [
+      {
+        "ogbia": "ekâ",
+        "category": "interrogatives"
+      }
+    ],
+    "why": [
+      {
+        "ogbia": "id`iéka / atugu",
+        "category": "interrogatives"
+      }
+    ],
+    "this": [
+      {
+        "ogbia": "onón",
+        "category": "demonstratives"
+      }
+    ],
+    "these": [
+      {
+        "ogbia": "inyen",
+        "category": "demonstratives"
+      }
+    ],
+    "those": [
+      {
+        "ogbia": "iye",
+        "category": "demonstratives"
+      }
+    ]
+  }
+}
