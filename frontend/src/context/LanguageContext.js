@@ -30,10 +30,16 @@ export const LanguageProvider = ({ children }) => {
     }
   };
 
-  const changeLanguage = async (code) => {
-    const lang = supportedLanguages.find(l => l.code === code);
+  const changeLanguage = async (languageInput) => {
+    const code = typeof languageInput === 'string'
+      ? languageInput
+      : (languageInput?.code || languageInput);
+    
+    const lang = supportedLanguages.find(l => l.code === code) || (typeof languageInput === 'object' ? languageInput : null);
     if (lang) {
-      await save('userLanguageCode', code);
+      if (lang.code) {
+        await save('userLanguageCode', lang.code);
+      }
       setActiveLanguage(lang);
     }
   };

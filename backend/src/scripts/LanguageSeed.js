@@ -16,6 +16,8 @@ const languages = [
     totalLessons: 12,
     totalSpeakers: 2000000,
     order: 1,
+    isActive: true,
+    isPublished: true,
     features: {
       hasAudio: true,
       hasPronunciation: true,
@@ -36,6 +38,8 @@ const languages = [
     totalLessons: 8,
     totalSpeakers: 500000,
     order: 2,
+    isActive: true,
+    isPublished: true,
     features: {
       hasAudio: false,
       hasPronunciation: true,
@@ -56,6 +60,8 @@ const languages = [
     totalLessons: 10,
     totalSpeakers: 300000,
     order: 3,
+    isActive: true,
+    isPublished: true,
     features: {
       hasAudio: false,
       hasPronunciation: true,
@@ -76,6 +82,8 @@ const languages = [
     totalLessons: 5,
     totalSpeakers: 200000,
     order: 4,
+    isActive: true,
+    isPublished: true,
     features: {
       hasAudio: false,
       hasPronunciation: true,
@@ -96,6 +104,8 @@ const languages = [
     totalLessons: 0,
     totalSpeakers: 1500000000,
     order: 0,
+    isActive: true,
+    isPublished: true,
     features: {
       hasAudio: true,
       hasPronunciation: true,
@@ -114,8 +124,7 @@ async function seedLanguages() {
 
     // Insert new languages
     const inserted = await Language.insertMany(languages);
-    inserted.forEach(lang => {
-    });
+    console.log(`Successfully seeded ${inserted.length} languages.`);
 
     process.exit(0);
   } catch (error) {

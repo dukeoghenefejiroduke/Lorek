@@ -33,7 +33,7 @@ router.use(contentLimiter);
  */
 router.get('/', cacheMiddleware(3600), async (req, res, next) => {
   try {
-    const languages = await Language.find({ isActive: true, isPublished: true })
+    const languages = await Language.find({ isActive: { $ne: false }, isPublished: { $ne: false } })
       .sort({ order: 1, name: 1 })
       .select('code name nativeName description region icon color difficulty totalWords totalLessons features');
 

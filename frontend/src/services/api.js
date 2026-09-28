@@ -364,7 +364,7 @@ const handleUnauthorized = async (error) => {
 
 // Cache management
 const cache = new Map();
-const pendingRequests = new Map();
+const pendingGetRequests = new Map();
 
 const getCachedResponse = async (key, ttl = config.CACHE_TTL) => {
   const cached = cache.get(key);
@@ -393,23 +393,23 @@ api.getWithCache = async (url, params = {}, ttl = config.CACHE_TTL, headers = {}
   
   // Check if there's already a pending request for this URL
   const pendingKey = cacheKey;
-  if (pendingRequests.has(pendingKey)) {
-    return pendingRequests.get(pendingKey);
+  if (pendingGetRequests.has(pendingKey)) {
+    return pendingGetRequests.get(pendingKey);
   }
   
   // Make the request
   const requestPromise = api.get(url, { params, headers })
     .then(response => {
       setCachedResponse(cacheKey, response.data);
-      pendingRequests.delete(pendingKey);
+      pendingGetRequests.delete(pendingKey);
       return { data: response.data, fromCache: false };
     })
     .catch(error => {
-      pendingRequests.delete(pendingKey);
+      pendingGetRequests.delete(pendingKey);
       throw error;
     });
   
-  pendingRequests.set(pendingKey, requestPromise);
+  pendingGetRequests.set(pendingKey, requestPromise);
   return requestPromise;
 };
 
@@ -929,6 +929,7 @@ export const apiUtils = {
   clearCache: () => {
     cache.clear();
     pendingRequests.clear();
+    pendingGetRequests.clear();
   },
   
   // Get queue status
@@ -952,6 +953,7 @@ export const apiUtils = {
   // Cancel all pending requests
   cancelAllRequests: () => {
     pendingRequests.clear();
+    pendingGetRequests.clear();
   },
 };
 

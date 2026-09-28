@@ -3556,3 +3556,45 @@
 {"level":"info","message":"User 6aaab50b5e945f632c02c93c completed lesson 6ab6d84fe4c4e3b1da39a5db with score 100","timestamp":"2026-09-26 15:53:43"}
 {"duration":"8133ms","level":"warn","message":"Slow request detected:","method":"POST","statusCode":200,"timestamp":"2026-09-26 15:53:43","url":"/api/lessons/6ab6d84fe4c4e3b1da39a5db/complete"}
 {"duration":"3787ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-26 15:54:06","url":"/api/lessons?lang=IZON&includeProgress=true"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-28T10:57:10.959Z\n    ================================\n    ","timestamp":"2026-09-28 11:57:10"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-28 11:57:11"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-28 11:57:11"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-09-28 11:57:20"}
+{"duration":"1367ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:11:54","url":"/api/user/me"}
+{"duration":"2434ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 12:11:57","url":"/api/notifications?limit=50"}
+{"duration":"2416ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:11:57","url":"/api/community/feed?limit=3"}
+{"duration":"2136ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:11:57","url":"/api/progress/badges"}
+{"duration":"4366ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:11:58","url":"/api/vocabulary/stats"}
+{"duration":"8076ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 12:12:02","url":"/api/progress"}
+{"duration":"1031ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 12:12:47","url":"/api/notifications/settings"}
+{"duration":"1443ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:12:47","url":"/api/notifications?limit=50"}
+{"duration":"1111ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:12:58","url":"/api/user/me"}
+{"duration":"1517ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:12:59","url":"/api/notifications?limit=50"}
+{"duration":"1803ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:13:05","url":"/api/languages/user/active"}
+{"duration":"2126ms","level":"warn","message":"Slow request detected:","method":"POST","statusCode":200,"timestamp":"2026-09-28 12:13:12","url":"/api/languages/user/active"}
+{"duration":"1631ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 12:13:26","url":"/api/languages/user/active"}
+{"duration":"2025ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:13:33","url":"/api/vocabulary/stats/overview"}
+{"duration":"4007ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:13:35","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=IZON"}
+{"duration":"1286ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:13:42","url":"/api/notifications?limit=50"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-28 12:56:26"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-28 12:56:26"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-28 12:56:26"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-28 12:56:26"}
+{"level":"info","message":"MongoDB connection closed","timestamp":"2026-09-28 12:56:31"}
+{"level":"info","message":"MongoDB connection closed","timestamp":"2026-09-28 12:56:31"}
+{"level":"info","message":"Redis connection closed","timestamp":"2026-09-28 12:56:31"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-28T11:57:12.013Z\n    ================================\n    ","timestamp":"2026-09-28 12:57:12"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-28 12:57:12"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-28 12:57:12"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-09-28 12:57:18"}
+{"duration":"1159ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:58:38","url":"/api/user/me"}
+{"duration":"1455ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:58:38","url":"/api/community/feed?limit=3"}
+{"duration":"1329ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:58:38","url":"/api/notifications?limit=50"}
+{"duration":"2790ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:58:39","url":"/api/progress"}
+{"duration":"1198ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:58:39","url":"/api/progress/badges"}
+{"duration":"1134ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:58:52","url":"/api/languages/user/active"}
+{"duration":"1146ms","level":"warn","message":"Slow request detected:","method":"POST","statusCode":200,"timestamp":"2026-09-28 12:59:01","url":"/api/languages/user/active"}
+{"duration":"3111ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 12:59:27","url":"/api/content/hierarchy"}
+{"duration":"1203ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 12:59:34","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=OGBIA"}
+{"duration":"2143ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:59:51","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=IZON"}
+{"duration":"2516ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 13:00:44","url":"/api/content/hierarchy"}

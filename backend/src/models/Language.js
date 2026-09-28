@@ -56,8 +56,8 @@ const languageSchema = new mongoose.Schema({
 
 // Static helper to get registry for frontend
 languageSchema.statics.getRegistry = function() {
-  return this.find({ isActive: true, isPublished: true })
-    .select('code name nativeName family directionality features')
+  return this.find({ isActive: { $ne: false }, isPublished: { $ne: false } })
+    .select('code name nativeName family directionality features description region icon color difficulty totalWords totalLessons')
     .sort({ order: 1 });
 };
 
