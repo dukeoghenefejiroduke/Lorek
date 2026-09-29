@@ -33,7 +33,7 @@ async function seedCulturalContent() {
 
     const adminId = new mongoose.Types.ObjectId(); // Mock creator
 
-    await CulturalContent.deleteMany({});
+    await CulturalContent.deleteMany({ language_id: language._id });
     
     const seededContents = contents.map(c => ({
         ...c,

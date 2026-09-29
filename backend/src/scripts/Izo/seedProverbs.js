@@ -39,7 +39,7 @@ async function seedProverbs() {
 
     const adminId = new mongoose.Types.ObjectId(); // Mock creator
 
-    await Proverb.deleteMany({});
+    await Proverb.deleteMany({ language_id: language._id });
     
     const seededProverbs = proverbs.map(p => ({
         ...p,

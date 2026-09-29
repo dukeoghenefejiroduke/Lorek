@@ -120,12 +120,15 @@ async function seedLanguages() {
     const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/lorek';
     await mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 2000 });
 
-    // Clear existing languages
-    await Language.deleteMany({});
-
-    // Insert new languages
-    const inserted = await Language.insertMany(languages);
-    console.log(`Successfully seeded ${inserted.length} languages.`);
+    // Upsert languages by code to preserve existing _id foreign key references
+    for (const langData of languages) {
+      await Language.updateOne(
+        { code: langData.code },
+        { $set: langData },
+        { upsert: true }
+      );
+    }
+    console.log(`Successfully seeded/updated ${languages.length} languages while preserving foreign key references.`);
 
     process.exit(0);
   } catch (error) {

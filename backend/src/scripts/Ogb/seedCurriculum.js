@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const Language = require('../../models/Language');
 const Lesson = require('../../models/Lesson');
 const Vocabulary = require('../../models/Vocabulary');
+const Course = require('../../models/Course');
+const Section = require('../../models/Section');
+const Unit = require('../../models/Unit');
 
 async function seedOgbiaCurriculum() {
   try {
@@ -14,6 +17,8 @@ async function seedOgbiaCurriculum() {
       process.exit(0);
     }
     const adminId = new mongoose.Types.ObjectId();
+    
+    // Cleanup only Ogbia lessons
     await Lesson.deleteMany({ language_id: language._id });
     
     const vocabWords = await Vocabulary.find({ language_id: language._id }).limit(3);
@@ -46,8 +51,44 @@ async function seedOgbiaCurriculum() {
         createdBy: adminId
       }
     ];
-    await Lesson.insertMany(lessons);
-    console.log('Ogbia curriculum seeded successfully!');
+
+    const createdLessons = await Lesson.insertMany(lessons);
+
+    // Find or create Ogbia Course
+    let course = await Course.findOne({ languageId: language._id });
+    if (!course) {
+      course = await Course.create({
+        title: 'Ogbia Beginner Course',
+        languageId: language._id,
+        description: 'Learn the Ogbia language from basics to conversations.'
+      });
+    }
+
+    // Find or create Section
+    let section = await Section.findOne({ courseId: course._id });
+    if (!section) {
+      section = await Section.create({
+        title: 'Ogbia Beginner Track',
+        courseId: course._id
+      });
+      await Course.findByIdAndUpdate(course._id, { $addToSet: { sections: section._id } });
+    }
+
+    // Find or create Unit
+    let unit = await Unit.findOne({ sectionId: section._id });
+    if (!unit) {
+      unit = await Unit.create({
+        title: 'Unit 1: Basics & Greetings',
+        sectionId: section._id,
+        lessons: createdLessons.map(l => l._id)
+      });
+      await Section.findByIdAndUpdate(section._id, { $addToSet: { units: unit._id } });
+    } else {
+      unit.lessons = createdLessons.map(l => l._id);
+      await unit.save();
+    }
+
+    console.log('Ogbia curriculum, course, section, and unit seeded successfully!');
   } catch (error) {
     console.error('⚠️ Curriculum seed error:', error);
   }

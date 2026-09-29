@@ -28,9 +28,9 @@ async function seedVocabulary() {
 
     const adminId = new mongoose.Types.ObjectId();
 
-    // Clear existing vocabulary to sync directly with translation dictionary
-    await Vocabulary.deleteMany({});
-    console.log('Cleared existing vocabulary collection for clean dictionary sync.');
+    // Clear existing vocabulary for this language to sync directly with translation dictionary
+    await Vocabulary.deleteMany({ language_id: lang._id });
+    console.log('Cleared existing vocabulary for Izon for clean dictionary sync.');
 
     console.log(`Processing ${izonLookup.length} dictionary entries from IzonLookup.json...`);
 
