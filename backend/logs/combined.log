@@ -3598,3 +3598,31 @@
 {"duration":"1203ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 12:59:34","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=OGBIA"}
 {"duration":"2143ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 12:59:51","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=IZON"}
 {"duration":"2516ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 13:00:44","url":"/api/content/hierarchy"}
+{"duration":"4136ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 13:04:39","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=OGBIA&category=family"}
+{"duration":"1481ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 13:04:46","url":"/api/languages/user/active"}
+{"duration":"1608ms","level":"warn","message":"Slow request detected:","method":"POST","statusCode":200,"timestamp":"2026-09-28 13:04:51","url":"/api/languages/user/active"}
+{"duration":"4116ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 13:04:58","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=EN&category=family"}
+{"duration":"1538ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 13:05:06","url":"/api/languages/user/active"}
+{"duration":"1541ms","level":"warn","message":"Slow request detected:","method":"POST","statusCode":200,"timestamp":"2026-09-28 13:05:11","url":"/api/languages/user/active"}
+{"duration":"2235ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 13:05:16","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=IZON&category=family"}
+{"duration":"1852ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":200,"timestamp":"2026-09-28 13:05:26","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=IZON&category=nature"}
+{"duration":"3097ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 13:05:35","url":"/api/vocabulary?limit=100&includePronunciation=true&lang=IZON"}
+{"duration":"1309ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 13:05:44","url":"/api/notifications?limit=50"}
+{"duration":"1177ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-28 13:06:17","url":"/api/notifications?limit=50"}
+{"duration":"1256ms","level":"warn","message":"Slow request detected:","method":"PUT","statusCode":200,"timestamp":"2026-09-28 13:06:37","url":"/api/notifications/settings"}
+{"duration":"1199ms","level":"warn","message":"Slow request detected:","method":"PUT","statusCode":200,"timestamp":"2026-09-28 13:06:45","url":"/api/notifications/settings"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-29T08:50:24.518Z\n    ================================\n    ","timestamp":"2026-09-29 09:50:24"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-29 09:50:24"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-29 09:50:24"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-09-29 09:50:34"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-29 09:55:26"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-29 09:55:26"}
+{"level":"info","message":"SIGINT received. Starting graceful shutdown...","timestamp":"2026-09-29 09:55:26"}
+{"level":"info","message":"HTTP server closed","timestamp":"2026-09-29 09:55:26"}
+{"level":"info","message":"MongoDB connection closed","timestamp":"2026-09-29 09:55:28"}
+{"level":"info","message":"MongoDB connection closed","timestamp":"2026-09-29 09:55:28"}
+{"level":"info","message":"Redis connection closed","timestamp":"2026-09-29 09:55:28"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-29T08:55:57.799Z\n    ================================\n    ","timestamp":"2026-09-29 09:55:57"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-29 09:55:58"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-29 09:55:58"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-09-29 09:56:01"}
