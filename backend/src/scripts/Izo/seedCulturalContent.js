@@ -1,7 +1,7 @@
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '../../../.env') });
 const mongoose = require('mongoose');
-const CulturalContent = require('../models/CulturalContent');
-const Language = require('../models/Language');
+const CulturalContent = require('../../models/CulturalContent');
+const Language = require('../../models/Language');
 
 const contents = [
   {

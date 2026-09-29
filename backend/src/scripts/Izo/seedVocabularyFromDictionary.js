@@ -1,9 +1,9 @@
-require('dotenv').config({ path: require('path').join(__dirname, '../../.env') });
+require('dotenv').config({ path: require('path').join(__dirname, '../../../.env') });
 const mongoose = require('mongoose');
-const Vocabulary = require('../models/Vocabulary');
-const Language = require('../models/Language');
-const izonLookup = require('../translation/packs/izo/IzonLookup.json');
-const englishReverseLookup = require('../translation/packs/izo/EnglishReverseLookup.json');
+const Vocabulary = require('../../models/Vocabulary');
+const Language = require('../../models/Language');
+const izonLookup = require('../../translation/packs/izo/IzonLookup.json');
+const englishReverseLookup = require('../../translation/packs/izo/EnglishReverseLookup.json');
 
 async function seedVocabulary() {
   try {

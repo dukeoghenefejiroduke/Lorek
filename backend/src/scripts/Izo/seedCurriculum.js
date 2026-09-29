@@ -1,16 +1,16 @@
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '../../../.env') });
 
 console.log('Starting seedCurriculum.js');
 
 const mongoose = require('mongoose');
 
-const Unit = require('../models/Unit');
-const Lesson = require('../models/Lesson');
-const Section = require('../models/Section');
-const Course = require('../models/Course');
-const Language = require('../models/Language');
-const Module = require('../models/Module');
-const Vocabulary = require('../models/Vocabulary');
+const Unit = require('../../models/Unit');
+const Lesson = require('../../models/Lesson');
+const Section = require('../../models/Section');
+const Course = require('../../models/Course');
+const Language = require('../../models/Language');
+const Module = require('../../models/Module');
+const Vocabulary = require('../../models/Vocabulary');
 
 // ============================================================
 // CURRICULUM
