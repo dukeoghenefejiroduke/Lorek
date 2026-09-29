@@ -132,6 +132,12 @@ let isOnline = true;
 let isRefreshing = false;
 let failedQueue = [];
 
+NetInfo.fetch().then(state => {
+  if (state.isConnected !== null && state.isConnected !== undefined) {
+    isOnline = state.isConnected;
+  }
+});
+
 const processQueue = (error, token = null) => {
   failedQueue.forEach(({ resolve, reject }) => {
     if (error) {
@@ -146,7 +152,7 @@ const processQueue = (error, token = null) => {
 
 NetInfo.addEventListener(state => {
   const wasOnline = isOnline;
-  isOnline = state.isConnected;
+  isOnline = state.isConnected !== false;
   
   // Sync when coming online
   if (!wasOnline && isOnline) {

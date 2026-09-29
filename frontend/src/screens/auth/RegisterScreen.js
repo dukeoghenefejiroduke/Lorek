@@ -172,7 +172,7 @@ const handleRegister = async () => {
     });
 
     if (result?.success) {
-      setSuccessMsg('Registration successful! Redirecting...');
+      setSuccessMsg(result.message || 'Registration successful! Please check your email to verify your account.');
     } else {
       // Improved error parsing
       if (result?.errors && Array.isArray(result.errors)) {

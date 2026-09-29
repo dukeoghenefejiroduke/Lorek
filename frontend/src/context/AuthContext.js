@@ -516,7 +516,7 @@ const refreshAuthToken = async (manualToken) => {
       // Provide haptic feedback
       haptics.notificationSuccess();
       
-      return { success: true, user };
+      return { success: true, user, message: response.data.message };
     } catch (error) {
       // Provide haptic feedback for error
       haptics.notificationError();

@@ -133,6 +133,19 @@ const completeLesson = async () => {
   const totalCorrect = answersArray.filter(a => a.correct).length;
   const calculatedScore = Math.round((totalCorrect / totalExercises) * 100);
 
+  const mistakesArray = lesson.exercises.map((ex, i) => {
+    const ans = currentAnswers[i];
+    if (ans && !ans.correct) {
+      const correctOpt = ex.options?.find(o => o.isCorrect);
+      return {
+        question: ex.question || ex.prompt || ex.instruction || `Exercise ${i + 1}`,
+        correctAnswer: correctOpt?.english || correctOpt?.izon || getCorrectAnswerString(ex.correctAnswer) || 'N/A',
+        explanation: ex.explanation || 'Review this word or grammar concept.',
+      };
+    }
+    return null;
+  }).filter(Boolean);
+
   const payload = {
     score: calculatedScore,
     timeSpent: timeSpent,
@@ -145,12 +158,14 @@ const completeLesson = async () => {
     const response = await lessonAPI.complete(lessonId, payload);
     const resultData = response.data.data;
     
-    // Navigate to Result Screen
+    // Navigate to Result Screen with mistakes and nextLesson
     navigation.navigate('Result', {
         score: calculatedScore,
         rewards: resultData.rewards,
         statistics: resultData.statistics,
-        feedback: resultData.feedback
+        feedback: resultData.feedback,
+        mistakes: mistakesArray,
+        nextLesson: resultData.nextLesson
     });
     
   } catch (error) {

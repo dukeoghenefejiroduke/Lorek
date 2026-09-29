@@ -936,6 +936,27 @@ lessonSchema.virtual('completionRate').get(function() {
  * Check if user meets prerequisites
  */
 lessonSchema.methods.checkPrerequisites = async function(userId) {
+  const Unit = mongoose.model('Unit');
+  const Progress = mongoose.model('Progress');
+  
+  // Sequential unlocking check via Unit structure
+  const unit = await Unit.findOne({ lessons: this._id });
+  if (unit) {
+    const lessonIds = unit.lessons.map(id => id.toString());
+    const index = lessonIds.indexOf(this._id.toString());
+    if (index > 0) {
+      const prevLessonId = lessonIds[index - 1];
+      const prevProgress = await Progress.findOne({
+        user: userId,
+        lesson: prevLessonId,
+        completed: true,
+      });
+      if (!prevProgress) {
+        return { met: false, missing: [{ type: 'sequential', description: 'Complete the previous lesson first.' }] };
+      }
+    }
+  }
+
   const User = mongoose.model('User');
   const user = await User.findById(userId);
   

@@ -111,9 +111,11 @@ router.get('/', auth, cacheMiddleware(300), async (req, res, next) => {
       }
     }
 
-    // Filter by Language if lang provided
-    if (lang) {
-      const languageDoc = await Language.findOne({ code: lang.toUpperCase() });
+    // Filter by Language if lang provided or Accept-Language header present
+    const targetLang = lang || req.headers['accept-language'];
+    if (targetLang) {
+      const cleanLang = targetLang.includes(',') ? targetLang.split(',')[0].trim() : targetLang;
+      const languageDoc = await Language.findOne({ code: cleanLang.toUpperCase() });
       if (languageDoc) {
         query.language_id = languageDoc._id;
       }
@@ -150,6 +152,17 @@ router.get('/', auth, cacheMiddleware(300), async (req, res, next) => {
       Lesson.countDocuments(query),
     ]);
 
+    // If unitId provided, sort lessons in exact unit order
+    if (unitId) {
+      const unit = await Unit.findById(unitId);
+      if (unit && unit.lessons) {
+        const unitLessonIds = unit.lessons.map(id => id.toString());
+        lessons.sort((a, b) => {
+          return unitLessonIds.indexOf(a._id.toString()) - unitLessonIds.indexOf(b._id.toString());
+        });
+      }
+    }
+
     // Enhance with user progress if authenticated and requested
     let enhancedLessons = lessons;
     if (includeProgress === 'true' && req.userId) {
@@ -163,16 +176,22 @@ router.get('/', auth, cacheMiddleware(300), async (req, res, next) => {
 
       const progressMap = new Map(progresses.map(p => [p.lesson.toString(), p]));
 
-      // Note: Prerequisites check is still per-lesson but would require further 
-      // complex refactoring to bulk. Progress lookup is now optimized.
       enhancedLessons = await Promise.all(
-        lessons.map(async (lesson) => {
+        lessons.map(async (lesson, index) => {
           const progress = progressMap.get(lesson._id.toString());
           const prerequisiteCheck = await lesson.checkPrerequisites(req.userId);
 
+          let isUnlocked = prerequisiteCheck.met;
+          if (index > 0 && !progress?.completed) {
+            const prevProgress = progressMap.get(lessons[index - 1]._id.toString());
+            if (!prevProgress || !prevProgress.completed) {
+              isUnlocked = false;
+            }
+          }
+
           return {
             ...lesson.toObject(),
-            isUnlocked: prerequisiteCheck.met,
+            isUnlocked,
             userProgress: progress ? {
               completed: progress.completed,
               score: progress.score,
@@ -186,9 +205,9 @@ router.get('/', auth, cacheMiddleware(300), async (req, res, next) => {
         })
       );
     } else {
-      enhancedLessons = lessons.map(lesson => ({
+      enhancedLessons = lessons.map((lesson, index) => ({
         ...lesson.toObject(),
-        isUnlocked: true, // Default to true if not logged in or progress not requested
+        isUnlocked: index === 0,
         userProgress: null,
       }));
     }

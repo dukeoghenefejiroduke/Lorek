@@ -2,22 +2,26 @@ import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, ActivityIndicator, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
 import ScreenHeader from '../../components/ScreenHeader';
 import api from '../../services/api';
 
 const CourseScreen = ({ navigation }) => {
   const { theme } = useContext(ThemeContext);
+  const { activeLanguage } = useContext(LanguageContext);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchCourses();
-  }, []);
+  }, [activeLanguage]);
 
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      const response = await api.get('/content/hierarchy');
+      const response = await api.get('/content/hierarchy', {
+        params: { lang: activeLanguage?.code || 'IZON' }
+      });
       setCourses(response.data.data);
     } catch (error) {
       console.error('Failed to fetch courses:', error);
