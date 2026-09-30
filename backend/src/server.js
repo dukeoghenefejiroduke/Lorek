@@ -107,10 +107,12 @@ app.use(helmet({
 }));
 
 // CORS configuration
+const defaultOrigins = ['https://izonlanguage.com', 'https://app.izonlanguage.com', 'https://lorek.vercel.app'];
+const envOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim()) : [];
+const allowedOrigins = Array.from(new Set([...defaultOrigins, ...envOrigins]));
+
 const corsOptions = {
-  origin: IS_PRODUCTION 
-    ? process.env.ALLOWED_ORIGINS?.split(',') || ['https://izonlanguage.com', 'https://app.izonlanguage.com', 'https://lorek.vercel.app']
-    : '*',
+  origin: IS_PRODUCTION ? allowedOrigins : '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key', 'X-Request-ID', 'X-Refresh-Token', 'Accept-Language'],
   exposedHeaders: ['X-RateLimit-Limit', 'X-RateLimit-Remaining', 'X-Request-ID'],
