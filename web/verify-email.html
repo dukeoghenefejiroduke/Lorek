@@ -63,7 +63,7 @@
                     statusDiv.innerText = 'Error: ' + (data.error || 'Verification failed.');
                 }
             } catch (error) {
-                statusDiv.innerText = 'Error: Could not connect to the server.';
+                statusDiv.innerText = 'Error: Could not connect to the server. (' + error.message + ')';
             } finally {
                 spinner.style.display = 'none';
             }
