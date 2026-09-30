@@ -3665,3 +3665,7 @@
 {"duration":"3210ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-29 10:18:00","url":"/api/progress/badges"}
 {"duration":"3464ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-29 10:18:01","url":"/api/vocabulary/stats"}
 {"duration":"6698ms","level":"warn","message":"Slow request detected:","method":"GET","statusCode":304,"timestamp":"2026-09-29 10:18:01","url":"/api/progress"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-09-30T09:25:10.132Z\n    ================================\n    ","timestamp":"2026-09-30 10:25:10"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-09-30 10:25:10"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-09-30 10:25:10"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-09-30 10:25:15"}

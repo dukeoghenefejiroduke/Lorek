@@ -1366,18 +1366,29 @@ async function ensureVocabulary(vocabItem, izon, adminId) {
   let vocab = await Vocabulary.findOne({
     izonWord: vocabItem.izon,
     language_id: izon._id
-  });
+  }).collation({ locale: 'en', strength: 2 });
 
   if (!vocab) {
-    vocab = await Vocabulary.create({
-      izonWord: vocabItem.izon,
-      englishTranslation: vocabItem.english,
-      language_id: izon._id,
-      category: 'other', // Default as per schema requirements
-      difficulty: 'beginner',
-      createdBy: adminId
-    });
-    console.log(`Created vocabulary: ${vocab.izonWord} with ID: ${vocab._id}`);
+    try {
+      vocab = await Vocabulary.create({
+        izonWord: vocabItem.izon,
+        englishTranslation: vocabItem.english,
+        language_id: izon._id,
+        category: 'other',
+        difficulty: 'beginner',
+        createdBy: adminId
+      });
+      console.log(`Created vocabulary: ${vocab.izonWord} with ID: ${vocab._id}`);
+    } catch (err) {
+      if (err.code === 11000) {
+        vocab = await Vocabulary.findOne({
+          izonWord: vocabItem.izon,
+          language_id: izon._id
+        }).collation({ locale: 'en', strength: 2 });
+      } else {
+        throw err;
+      }
+    }
   } else {
     console.log(`Found vocabulary: ${vocab.izonWord} with ID: ${vocab._id}`);
   }

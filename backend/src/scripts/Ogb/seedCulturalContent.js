@@ -23,7 +23,7 @@ const contents = [
 async function seedOgbiaCulturalContent() {
   try {
     const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/lorek';
-    await mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 2000 });
+    await mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 30000 });
     const language = await Language.findOne({ code: 'OGBIA' });
     if (!language) {
       console.warn('Ogbia language not found in DB.');
