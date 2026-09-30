@@ -109,7 +109,7 @@ app.use(helmet({
 // CORS configuration
 const corsOptions = {
   origin: IS_PRODUCTION 
-    ? process.env.ALLOWED_ORIGINS?.split(',') || ['https://izonlanguage.com', 'https://app.izonlanguage.com']
+    ? process.env.ALLOWED_ORIGINS?.split(',') || ['https://izonlanguage.com', 'https://app.izonlanguage.com', 'https://lorek.vercel.app']
     : '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key', 'X-Request-ID', 'X-Refresh-Token', 'Accept-Language'],
