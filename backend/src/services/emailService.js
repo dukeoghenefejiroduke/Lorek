@@ -62,7 +62,7 @@ class EmailService {
   sendWelcomeEmail = async (to, username, referralCode) => {
     return this.sendEmail({
       to,
-      subject: 'Welcome to Izon Language App',
+      subject: 'Welcome to Lorek Language App',
       template: 'welcome',
       data: { username, referralCode },
     });
@@ -74,7 +74,7 @@ class EmailService {
     
     return this.sendEmail({
       to,
-      subject: 'Verify Your Email - Izon Language App',
+      subject: 'Verify Your Email - lorek Language App',
       template: 'verify-email',
       data: {
         username,
@@ -92,7 +92,7 @@ class EmailService {
 
     return this.sendEmail({
       to,
-      subject: 'Reset Your Password - Izon Language App',
+      subject: 'Reset Your Password - lorek Language App',
       template: 'password-reset',
       data: {
         username,
@@ -107,7 +107,7 @@ class EmailService {
   sendPasswordChangedEmail = async (to, username) => {
     return this.sendEmail({
       to,
-      subject: 'Password Changed - Izon Language App',
+      subject: 'Password Changed - lorek Language App',
       template: 'password-changed',
       data: {
         username,
@@ -120,7 +120,7 @@ class EmailService {
   sendAchievementEmail = async (to, username, achievement) => {
     const webUrl = process.env.WEB_URL || 'http://localhost:3000';
     const name = encodeURIComponent(achievement.name || 'Milestone Reached');
-    const desc = encodeURIComponent(achievement.description || 'Great job mastering Izon vocabulary!');
+    const desc = encodeURIComponent(achievement.description || 'Great job mastering lorek vocabulary!');
     const icon = encodeURIComponent(achievement.icon || '🏆');
     return this.sendEmail({
       to,
@@ -145,7 +145,7 @@ class EmailService {
     const points = stats?.pointsEarned || 0;
     return this.sendEmail({
       to,
-      subject: 'Your Weekly Learning Progress - Izon Language App',
+      subject: 'Your Weekly Learning Progress - lorek Language App',
       template: 'weekly-report',
       data: {
         username,
@@ -174,7 +174,7 @@ class EmailService {
   sendFeedbackResponse = async (to, username, feedback) => {
     return this.sendEmail({
       to,
-      subject: 'Thank You for Your Feedback - Izon Language App',
+      subject: 'Thank You for Your Feedback - lorek Language App',
       template: 'feedback-response',
       data: {
         username,
@@ -196,7 +196,7 @@ class EmailService {
       try {
         const result = await this.sendEmail({
           to: recipient.email,
-          subject: options.subject || 'Izon Language App',
+          subject: options.subject || 'lorek Language App',
           template,
           data: {
             ...data,
@@ -236,7 +236,7 @@ class EmailService {
       return template;
     } catch (error) {
       logger.error(`Missing template: ${templateName}`);
-      return `<html><body><h1>Hello!</h1><p>This is a notification from Izon App.</p></body></html>`;
+      return `<html><body><h1>Hello!</h1><p>This is a notification from lorek App.</p></body></html>`;
     }
   }
 
