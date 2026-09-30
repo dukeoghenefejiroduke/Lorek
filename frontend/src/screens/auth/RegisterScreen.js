@@ -247,246 +247,267 @@ const handleReferralCheck = async (code) => {
             ) : null}
 
             {successMsg ? (
-              <View style={styles.successContainer}>
-                <MaterialIcons name="check-circle" size={20} color={theme.success} />
-                <Text style={[styles.successText, { color: theme.success }]}>{successMsg}</Text>
-              </View>
-            ) : null}
-
-            {/* Username Input */}
-            <View style={[styles.inputContainer, { backgroundColor: theme.card }]}>
-              <MaterialIcons name="person" size={20} color={theme.subText} style={styles.inputIcon} />
-              <TextInput
-                style={[styles.input, { color: theme.text }]}
-                placeholder="Username"
-                placeholderTextColor={theme.subText}
-                value={username}
-                onChangeText={(val) => {
-                  setUsername(val);
-                  if (errorMsg.toLowerCase().includes('username')) {
-                       setErrorMsg('');
-                  }
-                 if (val.trim().length >= 3 && val.trim().length <= 30) {
-                     setErrorMsg('');
-                  }
-                }}
-                autoCapitalize="none"
-                autoCorrect={false}
-                returnKeyType="next"
-                onSubmitEditing={() => emailRef.current?.focus()}
-                blurOnSubmit={false}
-              />
-             {username.length > 0 && (
-                 <Text style={{ 
-                   fontSize: 10, 
-                   color: (username.trim().length < 3 || username.length > 30) ? theme.error : theme.subText, 
-                   marginRight: 10 
-                 }}>
-                   {username.length}/30
-                </Text>
-              )}
-            </View>
-
-            {/* Email Input */}
-            <View style={[styles.inputContainer, { backgroundColor: theme.card }]}>
-              <MaterialIcons name="email" size={20} color={theme.subText} style={styles.inputIcon} />
-              <TextInput
-                ref={emailRef}
-                style={[styles.input, { color: theme.text }]}
-                placeholder="Email"
-                placeholderTextColor={theme.subText}
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-                returnKeyType="next"
-                onSubmitEditing={() => passwordRef.current?.focus()}
-                blurOnSubmit={false}
-              />
-            </View>
-
-            {/* Password Input */}
-            <View style={[styles.inputContainer, { backgroundColor: theme.card }]}>
-              <MaterialIcons name="lock" size={20} color={theme.subText} style={styles.inputIcon} />
-              <TextInput
-                ref={passwordRef}
-                style={[styles.input, { paddingRight: 50, color: theme.text }]}
-                placeholder="Password"
-                placeholderTextColor={theme.subText}
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={!showPassword}
-                autoCapitalize="none"
-                returnKeyType="next"
-                onSubmitEditing={() => confirmPasswordRef.current?.focus()}
-              />
-              <TouchableOpacity
-                style={styles.eyeIcon}
-                onPress={() => setShowPassword(!showPassword)}
-              >
-                <Ionicons 
-                  name={showPassword ? 'eye-off' : 'eye'} 
-                  size={20} 
-                  color={theme.subText} 
-                />
-              </TouchableOpacity>
-            </View>
-
-            {/* Password Strength Indicator */}
-            {password.length > 0 && (
-              <View style={styles.strengthContainer}>
-                <View style={styles.strengthBars}>
-                  {[1, 2, 3, 4].map((level) => (
-                    <View
-                      key={level}
-                      style={[
-                        styles.strengthBar,
-                        {
-                          backgroundColor: level <= passwordStrength.score 
-                            ? getPasswordStrengthColor() 
-                            : theme.border,
-                          width: '23%',
-                        },
-                      ]}
-                    />
-                  ))}
+              <View style={{ alignItems: 'center', justifyContent: 'center', paddingVertical: 30, width: '100%' }}>
+                <View style={[styles.successContainer, { width: '100%', marginBottom: 20, padding: 16 }]}>
+                  <MaterialIcons name="check-circle" size={28} color={theme.success} />
+                  <View style={{ flex: 1, marginLeft: 12 }}>
+                    <Text style={[styles.successText, { color: theme.success, fontWeight: 'bold', fontSize: 16, marginBottom: 4 }]}>
+                      Registration Successful!
+                    </Text>
+                    <Text style={[styles.successText, { color: theme.text, fontSize: 14, marginBottom: 8 }]}>
+                      {successMsg}
+                    </Text>
+                    <Text style={[styles.successText, { color: theme.subText, fontSize: 13, fontStyle: 'italic' }]}>
+                      If you don't see the email in your inbox, please check your spam or junk folder.
+                    </Text>
+                  </View>
                 </View>
-                <Text style={[styles.strengthText, { color: getPasswordStrengthColor() }]}>
-                  {getPasswordStrengthText()}
-                </Text>
-              </View>
-            )}
-
-            {/* Confirm Password Input */}
-            <View style={[styles.inputContainer, { backgroundColor: theme.card }]}>
-              <MaterialIcons name="lock-outline" size={20} color={theme.subText} style={styles.inputIcon} />
-              <TextInput
-                ref={confirmPasswordRef}
-                style={[styles.input, { paddingRight: 50, color: theme.text }]}
-                placeholder="Confirm Password"
-                placeholderTextColor={theme.subText}
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
-                secureTextEntry={!showConfirmPassword}
-                autoCapitalize="none"
-                returnKeyType="next"
-                onSubmitEditing={handleRegister}
-              />
-              <TouchableOpacity
-                style={styles.eyeIcon}
-                onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-              >
-                <Ionicons 
-                  name={showConfirmPassword ? 'eye-off' : 'eye'} 
-                  size={20} 
-                  color={theme.subText} 
-                />
-              </TouchableOpacity>
-            </View>
-
-            {/* Password Match Indicator */}
-            {confirmPassword.length > 0 && (
-              <View style={styles.matchContainer}>
-                <Ionicons
-                  name={password === confirmPassword ? 'checkmark-circle' : 'close-circle'}
-                  size={16}
-                  color={password === confirmPassword ? theme.success : theme.error}
-                />
-                <Text style={[
-                  styles.matchText,
-                  { color: password === confirmPassword ? theme.success : theme.error }
-                ]}>
-                  {password === confirmPassword ? 'Passwords match' : 'Passwords do not match'}
-                </Text>
-              </View>
-            )}
-
-{/* Referral Code (Optional) */}
-<View style={[styles.inputContainer, referralError ? { borderColor: theme.error, borderWidth: 1 } : null, { backgroundColor: theme.card }]}>
-  <MaterialIcons name="share" size={20} color={theme.subText} style={styles.inputIcon} />
-  <TextInput
-    style={[styles.input, { color: theme.text }]}
-    placeholder="Referral Code (Optional)"
-    placeholderTextColor={theme.subText}
-    value={referralCode}
-    onChangeText={handleReferralCheck} // Trigger check on type
-    autoCapitalize="characters"
-    returnKeyType="done"
-  />
-</View>
-
-{/* Show Success/Error Feedback */}
-{referrerName ? (
-  <Text style={{ color: theme.success, fontSize: 12, marginLeft: 15, marginBottom: 10 }}>
-    Invited by: <Text style={{ fontWeight: 'bold' }}>{referrerName}</Text>
-  </Text>
-) : null}
-{referralError ? (
-  <Text style={{ color: theme.error, fontSize: 12, marginLeft: 15, marginBottom: 10 }}>
-    {referralError}
-  </Text>
-) : null}
-
-            {/* Terms and Conditions */}
-            <TouchableOpacity
-              style={styles.checkboxContainer}
-              onPress={() => setAgreeToTerms(!agreeToTerms)}
-              activeOpacity={0.7}
-            >
-              <View style={[styles.checkbox, agreeToTerms && styles.checkboxChecked, { borderColor: theme.text }]}>
-                {agreeToTerms && <MaterialIcons name="check" size={16} color="#fff" />}
-              </View>
-              <Text style={[styles.checkboxLabel, { color: theme.text }]}>
-                I agree to the{' '}
-                <Text 
-                  style={[styles.linkHighlight, { color: theme.accent }]}
-                  onPress={() => setTermsModalVisible(true)}
+                <TouchableOpacity
+                  style={[styles.button, { backgroundColor: theme.surface, marginTop: 10, width: '100%' }]}
+                  onPress={() => navigation.navigate('Login')}
+                  activeOpacity={0.8}
                 >
-                  Terms of Service
-                </Text>
-                {' '}and{' '}
-                <Text 
-                  style={[styles.linkHighlight, { color: theme.accent }]}
-                  onPress={() => navigation.navigate('PrivacyPolicy')}
-                >
-                  Privacy Policy
-                </Text>
-              </Text>
-            </TouchableOpacity>
-
-            {/* Register Button */}
-            <TouchableOpacity
-              style={[styles.button, loading && styles.buttonDisabled, { backgroundColor: theme.surface }]}
-              onPress={handleRegister}
-              disabled={loading}
-              activeOpacity={0.8}
-            >
-              {loading ? (
-                <ActivityIndicator color={theme.primary} />
-              ) : (
-                <Text style={[styles.buttonText, { color: theme.primary }]}>Create Account</Text>
-              )}
-            </TouchableOpacity>
-
-            {/* Login Link */}
-            <View style={styles.loginContainer}>
-              <Text style={[styles.loginText, { color: theme.text }]}>Already have an account? </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                <Text style={[styles.loginLink, { color: theme.accent }]}>Sign In</Text>
-              </TouchableOpacity>
-            </View>
-
-            {/* Social Registration (Optional) */}
-            <View style={styles.socialContainer}>
-              <View style={styles.divider}>
-                <View style={[styles.dividerLine, { backgroundColor: theme.border }]} />
-                <Text style={[styles.dividerText, { color: theme.subText }]}>or</Text>
-                <View style={[styles.dividerLine, { backgroundColor: theme.border }]} />
+                  <Text style={[styles.buttonText, { color: theme.primary }]}>Proceed to Sign In</Text>
+                </TouchableOpacity>
               </View>
+            ) : (
+              <>
+                {/* Username Input */}
+                <View style={[styles.inputContainer, { backgroundColor: theme.card }]}>
+                  <MaterialIcons name="person" size={20} color={theme.subText} style={styles.inputIcon} />
+                  <TextInput
+                    style={[styles.input, { color: theme.text }]}
+                    placeholder="Username"
+                    placeholderTextColor={theme.subText}
+                    value={username}
+                    onChangeText={(val) => {
+                      setUsername(val);
+                      if (errorMsg.toLowerCase().includes('username')) {
+                           setErrorMsg('');
+                      }
+                     if (val.trim().length >= 3 && val.trim().length <= 30) {
+                         setErrorMsg('');
+                      }
+                    }}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    returnKeyType="next"
+                    onSubmitEditing={() => emailRef.current?.focus()}
+                    blurOnSubmit={false}
+                  />
+                 {username.length > 0 && (
+                     <Text style={{ 
+                       fontSize: 10, 
+                       color: (username.trim().length < 3 || username.length > 30) ? theme.error : theme.subText, 
+                       marginRight: 10 
+                     }}>
+                       {username.length}/30
+                    </Text>
+                  )}
+                </View>
 
-              <GoogleLoginButton type="register" />
-            </View>
+                {/* Email Input */}
+                <View style={[styles.inputContainer, { backgroundColor: theme.card }]}>
+                  <MaterialIcons name="email" size={20} color={theme.subText} style={styles.inputIcon} />
+                  <TextInput
+                    ref={emailRef}
+                    style={[styles.input, { color: theme.text }]}
+                    placeholder="Email"
+                    placeholderTextColor={theme.subText}
+                    value={email}
+                    onChangeText={setEmail}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    returnKeyType="next"
+                    onSubmitEditing={() => passwordRef.current?.focus()}
+                    blurOnSubmit={false}
+                  />
+                </View>
+
+                {/* Password Input */}
+                <View style={[styles.inputContainer, { backgroundColor: theme.card }]}>
+                  <MaterialIcons name="lock" size={20} color={theme.subText} style={styles.inputIcon} />
+                  <TextInput
+                    ref={passwordRef}
+                    style={[styles.input, { paddingRight: 50, color: theme.text }]}
+                    placeholder="Password"
+                    placeholderTextColor={theme.subText}
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry={!showPassword}
+                    autoCapitalize="none"
+                    returnKeyType="next"
+                    onSubmitEditing={() => confirmPasswordRef.current?.focus()}
+                  />
+                  <TouchableOpacity
+                    style={styles.eyeIcon}
+                    onPress={() => setShowPassword(!showPassword)}
+                  >
+                    <Ionicons 
+                      name={showPassword ? 'eye-off' : 'eye'} 
+                      size={20} 
+                      color={theme.subText} 
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                {/* Password Strength Indicator */}
+                {password.length > 0 && (
+                  <View style={styles.strengthContainer}>
+                    <View style={styles.strengthBars}>
+                      {[1, 2, 3, 4].map((level) => (
+                        <View
+                          key={level}
+                          style={[
+                            styles.strengthBar,
+                            {
+                              backgroundColor: level <= passwordStrength.score 
+                                ? getPasswordStrengthColor() 
+                                : theme.border,
+                              width: '23%',
+                            },
+                          ]}
+                        />
+                      ))}
+                    </View>
+                    <Text style={[styles.strengthText, { color: getPasswordStrengthColor() }]}>
+                      {getPasswordStrengthText()}
+                    </Text>
+                  </View>
+                )}
+
+                {/* Confirm Password Input */}
+                <View style={[styles.inputContainer, { backgroundColor: theme.card }]}>
+                  <MaterialIcons name="lock-outline" size={20} color={theme.subText} style={styles.inputIcon} />
+                  <TextInput
+                    ref={confirmPasswordRef}
+                    style={[styles.input, { paddingRight: 50, color: theme.text }]}
+                    placeholder="Confirm Password"
+                    placeholderTextColor={theme.subText}
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
+                    secureTextEntry={!showConfirmPassword}
+                    autoCapitalize="none"
+                    returnKeyType="next"
+                    onSubmitEditing={handleRegister}
+                  />
+                  <TouchableOpacity
+                    style={styles.eyeIcon}
+                    onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    <Ionicons 
+                      name={showConfirmPassword ? 'eye-off' : 'eye'} 
+                      size={20} 
+                      color={theme.subText} 
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                {/* Password Match Indicator */}
+                {confirmPassword.length > 0 && (
+                  <View style={styles.matchContainer}>
+                    <Ionicons
+                      name={password === confirmPassword ? 'checkmark-circle' : 'close-circle'}
+                      size={16}
+                      color={password === confirmPassword ? theme.success : theme.error}
+                    />
+                    <Text style={[
+                      styles.matchText,
+                      { color: password === confirmPassword ? theme.success : theme.error }
+                    ]}>
+                      {password === confirmPassword ? 'Passwords match' : 'Passwords do not match'}
+                    </Text>
+                  </View>
+                )}
+
+                {/* Referral Code (Optional) */}
+                <View style={[styles.inputContainer, referralError ? { borderColor: theme.error, borderWidth: 1 } : null, { backgroundColor: theme.card }]}>
+                  <MaterialIcons name="share" size={20} color={theme.subText} style={styles.inputIcon} />
+                  <TextInput
+                    style={[styles.input, { color: theme.text }]}
+                    placeholder="Referral Code (Optional)"
+                    placeholderTextColor={theme.subText}
+                    value={referralCode}
+                    onChangeText={handleReferralCheck}
+                    autoCapitalize="characters"
+                    returnKeyType="done"
+                  />
+                </View>
+
+                {/* Show Success/Error Feedback */}
+                {referrerName ? (
+                  <Text style={{ color: theme.success, fontSize: 12, marginLeft: 15, marginBottom: 10 }}>
+                    Invited by: <Text style={{ fontWeight: 'bold' }}>{referrerName}</Text>
+                  </Text>
+                ) : null}
+                {referralError ? (
+                  <Text style={{ color: theme.error, fontSize: 12, marginLeft: 15, marginBottom: 10 }}>
+                    {referralError}
+                  </Text>
+                ) : null}
+
+                {/* Terms and Conditions */}
+                <TouchableOpacity
+                  style={styles.checkboxContainer}
+                  onPress={() => setAgreeToTerms(!agreeToTerms)}
+                  activeOpacity={0.7}
+                >
+                  <View style={[styles.checkbox, agreeToTerms && styles.checkboxChecked, { borderColor: theme.text }]}>
+                    {agreeToTerms && <MaterialIcons name="check" size={16} color="#fff" />}
+                  </View>
+                  <Text style={[styles.checkboxLabel, { color: theme.text }]}>
+                    I agree to the{' '}
+                    <Text 
+                      style={[styles.linkHighlight, { color: theme.accent }]}
+                      onPress={() => setTermsModalVisible(true)}
+                    >
+                      Terms of Service
+                    </Text>
+                    {' '}and{' '}
+                    <Text 
+                      style={[styles.linkHighlight, { color: theme.accent }]}
+                      onPress={() => navigation.navigate('PrivacyPolicy')}
+                    >
+                      Privacy Policy
+                    </Text>
+                  </Text>
+                </TouchableOpacity>
+
+                {/* Register Button */}
+                <TouchableOpacity
+                  style={[styles.button, loading && styles.buttonDisabled, { backgroundColor: theme.surface }]}
+                  onPress={handleRegister}
+                  disabled={loading}
+                  activeOpacity={0.8}
+                >
+                  {loading ? (
+                    <ActivityIndicator color={theme.primary} />
+                  ) : (
+                    <Text style={[styles.buttonText, { color: theme.primary }]}>Create Account</Text>
+                  )}
+                </TouchableOpacity>
+
+                {/* Login Link */}
+                <View style={styles.loginContainer}>
+                  <Text style={[styles.loginText, { color: theme.text }]}>Already have an account? </Text>
+                  <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style={[styles.loginLink, { color: theme.accent }]}>Sign In</Text>
+                  </TouchableOpacity>
+                </View>
+
+                {/* Social Registration (Optional) */}
+                <View style={styles.socialContainer}>
+                  <View style={styles.divider}>
+                    <View style={[styles.dividerLine, { backgroundColor: theme.border }]} />
+                    <Text style={[styles.dividerText, { color: theme.subText }]}>or</Text>
+                    <View style={[styles.dividerLine, { backgroundColor: theme.border }]} />
+                  </View>
+
+                  <GoogleLoginButton type="register" />
+                </View>
+              </>
+            )}
           </Pressable>
         </LinearGradient>
       </KeyboardAvoidingWrapper>

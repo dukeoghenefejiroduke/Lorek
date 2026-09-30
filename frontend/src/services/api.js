@@ -9,7 +9,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // Environment configuration with fallbacks
 const ENV = {
   development: {
-    API_URL: 'http://127.0.0.1:5000/api', //'https://lorek.onrender.com/api', // Android Emulator
+    API_URL: 'https://lorek.onrender.com/api',
+    //API_URL: 'http://127.0.0.1:5000/api', // Android Emulator
     API_URL_IOS: 'https://lorek.onrender.com/api', // iOS Simulator
     API_URL_PHYSICAL: 'https://lorek.onrender.com/api', // Physical device
     TIMEOUT: 30000,

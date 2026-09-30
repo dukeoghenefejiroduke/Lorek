@@ -155,7 +155,7 @@ router.post('/register', validateRegistration, async (req, res, next) => {
       username,
       email,
       password,
-      status: process.env.NODE_ENV === 'development' ? 'active' : 'pending_verification',
+      status: 'pending_verification',
       'gamification.level': 1,
       'gamification.experience': 0,
       'gamification.points.total': 0,
@@ -175,9 +175,6 @@ router.post('/register', validateRegistration, async (req, res, next) => {
 
     await user.save();
 
-    // Generate token
-    const token = user.generateAuthToken();
-
     // Send welcome notification
     await notificationService.sendWelcome(user._id);
 
@@ -190,10 +187,9 @@ router.post('/register', validateRegistration, async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: 'Registration successful. Please check your email to verify your account.',
+      message: 'Registration successful. Please check your email to verify your account before logging in.',
       data: {
         user: user.toPublicJSON(),
-        token,
       },
     });
   } catch (err) {

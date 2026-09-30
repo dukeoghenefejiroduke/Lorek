@@ -486,37 +486,10 @@ const refreshAuthToken = async (manualToken) => {
         appVersion: '1.0.4'
       });
       
-      const { user, token, refreshToken } = response.data.data;
-      const expiresIn = 3600; // Default if not provided
-      const sessionExpiry = Date.now() + (expiresIn * 1000);
-      
-      // Store auth data
-      const storageItems = [
-        ['sessionExpiry', sessionExpiry.toString()]
-      ];
-
-      if (token) storageItems.push(['token', token]);
-      if (refreshToken) storageItems.push(['refreshToken', refreshToken]);
-      if (user) storageItems.push(['user', JSON.stringify(user)]); // Stringify to match MultiSet behavior
-
-      await multiSet(storageItems);
-      
-      // Ensure removal if missing
-      if (!token) await remove('token');
-      if (!refreshToken) await remove('refreshToken');
-      if (!user) await remove('user');
-      
-      setUser(user);
-      setIsAuthenticated(true);
-      setSessionExpiry(sessionExpiry);
-      
-      // Schedule token refresh
-      scheduleTokenRefresh(sessionExpiry);
-      
       // Provide haptic feedback
       haptics.notificationSuccess();
       
-      return { success: true, user, message: response.data.message };
+      return { success: true, message: response.data.message || 'Registration successful! Please check your email to verify your account.' };
     } catch (error) {
       // Provide haptic feedback for error
       haptics.notificationError();
