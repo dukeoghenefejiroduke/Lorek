@@ -143,7 +143,7 @@ router.get('/referral-code', async (req, res, next) => {
       success: true,
       data: {
         code: referralCode,
-        link: `https://izonapp.com/join?ref=${referralCode}`,
+        link: `https://lorek.vercel.app/join?ref=${referralCode}`,
       },
     });
   } catch (err) {

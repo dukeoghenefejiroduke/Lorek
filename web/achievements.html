@@ -5,21 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achievement Unlocked | Lorek</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .container { padding: 50px; text-align: center; max-width: 500px; margin: auto; font-family: sans-serif; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 40px; }
-        .badge { font-size: 72px; margin-bottom: 20px; }
-        h1 { color: #ff9800; margin-bottom: 10px; }
-        p { color: #555; font-size: 18px; line-height: 1.5; }
-        .btn { display: inline-block; margin-top: 30px; padding: 12px 25px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; }
-    </style>
 </head>
 <body>
+    <header>
+        <h1>Lorek Language App</h1>
+    </header>
+
     <main class="container">
-        <div id="badge-icon" class="badge">🏆</div>
-        <h1 id="achievement-title">Achievement Unlocked!</h1>
+        <div id="badge-icon" style="font-size: 64px; margin-bottom: 15px;">🏆</div>
+        <h1 id="achievement-title" style="color: #2e7d32; font-size: 1.5rem; margin-bottom: 10px;">Achievement Unlocked!</h1>
         <p id="achievement-desc">Congratulations on reaching a new milestone in Izon Language Learning with Lorek.</p>
         <a href="index.html" class="btn">Open Lorek App</a>
     </main>
+
+    <footer>
+        <p>&copy; 2026 Lorek App. All rights reserved.</p>
+    </footer>
+
     <script>
         if (window.location.hash) {
             const hashParams = new URLSearchParams(window.location.hash.substring(1));

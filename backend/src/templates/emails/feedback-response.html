@@ -1,8 +1,20 @@
-<div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px;">
-  <h2 style="color: #673ab7;">We Heard You! 📝</h2>
-  <p>Hi {{username}},</p>
-  <p>Thank you for your feedback regarding: <i>"{{feedback}}"</i></p>
-  <p>Our team has received this and we're working to make the Izon Language App even better because of your input.</p>
-  <p>If you have more thoughts, feel free to reach out at {{supportEmail}}.</p>
-  <p>Ebua (Thank you),<br>The Lorek Team</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Response</title>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f7fafc; margin: 0; padding: 40px 20px; color: #2d3748;">
+    <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
+        <h2 style="color: #673ab7; margin-top: 0; font-size: 24px;">We Heard You! 📝</h2>
+        <p>Hi <strong>{{username}}</strong>,</p>
+        <p>Thank you for your valuable feedback regarding: <i>"{{feedback}}"</i></p>
+        <p>Our team has received this and we're working to make the Lorek Language App even better because of your input.</p>
+        <p>If you have more thoughts, feel free to reach out at <a href="mailto:{{supportEmail}}" style="color: #673ab7;">{{supportEmail}}</a>.</p>
+        <p style="margin-top: 20px;">Ebua (Thank you),<br><strong>The Lorek Team</strong></p>
+        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 25px 0;">
+        <p style="font-size: 11px; color: #a0aec0; line-height: 1.5; text-align: center; margin: 0;">
+          If you don't see our emails in your inbox, please check your Spam or Junk folder and mark them as "Not Spam".
+        </p>
+    </div>
+</body>
+</html>
