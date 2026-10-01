@@ -100,18 +100,36 @@ router.get('/categories', cacheMiddleware(3600), async (req, res, next) => {
       })
     );
 
-    // If no categories in DB, return default ones
+    // If no categories in DB, return default ones with dynamically computed counts
     if (categoriesWithCounts.length === 0) {
-      const defaultCategories = [
-        { id: 'traditions', name: 'Traditions', icon: '🪔', color: '#FF6B6B', order: 1, contentCount: 0 },
-        { id: 'festivals', name: 'Festivals', icon: '🎉', color: '#4ECDC4', order: 2, contentCount: 0 },
-        { id: 'food', name: 'Cuisine', icon: '🍲', color: '#FFE66D', order: 3, contentCount: 0 },
-        { id: 'music', name: 'Music & Dance', icon: '🎵', color: '#A8E6CF', order: 4, contentCount: 0 },
-        { id: 'proverbs', name: 'Proverbs', icon: '📜', color: '#FF8B94', order: 5, contentCount: 0 },
-        { id: 'history', name: 'History', icon: '🏛️', color: '#B5EAD7', order: 6, contentCount: 0 },
-        { id: 'attire', name: 'Traditional Attire', icon: '👘', color: '#C7CEEA', order: 7, contentCount: 0 },
-        { id: 'language_tips', name: 'Language Tips', icon: '💬', color: '#FFDAC1', order: 8, contentCount: 0 },
+      const rawDefaultCategories = [
+        { id: 'traditions', name: 'traditions', nameDisplay: 'Traditions', icon: '🪔', color: '#FF6B6B', order: 1 },
+        { id: 'festivals', name: 'festivals', nameDisplay: 'Festivals', icon: '🎉', color: '#4ECDC4', order: 2 },
+        { id: 'food', name: 'food', nameDisplay: 'Cuisine', icon: '🍲', color: '#FFE66D', order: 3 },
+        { id: 'music', name: 'music', nameDisplay: 'Music & Dance', icon: '🎵', color: '#A8E6CF', order: 4 },
+        { id: 'proverbs', name: 'proverbs', nameDisplay: 'Proverbs', icon: '📜', color: '#FF8B94', order: 5 },
+        { id: 'history', name: 'history', nameDisplay: 'History', icon: '🏛️', color: '#B5EAD7', order: 6 },
+        { id: 'attire', name: 'attire', nameDisplay: 'Traditional Attire', icon: '👘', color: '#C7CEEA', order: 7 },
+        { id: 'language_tips', name: 'language_tips', nameDisplay: 'Language Tips', icon: '💬', color: '#FFDAC1', order: 8 },
       ];
+
+      const defaultCategories = await Promise.all(
+        rawDefaultCategories.map(async (cat) => {
+          const [contentCount, proverbCount] = await Promise.all([
+            CulturalContent.countDocuments({ category: cat.name, isPublished: true }),
+            Proverb.countDocuments({ category: cat.name, isPublished: true, isActive: true }),
+          ]);
+          return {
+            id: cat.id,
+            name: cat.nameDisplay,
+            icon: cat.icon,
+            color: cat.color,
+            order: cat.order,
+            contentCount: cat.id === 'proverbs' ? 0 : contentCount,
+            proverbCount: cat.id === 'proverbs' ? await Proverb.countDocuments({ isPublished: true, isActive: true }) : proverbCount,
+          };
+        })
+      );
       return res.json({ success: true, data: defaultCategories });
     }
 
