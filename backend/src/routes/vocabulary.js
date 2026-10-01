@@ -87,7 +87,16 @@ router.get('/', validatePagination, cacheMiddleware(300), async (req, res, next)
     if (lang) {
       const languageDoc = await Language.findOne({ code: lang.toUpperCase() });
       if (languageDoc) {
-        query.language_id = languageDoc._id;
+        const count = await Vocabulary.countDocuments({ language_id: languageDoc._id, isPublished: true, isActive: true });
+        if (count > 0) {
+          query.language_id = languageDoc._id;
+        } else {
+          query.$or = [
+            { language_id: languageDoc._id },
+            { language_id: { $exists: false } },
+            { language_id: null }
+          ];
+        }
       }
     }
     

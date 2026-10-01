@@ -117,7 +117,16 @@ router.get('/', auth, cacheMiddleware(300), async (req, res, next) => {
       const cleanLang = targetLang.includes(',') ? targetLang.split(',')[0].trim() : targetLang;
       const languageDoc = await Language.findOne({ code: cleanLang.toUpperCase() });
       if (languageDoc) {
-        query.language_id = languageDoc._id;
+        const count = await Lesson.countDocuments({ language_id: languageDoc._id, status: 'published' });
+        if (count > 0) {
+          query.language_id = languageDoc._id;
+        } else {
+          query.$or = [
+            { language_id: languageDoc._id },
+            { language_id: { $exists: false } },
+            { language_id: null }
+          ];
+        }
       }
     }
     
