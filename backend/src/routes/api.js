@@ -245,7 +245,19 @@ router.get('/vocabulary', cacheMiddleware(300), async (req, res, next) => {
       query.language_id = language_id;
     } else if (lang) {
       const language = await Language.findOne({ code: lang.toUpperCase() });
-      if (language) query.language_id = language._id;
+      if (language) {
+        const count = await Vocabulary.countDocuments({ language_id: language._id, isPublished: true, isActive: true });
+        if (count > 0) {
+          query.language_id = language._id;
+        } else {
+          query.$or = [
+            { language_id: language._id },
+            { language_id: { $exists: false } },
+            { language_id: null },
+            {} // absolute fallback to all words if none match
+          ];
+        }
+      }
     } else if (dialect) {
       const langDoc = await Language.findOne({ 
         $or: [

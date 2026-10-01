@@ -59,6 +59,18 @@ router.get('/hierarchy', async (req, res, next) => {
                 });
         }
 
+        // Absolute fallback: if still 0 courses, return all courses
+        if (courses.length === 0) {
+            courses = await Course.find({})
+                .populate({
+                    path: 'sections',
+                    populate: {
+                        path: 'units',
+                        populate: { path: 'lessons' }
+                    }
+                });
+        }
+
         res.json({ success: true, data: courses });
     } catch (err) { next(err); }
 });
