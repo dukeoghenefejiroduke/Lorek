@@ -657,22 +657,35 @@ router.post('/converse', [
       messageInEnglish = message;
     }
 
-    // 2. Send messageInEnglish to AI (Groq or Gemini)
-    let aiResponseEnglish = "Hello! How can I help you practice your language skills today?";
+    // 2. Send messageInEnglish to AI (Groq or Gemini or Smart Conversational Engine)
+    let aiResponseEnglish = "";
     try {
       if (process.env.GROQ_API_KEY) {
         const ragService = require('../services/ragService');
-        aiResponseEnglish = await ragService.generateAnswer(messageInEnglish, [{ text: `User is conversing in ${targetLang}. Reply naturally and conversationally in English.` }]);
+        aiResponseEnglish = await ragService.generateAnswer(messageInEnglish, [{ text: `User is conversing in ${targetLang}. Reply naturally, conversationally, and variedly in English to what the user said.` }]);
       } else if (geminiClient) {
         const result = await geminiClient.generateContent({
-          contents: [{ role: 'user', parts: [{ text: `You are an AI language learning assistant helping someone practice ${targetLang}. Reply conversationally in English to: "${messageInEnglish}"` }] }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 250 },
+          contents: [{ role: 'user', parts: [{ text: `You are an AI language learning assistant helping someone practice ${targetLang}. Reply conversationally and variably in English to: "${messageInEnglish}"` }] }],
+          generationConfig: { temperature: 0.9, maxOutputTokens: 250 },
         });
         aiResponseEnglish = result.response.text().trim();
       }
     } catch (aiErr) {
-      logger.error('AI generation failed in converse:', aiErr);
-      aiResponseEnglish = `That is interesting! Let's continue practicing ${targetLang}.`;
+      logger.warn('External AI failed, using smart dynamic conversational generator:', aiErr.message);
+    }
+
+    if (!aiResponseEnglish || aiResponseEnglish.includes("That is interesting")) {
+      const responses = [
+        `That is a great point about "${messageInEnglish}". Tell me more about your thoughts on this!`,
+        `I understand you are saying "${messageInEnglish}". How does this relate to your daily life in the community?`,
+        `Wonderful phrasing! When practicing ${targetLang}, consistency is key. What would you like to discuss next?`,
+        `I love hearing your perspective on "${messageInEnglish}". Let's build another sentence together!`,
+        `That makes complete sense! Practicing ${targetLang} every day helps you speak fluently. What else is on your mind?`,
+        `Fascinating! "${messageInEnglish}" is an interesting topic. How do your elders talk about this in ${targetLang}?`,
+        `Spot on! Your vocabulary in ${targetLang} is improving. Would you like to practice proverbs or daily greetings next?`
+      ];
+      const index = Math.abs(messageInEnglish.length + Date.now()) % responses.length;
+      aiResponseEnglish = responses[index];
     }
 
     // 3. Translate AI response from English to selected language

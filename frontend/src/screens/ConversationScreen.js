@@ -1,7 +1,6 @@
 import SafeAreaContainer from '../components/SafeAreaContainer';
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 import {
   View,
   Text,
@@ -9,22 +8,20 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
-  KeyboardAvoidingView,
+  Keyboard,
   Platform,
   Animated,
   Dimensions,
   ActivityIndicator,
-  Image,
   Modal,
   Alert,
+  StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import haptics from '../utils/haptics';
-import { Audio } from 'expo-av';
 import * as Speech from 'expo-speech';
-import { StatusBar } from 'expo-status-bar';
 import { LanguageContext } from '../context/LanguageContext';
 import { translatorAPI } from '../services/api';
 
@@ -53,6 +50,7 @@ const ConversationScreen = ({ route, navigation }) => {
   const [showVocab, setShowVocab] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
   
   const flatListRef = useRef();
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -73,6 +71,37 @@ const ConversationScreen = ({ route, navigation }) => {
     ]).start();
   }, []);
 
+  useEffect(() => {
+    const showSub = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
+      (e) => {
+        setKeyboardHeight(e.endCoordinates.height);
+        setTimeout(() => {
+          flatListRef.current?.scrollToEnd({ animated: true });
+        }, 100);
+      }
+    );
+    const hideSub = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
+      () => {
+        setKeyboardHeight(0);
+      }
+    );
+
+    return () => {
+      showSub.remove();
+      hideSub.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (chat.length > 0) {
+      setTimeout(() => {
+        flatListRef.current?.scrollToEnd({ animated: true });
+      }, 100);
+    }
+  }, [chat]);
+
   const handleSendMessage = async () => {
     if (!inputText.trim()) return;
 
@@ -91,7 +120,6 @@ const ConversationScreen = ({ route, navigation }) => {
 
     setChat(prev => [...prev, tempUserMsg]);
     setIsTyping(true);
-    setTimeout(() => flatListRef.current?.scrollToEnd(), 100);
 
     try {
       const response = await translatorAPI.converse({
@@ -103,14 +131,12 @@ const ConversationScreen = ({ route, navigation }) => {
       if (response && response.data && response.data.data) {
         const { userMessage, botMessage } = response.data.data;
         
-        // Replace temp user message with actual processed message and add bot message
         setChat(prev => [
           ...prev.slice(0, prev.length - 1),
           userMessage,
           botMessage
         ]);
 
-        // Speak bot message in target language or English
         if (Platform.OS !== 'web' && botMessage.text) {
           Speech.speak(botMessage.text, {
             language: activeLanguage?.code === 'en' ? 'en' : 'ig',
@@ -124,7 +150,6 @@ const ConversationScreen = ({ route, navigation }) => {
     } catch (error) {
       console.error('AI conversation error:', error);
       Alert.alert('Conversation Error', error.message || 'Failed to reach AI partner.');
-      // Fallback bot message
       const fallbackBot = {
         id: Math.random().toString(),
         sender: 'bot',
@@ -136,7 +161,6 @@ const ConversationScreen = ({ route, navigation }) => {
       setChat(prev => [...prev, fallbackBot]);
     } finally {
       setIsTyping(false);
-      setTimeout(() => flatListRef.current?.scrollToEnd(), 100);
       haptics.notificationSuccess();
     }
   };
@@ -180,7 +204,6 @@ const ConversationScreen = ({ route, navigation }) => {
               {item.text}
             </Text>
 
-            {/* Non-English conversation displays English translation below chat */}
             {showTranslation && (
               <View style={styles.translationContainer}>
                 <Text style={styles.translationLabel}>English Translation:</Text>
@@ -302,36 +325,37 @@ const ConversationScreen = ({ route, navigation }) => {
           keyExtractor={item => item.id}
           renderItem={renderChatItem}
           contentContainerStyle={styles.chatList}
-          onContentSizeChange={() => flatListRef.current?.scrollToEnd()}
           showsVerticalScrollIndicator={false}
         />
 
         {isTyping && renderTypingIndicator()}
 
-        {/* Input Bar */}
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
-        >
-          <View style={[styles.inputBar, { backgroundColor: theme.card || '#FFFFFF', borderTopColor: theme.border || '#e0e0e0' }]}>
-            <TextInput
-              style={[styles.inputBox, { color: theme.text || '#000', backgroundColor: theme.background || '#f9f9f9' }]}
-              placeholder={`Type in ${converseMode === 'selected' ? (activeLanguage?.name || 'Izon') : 'English'}...`}
-              placeholderTextColor="#888"
-              value={inputText}
-              onChangeText={setInputText}
-              multiline
-              maxLength={300}
-            />
-            <TouchableOpacity 
-              style={[styles.sendButton, { backgroundColor: scenarioColor }]}
-              onPress={handleSendMessage}
-              activeOpacity={0.8}
-            >
-              <Ionicons name="send" size={20} color="#fff" />
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>
+        {/* Input Bar touching the keyboard directly */}
+        <View style={[
+          styles.inputBar, 
+          { 
+            backgroundColor: theme.card || '#FFFFFF', 
+            borderTopColor: theme.border || '#e0e0e0',
+            marginBottom: keyboardHeight > 0 ? keyboardHeight - (Platform.OS === 'ios' ? 34 : 0) : 0 
+          }
+        ]}>
+          <TextInput
+            style={[styles.inputBox, { color: theme.text || '#000', backgroundColor: theme.background || '#f9f9f9' }]}
+            placeholder={`Type in ${converseMode === 'selected' ? (activeLanguage?.name || 'Izon') : 'English'}...`}
+            placeholderTextColor="#888"
+            value={inputText}
+            onChangeText={setInputText}
+            multiline
+            maxLength={300}
+          />
+          <TouchableOpacity 
+            style={[styles.sendButton, { backgroundColor: scenarioColor }]}
+            onPress={handleSendMessage}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="send" size={20} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
 
       {/* Message Detail Modal */}

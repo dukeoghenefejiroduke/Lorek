@@ -64,8 +64,8 @@ class RagService {
       );
       return groqResponse.data.choices[0].message.content;
     } catch (error) {
-      console.error("Error calling Groq API:", error);
-      throw error;
+      console.warn("⚠️ Groq API failed (falling back):", error.message);
+      return null;
     }
   }
 }

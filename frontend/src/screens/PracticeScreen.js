@@ -407,42 +407,77 @@ const loadPronunciationWords = async () => {
   };
 
  const startPractice = async (practiceType) => {
-   haptics.impactLight();
-   setShowResults(false);
-   setShowListeningResults(false);
-   setScore(0);
-   setCurrentQuestion(0);
-   setSessionId(null);
-   if (!(await checkAuth())) return;
+    if (practiceType === 'listening-quiz') {
+      if (!(await checkAuth())) return;
+      await loadListeningQuiz();
+      setMode('listening-quiz');
+      return;
+    }
+    if (practiceType === 'pronunciation') {
+      if (!(await checkAuth())) return;
+      setMode('pronunciation');
+      await loadPronunciationWords();
+      return;
+    }
+    if (practiceType === 'izon-to-english') {
+      if (!(await checkAuth())) return;
+      await loadQuizQuestions(practiceType);
+      return;
+    }
 
-   try {
-       setLoading(true);
-       const res = await practiceAPI.getDaily({ 
-           limit: 15, 
-           lang: activeLanguage?.code || 'IZON',
-           practiceType: practiceType 
-       });
+    haptics.impactLight();
+    setShowResults(false);
+    setShowListeningResults(false);
+    setScore(0);
+    setCurrentQuestion(0);
+    setSessionId(null);
+    if (!(await checkAuth())) return;
 
-       if (res.data?.success) {
-           const words = res.data?.data?.words || [];
-           const sId = res.data?.data?.sessionId;
+    try {
+        setLoading(true);
+        const res = await practiceAPI.getDaily({ 
+            limit: 15, 
+            lang: activeLanguage?.code || 'IZON',
+            practiceType: practiceType 
+        });
 
-           // --- NEW: Handle question generation here ---
-           // Based on your existing logic, you might need to set 'questions' here
-           // For now, I am ensuring mode is set only on success
-           
-           setSessionId(sId);
-           setMode(practiceType); // SUCCESS
-       } else {
-           Alert.alert("All Caught Up!", "No words due for review today.");
-       }
-   } catch (e) {
-       console.error(e);
-       Alert.alert("Error", "Failed to load practice session.");
-   } finally {
-       setLoading(false);
-   }
+        if (res.data?.success) {
+            const rawWords = res.data?.data?.words || [];
+            const sId = res.data?.data?.sessionId;
 
+            const words = rawWords.map(w => w.wordId || w).filter(Boolean);
+
+            if (words.length === 0) {
+                Alert.alert("All Caught Up!", "No words due for review today.");
+                setMode(null);
+                return;
+            }
+
+            const quizExercises = words.map((word) => ({
+                question: `What does "${word.izonWord || word.word}" mean?`,
+                correctAnswer: (word.englishTranslation || word.english),
+                options: generateOptions(word, words, practiceType),
+                word,
+                type: 'multiple-choice',
+            }));
+
+            setQuestions(quizExercises);
+            setSessionId(sId);
+            setMode(practiceType);
+            if (quizExercises.length > 0) {
+                loadExercise(quizExercises[0]);
+            }
+        } else {
+            Alert.alert("All Caught Up!", "No words due for review today.");
+            setMode(null);
+        }
+    } catch (e) {
+        console.error(e);
+        Alert.alert("Error", "Failed to load practice session.");
+        setMode(null);
+    } finally {
+        setLoading(false);
+    }
  };
 
   const loadPracticeContent = async (practiceMode) => {
