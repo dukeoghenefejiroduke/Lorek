@@ -246,7 +246,12 @@ router.get('/vocabulary', cacheMiddleware(300), async (req, res, next) => {
       query.language_id = language_id;
     } else if (targetLang) {
       const cleanLang = targetLang.includes(',') ? targetLang.split(',')[0].trim() : targetLang;
-      const language = await Language.findOne({ code: cleanLang.toUpperCase() });
+      const language = await Language.findOne({ 
+        $or: [
+          { code: cleanLang.toUpperCase() },
+          { name: new RegExp(`^${cleanLang}$`, 'i') }
+        ]
+      });
       if (language) {
         const count = await Vocabulary.countDocuments({ language_id: language._id, isPublished: true, isActive: true });
         if (count > 0) {

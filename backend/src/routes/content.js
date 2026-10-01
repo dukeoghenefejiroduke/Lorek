@@ -17,7 +17,12 @@ router.get('/hierarchy', async (req, res, next) => {
         const langCode = lang || req.headers['accept-language'] || 'IZON';
         const cleanLangCode = langCode.includes(',') ? langCode.split(',')[0].trim() : langCode;
         
-        languageDoc = await Language.findOne({ code: cleanLangCode.toUpperCase() });
+        languageDoc = await Language.findOne({ 
+            $or: [
+                { code: cleanLangCode.toUpperCase() },
+                { name: new RegExp(`^${cleanLangCode}$`, 'i') }
+            ]
+        });
         if (!languageDoc) {
             languageDoc = await Language.findOne({ code: 'IZON' });
         }
