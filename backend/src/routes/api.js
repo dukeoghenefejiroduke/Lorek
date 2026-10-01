@@ -241,10 +241,12 @@ router.get('/vocabulary', cacheMiddleware(300), async (req, res, next) => {
     if (difficulty) query.difficulty = difficulty;
     
     const { dialect } = req.query;
+    const targetLang = lang || req.headers['accept-language'];
     if (language_id) {
       query.language_id = language_id;
-    } else if (lang) {
-      const language = await Language.findOne({ code: lang.toUpperCase() });
+    } else if (targetLang) {
+      const cleanLang = targetLang.includes(',') ? targetLang.split(',')[0].trim() : targetLang;
+      const language = await Language.findOne({ code: cleanLang.toUpperCase() });
       if (language) {
         const count = await Vocabulary.countDocuments({ language_id: language._id, isPublished: true, isActive: true });
         if (count > 0) {
@@ -253,8 +255,7 @@ router.get('/vocabulary', cacheMiddleware(300), async (req, res, next) => {
           query.$or = [
             { language_id: language._id },
             { language_id: { $exists: false } },
-            { language_id: null },
-            {} // absolute fallback to all words if none match
+            { language_id: null }
           ];
         }
       }
