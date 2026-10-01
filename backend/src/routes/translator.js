@@ -615,6 +615,111 @@ router.get('/translations/offline-pack', cacheMiddleware(86400), async (req, res
 });
 
 // ============================================================================
+// AI CONVERSATION ENDPOINT
+// ============================================================================
+
+/**
+ * Converse with AI with automatic translation
+ * POST /api/translator/converse
+ */
+router.post('/converse', [
+  body('message').trim().notEmpty().withMessage('Message is required'),
+], async (req, res, next) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json({ success: false, errors: errors.array() });
+
+    const { message, language = 'izon', inputLanguage = 'selected' } = req.body;
+    const isEnglishInput = inputLanguage === 'en';
+
+    let messageInEnglish = message;
+    let userDisplayMessage = message;
+    let userTranslation = null;
+
+    const targetLang = (language || 'izon').toLowerCase();
+
+    // 1. If input is in selected language (non-English), translate to English first
+    if (!isEnglishInput && targetLang !== 'en') {
+      try {
+        const engine = TranslationEngineFactory.getEngine(targetLang);
+        if (engine) {
+          const transResult = await engine.translate(message, { from: targetLang, to: 'en', geminiClient });
+          if (transResult && transResult.translated) {
+            messageInEnglish = transResult.translated;
+          }
+        }
+      } catch (err) {
+        logger.warn('User message translation to English failed, using raw message:', err.message);
+      }
+      userTranslation = messageInEnglish !== message ? messageInEnglish : null;
+    } else {
+      userDisplayMessage = message;
+      messageInEnglish = message;
+    }
+
+    // 2. Send messageInEnglish to AI (Groq or Gemini)
+    let aiResponseEnglish = "Hello! How can I help you practice your language skills today?";
+    try {
+      if (process.env.GROQ_API_KEY) {
+        const ragService = require('../services/ragService');
+        aiResponseEnglish = await ragService.generateAnswer(messageInEnglish, [{ text: `User is conversing in ${targetLang}. Reply naturally and conversationally in English.` }]);
+      } else if (geminiClient) {
+        const result = await geminiClient.generateContent({
+          contents: [{ role: 'user', parts: [{ text: `You are an AI language learning assistant helping someone practice ${targetLang}. Reply conversationally in English to: "${messageInEnglish}"` }] }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 250 },
+        });
+        aiResponseEnglish = result.response.text().trim();
+      }
+    } catch (aiErr) {
+      logger.error('AI generation failed in converse:', aiErr);
+      aiResponseEnglish = `That is interesting! Let's continue practicing ${targetLang}.`;
+    }
+
+    // 3. Translate AI response from English to selected language
+    let botDisplayMessage = aiResponseEnglish;
+    let botTranslation = aiResponseEnglish;
+
+    if (targetLang !== 'en') {
+      try {
+        const engine = TranslationEngineFactory.getEngine(targetLang);
+        if (engine) {
+          const botTransResult = await engine.translate(aiResponseEnglish, { from: 'en', to: targetLang, geminiClient });
+          if (botTransResult && botTransResult.translated) {
+            botDisplayMessage = botTransResult.translated;
+          }
+        }
+      } catch (err) {
+        logger.warn('AI response translation to target language failed:', err.message);
+      }
+    }
+
+    res.json({
+      success: true,
+      data: {
+        userMessage: {
+          id: Math.random().toString(),
+          sender: 'user',
+          text: userDisplayMessage,
+          translation: userTranslation,
+          timestamp: new Date().toISOString(),
+          status: 'sent'
+        },
+        botMessage: {
+          id: Math.random().toString(),
+          sender: 'bot',
+          text: botDisplayMessage,
+          translation: targetLang !== 'en' ? botTranslation : null,
+          timestamp: new Date().toISOString(),
+          status: 'delivered'
+        }
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ============================================================================
 // CLEAR TRANSLATION HISTORY
 // ============================================================================
 

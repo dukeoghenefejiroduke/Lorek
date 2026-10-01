@@ -654,6 +654,7 @@ export const progressAPI = {
 // --- TRANSLATOR API ---
 export const translatorAPI = {
   translate: async (data) => api.post('/translator/translate', data, { headers: await getLanguageHeaders() }),
+  converse: async (data) => api.post('/translator/converse', data, { headers: await getLanguageHeaders() }),
   translateBatch: async (data) => api.post('/translator/translate/batch', data, { headers: await getLanguageHeaders() }),
   translateGet: async (params) => api.get('/translator/translate', { params, headers: await getLanguageHeaders() }),
   detectLanguage: async (text) => api.post('/translator/detect', { text }, { headers: await getLanguageHeaders() }),

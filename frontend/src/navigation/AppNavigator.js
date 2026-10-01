@@ -51,7 +51,7 @@ import TranslatorScreen    from '../screens/TranslatorScreen';
 import AdminScreen         from '../screens/admin/AdminScreen';
 import LeaderboardScreen   from '../screens/LeaderboardScreen';
 import ReferralScreen      from '../screens/ReferralScreen';
-import ConversationScreen  from '../screens/community/ConversationScreen';
+import ConversationScreen  from '../screens/ConversationScreen';
 
 // ── NEW screens added from ProfileScreen ────────────────────────────
 import EditProfileScreen   from '../screens/profile/EditProfileScreen';
