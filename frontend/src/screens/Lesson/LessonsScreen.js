@@ -15,6 +15,7 @@ import {
   ScrollView,
   Modal,
   Easing,
+  Alert,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';

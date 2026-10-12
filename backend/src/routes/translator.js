@@ -15,6 +15,7 @@ const { logger } = require('../config/logger');
 const { cacheMiddleware } = require('../middleware/cache');
 const redis = require('../config/redis');
 const TranslationEngineFactory = require('../translation/TranslationEngineFactory');
+const { AppError } = require('../middleware/errorHandler');
 
 // ============================================================================
 // RATE LIMITING
@@ -175,12 +176,25 @@ function preprocessEnglish(text, wordObjects) {
 async function handleTranslationLogic(params, currentUser = null) {
   const { text, from = 'en', to } = params;
   
+  if (!text || typeof text !== 'string' || !text.trim()) {
+    throw new AppError('Text is required', 400);
+  }
+
+  if (!to) {
+    throw new AppError('Target language (to) is required', 400);
+  }
+  
   // Normalize 'to' to an array
   const targetLanguages = Array.isArray(to) ? to : [to];
   
   const results = {};
 
   for (const targetLang of targetLanguages) {
+      if (!targetLang || typeof targetLang !== 'string' || !targetLang.trim()) {
+        results[targetLang] = { error: 'Target language is required' };
+        continue;
+      }
+
       // Get the appropriate engine dynamically
       const engine = TranslationEngineFactory.getEngine(targetLang);
       if (!engine) {
@@ -232,6 +246,7 @@ async function handleTranslationLogic(params, currentUser = null) {
 
 router.post('/translate', [
   body('text').trim().notEmpty().withMessage('Text is required'),
+  body('to').notEmpty().withMessage('Target language (to) is required'),
 ], async (req, res, next) => {
   try {
     const errors = validationResult(req);
@@ -255,7 +270,8 @@ router.post('/translate', [
  */
 router.get('/translate', async (req, res, next) => {
   try {
-    if (!req.query.text) return next(new AppError('Text required', 400));
+    if (!req.query.text || !req.query.text.trim()) return next(new AppError('Text required', 400));
+    if (!req.query.to) return next(new AppError('Target language required', 400));
 
     // Passing req.user here is safe; it will be null if not logged in
     const result = await handleTranslationLogic(req.query, req.user);

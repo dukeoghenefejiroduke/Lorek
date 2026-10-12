@@ -1,3 +1,4 @@
+/* global test, expect */
 // frontend/tests/lesson.test.js
 // Basic test to verify lesson completion calculation
 test('lesson completion score calculation', () => {
