@@ -1,4 +1,5 @@
 const rateLimit = require('express-rate-limit');
+const { ipKeyGenerator } = rateLimit;
 const RedisStore = require('rate-limit-redis');
 const redis = require('../config/redis');
 
@@ -8,7 +9,7 @@ const createLimiter = (options) => {
     // Trust the proxy to identify the real IP address of the client,
     // and provide a custom key generator to avoid ERR_ERL_UNDEFINED_IP_ADDRESS.
     validate: { ip: false },
-    keyGenerator: (req) => req.ip || req.connection.remoteAddress || 'anonymous',
+    keyGenerator: (req) => ipKeyGenerator(req.ip || req.connection.remoteAddress || 'anonymous'),
     
     store: redis.client ? new RedisStore({
       client: redis.client,
