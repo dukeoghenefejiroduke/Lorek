@@ -4,6 +4,10 @@ const lessonsRouter = require('../../src/routes/lessons');
 const languageRoutes = require('../../src/routes/language');
 const vocabularyRouter = require('../../src/routes/vocabulary');
 const translatorRoutes = require('../../src/routes/translator');
+const practiceRouter = require('../../src/routes/practice');
+const progressRouter = require('../../src/routes/progress');
+const gamesRouter = require('../../src/routes/games');
+const leaderboardRouter = require('../../src/routes/leaderboard');
 const { errorHandler, notFound } = require('../../src/middleware/errorHandler');
 
 // Set test environment secret if not present
@@ -22,6 +26,10 @@ const createTestApp = () => {
   app.use('/api/languages', languageRoutes);
   app.use('/api/vocabulary', vocabularyRouter);
   app.use('/api/translator', translatorRoutes);
+  app.use('/api/practice', practiceRouter);
+  app.use('/api/progress', progressRouter);
+  app.use('/api/games', gamesRouter);
+  app.use('/api/leaderboard', leaderboardRouter);
   
   // 404 & error handlers
   app.use(notFound);
