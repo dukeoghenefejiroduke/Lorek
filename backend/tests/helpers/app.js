@@ -8,6 +8,13 @@ const practiceRouter = require('../../src/routes/practice');
 const progressRouter = require('../../src/routes/progress');
 const gamesRouter = require('../../src/routes/games');
 const leaderboardRouter = require('../../src/routes/leaderboard');
+const communityRouter = require('../../src/routes/community');
+const messagesRouter = require('../../src/routes/messages');
+const referralRouter = require('../../src/routes/referral');
+const premiumRouter = require('../../src/routes/premium');
+const adminRouter = require('../../src/routes/admin');
+const contentRouter = require('../../src/routes/content');
+const ragRouter = require('../../src/routes/rag');
 const { errorHandler, notFound } = require('../../src/middleware/errorHandler');
 
 // Set test environment secret if not present
@@ -30,6 +37,13 @@ const createTestApp = () => {
   app.use('/api/progress', progressRouter);
   app.use('/api/games', gamesRouter);
   app.use('/api/leaderboard', leaderboardRouter);
+  app.use('/api/community', communityRouter);
+  app.use('/api/messages', messagesRouter);
+  app.use('/api/referral', referralRouter);
+  app.use('/api/premium', premiumRouter);
+  app.use('/api/admin', adminRouter);
+  app.use('/api/content', contentRouter);
+  app.use('/api/rag', ragRouter);
   
   // 404 & error handlers
   app.use(notFound);
