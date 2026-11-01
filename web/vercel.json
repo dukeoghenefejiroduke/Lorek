@@ -1,6 +1,13 @@
 {
-  "buildCommand": "echo 'No build required for static site'",
+  "buildCommand": "cd ../frontend && npm install && npx expo export --platform web && mkdir -p ../web/app && cp -r dist/* ../web/app/",
   "outputDirectory": ".",
-  "installCommand": "echo 'No dependencies to install'",
-  "framework": null
+  "installCommand": "echo 'No dependencies to install in web'",
+  "rewrites": [
+    { "source": "/app/(.*)", "destination": "/app/index.html" },
+    { "source": "/verify-email", "destination": "/verify-email.html" },
+    { "source": "/reset-password", "destination": "/reset-password.html" },
+    { "source": "/achievements", "destination": "/achievements.html" },
+    { "source": "/streak-reminder", "destination": "/streak-reminder.html" },
+    { "source": "/weekly-report", "destination": "/weekly-report.html" }
+  ]
 }
