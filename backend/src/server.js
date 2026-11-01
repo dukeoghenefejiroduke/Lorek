@@ -107,7 +107,7 @@ app.use(helmet({
 }));
 
 // CORS configuration
-const defaultOrigins = ['https://izonlanguage.com', 'https://app.izonlanguage.com', 'https://lorek.vercel.app'];
+const defaultOrigins = ['https://izonlanguage.com', 'https://app.izonlanguage.com', 'https://lorek.vercel.app', 'https://lorek.vercel.app/app', 'http://localhost:8081'];
 const envOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim()) : [];
 const allowedOrigins = Array.from(new Set([...defaultOrigins, ...envOrigins]));
 
