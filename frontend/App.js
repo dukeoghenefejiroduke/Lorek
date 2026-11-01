@@ -12,7 +12,7 @@ if (Platform.OS === 'web' && typeof document !== 'undefined') {
       display: flex;
       margin: 0;
       padding: 0;
-      overflow: hidden;
+      overflow-y: auto;
     }
   `;
   document.head.appendChild(style);

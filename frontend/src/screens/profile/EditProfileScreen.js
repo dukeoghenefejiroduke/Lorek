@@ -344,15 +344,35 @@ export default function EditProfileScreen({ navigation }) {
             </TouchableOpacity>
 
             {showDatePicker && (
-              <DateTimePicker
-                value={birthDate}
-                mode="date"
-                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                onChange={(event, selectedDate) => {
-                  setShowDatePicker(false);
-                  if (selectedDate) setBirthDate(selectedDate);
-                }}
-              />
+              Platform.OS === 'web' ? (
+                <input
+                  type="date"
+                  value={birthDate instanceof Date && !isNaN(birthDate) ? birthDate.toISOString().split('T')[0] : ''}
+                  onChange={(e) => {
+                    setShowDatePicker(false);
+                    if (e.target.value) setBirthDate(new Date(e.target.value));
+                  }}
+                  style={{
+                    padding: 10,
+                    borderRadius: 8,
+                    border: '1px solid #ccc',
+                    marginTop: 5,
+                    fontSize: 16,
+                    width: '100%',
+                    backgroundColor: '#fafafa'
+                  }}
+                />
+              ) : (
+                <DateTimePicker
+                  value={birthDate}
+                  mode="date"
+                  display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                  onChange={(event, selectedDate) => {
+                    setShowDatePicker(false);
+                    if (selectedDate) setBirthDate(selectedDate);
+                  }}
+                />
+              )
             )}
           </Animated.View>
 
