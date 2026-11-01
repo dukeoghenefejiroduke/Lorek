@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, ScrollView, View } from 'react-native';
 
 const KeyboardAvoidingWrapper = ({ children, style, scroll = true, scrollProps = {}, ...props }) => {
   const content = scroll ? (
@@ -14,6 +14,14 @@ const KeyboardAvoidingWrapper = ({ children, style, scroll = true, scrollProps =
   ) : (
     children
   );
+
+  if (Platform.OS === 'web') {
+    return (
+      <View style={[styles.container, style, { pointerEvents: 'auto', touchAction: 'manipulation' }]} {...props}>
+        {content}
+      </View>
+    );
+  }
 
   return (
     <KeyboardAvoidingView

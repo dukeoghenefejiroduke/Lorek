@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Alert } from 'react-native';
 
 if (Platform.OS === 'web' && typeof document !== 'undefined') {
   const style = document.createElement('style');
@@ -10,12 +10,57 @@ if (Platform.OS === 'web' && typeof document !== 'undefined') {
       height: 100%;
       flex: 1;
       display: flex;
+      flex-direction: column;
       margin: 0;
       padding: 0;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    input, textarea, select, button, [contenteditable="true"], [data-focusable="true"] {
+      pointer-events: auto !important;
+      user-select: text !important;
+      -webkit-user-select: text !important;
+      touch-action: manipulation !important;
+    }
+    div, span {
+      touch-action: manipulation;
     }
   `;
   document.head.appendChild(style);
+}
+
+if (Platform.OS === 'web' && typeof window !== 'undefined') {
+  Alert.alert = (title, message, buttons, options) => {
+    const fullMessage = `${title ? title + '\n\n' : ''}${message || ''}`;
+    if (!buttons || buttons.length === 0) {
+      window.alert(fullMessage);
+      return;
+    }
+    if (buttons.length === 1) {
+      window.alert(fullMessage);
+      if (buttons[0].onPress) buttons[0].onPress();
+      return;
+    }
+    if (buttons.length === 2) {
+      const cancelBtn = buttons.find(b => b.style === 'cancel' || b.text?.toLowerCase() === 'cancel');
+      const actionBtn = buttons.find(b => b !== cancelBtn) || buttons[1];
+      const confirmed = window.confirm(fullMessage);
+      if (confirmed) {
+        if (actionBtn && actionBtn.onPress) actionBtn.onPress();
+      } else {
+        if (cancelBtn && cancelBtn.onPress) cancelBtn.onPress();
+      }
+      return;
+    }
+    const result = window.prompt(`${fullMessage}\n\nOptions: ${buttons.map((b, i) => `${i + 1}: ${b.text}`).join(', ')} (Enter number):`);
+    const index = parseInt(result, 10) - 1;
+    if (!isNaN(index) && buttons[index] && buttons[index].onPress) {
+      buttons[index].onPress();
+    } else {
+      const defaultBtn = buttons.find(b => b.style !== 'cancel') || buttons[0];
+      if (defaultBtn && defaultBtn.onPress) defaultBtn.onPress();
+    }
+  };
 }
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -55,7 +100,7 @@ export default function App() {
           <LanguageProvider>
             <HealthProvider>
               <ExerciseEngineProvider>
-                <GestureHandlerRootView style={styles.container}>
+                <GestureHandlerRootView style={[styles.container, Platform.OS === 'web' && { touchAction: 'manipulation', pointerEvents: 'auto' }]}>
                   <NavigationWrapper />
                 </GestureHandlerRootView>
               </ExerciseEngineProvider>

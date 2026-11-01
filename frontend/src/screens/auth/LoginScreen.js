@@ -222,7 +222,7 @@ export default function LoginScreen({ navigation }) {
           end={{ x: 1, y: 1 }}
           style={styles.gradient}
         >
-          <Pressable style={styles.content} onPress={Keyboard.dismiss}>
+          <View style={styles.content}>
             {/* Header */}
             <View style={styles.headerContainer}>
               <Text style={[styles.title, { color: '#fff' }]}>LOREK, Native Language tutor</Text>
@@ -354,7 +354,7 @@ export default function LoginScreen({ navigation }) {
                 <Text style={[styles.demoText, { color: theme.text }]}>Password: demo123</Text>
               </View>
             )}
-          </Pressable>
+          </View>
         </LinearGradient>
       </KeyboardAvoidingWrapper>
 

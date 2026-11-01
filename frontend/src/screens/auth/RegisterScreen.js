@@ -233,7 +233,7 @@ const handleReferralCheck = async (code) => {
           end={{ x: 1, y: 1 }}
           style={styles.gradient}
         >
-          <Pressable style={styles.content} onPress={Keyboard.dismiss}>
+          <View style={styles.content}>
             <View style={styles.headerContainer}>
               <Text style={styles.title}>Create Account</Text>
               <Text style={styles.subtitle}>Join our Native learning community</Text>
@@ -508,7 +508,7 @@ const handleReferralCheck = async (code) => {
                 </View>
               </>
             )}
-          </Pressable>
+          </View>
         </LinearGradient>
       </KeyboardAvoidingWrapper>
 
