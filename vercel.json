@@ -1,0 +1,13 @@
+{
+  "buildCommand": "cd frontend && npm install && npx expo export --platform web && mkdir -p web/app && cp -r dist/* web/app/",
+  "outputDirectory": "web",
+  "installCommand": "echo 'No root dependencies'",
+  "rewrites": [
+    { "source": "/app/(.*)", "destination": "/app/index.html" },
+    { "source": "/verify-email", "destination": "/verify-email.html" },
+    { "source": "/reset-password", "destination": "/reset-password.html" },
+    { "source": "/achievements", "destination": "/achievements.html" },
+    { "source": "/streak-reminder", "destination": "/streak-reminder.html" },
+    { "source": "/weekly-report", "destination": "/weekly-report.html" }
+  ]
+}
