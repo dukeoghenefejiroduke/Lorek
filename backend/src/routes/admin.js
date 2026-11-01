@@ -20,7 +20,7 @@ router.use(authorize('admin'));
 // DASHBOARD STATISTICS
 // ============================================================================
 
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', async (req, res, next) => {
   try {
     const [
       totalUsers,

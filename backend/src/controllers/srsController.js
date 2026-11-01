@@ -617,6 +617,56 @@ const calculateRetention = (current, quality) => {
 };
 
 /**
+ * Calculate context relevance score
+ */
+const calculateContextRelevance = (context, word) => {
+  if (!context || !word) return 0.5;
+
+  let score = 0.5; // Default moderate relevance
+
+  const contextStr = typeof context === 'string'
+    ? context.toLowerCase()
+    : JSON.stringify(context).toLowerCase();
+
+  const wordText = (word.word || word.izonWord || '').toLowerCase();
+  const translation = (word.englishTranslation || '').toLowerCase();
+  const category = (word.category || '').toLowerCase();
+
+  if (wordText && contextStr.includes(wordText)) score += 0.3;
+  if (translation && contextStr.includes(translation)) score += 0.2;
+  if (category && contextStr.includes(category)) score += 0.2;
+
+  return Math.min(1.0, Math.max(0.0, score));
+};
+
+/**
+ * Calculate improvement metric based on historical vs current quality
+ */
+const calculateImprovement = (current, quality) => {
+  if (!current.reviewHistory || current.reviewHistory.length === 0) {
+    return 0;
+  }
+  const prevQualities = current.reviewHistory.map(r => r.quality / 4);
+  const avgPrev = prevQualities.reduce((a, b) => a + b, 0) / prevQualities.length;
+  const currentNormalized = quality / 4;
+  return Number((currentNormalized - avgPrev).toFixed(2));
+};
+
+/**
+ * Calculate consistency metric based on historical performance variance
+ */
+const calculateConsistency = (current, quality) => {
+  if (!current.reviewHistory || current.reviewHistory.length === 0) {
+    return 1.0;
+  }
+  const qualities = [...current.reviewHistory.map(r => r.quality / 4), quality / 4];
+  const mean = qualities.reduce((a, b) => a + b, 0) / qualities.length;
+  const variance = qualities.reduce((sum, q) => sum + Math.pow(q - mean, 2), 0) / qualities.length;
+  const stdDev = Math.sqrt(variance);
+  return Number(Math.max(0, Math.min(1.0, 1.0 - stdDev)).toFixed(2));
+};
+
+/**
  * Calculate word complexity
  */
 const calculateWordComplexity = (word) => {
@@ -1264,4 +1314,7 @@ const generateLearningRecommendations = (stats, weakAreas) => {
   return recommendations;
 };
 
-module.exports = exports;exports.processMasteryUpdate = processMasteryUpdate;
+module.exports = exports;
+exports.processMasteryUpdate = processMasteryUpdate;
+exports.calculateContextRelevance = calculateContextRelevance;
+exports.calculateLearningMetrics = calculateLearningMetrics;

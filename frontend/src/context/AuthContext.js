@@ -6,7 +6,7 @@ import haptics from '../utils/haptics';
 import { Platform, AppState, Alert } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import * as LocalAuthentication from 'expo-local-authentication';
-import * as SecureStore from 'expo-secure-store';
+import SecureStore from '../utils/secureStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext();

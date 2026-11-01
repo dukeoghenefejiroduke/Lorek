@@ -1,13 +1,11 @@
 import SafeAreaContainer from '../components/SafeAreaContainer';
 import React, { useState, useRef, useContext, useCallback } from 'react';
 import { ThemeContext, lightTheme } from '../context/ThemeContext';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Animated, FlatList } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions, Animated, FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { save } from '../services/storage';
 import { LanguageContext } from '../context/LanguageContext';
-
-const { width } = Dimensions.get('window');
 
 const onboardingData = [
   {
@@ -34,6 +32,7 @@ const onboardingData = [
 ];
 
 export default function OnboardingScreen({ navigation }) {
+  const { width } = useWindowDimensions();
   const contextValue = useContext(ThemeContext) || {};
   const { theme, isDarkMode } = contextValue;
   const { activeLanguage } = useContext(LanguageContext);
@@ -72,7 +71,7 @@ export default function OnboardingScreen({ navigation }) {
       <FlatList
         data={slides}
         renderItem={({ item }) => (
-          <View style={styles.slide}>
+          <View style={[styles.slide, { width }]}>
             <LinearGradient colors={item.gradient} style={styles.iconContainer}>
               <Ionicons name={item.icon} size={80} color="#fff" />
             </LinearGradient>
@@ -85,6 +84,11 @@ export default function OnboardingScreen({ navigation }) {
         pagingEnabled
         bounces={false}
         keyExtractor={(item) => item.id}
+        getItemLayout={(data, index) => ({
+          length: width,
+          offset: width * index,
+          index,
+        })}
         onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], { useNativeDriver: false })}
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={viewConfig}
@@ -108,7 +112,7 @@ export default function OnboardingScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  slide: { width, alignItems: 'center', justifyContent: 'center', padding: 40 },
+  slide: { alignItems: 'center', justifyContent: 'center', padding: 40 },
   iconContainer: { width: 160, height: 160, borderRadius: 80, justifyContent: 'center', alignItems: 'center', marginBottom: 40 },
   title: { fontSize: 28, fontWeight: 'bold', marginBottom: 15, textAlign: 'center' },
   description: { fontSize: 16, textAlign: 'center', lineHeight: 24 },

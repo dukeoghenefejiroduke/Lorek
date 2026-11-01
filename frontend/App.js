@@ -1,5 +1,23 @@
 import React, { useContext, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+
+if (Platform.OS === 'web' && typeof document !== 'undefined') {
+  const style = document.createElement('style');
+  style.type = 'text/css';
+  style.textContent = `
+    html, body, #root {
+      width: 100%;
+      height: 100%;
+      flex: 1;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
