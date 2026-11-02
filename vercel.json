@@ -8,7 +8,7 @@
       "destination": "/app/_expo/static/js/web-workers/:path*"
     },
     {
-      "source": "/app/((?!.*\\.).*)",
+      "source": "/app/((?!_expo/|assets/|.*\\.).*)",
       "destination": "/app/index.html"
     },
     {
