@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd frontend && npm install && npx expo export --platform web && mkdir -p ../web/public-app && rm -rf ../web/public-app/* && cp -r dist/* ../web/public-app/",
+  "buildCommand": "cd frontend && npm install && npx expo export --platform web && mkdir -p ../web/app && rm -rf ../web/app/* && cp -r dist/* ../web/app/ && sed -i 's|<head>|<head><base href=\"/app/\">|g' ../web/app/index.html",
   "outputDirectory": "web",
   "installCommand": "echo 'No root dependencies'",
   "headers": [
@@ -13,7 +13,7 @@
       ]
     },
     {
-      "source": "/public-app/_expo/(.*)",
+      "source": "/app/_expo/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "source": "/public-app/assets/(.*)",
+      "source": "/app/assets/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -33,12 +33,8 @@
   ],
   "rewrites": [
     {
-      "source": "/app/_expo/(.*)",
-      "destination": "/public-app/_expo/$1"
-    },
-    {
       "source": "/app/((?!.*\\.).*)",
-      "destination": "/public-app/index.html"
+      "destination": "/app/index.html"
     },
     {
       "source": "/verify-email",
