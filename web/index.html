@@ -7,122 +7,403 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico">
     <style>
-        .landing-hero {
-            text-align: center;
-            padding: 3rem 1.5rem;
+        :root {
+            --primary: #1a4c2e;
+            --secondary: #2e7d32;
+            --accent: #4CAF50;
+            --gold: #FFD700;
+            --dark: #111827;
+            --light: #f9fafb;
+            --gray: #4b5563;
         }
-        .landing-hero h1 {
-            font-size: 2.5rem;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f291a 0%, #1a4c2e 40%, #2e7d32 100%);
             color: #fff;
-            margin-bottom: 0.5rem;
-        }
-        .landing-hero p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-        }
-        .action-buttons {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            max-width: 320px;
+            justify-content: space-between;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(15, 41, 26, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 1.5rem 3rem;
+            max-width: 900px;
             margin: 0 auto;
         }
-        .btn-primary {
-            background: #fff;
-            color: #1a4c2e;
-            font-weight: 700;
-            padding: 16px 24px;
-            border-radius: 12px;
+
+        .badge-pill {
+            display: inline-block;
+            background: rgba(76, 175, 80, 0.2);
+            color: var(--gold);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .hero h2 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin: 0 0 1rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            color: #fff;
+        }
+
+        .hero h2 span {
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn-launch {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
+            color: #111827;
+            font-weight: 800;
+            padding: 16px 32px;
+            border-radius: 14px;
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 1.1rem;
         }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            background: #f0f0f0;
+
+        .btn-launch:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4);
         }
-        .btn-secondary {
+
+        .btn-download {
             background: rgba(255, 255, 255, 0.15);
             color: #fff;
-            font-weight: 600;
-            padding: 16px 24px;
-            border-radius: 12px;
+            font-weight: 700;
+            padding: 16px 32px;
+            border-radius: 14px;
             text-decoration: none;
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             transition: transform 0.2s, background 0.2s;
+            font-size: 1.1rem;
         }
-        .btn-secondary:hover {
-            transform: translateY(-2px);
+
+        .btn-download:hover {
+            transform: translateY(-3px);
             background: rgba(255, 255, 255, 0.25);
         }
+
+        .stats-section {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-item h3 {
+            font-size: 2.2rem;
+            margin: 0;
+            color: var(--gold);
+            font-weight: 800;
+        }
+
+        .stat-item p {
+            margin: 5px 0 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .section-container {
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, background 0.3s, border-color 0.3s;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-box h4 {
+            font-size: 1.35rem;
+            margin: 0 0 0.75rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .feature-box p {
+            color: rgba(255, 255, 255, 0.75);
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .download-banner {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(46, 125, 50, 0.3) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            text-align: center;
             max-width: 900px;
-            margin: 3rem auto;
-            padding: 0 1rem;
-            text-align: left;
+            margin: 4rem auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
-        .feature-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+        .download-banner h3 {
+            font-size: 2.2rem;
+            margin: 0 0 1rem;
+            color: #fff;
+            font-weight: 800;
         }
-        .feature-card h3 {
-            color: #1a4c2e;
-            margin-top: 0;
+
+        .download-banner p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .feature-card p {
-            color: #4a5568;
-            font-size: 0.95rem;
-            margin-bottom: 0;
+
+        footer {
+            background: #0b1f13;
+            padding: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 2.4rem; }
+            .stats-section { flex-direction: column; gap: 1.5rem; text-align: center; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Lorek Language App</h1>
+        <div class="logo-area">
+            <span class="logo-icon">🌿</span>
+            <h1>Lorek</h1>
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#culture">Culture & Heritage</a>
+            <a href="#download">Download App</a>
+            <a href="/app" style="color: var(--gold); font-weight: 700;">Launch Web App →</a>
+        </div>
     </header>
 
-    <main class="landing-hero">
-        <h1>Preserve & Learn Izon</h1>
-        <p>Your immersive gateway to mastering Izon and regional vocabulary, grammar, and culture.</p>
-        
-        <div class="action-buttons">
-            <a href="/app" class="btn-primary">🚀 Launch Web App</a>
-            <a href="#download" class="btn-secondary">📱 Download Mobile App</a>
+    <main>
+        <div class="hero">
+            <div class="badge-pill">✨ The Ultimate Izon & Regional Language Platform</div>
+            <h2>Master <span>Izon</span> & Connect With Your Heritage</h2>
+            <p>Lorek is your immersive language companion featuring structured lessons, smart spaced repetition (SRS), audio pronunciation, cultural proverbs, and gamified progress.</p>
+            
+            <div class="hero-buttons">
+                <a href="/app" class="btn-launch">🚀 Launch Web App Now</a>
+                <a href="#download" class="btn-download">📱 Get Mobile App</a>
+            </div>
+
+            <div class="stats-section">
+                <div class="stat-item">
+                    <h3>100+</h3>
+                    <p>Structured Lessons</p>
+                </div>
+                <div class="stat-item">
+                    <h3>SRS</h3>
+                    <p>Smart Flashcards</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Cultural Heritage</p>
+                </div>
+            </div>
         </div>
 
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3>Interactive Lessons</h3>
-                <p>Engage with structured units, vocabulary flashcards, and SRS review sessions designed for long-term retention.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Cultural Insights</h3>
-                <p>Explore proverbs, traditional stories, family trees, and cultural heritage embedded in every lesson.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Gamified Progress</h3>
-                <p>Earn XP, maintain daily streaks, unlock achievements, and compete on community leaderboards.</p>
+        <div id="features" class="section-container">
+            <div class="section-title">Everything You Need to Fluency</div>
+            <div class="section-subtitle">Designed with modern learning science and rich cultural context to make mastering Izon engaging and effective.</div>
+            
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">📚</div>
+                    <h4>Structured Curriculum</h4>
+                    <p>Progress seamlessly from beginner foundations to conversational mastery through carefully crafted courses, units, and interactive exercises.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Smart SRS Flashcards</h4>
+                    <p>Never forget a word. Our Spaced Repetition System optimizes review intervals based on your personal mastery and recall accuracy.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🎧</div>
+                    <h4>Native Audio Pronunciation</h4>
+                    <p>Listen to authentic audio recordings for vocabulary words and sentences to perfect your accent and listening comprehension.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🏆</div>
+                    <h4>Gamified Motivation</h4>
+                    <p>Earn XP points, maintain daily streaks, unlock milestone achievements, and climb community leaderboards.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🌳</div>
+                    <h4>Family & Kinship Trees</h4>
+                    <p>Explore traditional family terminology and relational structures with our interactive family tree learning modules.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">📜</div>
+                    <h4>Proverbs & Folklore</h4>
+                    <p>Immerse yourself in timeless cultural proverbs, traditional stories, and wisdom passed down through generations.</p>
+                </div>
             </div>
         </div>
 
-        <div id="download" class="container" style="margin-top: 4rem; color: #2d3748;">
-            <h2>Download Lorek Mobile App</h2>
-            <p>Take your language learning journey offline and on the go with our Android & iOS apps.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
-                <a href="#" class="btn-primary" style="background: #1a4c2e; color: #fff;">🤖 Download Android APK</a>
-                <a href="#" class="btn-secondary" style="background: #2d3748; color: #fff; border-color: #2d3748;">🍏 App Store (Coming Soon)</a>
+        <div id="culture" class="section-container" style="background: rgba(0,0,0,0.15); padding: 4rem 2rem; border-radius: 30px; margin-top: 4rem;">
+            <div class="section-title">Preserving Heritage Through Technology</div>
+            <div class="section-subtitle">Language is more than vocabulary — it's identity, history, and connection. Lorek bridges modern digital learning with indigenous preservation.</div>
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem;">
+                <div style="flex: 1; min-width: 280px; max-width: 450px; background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
+                    <h4 style="color: var(--gold); margin-top:0; font-size: 1.2rem;">🌟 Offline & Cloud Sync</h4>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">Study anytime, anywhere. Your progress, streaks, and review data sync seamlessly across your phone, tablet, and web browser.</p>
+                </div>
+                <div style="flex: 1; min-width: 280px; max-width: 450px; background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
+                    <h4 style="color: var(--gold); margin-top:0; font-size: 1.2rem;">🔒 Secure & Private</h4>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">Your account and data are protected with industry-standard JWT authentication, secure password resets, and email verification.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="download" class="download-banner">
+            <h3>Take Lorek Everywhere You Go</h3>
+            <p>Download the official mobile app for Android or access the full experience instantly in your web browser.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                <a href="/app" class="btn-launch">🚀 Launch Web App Now</a>
+                <a href="#" class="btn-download">🤖 Download Android APK</a>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Lorek App. All rights reserved.</p>
+        <p>&copy; 2026 Lorek Language App. Empowering indigenous language preservation. | <a href="/app">Web App</a></p>
     </footer>
 </body>
 </html>

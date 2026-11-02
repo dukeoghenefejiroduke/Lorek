@@ -23,7 +23,8 @@
       "package": "com.anonymous.frontend"
     },
     "web": {
-      "output": "single",
+      "bundler": "metro",
+      "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
