@@ -79,8 +79,8 @@ import { initDb } from './src/services/db';
 const linking = {
   prefixes: [
     'frontend://',
-    'https://*.vercel.app',
-    'https://lorek.vercel.app',
+    'https://*.vercel.app/app',
+    'https://lorek.vercel.app/app',
     'http://localhost:8081',
     'http://localhost:19006'
   ],
