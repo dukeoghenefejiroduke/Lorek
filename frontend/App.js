@@ -76,13 +76,23 @@ import AppNavigator from './src/navigation/AppNavigator';
 import UpdateNotification from './src/components/UpdateNotification';
 import { initDb } from './src/services/db';
 
+const linking = {
+  prefixes: [
+    'frontend://',
+    'https://*.vercel.app/app',
+    'https://lorek.vercel.app/app',
+    'http://localhost:8081',
+    'http://localhost:19006'
+  ],
+};
+
 function NavigationWrapper() {
   useNetworkSync();
   // This wrapper ensures we only render NavigationContainer 
   // after ensuring context is established if necessary, 
   // though ThemeProvider already handles this.
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <AppNavigator />
       <UpdateNotification />
     </NavigationContainer>
