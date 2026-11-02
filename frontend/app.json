@@ -54,8 +54,7 @@
       ]
     ],
     "experiments": {
-      "reactCompiler": true,
-      "baseUrl": "/app"
+      "reactCompiler": true
     }
   }
 }
