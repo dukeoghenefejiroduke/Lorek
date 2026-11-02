@@ -1,37 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>lorek</title>
-    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
-    <style id="expo-reset">
-      /* These styles make the body full-height */
-      html,
-      body {
-        height: 100%;
-      }
-      /* These styles disable body scrolling if you are using <ScrollView> */
-      body {
-        overflow: hidden;
-      }
-      /* These styles make the root element full-height */
-      #root {
-        display: flex;
-        height: 100%;
-        flex: 1;
-      }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorek Language App | Master Izon & Regional Languages</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+    <style>
+        .landing-hero {
+            text-align: center;
+            padding: 3rem 1.5rem;
+        }
+        .landing-hero h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .landing-hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+        .btn-primary {
+            background: #fff;
+            color: #1a4c2e;
+            font-weight: 700;
+            padding: 16px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s, background 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: #f0f0f0;
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-weight: 600;
+            padding: 16px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            transition: transform 0.2s, background 0.2s;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            text-align: left;
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .feature-card h3 {
+            color: #1a4c2e;
+            margin-top: 0;
+        }
+        .feature-card p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
     </style>
-  <link rel="icon" href="/favicon.ico" /></head>
+</head>
+<body>
+    <header>
+        <h1>Lorek Language App</h1>
+    </header>
 
-  <body>
-    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <!-- The root element for your Expo app. -->
-    <div id="root"></div>
-  <script src="/_expo/static/js/web/AppEntry-d5bedeeb049299c48005eacea01bac0c.js" defer></script>
+    <main class="landing-hero">
+        <h1>Preserve & Learn Izon</h1>
+        <p>Your immersive gateway to mastering Izon and regional vocabulary, grammar, and culture.</p>
+        
+        <div class="action-buttons">
+            <a href="/app" class="btn-primary">🚀 Launch Web App</a>
+            <a href="#download" class="btn-secondary">📱 Download Mobile App</a>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Interactive Lessons</h3>
+                <p>Engage with structured units, vocabulary flashcards, and SRS review sessions designed for long-term retention.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Cultural Insights</h3>
+                <p>Explore proverbs, traditional stories, family trees, and cultural heritage embedded in every lesson.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Gamified Progress</h3>
+                <p>Earn XP, maintain daily streaks, unlock achievements, and compete on community leaderboards.</p>
+            </div>
+        </div>
+
+        <div id="download" class="container" style="margin-top: 4rem; color: #2d3748;">
+            <h2>Download Lorek Mobile App</h2>
+            <p>Take your language learning journey offline and on the go with our Android & iOS apps.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+                <a href="#" class="btn-primary" style="background: #1a4c2e; color: #fff;">🤖 Download Android APK</a>
+                <a href="#" class="btn-secondary" style="background: #2d3748; color: #fff; border-color: #2d3748;">🍏 App Store (Coming Soon)</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Lorek App. All rights reserved.</p>
+    </footer>
 </body>
 </html>
