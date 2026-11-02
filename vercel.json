@@ -1,6 +1,6 @@
 {
-  "buildCommand": "cd frontend && npm install && npx expo export --platform web && mkdir -p web/app && rm -rf web/app/* && cp -r dist/* web/app/ && sed -i 's|src=\"/_expo|src=\"/app/_expo|g; s|href=\"/_expo|href=\"/app/_expo|g; s|src=\"/assets|src=\"/app/assets|g; s|href=\"/assets|href=\"/app/assets|g; s|href=\"/favicon|href=\"/app/favicon|g' web/app/index.html",
-  "outputDirectory": "web",
+  "buildCommand": "cd frontend && npm install && npx expo export --platform web && mkdir -p web/app && cp -r dist/* web/app/ && sed -i 's|src=\"/|src=\"/app/|g; s|href=\"/|href=\"/app/|g; s|/_expo|/app/_expo|g; s|/assets|/app/assets|g' web/app/index.html",
+  "outputDirectory": ".",
   "installCommand": "echo 'No root dependencies'",
   "rewrites": [
     { "source": "/app/((?!.*\\.).*)", "destination": "/app/index.html" },

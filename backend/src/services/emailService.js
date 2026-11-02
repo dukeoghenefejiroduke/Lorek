@@ -69,7 +69,7 @@ class EmailService {
   };
 
   sendVerificationEmail = async (to, username, verificationToken) => {
-    const webUrl = process.env.WEB_URL || 'http://localhost:3000';
+    const webUrl = process.env.WEB_URL || 'https://lorek.vercel.app';
     const verifyUrl = `${webUrl}/verify-email.html#token=${verificationToken}`;
     
     return this.sendEmail({
@@ -87,7 +87,7 @@ class EmailService {
   };
 
   sendPasswordResetEmail = async (to, username, resetToken) => {
-    const webUrl = process.env.WEB_URL || 'http://localhost:3000';
+    const webUrl = process.env.WEB_URL || 'https://lorek.vercel.app';
     const resetUrl = `${webUrl}/reset-password.html#token=${resetToken}`;
 
     return this.sendEmail({
@@ -118,7 +118,7 @@ class EmailService {
   };
 
   sendAchievementEmail = async (to, username, achievement) => {
-    const webUrl = process.env.WEB_URL || 'http://localhost:3000';
+    const webUrl = process.env.WEB_URL || 'https://lorek.vercel.app';
     const name = encodeURIComponent(achievement.name || 'Milestone Reached');
     const desc = encodeURIComponent(achievement.description || 'Great job mastering lorek vocabulary!');
     const icon = encodeURIComponent(achievement.icon || '🏆');
@@ -139,7 +139,7 @@ class EmailService {
   };
 
   sendWeeklyReport = async (to, username, stats) => {
-    const webUrl = process.env.WEB_URL || 'http://localhost:3000';
+    const webUrl = process.env.WEB_URL || 'https://lorek.vercel.app';
     const lessons = stats?.lessonsCompleted || 0;
     const words = stats?.wordsLearned || 0;
     const points = stats?.pointsEarned || 0;
@@ -157,7 +157,7 @@ class EmailService {
   };
 
   sendStreakReminder = async (to, username, streak) => {
-    const webUrl = process.env.WEB_URL || 'http://localhost:3000';
+    const webUrl = process.env.WEB_URL || 'https://lorek.vercel.app';
     return this.sendEmail({
       to,
       subject: `${streak}-Day Streak - Keep it up`,
