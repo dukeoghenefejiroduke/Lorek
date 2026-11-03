@@ -177,10 +177,12 @@ api.interceptors.request.use(
         }
     }
     
-    // 2. Offline Mode Handling
+    // 2. Offline Mode Handling (allow request to proceed, let network/axios handle connectivity)
     if (!isOnline && (config.method !== 'get')) {
-        await addToSyncQueue(config.method, config.url, config.data);
-        return Promise.reject('Queued for offline sync');
+        // Optional: queue non-critical mutations if desired, but allow auth/login/register through
+        if (config.url && config.url.includes('/auth/')) {
+            // Never queue auth requests
+        }
     }
     
     return config;
