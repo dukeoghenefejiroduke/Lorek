@@ -90,9 +90,9 @@ redis.connect().then(() => {
 // Helmet with custom configuration
 app.use(helmet({
   contentSecurityPolicy: IS_PRODUCTION ? undefined : false,
-  crossOriginEmbedderPolicy: IS_PRODUCTION,
-  crossOriginOpenerPolicy: IS_PRODUCTION,
-  crossOriginResourcePolicy: IS_PRODUCTION ? { policy: 'same-site' } : false,
+  crossOriginEmbedderPolicy: false,
+  crossOriginOpenerPolicy: false,
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
   dnsPrefetchControl: { allow: false },
   frameguard: { action: 'deny' },
   hsts: IS_PRODUCTION ? {

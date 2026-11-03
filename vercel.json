@@ -57,6 +57,10 @@
       "destination": "/app/index.html"
     },
     {
+      "source": "/Main/(.*)",
+      "destination": "/app/index.html"
+    },
+    {
       "source": "/login",
       "destination": "/app/index.html"
     },
@@ -115,6 +119,10 @@
     {
       "source": "/weekly-report",
       "destination": "/weekly-report.html"
+    },
+    {
+      "source": "/((?!app/|_expo/|assets/|favicon\\.ico|verify-email|reset-password|achievements|streak-reminder|weekly-report).*)",
+      "destination": "/app/index.html"
     }
   ]
 }
