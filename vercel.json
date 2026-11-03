@@ -33,6 +33,14 @@
   ],
   "rewrites": [
     {
+      "source": "/favicon.ico",
+      "destination": "/app/favicon.ico"
+    },
+    {
+      "source": "/Onboarding",
+      "destination": "/app/index.html"
+    },
+    {
       "source": "/assets/(.*)",
       "destination": "/app/assets/$1"
     },

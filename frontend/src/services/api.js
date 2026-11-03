@@ -13,20 +13,20 @@ const ENV = {
     //API_URL: 'http://127.0.0.1:5000/api', // Android Emulator
     API_URL_IOS: 'https://lorek.onrender.com/api', // iOS Simulator
     API_URL_PHYSICAL: 'https://lorek.onrender.com/api', // Physical device
-    TIMEOUT: 30000,
+    TIMEOUT: 60000,
     RETRY_ATTEMPTS: 3,
     CACHE_TTL: 3600000, // 1 hour
   },
   staging: {
-    API_URL: 'https://staging-api.izonlanguage.com/api',
-    TIMEOUT: 20000,
+    API_URL: 'https://lorek.onrender.com/api',
+    TIMEOUT: 60000,
     RETRY_ATTEMPTS: 2,
     CACHE_TTL: 1800000, // 30 minutes
   },
   production: {
-    API_URL: 'https://api.izonlanguage.com/api',
-    TIMEOUT: 15000,
-    RETRY_ATTEMPTS: 1,
+    API_URL: 'https://lorek.onrender.com/api',
+    TIMEOUT: 60000,
+    RETRY_ATTEMPTS: 2,
     CACHE_TTL: 900000, // 15 minutes
   }
 };
@@ -205,28 +205,24 @@ api.interceptors.response.use(
     console.error(`❌ API Response Error: ${error.config?.url} ${error.message}`, error.response?.status);
     const originalConfig = error.config;
     
-    // Don't retry if we've already retried or if it's not a GET request
-    if (!originalConfig || originalConfig._retry || originalConfig.method !== 'get') {
+    // Check if we should retry (network errors, timeouts, or 5xx)
+    const shouldRetry = !error.response || error.code === 'ECONNABORTED' || (error.response && error.response.status >= 500 && error.response.status <= 599);
+    
+    if (!originalConfig || originalConfig._retry || !shouldRetry) {
       return handleApiError(error);
     }
 
-    // Check if we should retry (network errors or 5xx)
-    const shouldRetry = !error.response || (error.response.status >= 500 && error.response.status <= 599);
+    originalConfig._retry = true;
+    originalConfig._retryCount = originalConfig._retryCount || 0;
     
-    if (shouldRetry) {
-      originalConfig._retry = true;
-      originalConfig._retryCount = originalConfig._retryCount || 0;
+    if (originalConfig._retryCount < config.RETRY_ATTEMPTS) {
+      originalConfig._retryCount++;
       
-      if (originalConfig._retryCount < config.RETRY_ATTEMPTS) {
-        originalConfig._retryCount++;
-        
-        // Exponential backoff
-        const delay = Math.pow(2, originalConfig._retryCount) * 1000;
-        await new Promise(resolve => setTimeout(resolve, delay));
-        
-        
-        return api(originalConfig);
-      }
+      // Exponential backoff
+      const delay = Math.pow(2, originalConfig._retryCount) * 1000;
+      await new Promise(resolve => setTimeout(resolve, delay));
+      
+      return api(originalConfig);
     }
 
     return handleApiError(error);
@@ -247,10 +243,10 @@ const handleApiError = async (error) => {
 
   // Categorize errors
   if (errorResponse.isNetworkError) {
-    errorResponse.message = 'Network connection unavailable. Please check your internet connection.';
+    errorResponse.message = 'Network connection unavailable or server is waking up from sleep mode. Please try again.';
     errorResponse.type = 'NETWORK_ERROR';
   } else if (errorResponse.isTimeout) {
-    errorResponse.message = 'Request timed out. Please try again.';
+    errorResponse.message = 'Request timed out. Server may be waking up from sleep mode. Please try again.';
     errorResponse.type = 'TIMEOUT_ERROR';
   } else if (error.response) {
     switch (error.response.status) {
