@@ -33,6 +33,14 @@
   ],
   "rewrites": [
     {
+      "source": "/assets/(.*)",
+      "destination": "/app/assets/$1"
+    },
+    {
+      "source": "/_expo/(.*)",
+      "destination": "/app/_expo/$1"
+    },
+    {
       "source": "/app/((?!.*\\.).*)",
       "destination": "/app/index.html"
     },
