@@ -1,8 +1,8 @@
 const fetch = require('node-fetch'); 
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 const mongoose = require('mongoose');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { body, validationResult } = require('express-validator');
 const { intensiveLimiter } = require('../middleware/rateLimit');
 
@@ -70,12 +70,7 @@ function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-// Initialize Gemini if available
-let geminiClient = null;
-if (process.env.GEMINI_API_KEY) {
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  geminiClient = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-}
+
 
 /**
  * Advanced SOV Reordering
@@ -206,7 +201,6 @@ async function handleTranslationLogic(params, currentUser = null) {
       const context = {
         from,
         to: targetLang,
-        geminiClient,
       };
 
       // Perform translation using the engine
@@ -326,21 +320,28 @@ router.post('/detect', [
       }
     }
     
-    // Use Gemini for better detection if available
-    if (geminiClient && input.length > 10) {
+    // Use Groq for better detection if available
+    if (process.env.GROQ_API_KEY && input.length > 10) {
       try {
-        const result = await geminiClient.generateContent({
-          contents: [{ role: 'user', parts: [{ text: `Detect the language of this text. Answer with only "en" or "izon": "${input}"` }] }],
-          generationConfig: { temperature: 0.1, maxOutputTokens: 10 },
-        });
-        const response = await result.response;
-        const geminiResult = response.text().trim().toLowerCase();
-        if (geminiResult === 'izon' || geminiResult === 'en') {
-          detectedLanguage = geminiResult;
+        const groqResponse = await axios.post(
+          'https://api.groq.com/openai/v1/chat/completions',
+          {
+            model: 'openai/gpt-oss-20b',
+            messages: [
+              { role: 'user', content: `Detect the language of this text. Answer with only "en" or "izon": "${input}"` }
+            ],
+            temperature: 0.1,
+            max_tokens: 10,
+          },
+          { headers: { Authorization: `Bearer ${process.env.GROQ_API_KEY}` } }
+        );
+        const groqResult = groqResponse.data.choices[0].message.content.trim().toLowerCase();
+        if (groqResult === 'izon' || groqResult === 'en') {
+          detectedLanguage = groqResult;
           confidence = 0.9;
         }
       } catch (err) {
-        logger.error('Gemini language detection failed:', err);
+        logger.error('Groq language detection failed:', err);
       }
     }
 
@@ -659,7 +660,7 @@ router.post('/converse', [
       try {
         const engine = TranslationEngineFactory.getEngine(targetLang);
         if (engine) {
-          const transResult = await engine.translate(message, { from: targetLang, to: 'en', geminiClient });
+          const transResult = await engine.translate(message, { from: targetLang, to: 'en' });
           if (transResult && transResult.translated) {
             messageInEnglish = transResult.translated;
           }
@@ -673,18 +674,12 @@ router.post('/converse', [
       messageInEnglish = message;
     }
 
-    // 2. Send messageInEnglish to AI (Groq or Gemini or Smart Conversational Engine)
+    // 2. Send messageInEnglish to AI (Groq or Smart Conversational Engine)
     let aiResponseEnglish = "";
     try {
       if (process.env.GROQ_API_KEY) {
         const ragService = require('../services/ragService');
         aiResponseEnglish = await ragService.generateAnswer(messageInEnglish, [{ text: `User is conversing in ${targetLang}. Reply naturally, conversationally, and variedly in English to what the user said.` }]);
-      } else if (geminiClient) {
-        const result = await geminiClient.generateContent({
-          contents: [{ role: 'user', parts: [{ text: `You are an AI language learning assistant helping someone practice ${targetLang}. Reply conversationally and variably in English to: "${messageInEnglish}"` }] }],
-          generationConfig: { temperature: 0.9, maxOutputTokens: 250 },
-        });
-        aiResponseEnglish = result.response.text().trim();
       }
     } catch (aiErr) {
       logger.warn('External AI failed, using smart dynamic conversational generator:', aiErr.message);
@@ -712,7 +707,7 @@ router.post('/converse', [
       try {
         const engine = TranslationEngineFactory.getEngine(targetLang);
         if (engine) {
-          const botTransResult = await engine.translate(aiResponseEnglish, { from: 'en', to: targetLang, geminiClient });
+          const botTransResult = await engine.translate(aiResponseEnglish, { from: 'en', to: targetLang });
           if (botTransResult && botTransResult.translated) {
             botDisplayMessage = botTransResult.translated;
           }

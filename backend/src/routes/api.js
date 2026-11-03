@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const mongoose = require('mongoose');
 const { publicLimiter } = require('../middleware/rateLimit');
 const redis = require('../config/redis');
@@ -25,13 +24,6 @@ router.use(publicLimiter);
 
 // Apply API key authentication
 router.use(validateApiKey);
-
-// Initialize Gemini
-let geminiClient = null;
-if (process.env.GEMINI_API_KEY) {
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  geminiClient = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-}
 
 // ============================================================================
 // CONSTANTS & UTILITIES
@@ -142,9 +134,9 @@ function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-// Gemini translation function with enhanced prompting
-async function translateWithGemini(text, from, to, context = {}) {
-  if (!geminiClient) return null;
+// Groq translation function with enhanced prompting
+async function translateWithGroq(text, from, to, context = {}) {
+  if (!process.env.GROQ_API_KEY) return null;
   
   try {
     const promptFrom = from === 'en' ? 'English' : 'Izon (Ijaw, primarily Kolokuma dialect)';
@@ -165,20 +157,23 @@ Output ONLY the translation — no explanations, no quotes, no additional text.$
 
     const userPrompt = `Translate from ${promptFrom} to ${promptTo}: "${text}"`;
     
-    const result = await geminiClient.generateContent({
-      contents: [{ role: 'user', parts: [{ text: `${systemPrompt}\n\n${userPrompt}` }] }],
-      generationConfig: { 
-        temperature: 0.2, 
-        maxOutputTokens: 512,
-        topP: 0.8,
-        topK: 40,
+    const groqResponse = await axios.post(
+      'https://api.groq.com/openai/v1/chat/completions',
+      {
+        model: 'openai/gpt-oss-20b',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ],
+        temperature: 0.2,
+        max_tokens: 512,
       },
-    });
+      { headers: { Authorization: `Bearer ${process.env.GROQ_API_KEY}` } }
+    );
     
-    const response = await result.response;
-    return response.text().trim();
+    return groqResponse.data.choices[0].message.content.trim();
   } catch (error) {
-    logger.error('[Gemini Error]:', error.message);
+    logger.error('[Groq Translation Error]:', error.message);
     return null;
   }
 }
@@ -753,14 +748,14 @@ router.post('/translate', async (req, res, next) => {
 
       // 3. LLM fallback for complex sentences
       if (words.length > 2 || /[.,!?]/.test(input)) {
-        const llmResult = await translateWithGemini(input, from, to, { ...context, formality });
+        const llmResult = await translateWithGroq(input, from, to, { ...context, formality });
         
         if (llmResult && llmResult.trim()) {
           translated = llmResult.trim();
           type = 'llm_fallback';
           confidence = 'medium';
           note = 'AI-generated translation — review by native Izon speaker recommended';
-          provider = 'gemini';
+          provider = 'groq';
           
           // Add word breakdown for LLM translation
           wordBreakdown = [{
@@ -837,7 +832,7 @@ router.post('/translate/batch', async (req, res, next) => {
     const results = [];
     
     for (const text of texts) {
-      const result = await translateWithGemini(text, from, to);
+      const result = await translateWithGroq(text, from, to);
       results.push({
         original: text,
         translated: result || '[Translation failed]',

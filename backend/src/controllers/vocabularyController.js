@@ -13,9 +13,10 @@ const axios = require('axios');
 const natural = require('natural');
 const { OpenAI } = require('openai');
 
-// Initialize AI for advanced processing
+// Initialize Groq AI for advanced processing
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.GROQ_API_KEY,
+  baseURL: 'https://api.groq.com/openai/v1',
 });
 
 // ============================================================================
@@ -846,7 +847,7 @@ const enrichWordData = async (data) => {
   try {
     // Use AI to generate additional content
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "openai/gpt-oss-20b",
       messages: [
         {
           role: "system",
@@ -907,7 +908,7 @@ const enrichWordData = async (data) => {
 const validateWordWithAI = async (word) => {
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "openai/gpt-oss-20b",
       messages: [
         {
           role: "system",
@@ -951,7 +952,7 @@ const validateWordWithAI = async (word) => {
 const generateCulturalContext = async (word) => {
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "openai/gpt-oss-20b",
       messages: [
         {
           role: "system",

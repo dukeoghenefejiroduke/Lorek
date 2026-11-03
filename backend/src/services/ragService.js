@@ -54,7 +54,7 @@ class RagService {
       const groqResponse = await axios.post(
         'https://api.groq.com/openai/v1/chat/completions',
         {
-          model: 'llama3-8b-8192',
+          model: 'openai/gpt-oss-20b',
           messages: [
             { role: 'system', content: 'You are an expert in the Lorek language. Answer based on the provided context.' },
             { role: 'user', content: `Context: ${JSON.stringify(context)}\n\nQuestion: ${query}` }

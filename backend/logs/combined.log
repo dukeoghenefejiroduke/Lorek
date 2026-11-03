@@ -3963,3 +3963,180 @@
 {"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-10-31 20:34:57","url":"/api/admin/dashboard"}
 {"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"POST","statusCode":403,"timestamp":"2026-10-31 20:34:58","url":"/api/lessons"}
 {"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-10-31 20:34:58","url":"/api/messages/conversations"}
+{"level":"info","message":"\n    🚀 Izon Language API Server\n    ================================\n    📡 Environment: development\n    🔌 Port: 5000\n    🌐 URL: http://0.0.0.0:5000\n    🔗 Public: http://0.0.0.0:5000/api/public\n    📚 API Docs: http://localhost:5000/api-docs\n    💾 Database: Disconnected\n    ⚡ Redis: connecting\n    🕒 Started: 2026-11-03T09:24:19.002Z\n    ================================\n    ","timestamp":"2026-11-03 10:24:19"}
+{"level":"info","message":"Redis client connected","timestamp":"2026-11-03 10:24:19"}
+{"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-11-03 10:24:19"}
+{"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-11-03 10:24:23"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:48:20","url":"/api/languages/user/active"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:48:44","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 11:48:45","url":"/api/admin/dashboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:49:04","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:49:19","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 11:49:19","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"POST","statusCode":403,"timestamp":"2026-11-03 11:49:20","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:49:20","url":"/api/messages/conversations"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:49:30","url":"/api/games/stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 11:49:31","url":"/api/games/start"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:49:31","url":"/api/leaderboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:49:31","url":"/api/leaderboard/rank"}
+{"error":"Invalid game type","level":"warn","message":"Client Error:","method":"POST","statusCode":400,"timestamp":"2026-11-03 11:49:32","url":"/api/games/start"}
+{"error":"Game session not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 11:49:32","url":"/api/games/submit"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:49:48","url":"/api/content/hierarchy"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:53:22","url":"/api/languages/user/active"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:53:35","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 11:53:35","url":"/api/admin/dashboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:54:08","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:54:11","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 11:54:11","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"POST","statusCode":403,"timestamp":"2026-11-03 11:54:11","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:54:12","url":"/api/messages/conversations"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:54:14","url":"/api/games/stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 11:54:15","url":"/api/games/start"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:54:15","url":"/api/leaderboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:54:15","url":"/api/leaderboard/rank"}
+{"error":"Invalid game type","level":"warn","message":"Client Error:","method":"POST","statusCode":400,"timestamp":"2026-11-03 11:54:15","url":"/api/games/start"}
+{"error":"Game session not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 11:54:16","url":"/api/games/submit"}
+{"0":{"location":"body","msg":"Please pick a username between 3 and 30 characters.","path":"username","type":"field","value":"ab"},"1":{"location":"body","msg":"That email address doesn't look right.","path":"email","type":"field","value":"invalid"},"2":{"location":"body","msg":"Your password needs at least 8 characters.","path":"password","type":"field","value":"123"},"3":{"location":"body","msg":"Your password needs to be stronger. Use a mix of uppercase letters, lowercase letters, and numbers.","path":"password","type":"field","value":"123"},"level":"error","message":"Registration validation errors:","timestamp":"2026-11-03 11:54:55"}
+{"error":"Invalid email or password","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 11:54:56","url":"/api/auth/login"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:54:56","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:54:58","url":"/api/content/hierarchy"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:55:08","url":"/api/practice/daily"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:55:08","url":"/api/progress/stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:55:43","url":"/api/lessons"}
+{"error":"Lesson not found","level":"warn","message":"Client Error:","method":"GET","statusCode":404,"timestamp":"2026-11-03 11:55:44","url":"/api/lessons/507f1f77bcf86cd799439012"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:58:47","url":"/api/languages/user/active"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:58:56","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 11:58:58","url":"/api/admin/dashboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:59:24","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:59:31","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 11:59:31","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"POST","statusCode":403,"timestamp":"2026-11-03 11:59:31","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:59:32","url":"/api/messages/conversations"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:59:38","url":"/api/games/stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 11:59:38","url":"/api/games/start"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:59:39","url":"/api/leaderboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 11:59:39","url":"/api/leaderboard/rank"}
+{"error":"Invalid game type","level":"warn","message":"Client Error:","method":"POST","statusCode":400,"timestamp":"2026-11-03 11:59:39","url":"/api/games/start"}
+{"error":"Game session not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 11:59:39","url":"/api/games/submit"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:00:03","url":"/api/content/hierarchy"}
+{"0":{"location":"body","msg":"Please pick a username between 3 and 30 characters.","path":"username","type":"field","value":"ab"},"1":{"location":"body","msg":"That email address doesn't look right.","path":"email","type":"field","value":"invalid"},"2":{"location":"body","msg":"Your password needs at least 8 characters.","path":"password","type":"field","value":"123"},"3":{"location":"body","msg":"Your password needs to be stronger. Use a mix of uppercase letters, lowercase letters, and numbers.","path":"password","type":"field","value":"123"},"level":"error","message":"Registration validation errors:","timestamp":"2026-11-03 12:00:09"}
+{"error":"Invalid email or password","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:00:10","url":"/api/auth/login"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:00:10","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:00:15","url":"/api/practice/daily"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:00:16","url":"/api/progress/stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:00:42","url":"/api/vocabulary/mastery/update"}
+{"error":"Invalid practice session","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:00:44","url":"/api/practice/submit"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:00:47","url":"/api/lessons"}
+{"error":"Lesson not found","level":"warn","message":"Client Error:","method":"GET","statusCode":404,"timestamp":"2026-11-03 12:00:47","url":"/api/lessons/507f1f77bcf86cd799439012"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:01:23","url":"/api/community/feed"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:01:23","url":"/api/community/posts"}
+{"level":"info","message":"New post created by user 507f1f77bcf86cd799439011","timestamp":"2026-11-03 12:01:24"}
+{"error":"Post not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:01:24","url":"/api/community/posts/507f1f77bcf86cd799439999/like"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:01:30","url":"/api/messages/conversations"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:01:30","url":"/api/messages/conversation"}
+{"error":"Cannot start conversation with yourself","level":"warn","message":"Client Error:","method":"POST","statusCode":400,"timestamp":"2026-11-03 12:01:30","url":"/api/messages/conversation"}
+{"error":"User not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:01:31","url":"/api/messages/conversation"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:01:58","url":"/api/referral/referral-stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:01:59","url":"/api/premium/status"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:16:13","url":"/api/languages/user/active"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:16:15","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 12:16:15","url":"/api/admin/dashboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:16:43","url":"/api/messages/conversations"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:16:43","url":"/api/messages/conversation"}
+{"error":"Cannot start conversation with yourself","level":"warn","message":"Client Error:","method":"POST","statusCode":400,"timestamp":"2026-11-03 12:16:44","url":"/api/messages/conversation"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:16:44","url":"/api/games/stats"}
+{"error":"User not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:16:44","url":"/api/messages/conversation"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:16:44","url":"/api/games/start"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:16:44","url":"/api/leaderboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:16:44","url":"/api/leaderboard/rank"}
+{"error":"Invalid game type","level":"warn","message":"Client Error:","method":"POST","statusCode":400,"timestamp":"2026-11-03 12:16:45","url":"/api/games/start"}
+{"error":"Game session not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:16:45","url":"/api/games/submit"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:16:50","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 12:16:51","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"POST","statusCode":403,"timestamp":"2026-11-03 12:16:51","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:16:51","url":"/api/messages/conversations"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:17:20","url":"/api/vocabulary/mastery/update"}
+{"error":"Invalid practice session","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:17:21","url":"/api/practice/submit"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:17:23","url":"/api/content/hierarchy"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:18:00","url":"/api/community/feed"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:18:00","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:18:00","url":"/api/community/posts"}
+{"level":"info","message":"New post created by user 507f1f77bcf86cd799439011","timestamp":"2026-11-03 12:18:00"}
+{"0":{"location":"body","msg":"Please pick a username between 3 and 30 characters.","path":"username","type":"field","value":"ab"},"1":{"location":"body","msg":"That email address doesn't look right.","path":"email","type":"field","value":"invalid"},"2":{"location":"body","msg":"Your password needs at least 8 characters.","path":"password","type":"field","value":"123"},"3":{"location":"body","msg":"Your password needs to be stronger. Use a mix of uppercase letters, lowercase letters, and numbers.","path":"password","type":"field","value":"123"},"level":"error","message":"Registration validation errors:","timestamp":"2026-11-03 12:18:00"}
+{"error":"Lesson not found","level":"warn","message":"Client Error:","method":"GET","statusCode":404,"timestamp":"2026-11-03 12:18:00","url":"/api/lessons/507f1f77bcf86cd799439012"}
+{"error":"Post not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:18:00","url":"/api/community/posts/507f1f77bcf86cd799439999/like"}
+{"error":"Invalid email or password","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:18:01","url":"/api/auth/login"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:18:01","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:18:41","url":"/api/referral/referral-stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:19:07","url":"/api/practice/daily"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:19:08","url":"/api/progress/stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:19:10","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:22:21","url":"/api/languages/user/active"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:22:34","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 12:22:35","url":"/api/admin/dashboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:22:59","url":"/api/messages/conversations"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:22:59","url":"/api/messages/conversation"}
+{"error":"Cannot start conversation with yourself","level":"warn","message":"Client Error:","method":"POST","statusCode":400,"timestamp":"2026-11-03 12:22:59","url":"/api/messages/conversation"}
+{"error":"User not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:22:59","url":"/api/messages/conversation"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:23:09","url":"/api/games/stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:23:09","url":"/api/games/start"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:23:09","url":"/api/leaderboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:23:10","url":"/api/leaderboard/rank"}
+{"error":"Invalid game type","level":"warn","message":"Client Error:","method":"POST","statusCode":400,"timestamp":"2026-11-03 12:23:10","url":"/api/games/start"}
+{"error":"Game session not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:23:10","url":"/api/games/submit"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:23:14","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 12:23:14","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"POST","statusCode":403,"timestamp":"2026-11-03 12:23:14","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:23:14","url":"/api/messages/conversations"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:23:30","url":"/api/vocabulary/mastery/update"}
+{"error":"Invalid practice session","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:23:30","url":"/api/practice/submit"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:23:48","url":"/api/content/hierarchy"}
+{"0":{"location":"body","msg":"Please pick a username between 3 and 30 characters.","path":"username","type":"field","value":"ab"},"1":{"location":"body","msg":"That email address doesn't look right.","path":"email","type":"field","value":"invalid"},"2":{"location":"body","msg":"Your password needs at least 8 characters.","path":"password","type":"field","value":"123"},"3":{"location":"body","msg":"Your password needs to be stronger. Use a mix of uppercase letters, lowercase letters, and numbers.","path":"password","type":"field","value":"123"},"level":"error","message":"Registration validation errors:","timestamp":"2026-11-03 12:24:04"}
+{"error":"Invalid email or password","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:24:04","url":"/api/auth/login"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:24:05","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:24:21","url":"/api/lessons"}
+{"error":"Lesson not found","level":"warn","message":"Client Error:","method":"GET","statusCode":404,"timestamp":"2026-11-03 12:24:21","url":"/api/lessons/507f1f77bcf86cd799439012"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:24:27","url":"/api/community/feed"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:24:27","url":"/api/community/posts"}
+{"level":"info","message":"New post created by user 507f1f77bcf86cd799439011","timestamp":"2026-11-03 12:24:27"}
+{"error":"Post not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:24:28","url":"/api/community/posts/507f1f77bcf86cd799439999/like"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:24:52","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:25:09","url":"/api/referral/referral-stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:25:09","url":"/api/premium/status"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:25:22","url":"/api/practice/daily"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:25:23","url":"/api/progress/stats"}
+{"error":"geminiClient is not defined","ip":"::ffff:127.0.0.1","level":"error","message":"Server Error:","method":"POST","stack":"ReferenceError: geminiClient is not defined\n    at geminiClient (/data/data/com.termux/files/home/Lorek/backend/src/routes/translator.js:204:9)\n    at handleTranslationLogic (/data/data/com.termux/files/home/Lorek/backend/src/routes/translator.js:250:26)\n    at Layer.handleRequest (/data/data/com.termux/files/home/Lorek/backend/node_modules/router/lib/layer.js:152:17)\n    at next (/data/data/com.termux/files/home/Lorek/backend/node_modules/router/lib/route.js:157:13)\n    at middleware (/data/data/com.termux/files/home/Lorek/backend/node_modules/express-validator/lib/middlewares/check.js:16:13)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)","timestamp":"2026-11-03 12:25:31","url":"/api/translator/translate"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:28:12","url":"/api/practice/daily"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:28:12","url":"/api/progress/stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:28:14","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 12:28:15","url":"/api/admin/dashboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:28:18","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"GET","statusCode":403,"timestamp":"2026-11-03 12:28:18","url":"/api/admin/dashboard"}
+{"error":"You do not have permission to perform this action","level":"warn","message":"Client Error:","method":"POST","statusCode":403,"timestamp":"2026-11-03 12:28:18","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:28:18","url":"/api/messages/conversations"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:28:36","url":"/api/languages/user/active"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:28:50","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:28:55","url":"/api/referral/referral-stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:28:56","url":"/api/premium/status"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:29:03","url":"/api/community/feed"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:29:04","url":"/api/community/posts"}
+{"level":"info","message":"New post created by user 507f1f77bcf86cd799439011","timestamp":"2026-11-03 12:29:04"}
+{"error":"Post not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:29:04","url":"/api/community/posts/507f1f77bcf86cd799439999/like"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:29:31","url":"/api/lessons"}
+{"error":"Lesson not found","level":"warn","message":"Client Error:","method":"GET","statusCode":404,"timestamp":"2026-11-03 12:29:31","url":"/api/lessons/507f1f77bcf86cd799439012"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:29:36","url":"/api/games/stats"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:29:36","url":"/api/games/start"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:29:36","url":"/api/leaderboard"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:29:37","url":"/api/leaderboard/rank"}
+{"error":"Invalid game type","level":"warn","message":"Client Error:","method":"POST","statusCode":400,"timestamp":"2026-11-03 12:29:37","url":"/api/games/start"}
+{"error":"Game session not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:29:37","url":"/api/games/submit"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:29:39","url":"/api/messages/conversations"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:29:39","url":"/api/messages/conversation"}
+{"error":"Cannot start conversation with yourself","level":"warn","message":"Client Error:","method":"POST","statusCode":400,"timestamp":"2026-11-03 12:29:39","url":"/api/messages/conversation"}
+{"error":"User not found","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:29:39","url":"/api/messages/conversation"}
+{"0":{"location":"body","msg":"Please pick a username between 3 and 30 characters.","path":"username","type":"field","value":"ab"},"1":{"location":"body","msg":"That email address doesn't look right.","path":"email","type":"field","value":"invalid"},"2":{"location":"body","msg":"Your password needs at least 8 characters.","path":"password","type":"field","value":"123"},"3":{"location":"body","msg":"Your password needs to be stronger. Use a mix of uppercase letters, lowercase letters, and numbers.","path":"password","type":"field","value":"123"},"level":"error","message":"Registration validation errors:","timestamp":"2026-11-03 12:30:14"}
+{"error":"Invalid email or password","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:30:15","url":"/api/auth/login"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:30:15","url":"/api/lessons"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-03 12:30:17","url":"/api/content/hierarchy"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"POST","statusCode":401,"timestamp":"2026-11-03 12:30:59","url":"/api/vocabulary/mastery/update"}
+{"error":"Invalid practice session","level":"warn","message":"Client Error:","method":"POST","statusCode":404,"timestamp":"2026-11-03 12:31:00","url":"/api/practice/submit"}
