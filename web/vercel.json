@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd ../frontend && npm install && npx expo export --platform web && mkdir -p ../web/app && cp -r dist/* ../web/app/ && sed -i 's|src=\"/|src=\"/app/|g; s|href=\"/|href=\"/app/|g; s|/_expo|/app/_expo|g; s|/assets|/app/assets|g' ../web/app/index.html",
+  "buildCommand": "cd ../frontend && npm install && npx expo export --platform web && mkdir -p ../web/app && cp -r dist/* ../web/app/ && sed -i 's|src=\"/|src=\"/app/|g' ../web/app/index.html",
   "outputDirectory": ".",
   "installCommand": "echo 'No dependencies to install in web'",
   "rewrites": [
