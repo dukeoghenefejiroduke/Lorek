@@ -107,12 +107,22 @@ app.use(helmet({
 }));
 
 // CORS configuration
-const defaultOrigins = ['https://izonlanguage.com', 'https://app.izonlanguage.com', 'https://lorek.vercel.app', 'https://lorek.vercel.app/app', 'http://localhost:8081'];
+const defaultOrigins = ['https://izonlanguage.com', 'https://app.izonlanguage.com', 'https://lorek.vercel.app', 'http://localhost:8081'];
 const envOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim()) : [];
 const allowedOrigins = Array.from(new Set([...defaultOrigins, ...envOrigins]));
 
 const corsOptions = {
-  origin: IS_PRODUCTION ? allowedOrigins : '*',
+  origin: (origin, callback) => {
+    if (!origin || !IS_PRODUCTION) {
+      return callback(null, true);
+    }
+    const isAllowed = allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin);
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key', 'X-Request-ID', 'X-Refresh-Token', 'Accept-Language'],
   exposedHeaders: ['X-RateLimit-Limit', 'X-RateLimit-Remaining', 'X-Request-ID'],
@@ -123,7 +133,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Handle preflight requests
-app.options('/*splat', cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // ============================================================================
 // PERFORMANCE MIDDLEWARE
