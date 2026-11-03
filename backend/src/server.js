@@ -134,7 +134,7 @@ const corsOptions = {
     }
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key', 'X-Request-ID', 'X-Refresh-Token', 'Accept-Language'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key', 'X-Request-ID', 'X-Refresh-Token', 'Accept-Language', 'X-Client-Version', 'X-Client-Platform', 'X-Client-Environment'],
   exposedHeaders: ['X-RateLimit-Limit', 'X-RateLimit-Remaining', 'X-Request-ID'],
   credentials: true,
   optionsSuccessStatus: 200,

@@ -9,29 +9,29 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // Environment configuration with fallbacks
 const ENV = {
   development: {
-    API_URL: 'https://lorek.onrender.com/api',
-    API_URL_IOS: 'https://lorek.onrender.com/api',
-    API_URL_PHYSICAL: 'https://lorek.onrender.com/api',
-    TIMEOUT: 60000,
-    RETRY_ATTEMPTS: 3,
+    API_URL: 'http://localhost:5000/api',
+    API_URL_IOS: 'http://localhost:5000/api',
+    API_URL_PHYSICAL: 'http://localhost:5000/api',
+    TIMEOUT: 90000,
+    RETRY_ATTEMPTS: 5,
     CACHE_TTL: 3600000, // 1 hour
   },
   staging: {
     API_URL: 'https://lorek.onrender.com/api',
-    TIMEOUT: 60000,
-    RETRY_ATTEMPTS: 2,
+    TIMEOUT: 90000,
+    RETRY_ATTEMPTS: 4,
     CACHE_TTL: 1800000, // 30 minutes
   },
   production: {
     API_URL: 'https://lorek.onrender.com/api',
-    TIMEOUT: 60000,
-    RETRY_ATTEMPTS: 2,
+    TIMEOUT: 90000,
+    RETRY_ATTEMPTS: 4,
     CACHE_TTL: 900000, // 15 minutes
   }
 };
 
-// Determine environment
-const ENVIRONMENT = process.env.EXPO_PUBLIC_APP_ENV || 'development';
+// Determine environment (default to production if no .env / EXPO_PUBLIC_APP_ENV is provided)
+const ENVIRONMENT = process.env.EXPO_PUBLIC_APP_ENV || 'production';
 const config = ENV[ENVIRONMENT];
 
 // Helper to get language headers
@@ -42,6 +42,7 @@ export const getLanguageHeaders = async () => {
 
 // Get appropriate API URL based on platform
 const getApiUrl = () => {
+    
   if (ENVIRONMENT !== 'development') return config.API_URL;
   
   if (Platform.OS === 'ios') {
