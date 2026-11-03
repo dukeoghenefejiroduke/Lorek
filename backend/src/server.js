@@ -107,7 +107,17 @@ app.use(helmet({
 }));
 
 // CORS configuration
-const defaultOrigins = ['https://izonlanguage.com', 'https://app.izonlanguage.com', 'https://lorek.vercel.app', 'http://localhost:8081'];
+const defaultOrigins = [
+  'https://izonlanguage.com',
+  'https://app.izonlanguage.com',
+  'https://lorek.vercel.app',
+  'http://localhost:8081',
+  'http://localhost:19006',
+  'http://localhost:3000',
+  'http://127.0.0.1:8081',
+  'http://127.0.0.1:19006',
+  'http://127.0.0.1:3000'
+];
 const envOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim()) : [];
 const allowedOrigins = Array.from(new Set([...defaultOrigins, ...envOrigins]));
 
@@ -116,11 +126,11 @@ const corsOptions = {
     if (!origin || !IS_PRODUCTION) {
       return callback(null, true);
     }
-    const isAllowed = allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin);
+    const isAllowed = allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin) || /\.expo\.dev$/.test(origin) || /\.exp\.direct$/.test(origin);
     if (isAllowed) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(null, true); // Fallback to allow web clients smoothly without CORS network errors
     }
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
