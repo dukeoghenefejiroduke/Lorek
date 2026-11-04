@@ -253,8 +253,12 @@ const handleApiError = async (error) => {
   } else if (error.response) {
     switch (error.response.status) {
       case 400:
-        errorResponse.message = error.response.data?.message || 'Invalid request';
+        errorResponse.message = error.response.data?.message || 
+          (error.response.data?.errors && Array.isArray(error.response.data.errors) 
+            ? error.response.data.errors.map(e => e.msg || e.message).join(', ') 
+            : 'Invalid request');
         errorResponse.type = 'BAD_REQUEST';
+        errorResponse.errors = error.response.data?.errors;
         break; 
         
       case 401:
@@ -276,7 +280,10 @@ const handleApiError = async (error) => {
         errorResponse.type = 'NOT_FOUND';
         break;
       case 422:
-        errorResponse.message = error.response.data?.message || 'Validation failed';
+        errorResponse.message = error.response.data?.message || 
+          (error.response.data?.errors && Array.isArray(error.response.data.errors) 
+            ? error.response.data.errors.map(e => e.msg || e.message).join(', ') 
+            : 'Validation failed');
         errorResponse.type = 'VALIDATION_ERROR';
         errorResponse.errors = error.response.data?.errors;
         break;

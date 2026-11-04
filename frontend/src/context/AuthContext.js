@@ -495,16 +495,24 @@ const refreshAuthToken = async (manualToken) => {
       haptics.notificationError();
       
       let errorMessage = 'Registration failed. Please try again.';
-      if (error.response && error.response.data && error.response.data.errors) {
-        // Handle validation errors from backend
-        errorMessage = error.response.data.errors.map(e => e.message).join(', ');
+      let validationErrors = null;
+      if (error.data && error.data.errors) {
+        validationErrors = error.data.errors;
+        errorMessage = error.data.errors.map(e => e.msg || e.message).join(', ');
+      } else if (error.errors) {
+        validationErrors = error.errors;
+        errorMessage = error.errors.map(e => e.msg || e.message).join(', ');
+      } else if (error.response && error.response.data && error.response.data.errors) {
+        validationErrors = error.response.data.errors;
+        errorMessage = error.response.data.errors.map(e => e.msg || e.message).join(', ');
       } else if (error.message) {
         errorMessage = error.message;
       }
       
       return { 
         success: false, 
-        error: errorMessage
+        error: errorMessage,
+        errors: validationErrors
       };
     }
   };
