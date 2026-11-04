@@ -107,4 +107,46 @@ describe('Auth API', () => {
     expect(res.status).toBe(401);
     expect(res.body.success).toBe(false);
   });
+
+  test('POST /api/auth/google with valid profile (new user registration)', async () => {
+    User.findOne
+      .mockResolvedValueOnce(null) // googleId check
+      .mockResolvedValueOnce(null) // email check
+      .mockResolvedValueOnce(null); // username uniqueness check
+    User.prototype.save.mockResolvedValue(true);
+    User.prototype.generateAuthToken = jest.fn().mockReturnValue('mock_jwt_token');
+    User.prototype.generateRefreshToken = jest.fn().mockReturnValue('mock_refresh_token');
+    User.prototype.toPublicJSON = jest.fn().mockReturnValue({ email: 'googleuser@example.com', username: 'googleuser' });
+
+    const res = await request(app)
+      .post('/api/auth/google')
+      .send({
+        token: 'mock_google_token',
+        profile: {
+          id: 'google123456',
+          email: 'googleuser@example.com',
+          name: 'Google User',
+          picture: 'https://example.com/avatar.jpg'
+        }
+      });
+
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data.token).toBe('mock_jwt_token');
+    expect(res.body.data.user.email).toBe('googleuser@example.com');
+  });
+
+  test('POST /api/auth/google with missing email returns 400', async () => {
+    const res = await request(app)
+      .post('/api/auth/google')
+      .send({
+        token: 'mock_google_token',
+        profile: {
+          id: 'google123456'
+        }
+      });
+
+    expect(res.status).toBe(400);
+    expect(res.body.success).toBe(false);
+  });
 });

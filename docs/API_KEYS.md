@@ -49,3 +49,15 @@ curl -X POST http://localhost:5000/api/translator/translate \
   -H "X-API-Key: izon_your_generated_api_key_here" \
   -d '{"text": "Hello", "to": "izon"}'
 ```
+
+---
+
+## Google OAuth & Android Debug Keystore Configuration
+
+- **Android Package Name:** `com.anonymous.lorek`
+- **Debug Keystore Path:** `~/.android/debug.keystore`
+- **Debug SHA-1 Certificate Fingerprint:** 
+  `96:13:BA:C8:52:D2:C1:52:53:06:EB:46:7F:00:AD:47:DB:FD:67:6D`
+- **Debug SHA-256 Certificate Fingerprint:** 
+  `53:37:A8:A6:26:31:41:94:7A:CB:9A:2C:14:8A:16:3F:CC:8B:15:69:FF:17:E8:53:A7:C1:7E:37:94:C0:94:D9`
+

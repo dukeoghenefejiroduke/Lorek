@@ -416,4 +416,124 @@ router.post('/reset-password', [
   }
 });
 
+/**
+ * Google authentication (Login or Register)
+ * POST /api/auth/google
+ */
+router.post('/google', [
+  body('token').optional().isString().withMessage('Token must be a string'),
+  body('profile').optional().isObject().withMessage('Profile must be an object'),
+], async (req, res, next) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+
+    const { token, profile } = req.body;
+
+    if (!profile || !profile.email) {
+      throw new AppError('Google profile with email is required', 400);
+    }
+
+    const googleId = profile.id || profile.sub || profile.googleId;
+    const email = profile.email.toLowerCase();
+    const displayName = profile.name || profile.displayName || email.split('@')[0];
+    const avatarUrl = profile.picture || profile.avatarUrl;
+
+    if (!googleId) {
+      throw new AppError('Google ID is missing from profile', 400);
+    }
+
+    // 1. Check if user exists by googleId
+    let user = await User.findOne({ googleId });
+
+    if (!user) {
+      // 2. Check if user exists by email
+      user = await User.findOne({ email });
+
+      if (user) {
+        // Link googleId to existing user
+        user.googleId = googleId;
+        if (!user.profile) user.profile = {};
+        if (!user.profile.avatar) user.profile.avatar = {};
+        if (avatarUrl && !user.profile.avatar.url) {
+          user.profile.avatar.url = avatarUrl;
+        }
+        if (displayName && !user.profile.displayName) {
+          user.profile.displayName = displayName;
+        }
+        if (user.status === 'pending_verification') {
+          user.status = 'active';
+        }
+        await user.save();
+      } else {
+        // Create new user
+        let baseUsername = (profile.given_name || email.split('@')[0])
+          .toLowerCase()
+          .replace(/[^a-z0-9_]/g, '');
+        if (baseUsername.length < 3) {
+          baseUsername = baseUsername + 'user';
+        }
+        if (baseUsername.length > 30) {
+          baseUsername = baseUsername.substring(0, 30);
+        }
+
+        let username = baseUsername;
+        let counter = 1;
+        while (await User.findOne({ username })) {
+          const suffix = String(counter++);
+          username = baseUsername.substring(0, 30 - suffix.length) + suffix;
+        }
+
+        user = new User({
+          username,
+          email,
+          googleId,
+          status: 'active',
+          profile: {
+            displayName,
+            avatar: avatarUrl ? { url: avatarUrl } : undefined,
+          },
+          'gamification.level': 1,
+          'gamification.experience': 0,
+          'gamification.points.total': 0,
+        });
+
+        await user.save();
+
+        try {
+          await notificationService.sendWelcome(user._id);
+        } catch (notifErr) {
+          logger.error('Failed to send welcome notification for Google user:', notifErr);
+        }
+      }
+    }
+
+    if (user.security?.lockUntil && user.security.lockUntil > Date.now()) {
+      throw new AppError('Account is temporarily locked. Please try again later.', 403);
+    }
+
+    user.lastActive = new Date();
+    if (!user.security) user.security = {};
+    user.security.lastLogin = new Date();
+
+    const authToken = user.generateAuthToken();
+    const refreshToken = user.generateRefreshToken();
+    user.security.refreshToken = refreshToken;
+    await user.save();
+
+    res.json({
+      success: true,
+      data: {
+        user: user.toPublicJSON(),
+        token: authToken,
+        refreshToken,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

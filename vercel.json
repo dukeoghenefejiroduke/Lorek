@@ -57,7 +57,27 @@
       "destination": "/app/index.html"
     },
     {
+      "source": "/Main",
+      "destination": "/app/index.html"
+    },
+    {
+      "source": "/Main/",
+      "destination": "/app/index.html"
+    },
+    {
       "source": "/Main/(.*)",
+      "destination": "/app/index.html"
+    },
+    {
+      "source": "/main",
+      "destination": "/app/index.html"
+    },
+    {
+      "source": "/main/",
+      "destination": "/app/index.html"
+    },
+    {
+      "source": "/main/(.*)",
       "destination": "/app/index.html"
     },
     {
