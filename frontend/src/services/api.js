@@ -724,6 +724,11 @@ export const notificationAPI = {
   unregisterToken: (data) => api.delete('/notifications/register-token', { data }),
 };
 
+// --- CONTENT API ---
+export const contentAPI = {
+  getHierarchy: () => api.get('/content/hierarchy', { headers: getLanguageHeaders() }),
+};
+
 
 // --- ADMIN API ---
 export const adminAPI = {  // Dashboard
