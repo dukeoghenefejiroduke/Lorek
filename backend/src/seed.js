@@ -53,30 +53,30 @@ async function seed() {
     }
     console.log('Users created successfully.');
 
-    console.log('Creating Languages: IZON and OGBIA...');
-    const izonLang = await Language.create({
-      code: 'IZON',
-      name: 'Izon',
-      nativeName: 'Ịjọ / Ijaw',
-      family: 'Niger-Congo / Ijoid',
-      region: 'Bayelsa, Delta, Rivers',
-      icon: '🌊',
-      color: '#10B981',
-      description: 'Central Izon (Yenagoa, Nembe, Kalabari, Mein dialects)',
-      features: { hasAudio: true, hasPronunciation: true, hasGrammar: true, hasCulture: true }
-    });
+    console.log('Creating Languages from Language Factory Config...');
+    const INITIAL_LANGUAGES = require('./languages/config');
+    const langDocs = {};
 
-    const ogbiaLang = await Language.create({
-      code: 'OGBIA',
-      name: 'Ogbia',
-      nativeName: 'AgBeya / Abaya',
-      family: 'Niger-Congo / Delta Cross',
-      region: 'Bayelsa (Ogbia LGA - Oloibiri)',
-      icon: '🛢️',
-      color: '#3B82F6',
-      description: 'Ogbia language shell with Kolo, Oloibiri, and Anyama dialects. Crowdsourced native verification active.',
-      features: { hasAudio: true, hasPronunciation: true, hasGrammar: false, hasCulture: true }
-    });
+    for (const langConfig of INITIAL_LANGUAGES) {
+      const createdLang = await Language.findOneAndUpdate(
+        { code: langConfig.code },
+        {
+          name: langConfig.name,
+          nativeName: langConfig.nativeName,
+          family: langConfig.family,
+          region: langConfig.region,
+          icon: langConfig.icon,
+          color: langConfig.color,
+          description: langConfig.description,
+          features: langConfig.features,
+          isActive: true,
+          isPublished: true
+        },
+        { upsert: true, new: true }
+      );
+      langDocs[langConfig.code] = createdLang;
+    }
+    const izonLang = langDocs['IZON'];
 
     console.log('Creating Courses, Sections, Units & Lessons for IZON...');
     const izonCourse = await Course.create({
@@ -196,6 +196,7 @@ async function seed() {
     }
 
     console.log('Seeding Ogbia shell & Native Contributor placeholders...');
+    const ogbiaLang = langDocs['OGBIA'];
     const ogbiaUnit = await Unit.create({
       title: 'Ogbia Community Contributions (Oloibiri / Kolo / Anyama)',
       sectionId: izonSection._id
