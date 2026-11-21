@@ -77,6 +77,11 @@ const LeaderboardScreen = ({ navigation }) => {
   useEffect(() => {
     loadLeaderboard();
     
+    // 30-second polling refresh interval for MVP
+    const pollInterval = setInterval(() => {
+      loadLeaderboard();
+    }, 30000);
+
     Animated.parallel([
       Animated.timing(fadeAnim, { toValue: 1, duration: 800, useNativeDriver: true }),
       Animated.spring(slideAnim, { toValue: 0, friction: 8, useNativeDriver: true }),
@@ -86,6 +91,8 @@ const LeaderboardScreen = ({ navigation }) => {
     Animated.loop(
       Animated.timing(rotateAnim, { toValue: 1, duration: 20000, easing: Easing.linear, useNativeDriver: true })
     ).start();
+
+    return () => clearInterval(pollInterval);
   }, [loadLeaderboard]);
 
   const onRefresh = async () => {
