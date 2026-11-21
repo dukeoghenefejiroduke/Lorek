@@ -61,4 +61,12 @@ export const syncService = {
   }
 };
 
+export const addToSyncQueue = async (actionType, endpoint, payload) => {
+  return syncService.queueAction(actionType, endpoint, payload);
+};
+
+export const processSyncQueue = async () => {
+  return syncService.processQueue();
+};
+
 export default syncService;

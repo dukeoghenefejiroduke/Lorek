@@ -1,8 +1,7 @@
-import { progressAPI } from './api';
-
 export const streakService = {
   syncOnAppLaunch: async () => {
     try {
+      const { progressAPI } = await import('./api');
       const response = await progressAPI.get();
       const data = response.data?.data || response.data;
       
@@ -42,3 +41,4 @@ export const streakService = {
     return minutesToday >= dailyGoal;
   }
 };
+
