@@ -33,6 +33,7 @@ const LeaderboardScreen = ({ navigation }) => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [activeTab, setActiveTab] = useState('learners'); // 'learners' | 'contributors'
   const [selectedUser, setSelectedUser] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [timeFilter, setTimeFilter] = useState('weekly');
@@ -57,6 +58,7 @@ const LeaderboardScreen = ({ navigation }) => {
     try {
       setLoading(true);
       const response = await leaderboardAPI.getLeaderboard({
+        tab: activeTab,
         period: timeFilter,
         category: categoryFilter,
         limit: 50,
@@ -72,7 +74,7 @@ const LeaderboardScreen = ({ navigation }) => {
       setLoading(false);
       setRefreshing(false);
     }
-  }, [timeFilter, categoryFilter]);
+  }, [activeTab, timeFilter, categoryFilter]);
 
   useEffect(() => {
     loadLeaderboard();
@@ -200,6 +202,14 @@ const LeaderboardScreen = ({ navigation }) => {
           <>
             <LinearGradient colors={theme.headerGradient} style={styles.header}>
               <View style={styles.headerContent}><TouchableOpacity onPress={() => navigation.goBack()}><Ionicons name="arrow-back" size={24} color="#fff" /></TouchableOpacity><Text style={styles.headerTitle}>Leaderboard</Text><View style={{width: 24}}/></View>
+              <View style={styles.tabRow}>
+                <TouchableOpacity style={[styles.tabButton, activeTab === 'learners' && styles.tabButtonActive]} onPress={() => { setActiveTab('learners'); haptics.impactLight(); }}>
+                  <Text style={[styles.tabText, activeTab === 'learners' && styles.tabTextActive]}>🎓 Learners</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.tabButton, activeTab === 'contributors' && styles.tabButtonActive]} onPress={() => { setActiveTab('contributors'); haptics.impactLight(); }}>
+                  <Text style={[styles.tabText, activeTab === 'contributors' && styles.tabTextActive]}>✍️ Contributors</Text>
+                </TouchableOpacity>
+              </View>
             </LinearGradient>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterScroll}>
                 {['weekly', 'monthly', 'allTime'].map((period) => (
@@ -247,6 +257,11 @@ const styles = StyleSheet.create({
   filterScroll: { paddingHorizontal: 20, marginVertical: 10 },
   filterChip: { paddingHorizontal: 15, paddingVertical: 8, borderRadius: 20, marginRight: 10 },
   list: { paddingBottom: 20 },
+  tabRow: { flexDirection: 'row', justifyContent: 'center', marginTop: 15, backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: 25, padding: 4, marginHorizontal: 20 },
+  tabButton: { flex: 1, paddingVertical: 10, alignItems: 'center', borderRadius: 20 },
+  tabButtonActive: { backgroundColor: '#fff' },
+  tabText: { color: '#fff', fontWeight: '600', fontSize: 14 },
+  tabTextActive: { color: '#10B981', fontWeight: 'bold' },
 });
 
 export default LeaderboardScreen;

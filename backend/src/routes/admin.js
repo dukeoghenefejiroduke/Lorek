@@ -292,57 +292,76 @@ router.get('/content/stats', async (req, res) => {
   }
 });
 
-// Moderate content
+// Moderate content (Vocabulary / Contributions)
 router.post('/content/moderate/:id', async (req, res) => {
   try {
     const { action, comment } = req.body; // action: 'approve' or 'reject'
-    const contributionId = req.params.id;
+    const itemId = req.params.id;
 
     if (!['approve', 'reject'].includes(action)) {
       return res.status(400).json({ success: false, message: 'Invalid action' });
     }
 
-    const contribution = await Contribution.findById(contributionId);
-    if (!contribution) {
-      return res.status(404).json({ success: false, message: 'Contribution not found' });
+    // Try finding in Vocabulary first (for 1-click vocabulary moderation)
+    let vocabItem = await Vocabulary.findById(itemId);
+    if (vocabItem) {
+      vocabItem.verificationStatus = action === 'approve' ? 'verified' : 'rejected';
+      vocabItem.status = action === 'approve' ? 'approved' : 'rejected';
+      await vocabItem.save();
+
+      if (action === 'approve' && vocabItem.createdBy) {
+        // Award +20 XP to contributor
+        const contributor = await User.findById(vocabItem.createdBy);
+        if (contributor) {
+          contributor.progress.totalPoints += 20;
+          contributor.gamification.points.total += 20;
+          contributor.contributions.contributionScore += 20;
+          contributor.contributions.verifiedContributions = (contributor.contributions.verifiedContributions || 0) + 1;
+          await contributor.save();
+        }
+
+        // Instantly attach word to Lesson 1 of that language
+        const Lesson = require('../models/Lesson');
+        const firstLesson = await Lesson.findOne({ language_id: vocabItem.language_id });
+        if (firstLesson) {
+          firstLesson.vocabulary.push({
+            wordId: vocabItem._id,
+            phonetic: vocabItem.phonetic || '',
+            context: 'Crowdsourced community verified',
+            example: { izon: vocabItem.izonWord, english: vocabItem.englishTranslation },
+            priority: 1,
+            masteryLevel: 'introduce'
+          });
+          await firstLesson.save();
+        }
+      }
+
+      return res.json({ success: true, message: `Vocabulary item ${action}ed successfully (+20 XP awarded if approved)` });
     }
 
-    // 1. Update contribution status
+    // Fallback to Contribution model
+    const contribution = await Contribution.findById(itemId);
+    if (!contribution) {
+      return res.status(404).json({ success: false, message: 'Item not found' });
+    }
+
     contribution.status = action === 'approve' ? 'approved' : 'rejected';
     await contribution.save();
 
-    // 2. Create review record
-    await Review.create({
-      contributionId,
-      reviewerId: req.user._id,
-      decision: action,
-      comment
-    });
-
-    // 3. If approved, optionally push to production (Vocabulary/etc)
     if (action === 'approve') {
-      // Award points/stats to contributor
       await User.findByIdAndUpdate(contribution.userId, {
         $inc: { 
-          'contributions.contributionScore': 10,
+          'progress.totalPoints': 20,
+          'contributions.contributionScore': 20,
           'contributions.verifiedContributions': 1
         }
       });
-
-      if (contribution.type === 'translation') {
-        await Vocabulary.create({
-          izonWord: contribution.data.text,
-          englishTranslation: "Pending verification...", // Or map fields correctly
-          category: 'general',
-          verificationStatus: 'verified'
-        });
-      }
     }
 
     res.json({ success: true, message: `Contribution ${action}ed successfully` });
   } catch (err) {
     console.error('Moderation error:', err);
-    res.status(500).json({ success: false, message: 'Server error' });
+    res.status(500).json({ success: false, message: 'Server error: ' + err.message });
   }
 });
 
