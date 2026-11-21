@@ -885,6 +885,15 @@ export const messagesAPI = {
   getUnreadCount: () => api.get('/messages/unread/count'),
 };
 
+export const searchAPI = {
+  global: async (query, type = 'all', limit = 20) => api.get('/search', { params: { q: query, type, limit }, headers: await getLanguageHeaders() }),
+  suggestions: async (query) => api.get('/search/suggestions', { params: { q: query }, headers: await getLanguageHeaders() }),
+  recent: async (limit = 10) => api.get('/search/recent', { params: { limit }, headers: await getLanguageHeaders() }),
+  trending: async (limit = 10) => api.get('/search/trending', { params: { limit }, headers: await getLanguageHeaders() }),
+  clearHistory: async () => api.delete('/search/history', { headers: await getLanguageHeaders() }),
+  deleteHistoryItem: async (query) => api.delete(`/search/history/${encodeURIComponent(query)}`, { headers: await getLanguageHeaders() }),
+};
+
 export const practiceAPI = {
   getDaily: async (params) => api.get('/practice/daily', { params, headers: await getLanguageHeaders() }),
   submitResult: async (data) => api.post('/practice/submit', data, { headers: await getLanguageHeaders() }),

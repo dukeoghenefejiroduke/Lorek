@@ -194,7 +194,7 @@ const LeaderboardScreen = ({ navigation }) => {
       </Animated.View>
       <FlatList
         data={leaderboard.filter(item => item.rank > 3)}
-        keyExtractor={(item) => item.user?._id.toString() || item.username}
+        keyExtractor={(item, index) => item.user?._id?.toString() || item._id?.toString() || item.id?.toString() || item.username || `leaderboard-${index}`}
         renderItem={renderItem}
         contentContainerStyle={styles.list}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[theme.primary]} />}

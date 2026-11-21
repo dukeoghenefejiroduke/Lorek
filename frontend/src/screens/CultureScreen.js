@@ -223,7 +223,9 @@ export default function CultureScreen({ navigation }) {
           title: selectedItem.title || `${activeLanguage?.name || 'Izon'} Proverb`,
         });
       } catch (error) {
-        console.error('Error sharing:', error);
+        if (error?.name !== 'AbortError' && !error?.message?.includes('aborted')) {
+          console.error('Error sharing:', error);
+        }
       }
     }
   };

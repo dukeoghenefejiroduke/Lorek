@@ -39,12 +39,6 @@ export default function PracticeScreen() {
   const navigation = useNavigation();
   const { loadExercise } = useExerciseEngine();
 
-  useEffect(() => {
-    if (questions && questions[currentQuestion]) {
-      loadExercise(questions[currentQuestion]);
-    }
-  }, [questions, currentQuestion]);
-
   // State management
   const [mode, setMode] = useState(null);
   const [questions, setQuestions] = useState([]);
@@ -80,14 +74,20 @@ export default function PracticeScreen() {
   const [loadingForecast, setLoadingForecast] = useState(false);
   const [languageSwitcherVisible, setLanguageSwitcherVisible] = useState(false);
   
-   // SRS Specific State
+  // SRS Specific State
   const [sessionId, setSessionId] = useState(null);
   const [srsStats, setSrsStats] = useState({ dueToday: 0, completedToday: 0 });
   
- const { activeLanguage } = useContext(LanguageContext);
+  const { activeLanguage } = useContext(LanguageContext);
     
-   const contextValue = useContext(ThemeContext) || {};
-   const { isDarkMode, theme } = contextValue;
+  const contextValue = useContext(ThemeContext) || {};
+  const { isDarkMode, theme } = contextValue;
+
+  useEffect(() => {
+    if (questions && questions[currentQuestion]) {
+      loadExercise(questions[currentQuestion]);
+    }
+  }, [questions, currentQuestion]);
     
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;

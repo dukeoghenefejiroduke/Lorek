@@ -487,7 +487,9 @@ export default function TranslatorScreen({ navigation }) {
         title: 'Translation',
       });
     } catch (error) {
-      console.error('Share failed:', error);
+      if (error?.name !== 'AbortError' && !error?.message?.includes('aborted')) {
+        console.error('Share failed:', error);
+      }
     }
   };
 

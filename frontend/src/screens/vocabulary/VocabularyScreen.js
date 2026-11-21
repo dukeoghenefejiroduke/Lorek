@@ -38,60 +38,58 @@ const { width } = Dimensions.get('window');
 const VocabularyScreen = ({ navigation }) => {
   const { activeLanguage } = useContext(LanguageContext);
   
-  
-const [vocabulary, setVocabulary] = useState([]);
+  const [vocabulary, setVocabulary] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [category, setCategory] = useState('all');
+  const [viewMode, setViewMode] = useState('grid');
+  const [error, setError] = useState(null);
+  const [pronunciationGuide, setPronunciationGuide] = useState(null);
+  const [includePronunciation, setIncludePronunciation] = useState(true);
+  const [selectedWord, setSelectedWord] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [statsModalVisible, setStatsModalVisible] = useState(false);
+  const [favorites, setFavorites] = useState([]);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [sortBy, setSortBy] = useState('default'); // default, az, difficulty
+  const [isReporting, setIsReporting] = useState(false);
+  const [reportModalVisible, setReportModalVisible] = useState(false);
+  const [reportReason, setReportReason] = useState('');
+  const [backendStats, setBackendStats] = useState(null);
+  const [languageSwitcherVisible, setLanguageSwitcherVisible] = useState(false);
 
-   const contextValue = useContext(ThemeContext) || {};
-   const { isDarkMode, theme } = contextValue;
+  const contextValue = useContext(ThemeContext) || {};
+  const { isDarkMode, theme } = contextValue;
 
-const filteredVocabulary = useMemo(() => {
-  let filtered = [...vocabulary];
+  const filteredVocabulary = useMemo(() => {
+    let filtered = [...vocabulary];
 
-  // Search filter
-  if (searchQuery) {
-    const q = searchQuery.toLowerCase();
-    filtered = filtered.filter(item => 
-      item.izonWord?.toLowerCase().includes(q) || 
-      item.english?.toLowerCase().includes(q) ||
-      item.englishTranslation?.toLowerCase().includes(q) ||
-      item.category?.toLowerCase().includes(q)
-    );
-  }
+    // Search filter
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter(item => 
+        item.izonWord?.toLowerCase().includes(q) || 
+        item.english?.toLowerCase().includes(q) ||
+        item.englishTranslation?.toLowerCase().includes(q) ||
+        item.category?.toLowerCase().includes(q)
+      );
+    }
 
-  // Favorites filter
-  if (showFavoritesOnly) {
-    filtered = filtered.filter(item => favorites.includes(item._id || item.id));
-  }
+    // Favorites filter
+    if (showFavoritesOnly) {
+      filtered = filtered.filter(item => favorites.includes(item._id || item.id));
+    }
 
-  // Sorting
-  if (sortBy === 'az') {
-    filtered.sort((a, b) => (a.izonWord || '').localeCompare(b.izonWord || ''));
-  } else if (sortBy === 'difficulty') {
-    const weights = { beginner: 1, intermediate: 2, advanced: 3 };
-    filtered.sort((a, b) => (weights[a.difficulty] || 0) - (weights[b.difficulty] || 0));
-  }
+    // Sorting
+    if (sortBy === 'az') {
+      filtered.sort((a, b) => (a.izonWord || '').localeCompare(b.izonWord || ''));
+    } else if (sortBy === 'difficulty') {
+      const weights = { beginner: 1, intermediate: 2, advanced: 3 };
+      filtered.sort((a, b) => (weights[a.difficulty] || 0) - (weights[b.difficulty] || 0));
+    }
 
-  return filtered;
-}, [vocabulary, searchQuery, showFavoritesOnly, sortBy, favorites]);
-
-const [loading, setLoading] = useState(true);
-const [searchQuery, setSearchQuery] = useState('');
-const [category, setCategory] = useState('all');
-const [viewMode, setViewMode] = useState('grid');
-const [error, setError] = useState(null);
-const [pronunciationGuide, setPronunciationGuide] = useState(null);
-const [includePronunciation, setIncludePronunciation] = useState(true);
-const [selectedWord, setSelectedWord] = useState(null);
-const [modalVisible, setModalVisible] = useState(false);
-const [statsModalVisible, setStatsModalVisible] = useState(false);
-const [favorites, setFavorites] = useState([]);
-const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
-const [sortBy, setSortBy] = useState('default'); // default, az, difficulty
-const [isReporting, setIsReporting] = useState(false);
-const [reportModalVisible, setReportModalVisible] = useState(false);
-const [reportReason, setReportReason] = useState('');
-const [backendStats, setBackendStats] = useState(null);
-const [languageSwitcherVisible, setLanguageSwitcherVisible] = useState(false);
+    return filtered;
+  }, [vocabulary, searchQuery, showFavoritesOnly, sortBy, favorites]);
 
 // Add these with your other animation refs
 const fadeAnim = useRef(new Animated.Value(0)).current;
