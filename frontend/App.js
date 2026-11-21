@@ -1,5 +1,14 @@
 import React, { useContext, useEffect } from 'react';
-import { StyleSheet, Platform, Alert } from 'react-native';
+import { StyleSheet, Platform, Alert, Animated } from 'react-native';
+
+if (Platform.OS === 'web') {
+  const originalTiming = Animated.timing;
+  Animated.timing = (value, config) => originalTiming(value, { ...config, useNativeDriver: false });
+  const originalSpring = Animated.spring;
+  Animated.spring = (value, config) => originalSpring(value, { ...config, useNativeDriver: false });
+  const originalDecay = Animated.decay;
+  Animated.decay = (value, config) => originalDecay(value, { ...config, useNativeDriver: false });
+}
 
 if (Platform.OS === 'web' && typeof document !== 'undefined') {
   const style = document.createElement('style');

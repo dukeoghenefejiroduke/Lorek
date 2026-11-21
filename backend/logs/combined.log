@@ -8160,3 +8160,4 @@
 {"level":"info","message":"Redis client connected","timestamp":"2026-11-21 11:42:46"}
 {"level":"info","message":"✅ Redis connected successfully","timestamp":"2026-11-21 11:42:46"}
 {"level":"info","message":"✅ MongoDB connected successfully","timestamp":"2026-11-21 11:42:51"}
+{"error":"No token provided","level":"warn","message":"Client Error:","method":"GET","statusCode":401,"timestamp":"2026-11-21 20:34:47","url":"/api/practice/daily"}

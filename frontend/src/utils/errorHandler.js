@@ -1,5 +1,10 @@
 import { Alert } from 'react-native';
 
+export const handleGlobalError = (error, context = '') => {
+  console.error(`Global Error in ${context}:`, error);
+  handleNetworkError(error, context);
+};
+
 export const handleNetworkError = (error, context = '') => {
   console.error(`Error in ${context}:`, error);
 
