@@ -189,101 +189,68 @@ const fetchLessons = async () => {
     </View>
   );
 
-  const renderLessonCard = ({ item, index }) => {
+  const renderPathNode = ({ item, index }) => {
     const isLocked = item.isUnlocked === false;
-    const levelColors = isLocked ? ['#9E9E9E', '#757575'] : getLevelColor(item.level);
     const progress = item.progress || 0;
-    const animationDelay = index * 100;
+    const isCompleted = progress >= 100 || item.userProgress?.completed;
+    
+    // Serpentine horizontal offset pattern: 0 -> 95 -> 0 -> -95
+    const offsets = [0, 95, 0, -95];
+    const translateX = offsets[index % offsets.length];
+
+    let nodeColors = ['#4CAF50', '#2E7D32'];
+    let iconName = 'star';
+
+    if (isLocked) {
+      nodeColors = ['#9E9E9E', '#616161'];
+      iconName = 'lock';
+    } else if (isCompleted) {
+      nodeColors = ['#FFD700', '#FFA000'];
+      iconName = 'emoji-events';
+    } else {
+      nodeColors = ['#58CC02', '#46A302'];
+      iconName = 'play-arrow';
+    }
 
     return (
-      <Animated.View
-        style={[
-          styles.cardWrapper,
-          {
-            opacity: fadeAnim,
-            transform: [{
-              translateY: slideAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [animationDelay, 0]
-              })
-            }]
-          }
-        ]}
-      >
+      <View style={[styles.pathNodeRow, { transform: [{ translateX }] }]}>
         <TouchableOpacity
-          style={styles.lessonCard}
+          style={[styles.pathNodeButton, isCompleted && styles.completedNodeShadow]}
           onPress={() => handleLessonPress(item)}
-          activeOpacity={0.7}
+          activeOpacity={0.8}
         >
           <LinearGradient
-            colors={levelColors}
-            style={styles.cardGradient}
+            colors={nodeColors}
+            style={styles.pathNodeCircle}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
           >
-            {/* Level Badge */}
-            <View style={styles.levelBadge}>
-              {isLocked ? (
-                <>
-                  <MaterialIcons name="lock" size={14} color="#fff" />
-                  <Text style={styles.levelText}>Locked</Text>
-                </>
-              ) : (
-                <>
-                  <Text style={styles.levelIcon}>{getLevelIcon(item.level)}</Text>
-                  <Text style={styles.levelText}>{item.level}</Text>
-                </>
-              )}
-            </View>
-
-            {/* Lesson Content */}
-            <View style={styles.cardContent}>
-              <Text style={styles.lessonTitle}>{item?.title?.english || item?.title || ''}</Text>
-              <Text style={styles.lessonDescription} numberOfLines={2}>
-                {item?.description?.english || item?.description || ''}
-              </Text>
-
-              {/* Stats Row */}
-              <View style={styles.lessonStats}>
-                <View style={styles.statItem}>
-                  <MaterialIcons name="menu-book" size={14} color="#fff" />
-                  <Text style={styles.statText}>{item.vocabulary?.length || 0} words</Text>
-                </View>
-                <View style={styles.statItem}>
-                  <MaterialIcons name="timer" size={14} color="#fff" />
-                  <Text style={styles.statText}>{item.duration || 15} min</Text>
-                </View>
-                <View style={styles.statItem}>
-                  <MaterialIcons name="stars" size={14} color="#fff" />
-                  <Text style={styles.statText}>{item.points || 10} XP</Text>
-                </View>
-              </View>
-
-              {/* Progress Bar */}
-              {progress > 0 && (
-                <View style={styles.progressSection}>
-                  {renderProgressBar(progress)}
-                  <Text style={styles.progressText}>{progress}% Complete</Text>
-                </View>
-              )}
-
-              {/* Start Button */}
-              <View style={styles.startButtonContainer}>
-                <Text style={styles.startButtonText}>
-                  {isLocked ? 'Locked' : (progress > 0 ? 'Continue' : 'Start Lesson')}
-                </Text>
-                <MaterialIcons name={isLocked ? "lock" : "arrow-forward"} size={16} color="#fff" />
-              </View>
-            </View>
-
-            {/* Decorative Elements */}
-            <View style={styles.cardDecoration}>
-              <View style={styles.circle1} />
-              <View style={styles.circle2} />
-            </View>
+            <MaterialIcons name={iconName} size={32} color="#fff" />
           </LinearGradient>
+          
+          <View style={styles.nodeBadge}>
+            <Text style={styles.nodeBadgeText}>{item.level ? item.level.charAt(0).toUpperCase() : 'L'}</Text>
+          </View>
         </TouchableOpacity>
-      </Animated.View>
+
+        <TouchableOpacity 
+          style={[styles.nodeTitleCard, { backgroundColor: theme.card || '#fff' }]}
+          onPress={() => handleLessonPress(item)}
+          activeOpacity={0.8}
+        >
+          <Text style={[styles.nodeLessonTitle, { color: theme.text || '#333' }]} numberOfLines={1}>
+            {item?.title?.english || item?.title || ''}
+          </Text>
+          <View style={styles.nodeMetaRow}>
+            <Text style={[styles.nodeMetaText, { color: theme.subText || '#666' }]}>
+              {item.vocabulary?.length || 5} words • {item.points || 10} XP
+            </Text>
+            {progress > 0 && !isCompleted && (
+              <Text style={styles.nodeProgressText}>{progress}%</Text>
+            )}
+          </View>
+        </TouchableOpacity>
+      </View>
     );
   };
 
@@ -363,10 +330,15 @@ const fetchLessons = async () => {
 
       <FlatList
         data={filteredLessons}
-        renderItem={renderLessonCard}
+        renderItem={renderPathNode}
         keyExtractor={(item) => item._id}
-         contentContainerStyle={[styles.list, { paddingBottom: 200 }]}
+        contentContainerStyle={[styles.list, { paddingBottom: 200 }]}
         ListHeaderComponent={renderHeader}
+        initialNumToRender={8}
+        maxToRenderPerBatch={8}
+        windowSize={5}
+        removeClippedSubviews={Platform.OS === 'android'}
+        updateCellsBatchingPeriod={50}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <View style={[styles.emptyIconContainer, { backgroundColor: theme.surface }]}>
@@ -941,6 +913,83 @@ const styles = StyleSheet.create({
     color: '#4CAF50',
     fontSize: 16,
     fontWeight: '600',
+  },
+  pathNodeRow: {
+    alignItems: 'center',
+    marginVertical: 20,
+    width: '100%',
+  },
+  pathNodeButton: {
+    width: 82,
+    height: 82,
+    borderRadius: 41,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+    position: 'relative',
+  },
+  completedNodeShadow: {
+    shadowColor: '#FFD700',
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+  },
+  pathNodeCircle: {
+    width: 82,
+    height: 82,
+    borderRadius: 41,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  nodeBadge: {
+    position: 'absolute',
+    bottom: -4,
+    backgroundColor: '#333',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#fff',
+  },
+  nodeBadgeText: {
+    color: '#fff',
+    fontSize: 10,
+    fontWeight: 'bold',
+  },
+  nodeTitleCard: {
+    marginTop: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 16,
+    maxWidth: 220,
+    alignItems: 'center',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+  },
+  nodeLessonTitle: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  nodeMetaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: 2,
+  },
+  nodeMetaText: {
+    fontSize: 11,
+  },
+  nodeProgressText: {
+    fontSize: 11,
+    fontWeight: 'bold',
+    color: '#4CAF50',
   },
 });
 

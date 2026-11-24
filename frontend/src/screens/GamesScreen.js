@@ -739,38 +739,46 @@ const handleLeaderboardPress = async (gameType) => {
         style={[styles.gameCard, game.disabled && { opacity: 0.5 }]}
         onPress={() => !game.disabled && handleGamePress(game.id)}
         disabled={loading || game.disabled}
+        activeOpacity={0.85}
       >
         <LinearGradient
-          colors={[game.color, game.color + 'CC']}
+          colors={[game.color, '#1a1a1a']}
           style={styles.gameCardGradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
         >
-          <Text style={styles.gameIcon}>{game.icon}</Text>
+          <View style={styles.gameHeaderRow}>
+            <Text style={styles.gameIcon}>{game.icon}</Text>
+            <TouchableOpacity 
+              style={styles.leaderboardIcon}
+              onPress={(e) => {
+                e.stopPropagation();
+                handleLeaderboardPress(game.id);
+              }}
+            >
+              <MaterialIcons name="leaderboard" size={18} color="#fff" />
+            </TouchableOpacity>
+          </View>
+
           <Text style={styles.gameTitle}>{game.title}</Text>
-          <Text style={styles.gameDescription}>{game.description}</Text>
-          {game.disabled && <Text style={{ color: '#fff', fontSize: 10 }}>Coming Soon</Text>}
+          <Text style={styles.gameDescription} numberOfLines={2}>{game.description}</Text>
+          
+          {game.disabled && (
+            <View style={styles.comingSoonBadge}>
+              <Text style={styles.comingSoonText}>Coming Soon</Text>
+            </View>
+          )}
+
           <View style={styles.gameTags}>
             <View style={styles.gameTag}>
               <MaterialIcons name="star" size={12} color="#FFD700" />
               <Text style={styles.gameTagText}>{game.difficulty}</Text>
             </View>
             <View style={styles.gameTag}>
-              <MaterialIcons name="person" size={12} color="#fff" />
-              <Text style={styles.gameTagText}>{game.players}</Text>
-            </View>
-            <View style={styles.gameTag}>
               <MaterialIcons name="timer" size={12} color="#fff" />
               <Text style={styles.gameTagText}>{game.time}</Text>
             </View>
           </View>
-          <TouchableOpacity 
-            style={styles.leaderboardIcon}
-            onPress={(e) => {
-              e.stopPropagation();
-              handleLeaderboardPress(game.id);
-            }}
-          >
-            <MaterialIcons name="leaderboard" size={16} color="#fff" />
-          </TouchableOpacity>
         </LinearGradient>
       </TouchableOpacity>
     </Animated.View>
@@ -1162,4 +1170,7 @@ matchCardText: {
   emptyLeaderboard: { alignItems: 'center', paddingVertical: 60 },
   emptyLeaderboardText: { fontSize: 18, fontWeight: 'bold', color: '#333', marginTop: 15, marginBottom: 8 },
   emptyLeaderboardSubtext: { fontSize: 14, color: '#999', textAlign: 'center' },
+  gameHeaderRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: 10 },
+  comingSoonBadge: { backgroundColor: 'rgba(0,0,0,0.4)', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 8, alignSelf: 'flex-start', marginBottom: 8 },
+  comingSoonText: { color: '#FFD700', fontSize: 10, fontWeight: 'bold' },
 });

@@ -1,13 +1,16 @@
-# Lesson System Architecture
+# Lesson System Architecture (Duolingo-Style Winding Path)
 
 This document describes the architectural layout, components, models, and interaction flow of the Lorek Lesson System.
 
-## 1. Domain Models
+## 1. Domain Models & Architecture
 
-The lesson system is built upon a relational hierarchy represented using MongoDB schemas:
+The lesson system is built upon a relational hierarchy represented using MongoDB schemas and rendered using an immersive Duolingo-style learning path:
 
-*   **Course:** The top-level learning module (e.g., Izon Language).
-*   **Unit:** Groups related lessons under thematic categories (e.g., Greetings, Family).
+*   **Course / Unit:** Backend data structures grouping lessons by thematic categories and difficulty levels.
+*   **Learning Path (`LessonsScreen.js`):** A serpentine winding skill tree layout featuring:
+    *   Staggered horizontal node offsets (`0 → 95 → 0 → -95px`) creating a natural winding trail.
+    *   Gamified node states: Completed (gold/amber glowing badges with trophy icons), Active/Next (Duolingo green with play actions), and Locked (grayed out with lock indicators).
+    *   Virtualized performance rendering (`initialNumToRender`, `maxToRenderPerBatch`, `windowSize`, `removeClippedSubviews`) for zero-lag scrolling.
 *   **Lesson:** The primary lesson content holding teaching items and interactive exercises.
 *   **Progress:** Persists overall user lesson completion, best scores, and locking status.
 

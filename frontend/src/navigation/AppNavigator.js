@@ -33,8 +33,6 @@ import { notificationAPI } from '../services/api';
 
 import { streakService } from '../services/streakService';
 
-import CourseScreen from '../screens/Lesson/CourseScreen';
-import UnitScreen from '../screens/Lesson/UnitScreen';
 import ReviewScreen from '../screens/Lesson/ReviewScreen';
 import PronunciationScreen from '../screens/PronunciationScreen';
 import PremiumScreen from '../screens/PremiumScreen';
@@ -1013,8 +1011,6 @@ export default function AppNavigator() {
         animation: 'slide_from_right',
       }}>
 
-        <Stack.Screen name="Course" component={CourseScreen} />
-        <Stack.Screen name="UnitScreen" component={UnitScreen} />
         <Stack.Screen name="Review" component={ReviewScreen} />
         <Stack.Screen name="EditProfile"   component={EditProfileScreen} />
         <Stack.Screen name="Notifications" component={NotificationsScreen} />
