@@ -1,7 +1,7 @@
 {
-  "buildCommand": "cd frontend && npm install && npx expo export --platform web && mkdir -p web/app && cp -r dist/* web/app/ && sed -i 's|src=\"/|src=\"/app/|g' web/app/index.html",  
+  "buildCommand": "cd frontend && npx expo export --platform web && mkdir -p web/app && cp -r dist/* web/app/ && sed -i 's|src=\"/|src=\"/app/|g' web/app/index.html",  
   "outputDirectory": "web",
-  "installCommand": "echo 'No root dependencies'",
+  "installCommand": "cd frontend && npm install",
   "headers": [
     {
       "source": "/app/(.*\\.html)?",

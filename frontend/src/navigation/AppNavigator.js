@@ -106,7 +106,7 @@ function MainApp({ navigation }) {
       category: 'Learning',
       items: [
         { name: 'Home', icon: 'home', screen: HomeScreen, color: '#4CAF50', gradient: ['#4CAF50', '#2E7D32'] },
-        { name: 'Lessons', icon: 'book', screen: CourseScreen, color: '#2196F3', gradient: ['#2196F3', '#1565C0'] },
+        { name: 'Lessons', icon: 'book', screen: LessonsScreen, color: '#2196F3', gradient: ['#2196F3', '#1565C0'] },
         { name: 'Vocabulary', icon: 'list', screen: VocabularyScreen, color: '#FF9800', gradient: ['#FF9800', '#F57C00'] },
         { name: 'Practice', icon: 'pencil', screen: PracticeScreen, color: '#9C27B0', gradient: ['#9C27B0', '#6A1B9A'] },
       ]
@@ -169,20 +169,9 @@ function MainApp({ navigation }) {
     let isMounted = true;
 
     if (user) {
-      const initializeAppData = async () => {
-        try {
-          // 1. Sync Streak (Only once on mount/user change)
-          const streakData = await streakService.syncOnAppLaunch();
-          if (isMounted) {
-          }
-          
-          // 2. Load Notifications
-          await loadNotifications();
-        } catch (err) {
-        }
-      };
-
-      initializeAppData();
+      // Run non-critical background sync tasks without blocking render
+      streakService.syncOnAppLaunch().catch(() => {});
+      loadNotifications().catch(() => {});
     }
     
     // Setup initial screen
